@@ -36,6 +36,7 @@ RUN yum install -y rh-git29
 # Natron Environment
 ENV NATRON_SRC_DIR=/opt/Natron-src
 ENV NATRON_SDK_DIR=/opt/Natron-sdk
+ENV NATRON_BUILD_DIR=/opt/Natron-build
 ENV NATRON_TARBALLS=/opt/Natron-tarballs
 
 # Pre-setup some env vars used by build scripts
@@ -46,6 +47,7 @@ ENV TMP_PATH="/tmp/natron-tmp"
 ENV OFX_PLUGIN_PATH=/usr/OFX
 
 VOLUME $SDK
+VOLUME $NATRON_BUILD_DIR
 VOLUME $OFX_PLUGIN_PATH
 VOLUME $NATRON_TARBALLS
 
