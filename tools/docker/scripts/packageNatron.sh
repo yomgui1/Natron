@@ -84,7 +84,7 @@ done
 
 # Python
 PYVER=2.7
-PY_PKG_PATH="$SDK/lib/python${PYVER}/site-packages"
+PY_PKG_PATH="$D/lib/python${PYVER}/site-packages"
 cp -a "$SDK/lib/python${PYVER}" "$D/lib/"
 
 if [[ $QT4 == 1 ]]; then
@@ -97,14 +97,13 @@ rm -rf "${PY_PKG_PATH}/setuptools"*
 rm -rf "${PY_PKG_PATH}/pkg_resources"
 rm -rf "$D/lib/python${PYVER}"/{test,config,config-"${PYVER}m"}
 
-PYZIPFILE="$SDK/lib/python${PYVER/./}.zip"
+PYZIPFILE="$D/lib/python${PYVER/./}.zip"
 if [[ ! -f "$PYZIPFILE" ]]; then
-	pushd "$SDK/lib/python${PYVER}"
+	pushd "$D/lib/python${PYVER}"
 	zip -r -m "$PYZIPFILE" * -x site-packages\* lib-dynload\* lib2to3\* \
 		lib-tk\* plat-linux2\* LICENSE.txt pdb.doc wsgiref.egg-info || true
 	popd
 fi
-cp "$PYZIPFILE" "$D/lib/"
 
 # PySide/Shiboken
 if [[ $QT4 == 1 ]]; then
