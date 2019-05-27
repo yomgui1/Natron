@@ -1,10 +1,14 @@
 #!/bin/bash
 
 # Install gmp (used by ruby)
-# version is set in gcc.sh
+GMP_VERSION=6.1.2
+GMP_TAR="gmp-${GMP_VERSION}.tar.bz2"
+GMP_SITE="https://gmplib.org/download/gmp"
+# version is also set in gcc.sh
 # see http://www.linuxfromscratch.org/lfs/view/development/chapter06/gmp.html
 if build_step && { force_build || { [ ! -s "$SDK_HOME/include/gmp.h" ]; }; }; then
     REBUILD_RUBY=1
+	REBUILD_NETTLE=1
     start_build
     download "$GMP_SITE" "$GMP_TAR"
     untar "$SRC_PATH/$GMP_TAR"

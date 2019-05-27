@@ -23,9 +23,9 @@ if [ -z "${CWD:-}" ]; then
 fi
 
 # Set common paths used across scripts
-TMP_PATH="$CWD/tmp"
-SRC_PATH="$CWD/src"
-INC_PATH="$CWD/include"
+TMP_PATH=${TMP_PATH:-"$CWD/tmp"}
+SRC_PATH=${SRC_PATH:-"$CWD/src"}
+INC_PATH=${INC_PATH:-"$CWD/include"}
 # posix name for temporary directory
 TMPDIR=${TMPDIR:-/tmp}
 export TMPDIR

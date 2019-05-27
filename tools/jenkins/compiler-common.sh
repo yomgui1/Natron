@@ -113,6 +113,10 @@ if [ "$PKGOS" = "OSX" ]; then
 
 
 elif [ "$PKGOS" = "Linux" ]; then
+    COMPILER=gcc
+    GCC_VERSION=$($COMPILER --version | head -n1 | awk '{print $3}')
+    echo "Found GCC version $GCC_VERSION"
+
     if [ "${COMPILE_TYPE:-}" = "debug" ]; then
         BF="-g"
     else

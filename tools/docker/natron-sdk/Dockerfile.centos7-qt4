@@ -1,0 +1,80 @@
+##
+# This file is part of Natron <https://natrongithub.github.io/>,
+# Copyright 2019 Guillaume Roguez <yomgui1@gmail.com>
+#
+# Natron is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# Natron is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Natron.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>
+##
+# WARNING: this script must run from the top directory of Natron sources
+#
+
+# Using CentOS 7 for the GLIBC v2.17, as requiered by CY2019
+FROM centos:7
+
+# Enable EPEL repository (https://fedoraproject.org/wiki/EPEL)
+RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+# RPM-Fusion repositories (https://rpmfusion.org/Configuration)
+RUN yum install -y --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
+
+# Update base image
+RUN yum update -y
+
+# devtoolsets from RedHat Software Collections
+RUN yum install -y centos-release-scl
+
+# GCC 8 and Clang/LLVM 5 toolchains
+RUN yum install -y devtoolset-8-toolchain
+
+# GIT v2.y
+RUN yum install -y rh-git29
+
+# Developing tools
+RUN yum install -y nano which less nasm time bzip2 p7zip-plugins ccache gettext wget zip unzip rsync file tree gperf gcc-c++ xz patch bison flex libtool-ltdl texinfo make cmake3 autoconf-archive cppunit-devel
+
+RUN yum install -y python-docutils  python-pygments python-jinja2 python-sphinx
+
+# X11/OpenGL native (baseline for Natron, not included in final binary)
+RUN yum install -y "libX*devel" "*GL*devel" "*xcb*devel" "xorg*devel" xorg-x11-fonts-Type1 libdrm-devel "mesa-libGL*-devel" "mesa-libEGL*-devel" "*glut*devel" "libxkbcommon*devel"
+
+# Add perl modules for qt4webkit
+RUN yum install -y perl-version perl-XML-Parser perl-Digest-MD5
+
+# Add to system some libraries needed by GIT as build scripts destroy LD_LIBRARY_PATH
+RUN ldconfig /opt/rh/httpd24/root/usr/lib64/
+
+# Alias cmake3 to cmake (cmake3 doesn't provide 'cmake')
+RUN cd /usr/bin && ln -s cmake3 cmake
+
+# Natron Environment
+ENV NATRON_SRC_DIR=/opt/Natron-src
+ENV NATRON_SDK_DIR=/opt/Natron-sdk
+ENV NATRON_BUILD_DIR=/opt/Natron-build
+ENV NATRON_TARBALLS=/opt/Natron-tarballs
+
+# Pre-setup some env vars used by build scripts
+ENV SDK="$NATRON_SDK_DIR"
+ENV SRC_PATH="$NATRON_TARBALLS"
+ENV TMP_PATH="/tmp/natron-tmp"
+ENV OFX_PLUGIN_PATH=/usr/OFX
+
+# Backup volumes
+VOLUME $SDK
+VOLUME $NATRON_BUILD_DIR
+VOLUME $OFX_PLUGIN_PATH
+VOLUME $NATRON_TARBALLS
+
+WORKDIR $NATRON_SRC_DIR/tools/jenkins
+
+ENTRYPOINT ["scl", "enable", "devtoolset-8", "httpd24", "rh-git29", "--"]
+CMD bash

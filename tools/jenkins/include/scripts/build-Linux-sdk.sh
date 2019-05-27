@@ -393,29 +393,20 @@ if dobuild; then
     export PKG_CONFIG_PATH LD_LIBRARY_PATH PATH BOOST_ROOT OPENJPEG_HOME THIRD_PARTY_TOOLS_HOME PYTHON_HOME PYTHON_PATH PYTHON_INCLUDE
 fi
 
-build gcc
-
-checkpoint
-
-if dobuild; then
-    export CC="${SDK_HOME}/gcc/bin/gcc"
-    export CXX="${SDK_HOME}/gcc/bin/g++"
-fi
-
 build bzip2
 build xz # (required to uncompress source tarballs)
-build m4
+#build m4
 build ncurses # (required for gdb and readline)
 build bison # (for SeExpr)
 build flex # (for SeExpr)
-build pkg-config
-build libtool
-build gperf # (used by fontconfig) as well as assemblers (yasm and nasm)
-build autoconf
-build automake
-build yasm
+#build pkg-config
+#build libtool
+#build gperf # (used by fontconfig) as well as assemblers (yasm and nasm)
+#build autoconf
+#build automake
+#build yasm
 build nasm # (for x264, lame, ans others)
-build gmp # (used by ruby)
+build gmp # (used by ruby and nettle)
 build openssl
 build patchelf
 build gettext
@@ -436,7 +427,7 @@ build gnutls # (for ffmpeg)
 build curl
 build libarchive # (for cmake)
 #build libuv # (for cmake but we use the one bundled with cmake)
-build cmake
+#build cmake
 build libzip # (requires cmake)
 #build berkeleydb # (optional for python2 and python3)
 build sqlite # (required for webkit and QtSql SQLite module, optional for python2)
@@ -492,7 +483,7 @@ build boost
 
 checkpoint
 
-build cppunit
+#build cppunit
 build libjpeg-turbo
 build giflib
 build tiff
@@ -549,7 +540,7 @@ build libbluray # (for ffmpeg)
 build openh264 # (for ffmpeg)
 build snappy # (for ffmpeg)
 build ffmpeg
-build ruby # (necessary for qtwebkit)
+#build ruby # (necessary for qtwebkit)
 build breakpad
 build valgrind
 build gdb # (requires xz, zlib ncurses, python2, texinfo)
@@ -589,7 +580,7 @@ build qt4
 
 checkpoint
 
-build qt4webkit
+#build qt4webkit
 
 if dobuild; then
     # add qt4 to lib path to build shiboken and pyside

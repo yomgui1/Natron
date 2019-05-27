@@ -1,4 +1,4 @@
-boost: LIBS += -lboost_serialization
+boost: LIBS += -lboost_serialization -lboost_thread
 expat: LIBS += -lexpat
 expat: PKGCONFIG -= expat
 INCLUDEPATH+=/opt/Natron-sdk/include
