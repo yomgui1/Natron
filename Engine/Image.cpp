@@ -1866,6 +1866,8 @@ Image::halveRoIForDepth(const RectI & roi,
     int dstRowSize = dstBounds.width() * _nbComponents;
 
     // offset pointers so that srcData and dstData correspond to pixel (0,0)
+    // WARNING: these pointers are not valid as the allocated memory starts at (bounds.x1, bounds.y1)
+    // WARNING: Don't use them as it
     const PIX* const srcData = srcPixels - (srcBounds.x1 * _nbComponents + srcRowSize * srcBounds.y1);
     PIX* const dstData       = dstPixels - (dstBounds.x1 * _nbComponents + dstRowSize * dstBounds.y1);
     const int srcBmRowSize = srcBmBounds.width();

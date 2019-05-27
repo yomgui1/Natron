@@ -23,9 +23,9 @@ if [ -z "${CWD:-}" ]; then
 fi
 
 # Set common paths used across scripts
-TMP_PATH="${WORKSPACE:-}/tmp"
-SRC_PATH="${WORKSPACE:-}/src"
-INC_PATH="$CWD/include"
+TMP_PATH=${TMP_PATH:-"$WORKSPACE/tmp"}
+SRC_PATH=${SRC_PATH:-"$WORKSPACE/src"}
+INC_PATH=${INC_PATH:-"$CWD/include"}
 # posix name for temporary directory
 TMPDIR=${TMPDIR:-/tmp}
 export TMPDIR
@@ -338,6 +338,11 @@ elif [ "$PKGOS" = "Windows" ]; then
 elif [ "$PKGOS" = "OSX" ]; then
     PKG_CONFIG_PATH="$FFMPEG_PATH/lib/pkgconfig:$LIBRAW_PATH/lib/pkgconfig:$OSMESA_PATH/lib/pkgconfig:$QTDIR/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
 fi
+
+# Git-29 and devtoolset-8 need some specifics env variables erased by common.sh
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/httpd24/root/usr/lib64
+PATH=$PATH:/opt/rh/rh-git29/root/usr/bin:/opt/rh/httpd24/root/usr/bin:/opt/rh/httpd24/root/usr/sbin:/opt/rh/devtoolset-8/root/usr/bin
+
 export LD_LIBRARY_PATH LD_RUN_PATH DYLD_LIBRARY_PATH LIBRARY_PATH CPATH PKG_CONFIG_PATH C_INCLUDE_PATH CPLUS_INCLUDE_PATH
 
 # Load compiler related stuff

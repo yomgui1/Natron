@@ -6,8 +6,8 @@ MAGICK_VERSION=6.9.10-92 # latest is 6.9.10-92, but 6.9.10-80 and later fail to 
 MAGICK_VERSION_SHORT=${MAGICK_VERSION%-*}
 #MAGICK_TAR="ImageMagick6-${MAGICK_VERSION}.tar.gz"
 #MAGICK_SITE="https://gitlab.com/ImageMagick/ImageMagick6/-/archive/${MAGICK_VERSION}"
-MAGICK_TAR="ImageMagick-${MAGICK_VERSION}.tar.gz"
-MAGICK_SITE="https://imagemagick.org/download"
+MAGICK_TAR="ImageMagick-${MAGICK_VERSION}.tar.xz"
+MAGICK_SITE="https://imagemagick.org/download/releases"
 if download_step; then
     download "$MAGICK_SITE" "$MAGICK_TAR"
 fi
