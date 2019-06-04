@@ -59,7 +59,6 @@ using std::pair;
 
 /*Class inheriting KnobGui, must have a function named BuildKnobGui with the following signature.
    This function should in turn call a specific class-based static function with the appropriate param.*/
-typedef KnobHelper *(*KnobBuilder)(KnobHolder  *holder, const std::string &description, int dimension);
 typedef KnobGuiWidgets *(*KnobGuiBuilder)(const KnobGuiPtr& knob, ViewIdx view);
 
 KnobGuiFactory::KnobGuiFactory()
@@ -67,26 +66,16 @@ KnobGuiFactory::KnobGuiFactory()
     loadBultinKnobs();
 }
 
-KnobGuiFactory::~KnobGuiFactory()
-{
-    for (std::map<std::string, LibraryBinary *>::iterator it = _loadedKnobs.begin(); it != _loadedKnobs.end(); ++it) {
-        delete it->second;
-    }
-    _loadedKnobs.clear();
-}
-
 template<typename K, typename KG>
-static std::pair<std::string, LibraryBinary *>
+static auto
 knobGuiFactoryEntry()
 {
     std::string stub;
     KnobHelperPtr knob( K::create(KnobHolderPtr(), stub, 1) );
-    std::map<std::string, void (*)()> functions;
-
-    functions.insert( make_pair("BuildKnobGui", ( void (*)() ) & KG::BuildKnobGui) );
-    LibraryBinary *knobPlugin = new LibraryBinary(functions);
-
-    return make_pair(knob->typeName(), knobPlugin);
+    std::map<std::string, void (*)()> functions {
+        make_pair("BuildKnobGui", ( void (*)() ) & KG::BuildKnobGui)
+    };
+    return make_pair(knob->typeName(), std::make_unique<LibraryBinary>(functions));
 }
 
 void
@@ -113,18 +102,17 @@ KnobGuiWidgets *
 KnobGuiFactory::createGuiForKnob(const KnobGuiPtr& knob, ViewIdx view) const
 {
     assert(knob);
-    std::map<std::string, LibraryBinary *>::const_iterator it = _loadedKnobs.find( knob->getKnob()->typeName() );
+    auto it = _loadedKnobs.find( knob->getKnob()->typeName() );
     if ( it == _loadedKnobs.end() ) {
-        return NULL;
-    } else {
-        std::pair<bool, KnobGuiBuilder> guiBuilderFunc = it->second->findFunction<KnobGuiBuilder>("BuildKnobGui");
-        if (!guiBuilderFunc.first) {
-            return NULL;
-        }
-        KnobGuiBuilder guiBuilder = (KnobGuiBuilder)(guiBuilderFunc.second);
-
-        return guiBuilder(knob, view);
+        return nullptr;
     }
+
+    auto guiBuilderFunc = it->second->findFunction<KnobGuiBuilder>("BuildKnobGui");
+    if (!guiBuilderFunc.first) {
+        return nullptr;
+    }
+
+    return (guiBuilderFunc.second)(knob, view);
 }
 
 NATRON_NAMESPACE_EXIT

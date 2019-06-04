@@ -29,11 +29,13 @@
 
 #include <string>
 #include <map>
+#include <memory>
 
 #if !defined(Q_MOC_RUN) && !defined(SBK_RUN)
 #include <boost/shared_ptr.hpp>
 #endif
 
+#include "Engine/LibraryBinary.h"
 #include "Gui/GuiFwd.h"
 
 NATRON_NAMESPACE_ENTER
@@ -45,22 +47,16 @@ class KnobHolder;
 
 class KnobGuiFactory
 {
-    std::map<std::string, LibraryBinary *> _loadedKnobs;
+    std::map<std::string, std::unique_ptr<LibraryBinary>> _loadedKnobs;
 
 public:
     KnobGuiFactory();
 
-    ~KnobGuiFactory();
-
+    ~KnobGuiFactory() {}
 
     KnobGuiWidgets * createGuiForKnob(const KnobGuiPtr& knob, ViewIdx view) const;
 
 private:
-    const std::map<std::string, LibraryBinary *> &getLoadedKnobs() const
-    {
-        return _loadedKnobs;
-    }
-
     void loadBultinKnobs();
 };
 
