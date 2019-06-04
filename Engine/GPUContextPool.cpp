@@ -26,6 +26,7 @@
 
 #include <set>
 #include <stdexcept>
+#include <thread>
 
 #include <QMutex>
 #include <QWaitCondition>
@@ -58,8 +59,6 @@ struct GPUContextPoolPrivate
     OSGLContextWPtr lastUsedCPUGLContext;
     OSGLContextWPtr cpuGLShareContext;
 
-    std::map<QThread*, OSGLContextAttacherWPtr> perThreadsActiveContext;
-
     GPUContextPoolPrivate()
     : contextPoolMutex(QMutex::Recursive)
     , glContextPool()
@@ -81,52 +80,24 @@ GPUContextPool::~GPUContextPool()
 {
 }
 
+static thread_local OSGLContextAttacherWPtr threadActiveContext {};
+
 void
 GPUContextPool::registerContextForThread(const OSGLContextAttacherPtr& context)
 {
-    QThread* curThread = QThread::currentThread();
-
-    QMutexLocker k(&_imp->contextPoolMutex);
-
-    // If another context is bound to this thread, dettach it first
-    {
-        std::map<QThread*, OSGLContextAttacherWPtr>::iterator foundThread = _imp->perThreadsActiveContext.find(curThread);
-        if (foundThread != _imp->perThreadsActiveContext.end()) {
-            OSGLContextAttacherPtr currentExistingContext = foundThread->second.lock();
-            if (currentExistingContext) {
-                // This will erase this context from the perThreadsActiveContext map
-                currentExistingContext->dettach();
-            }
-        }
-    }
-    OSGLContextAttacherWPtr& c = _imp->perThreadsActiveContext[curThread];
-    c = context;
+    threadActiveContext = context;
 }
 
 void
 GPUContextPool::unregisterContextForThread()
 {
-    QThread* curThread = QThread::currentThread();
-
-    QMutexLocker k(&_imp->contextPoolMutex);
-    std::map<QThread*, OSGLContextAttacherWPtr>::iterator foundThread = _imp->perThreadsActiveContext.find(curThread);
-    if (foundThread != _imp->perThreadsActiveContext.end()) {
-        _imp->perThreadsActiveContext.erase(foundThread);
-    }
-
+    threadActiveContext.reset();
 }
 
 OSGLContextAttacherPtr
 GPUContextPool::getThreadLocalContext() const
 {
-    QThread* curThread = QThread::currentThread();
-
-    QMutexLocker k(&_imp->contextPoolMutex);
-    std::map<QThread*, OSGLContextAttacherWPtr>::const_iterator foundThread = _imp->perThreadsActiveContext.find(curThread);
-    if (foundThread != _imp->perThreadsActiveContext.end()) {
-        return foundThread->second.lock();
-    }
-    return OSGLContextAttacherPtr();
+    return threadActiveContext.lock();
 }
 
 void
