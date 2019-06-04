@@ -187,52 +187,29 @@ CONFIG(enable-osmesa) {
 unix:LIBS += $$QMAKE_LIBS_DYNLOAD
 
 *g++* {
+  # The code must be compatible with C++14 by default
+  QMAKE_CXXFLAGS += -std=c++14
+
   QMAKE_CXXFLAGS += -ftemplate-depth-1024
   GCCVer = $$system($$QMAKE_CXX --version)
-  contains(GCCVer,[0-3]\\.[0-9]+.*) {
-  } else {
-    contains(GCCVer,4\\.7.*) {
-      QMAKE_CXXFLAGS += -Wno-c++11-extensions
-    }
-    contains(GCCVer,[5-9]\\.[0-9]+.*) {
-      # Eigen uses std::binder1st which is deprecated in C++11
-      QMAKE_CXXFLAGS += -Wno-deprecated-declarations
-    }
-    contains(GCCVer,[6-9]\\.[0-9]+.*) {
-      # older versions of boost (at least up to 1.65.1) fail to compile with:
-      # /usr/include/boost/crc.hpp:350:9: error: right operand of shift expression '(18446744073709551615 << 64)' is >= than the precision of the left operand [-fpermissive]
-      # see https://github.com/MrKepzie/Natron/issues/1659
-      # -fpermissive turns it into a warning
-      QMAKE_CXXFLAGS += -fpermissive
-      # GCC 6 and later are C++14 by default, but Qt 4 is C++98
-      # Note: disabled, because qmake should put the right flags anyway
-      #lessThan(QT_MAJOR_VERSION, 5): QMAKE_CXXFLAGS += -std=gnu++98
-
-      # clear some Eigen3 warnings
-      QMAKE_CFLAGS += -Wno-int-in-bool-context
-      QMAKE_CXXFLAGS += -Wno-int-in-bool-context
-    }
-    contains(GCCVer,[7-9]\\.[0-9]+.*) {
-      # clear a lot of boost warnings
-      QMAKE_CFLAGS += -Wno-expansion-to-defined
-      QMAKE_CXXFLAGS += -Wno-expansion-to-defined
-    }
+  contains(GCCVer,[5-9]\\.[0-9]+.*) {
+    # Eigen uses std::binder1st which is deprecated in C++1y
+    QMAKE_CXXFLAGS += -Wno-deprecated-declarations
   }
-  c++11 {
-    # check for at least version 4.7
-    contains(GCCVer,[0-3]\\.[0-9]+.*) {
-      error("At least GCC 4.6 is required.")
-    } else {
-      contains(GCCVer,4\\.[0-5].*) {
-        error("At least GCC 4.6 is required.")
-      } else {
-        contains(GCCVer,4\\.6.*) {
-          QMAKE_CXXFLAGS += -std=c++0x
-        } else {
-          QMAKE_CXXFLAGS += -std=c++11
-        }
-      }
-    }
+  contains(GCCVer,[6-9]\\.[0-9]+.*) {
+    # older versions of boost (at least up to 1.65.1) fail to compile with:
+    # /usr/include/boost/crc.hpp:350:9: error: right operand of shift expression '(18446744073709551615 << 64)' is >= than the precision of the left operand [-fpermissive]
+    # see https://github.com/MrKepzie/Natron/issues/1659
+    # -fpermissive turns it into a warning
+    QMAKE_CXXFLAGS += -fpermissive
+    # clear some Eigen3 warnings
+    QMAKE_CFLAGS += -Wno-int-in-bool-context
+    QMAKE_CXXFLAGS += -Wno-int-in-bool-context
+  }
+  contains(GCCVer,[7-9]\\.[0-9]+.*) {
+    # clear a lot of boost warnings
+    QMAKE_CFLAGS += -Wno-expansion-to-defined
+    QMAKE_CXXFLAGS += -Wno-expansion-to-defined
   }
 }
 
@@ -301,11 +278,6 @@ CONFIG(debug) {
     # precompiled headers don't work with multiple archs
     CONFIG += precompile_header
   }
-}
-
-!macx {
-  # c++11 build fails on Snow Leopard 10.6 (see the macx section below)
-  #CONFIG += c++11
 }
 
 win32 {
@@ -487,17 +459,13 @@ unix {
   symbols_hidden_by_default.name = GCC_SYMBOLS_PRIVATE_EXTERN
   symbols_hidden_by_default.value = YES
   QMAKE_MAC_XCODE_SETTINGS += symbols_hidden_by_default
-  c++11 {
-    QMAKE_CXXFLAGS += -std=c++11
-  }
+  QMAKE_CXXFLAGS += -std=c++14
 }
 
 *clang* {
   QMAKE_CXXFLAGS += -ftemplate-depth-1024
   QMAKE_CXXFLAGS_WARN_ON += -Wno-c++11-extensions
-  c++11 {
-    QMAKE_CXXFLAGS += -std=c++11
-  }
+  QMAKE_CXXFLAGS += -std=c++14
 }
 
 # see http://clang.llvm.org/docs/AddressSanitizer.html and http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
@@ -552,8 +520,8 @@ unix:!macx {
     INSTALLS += target_icons target_mime target_desktop target_appdata
 }
 
-# GCC 8.1 (and maybe 8.2) gives a strange bug in the release builds, see https://github.com/NatronGitHub/Natron/issues/279
-# configure with CONFIG+=enforce-gcc8 to enforce building even if GCC 8.1 or 8.2 is detected
+# GCC 8.1 gives a strange bug in the release builds, see https://github.com/NatronGitHub/Natron/issues/279
+# prevent building with GCC 8, unless configure with CONFIG+=enforce-gcc8
 
 enforce-gcc8 {
   DEFINES += ENFORCE_GCC8
