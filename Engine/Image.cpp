@@ -43,6 +43,8 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_ON
 #include "Engine/OSGLContext.h"
 #include "Engine/GLShader.h"
 
+#include "Global/FloatingPointExceptions.h"
+
 namespace Natron {
 
 #define BM_GET(i, j) (&_map[( i - _bounds.bottom() ) * _bounds.width() + ( j - _bounds.left() )])
@@ -2119,16 +2121,20 @@ Image::checkForNaNs(const RectI& roi)
     QWriteLocker k(&_entryLock);
     unsigned int compsCount = getComponentsCount();
     bool hasnan = false;
-    for (int y = roi.y1; y < roi.y2; ++y) {
-        float* pix = (float*)pixelAt(roi.x1, y);
-        float* const end = pix +  compsCount * roi.width();
+    {
+        boost_adaptbx::floating_point::exception_trapping trap();
 
-        for (; pix < end; ++pix) {
-            // we remove NaNs, but infinity values should pose no problem
-            // (if they do, please explain here which ones)
-            if ( (boost::math::isnan)(*pix) ) { // check for NaN ((boost::math::isnan)(x) is not slower than x != x and works with -Ofast)
-                *pix = 1.;
-                hasnan = true;
+        for (int y = roi.y1; y < roi.y2; ++y) {
+            float* pix = (float*)pixelAt(roi.x1, y);
+            float* const end = pix +  compsCount * roi.width();
+
+            for (; pix < end; ++pix) {
+                // we remove NaNs, but infinity values should pose no problem
+                // (if they do, please explain here which ones)
+                if ( (boost::math::isnan)(*pix) ) { // check for NaN ((boost::math::isnan)(x) is not slower than x != x and works with -Ofast)
+                    *pix = 1.;
+                    hasnan = true;
+                }
             }
         }
     }
