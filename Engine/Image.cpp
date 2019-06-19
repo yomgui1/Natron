@@ -1622,25 +1622,6 @@ Image::fillBoundsZero(const OSGLContextPtr& glContext)
 }
 
 unsigned char*
-Image::pixelAt(int x,
-               int y)
-{
-    if ( ( x < _bounds.x1 ) || ( x >= _bounds.x2 ) || ( y < _bounds.y1 ) || ( y >= _bounds.y2 ) ) {
-        return NULL;
-    } else {
-        unsigned char* ret =  (unsigned char*)this->_data.writable();
-        if (!ret) {
-            return 0;
-        }
-        int compDataSize = _depthBytesSize * _nbComponents;
-        ret = ret + (qint64)( y - _bounds.y1 ) * compDataSize * _bounds.width()
-              + (qint64)( x - _bounds.x1 ) * compDataSize;
-
-        return ret;
-    }
-}
-
-unsigned char*
 Image::pixelAtStatic(int x,
                      int y,
                      const RectI& bounds,
@@ -1648,38 +1629,33 @@ Image::pixelAtStatic(int x,
                      int dataSizeOf,
                      unsigned char* buf)
 {
-    if ( ( x < bounds.x1 ) || ( x >= bounds.x2 ) || ( y < bounds.y1 ) || ( y >= bounds.y2 ) ) {
-        return NULL;
-    } else {
-        unsigned char* ret = buf;
-        if (!ret) {
-            return 0;
-        }
-        int compDataSize = dataSizeOf * nComps;
-        ret = ret + (qint64)( y - bounds.y1 ) * compDataSize * bounds.width()
-              + (qint64)( x - bounds.x1 ) * compDataSize;
-
-        return ret;
+    if ( ( x >= bounds.x1 ) && ( x < bounds.x2 ) && ( y >= bounds.y1 ) && ( y < bounds.y2 ) ) {
+        std::size_t compDataSize = dataSizeOf * nComps;
+        buf += ( y - bounds.y1 ) * compDataSize * bounds.width();
+        buf += ( x - bounds.x1 ) * compDataSize;
+        return buf;
     }
+    return nullptr;
+}
+
+unsigned char*
+Image::pixelAt(int x,
+               int y)
+{
+    if (auto* ret = (unsigned char*)this->_data.writable()) {
+        return pixelAtStatic(x, y, _bounds, _nbComponents, _depthBytesSize, ret);
+    }
+    return nullptr;
 }
 
 const unsigned char*
 Image::pixelAt(int x,
                int y) const
 {
-    if ( ( x < _bounds.x1 ) || ( x >= _bounds.x2 ) || ( y < _bounds.y1 ) || ( y >= _bounds.y2 ) ) {
-        return NULL;
-    } else {
-        unsigned char* ret = (unsigned char*)this->_data.readable();
-        if (!ret) {
-            return 0;
-        }
-        int compDataSize = _depthBytesSize * _nbComponents;
-        ret = ret + (qint64)( y - _bounds.y1 ) * compDataSize * _bounds.width()
-              + (qint64)( x - _bounds.x1 ) * compDataSize;
-
-        return ret;
+    if (auto* ret = (unsigned char*)this->_data.readable()) {
+        return pixelAtStatic(x, y, _bounds, _nbComponents, _depthBytesSize, ret);
     }
+    return nullptr;
 }
 
 unsigned int
