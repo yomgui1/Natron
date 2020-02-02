@@ -26,6 +26,7 @@
 // ***** END PYTHON BLOCK *****
 
 #include <QThread>
+#include <boost/shared_ptr.hpp>
 
 #include "Engine/EngineFwd.h"
 #include "Engine/ThreadPool.h"
