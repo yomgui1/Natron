@@ -658,4 +658,3 @@ ScriptEditor::focusInEvent(QFocusEvent* e)
 }
 
 using namespace Natron;
-#include "moc_ScriptEditor.cpp"

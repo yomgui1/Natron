@@ -418,4 +418,3 @@ PickKnobDialog::getSelectedKnob(bool* makeAlias,
 }
 
 using namespace Natron;
-#include "moc_PickKnobDialog.cpp"

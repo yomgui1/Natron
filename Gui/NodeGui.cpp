@@ -4178,4 +4178,3 @@ NodeGui::onInputVisibilityChanged(int /*inputNb*/)
 }
 
 using namespace Natron;
-#include "moc_NodeGui.cpp"

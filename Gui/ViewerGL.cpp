@@ -4639,4 +4639,3 @@ ViewerGL::currentTimeForEvent(QInputEvent* e)
 }
 
 using namespace Natron;
-#include "moc_ViewerGL.cpp"

@@ -3684,4 +3684,3 @@ DopeSheetView::focusInEvent(QFocusEvent *e)
 }
 
 using namespace Natron;
-#include "moc_DopeSheetView.cpp"

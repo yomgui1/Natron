@@ -337,4 +337,3 @@ NewLayerDialog::onRGBAButtonClicked()
 }
 
 using namespace Natron;
-#include "moc_NewLayerDialog.cpp"

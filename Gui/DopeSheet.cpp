@@ -1630,4 +1630,3 @@ DSNode::containsNodeContext() const
 }
 
 using namespace Natron;
-#include "moc_DopeSheet.cpp"

@@ -377,4 +377,3 @@ KnobGuiParametric::restoreOpenGLContext()
 }
 
 using namespace Natron;
-#include "moc_KnobGuiParametric.cpp"

@@ -3710,4 +3710,3 @@ Settings::isDriveLetterToUNCPathConversionEnabled() const
 }
 
 using namespace Natron;
-#include "moc_Settings.cpp"

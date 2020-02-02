@@ -167,4 +167,3 @@ FloatingWidget::closeEvent(QCloseEvent* e)
 }
 
 using namespace Natron;
-#include "moc_FloatingWidget.cpp"

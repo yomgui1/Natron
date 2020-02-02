@@ -732,4 +732,3 @@ ProgressTaskInfoPrivate::refreshButtons()
 }
 
 using namespace Natron;
-#include "moc_ProgressTaskInfo.cpp"

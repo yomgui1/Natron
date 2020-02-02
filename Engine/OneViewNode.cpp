@@ -191,4 +191,3 @@ OneViewNode::onProjectViewsChanged()
 
 using namespace Natron;
 
-#include "moc_OneViewNode.cpp"

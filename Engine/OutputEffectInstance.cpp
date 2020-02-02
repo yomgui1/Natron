@@ -532,4 +532,3 @@ OutputEffectInstance::reportStats(int time,
 }
 
 using namespace Natron;
-#include "moc_OutputEffectInstance.cpp"

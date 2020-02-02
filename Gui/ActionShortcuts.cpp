@@ -336,4 +336,3 @@ ToolTipActionShortcut::setShortcutWrapper(const QString& actionID,
 }
 
 using namespace Natron;
-#include "moc_ActionShortcuts.cpp"

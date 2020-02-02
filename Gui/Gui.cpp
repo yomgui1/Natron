@@ -791,4 +791,3 @@ Gui::dockClicked()
 }
 
 using namespace Natron;
-#include "moc_Gui.cpp"

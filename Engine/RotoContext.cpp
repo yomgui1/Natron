@@ -4811,4 +4811,3 @@ RotoContext::declarePythonFields()
 }
 
 using namespace Natron;
-#include "moc_RotoContext.cpp"

@@ -95,4 +95,3 @@ GroupInput::knobChanged(KnobI* k,
 }
 
 using namespace Natron;
-#include "moc_GroupInput.cpp"

@@ -1737,4 +1737,3 @@ FileSystemModel::filesListFromPattern(const std::string& pattern, SequenceParsin
 }
 
 using namespace Natron;
-#include "moc_FileSystemModel.cpp"

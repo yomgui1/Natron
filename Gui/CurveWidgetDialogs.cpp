@@ -598,4 +598,3 @@ EditKeyFrameDialog::changeEvent(QEvent* e)
 }
 
 using namespace Natron;
-#include "moc_CurveWidgetDialogs.cpp"

@@ -3690,4 +3690,3 @@ Bezier::expandToFeatherDistance(bool useGuiCurve,
 }
 
 using namespace Natron;
-#include "moc_Bezier.cpp"

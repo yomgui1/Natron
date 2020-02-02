@@ -260,4 +260,3 @@ NodeRenderWatcher::handleBlockingTask(int taskID)
 }
 
 using namespace Natron;
-#include "moc_GenericSchedulerThreadWatcher.cpp"

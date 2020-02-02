@@ -4898,4 +4898,3 @@ OfxParametricInstance::copyFrom(const OFX::Host::Param::Instance &instance,
 }
 
 using namespace Natron;
-#include "moc_OfxParamInstance.cpp"

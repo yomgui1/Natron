@@ -2432,4 +2432,3 @@ CurveWidget::addKey(const CurveGuiPtr& curve, double xCurve, double yCurve)
 }
 
 using namespace Natron;
-#include "moc_CurveWidget.cpp"

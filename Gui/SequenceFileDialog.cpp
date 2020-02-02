@@ -3055,4 +3055,3 @@ SequenceFileDialog::done(int r)
 }
 
 using namespace Natron;
-#include "moc_SequenceFileDialog.cpp"

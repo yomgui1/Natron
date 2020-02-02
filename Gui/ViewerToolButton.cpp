@@ -122,4 +122,3 @@ ViewerToolButton::handleSelection()
 
 }
 using namespace Natron;
-#include "moc_ViewerToolButton.cpp"

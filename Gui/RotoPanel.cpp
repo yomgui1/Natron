@@ -3002,4 +3002,3 @@ DuplicateItemUndoCommand::redo()
 }
 
 using namespace Natron;
-#include "moc_RotoPanel.cpp"

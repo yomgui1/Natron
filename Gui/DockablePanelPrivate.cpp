@@ -142,4 +142,3 @@ OverlayColorButton::mousePressEvent(QMouseEvent* e)
 }
 
 using namespace Natron;
-#include "moc_DockablePanelPrivate.cpp"

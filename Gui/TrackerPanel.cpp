@@ -2047,4 +2047,3 @@ TrackerPanel::onTimeChanged(SequenceTime time,
 
 using namespace Natron;
 
-#include "moc_TrackerPanel.cpp"

@@ -1367,4 +1367,3 @@ KnobGuiInt::getIncrements(std::vector<double>* increments) const
 }
 
 using namespace Natron;
-#include "moc_KnobGuiValue.cpp"

@@ -1386,4 +1386,3 @@ TimeLineGui::onTimeFormatChanged(int value)
 }
 
 using namespace Natron;
-#include "moc_TimeLineGui.cpp"

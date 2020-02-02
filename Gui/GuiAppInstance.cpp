@@ -1669,4 +1669,3 @@ GuiAppInstance::reloadScriptEditorFonts()
 }
 
 using namespace Natron;
-#include "moc_GuiAppInstance.cpp"

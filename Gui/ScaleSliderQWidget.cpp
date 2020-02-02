@@ -654,4 +654,3 @@ ScaleSliderQWidget::setUseLineColor(bool use,
 }
 
 using namespace Natron;
-#include "moc_ScaleSliderQWidget.cpp"

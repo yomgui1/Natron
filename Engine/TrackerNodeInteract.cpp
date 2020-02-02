@@ -1812,4 +1812,3 @@ TrackerNodeInteract::onAllKeyframesRemovedOnTrack(const TrackMarkerPtr& marker)
 
 }
 using namespace Natron;
-#include "moc_TrackerNodeInteract.cpp"

@@ -2445,4 +2445,3 @@ TrackerPanelV1::showMenuForInstance(Node* instance)
 }
 
 using namespace Natron;
-#include "moc_MultiInstancePanel.cpp"

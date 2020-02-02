@@ -1524,4 +1524,3 @@ RotoDrawableItem::resetTransformCenter()
 }
 
 using namespace Natron;
-#include "moc_RotoDrawableItem.cpp"

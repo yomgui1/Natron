@@ -594,4 +594,3 @@ KnobGuiColor::isAutoFoldDimensionsEnabled() const
 }
 
 using namespace Natron;
-#include "moc_KnobGuiColor.cpp"

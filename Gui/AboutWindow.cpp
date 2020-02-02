@@ -601,4 +601,3 @@ AboutWindow::updateLibrariesVersions()
 }
 
 using namespace Natron;
-#include "moc_AboutWindow.cpp"

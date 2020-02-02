@@ -330,4 +330,3 @@ KnobPath::appendPath(const std::string& path)
 }
 
 using namespace Natron;
-#include "moc_KnobFile.cpp"

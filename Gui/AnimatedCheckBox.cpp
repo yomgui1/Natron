@@ -208,4 +208,3 @@ AnimatedCheckBox::paintEvent(QPaintEvent* e)
 }
 
 using namespace Natron;
-#include "moc_AnimatedCheckBox.cpp"

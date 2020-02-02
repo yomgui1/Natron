@@ -194,4 +194,3 @@ BackdropGuiPrivate::refreshLabelText(int nameHeight,
 }
 
 using namespace Natron;
-#include "moc_BackdropGui.cpp"

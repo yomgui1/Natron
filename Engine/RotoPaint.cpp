@@ -3308,5 +3308,4 @@ RotoPaint::onSelectionChanged(int reason)
 
 }
 using namespace Natron;
-#include "moc_RotoPaint.cpp"
 

@@ -1167,4 +1167,3 @@ GuiApplicationManager::updateAboutWindowLibrariesVersion()
 }
 
 using namespace Natron;
-#include "moc_GuiApplicationManager.cpp"

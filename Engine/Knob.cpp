@@ -6349,4 +6349,3 @@ template class Knob<std::string>;
 }
 
 using namespace Natron;
-#include "moc_Knob.cpp"

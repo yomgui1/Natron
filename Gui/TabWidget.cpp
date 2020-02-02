@@ -2182,4 +2182,3 @@ TabWidgetPrivate::removeTabToPython(PanelWidget* widget,
 }
 
 using namespace Natron;
-#include "moc_TabWidget.cpp"

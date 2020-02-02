@@ -741,4 +741,3 @@ PrecompNode::getPrecompApp() const
 }
 
 using namespace Natron;
-#include "moc_PrecompNode.cpp"

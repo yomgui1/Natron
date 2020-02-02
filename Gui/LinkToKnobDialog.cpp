@@ -239,4 +239,3 @@ LinkToKnobDialog::getSelectedKnobs() const
 }
 
 using namespace Natron;
-#include "moc_LinkToKnobDialog.cpp"

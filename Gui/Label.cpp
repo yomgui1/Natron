@@ -78,4 +78,3 @@ Label::setAltered(bool a)
 }
 
 using namespace Natron;
-#include "moc_Label.cpp"

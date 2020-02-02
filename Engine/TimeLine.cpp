@@ -126,4 +126,3 @@ TimeLine::onFrameChanged(SequenceTime frame)
 }
 
 using namespace Natron;
-#include "moc_TimeLine.cpp"

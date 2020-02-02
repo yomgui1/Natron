@@ -1109,4 +1109,3 @@ ViewerTab::ViewerTab(const std::list<NodeGuiPtr> & existingNodesContext,
 }
 
 using namespace Natron;
-#include "moc_ViewerTab.cpp"

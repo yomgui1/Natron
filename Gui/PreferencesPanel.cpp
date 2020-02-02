@@ -1656,4 +1656,3 @@ PreferencesPanel::onRestoreDefaultShortcutsButtonClicked()
 }
 
 using namespace Natron;
-#include "moc_PreferencesPanel.cpp"

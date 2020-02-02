@@ -183,4 +183,3 @@ LineEdit::keyPressEvent(QKeyEvent* e)
 }
 
 using namespace Natron;
-#include "moc_LineEdit.cpp"

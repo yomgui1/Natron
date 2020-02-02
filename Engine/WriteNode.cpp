@@ -1318,4 +1318,3 @@ WriteNode::onSequenceRenderFinished()
 }
 
 using namespace Natron;
-#include "moc_WriteNode.cpp"

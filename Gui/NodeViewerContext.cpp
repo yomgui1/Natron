@@ -746,4 +746,3 @@ NodeViewerContext::notifyGuiClosing()
 
 }
 using namespace Natron;
-#include "moc_NodeViewerContext.cpp"

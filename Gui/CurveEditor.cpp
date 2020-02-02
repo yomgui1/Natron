@@ -1705,4 +1705,3 @@ CurveEditor::onExprLineEditFinished()
 }
 
 using namespace Natron;
-#include "moc_CurveEditor.cpp"

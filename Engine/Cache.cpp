@@ -31,4 +31,3 @@ namespace Natron {
 }
 
 using namespace Natron;
-#include "moc_Cache.cpp"

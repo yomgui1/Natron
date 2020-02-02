@@ -813,4 +813,3 @@ BezierCPCurveGui::setKeyFrameInterpolation(KeyframeTypeEnum interp,
 }
 
 using namespace Natron;
-#include "moc_CurveGui.cpp"

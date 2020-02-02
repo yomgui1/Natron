@@ -1852,4 +1852,3 @@ struct ManageUserParamsDialogPrivate
     }
 
 using namespace Natron;
-#include "moc_DockablePanel.cpp"

@@ -543,4 +543,3 @@ OutputScriptTextEdit::scrollContentsBy(int dx,
 }
 
 using namespace Natron;
-#include "moc_ScriptTextEdit.cpp"

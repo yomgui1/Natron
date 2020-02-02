@@ -648,4 +648,3 @@ ProjectGui::setPickersColor(double r,
 }
 
 using namespace Natron;
-#include "moc_ProjectGui.cpp"

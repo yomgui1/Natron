@@ -310,4 +310,3 @@ NodeSettingsPanel::onExportPresetsActionTriggered()
 }
 
 using namespace Natron;
-#include "moc_NodeSettingsPanel.cpp"

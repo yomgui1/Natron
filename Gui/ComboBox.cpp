@@ -1103,4 +1103,3 @@ ComboBox::getAltered() const
 }
 
 using namespace Natron;
-#include "moc_ComboBox.cpp"

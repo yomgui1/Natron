@@ -492,4 +492,3 @@ KnobGuiChoice::reflectModificationsState()
 }
 
 using namespace Natron;
-#include "moc_KnobGuiChoice.cpp"

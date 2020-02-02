@@ -344,4 +344,3 @@ MessageBox::event(QEvent* e)
 }
 
 using namespace Natron;
-#include "moc_MessageBox.cpp"

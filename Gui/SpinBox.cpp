@@ -1124,4 +1124,3 @@ KnobSpinBox::focusOutEvent(QFocusEvent* e)
 }
 
 using namespace Natron;
-#include "moc_SpinBox.cpp"

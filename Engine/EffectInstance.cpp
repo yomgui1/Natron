@@ -5978,5 +5978,4 @@ EffectInstance::setClipPreferencesRunning(bool running)
 }
 
 using namespace Natron;
-#include "moc_EffectInstance.cpp"
 

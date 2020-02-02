@@ -455,4 +455,3 @@ InfoViewerWidget::setImageFormat(const ImagePlaneDesc& comp,
 }
 
 using namespace Natron;
-#include "moc_InfoViewerWidget.cpp"

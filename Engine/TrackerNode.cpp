@@ -2451,4 +2451,3 @@ TrackerNode::refreshExtraStateAfterTimeChanged(bool isPlayback,
 }
 using namespace Natron;
 
-#include "moc_TrackerNode.cpp"

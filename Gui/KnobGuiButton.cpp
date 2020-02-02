@@ -250,4 +250,3 @@ KnobGuiButton::onLabelChangedInternal()
 }
 
 using namespace Natron;
-#include "moc_KnobGuiButton.cpp"

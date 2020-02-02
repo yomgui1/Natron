@@ -1087,4 +1087,3 @@ RenderStatsDialog::onIDLineEditChanged(const QString& filter)
 }
 
 using namespace Natron;
-#include "moc_RenderStatsDialog.cpp"

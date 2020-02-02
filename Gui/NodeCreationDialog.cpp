@@ -539,4 +539,3 @@ NodeCreationDialog::finish(bool accepted)
 }
 
 using namespace Natron;
-#include "moc_NodeCreationDialog.cpp"

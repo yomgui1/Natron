@@ -2592,4 +2592,3 @@ KnobLayers::typeNameStatic()
 }
 
 using namespace Natron;
-#include "moc_KnobTypes.cpp"

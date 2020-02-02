@@ -170,4 +170,3 @@ JoinViewsNode::onProjectViewsChanged()
 }
 
 using namespace Natron;
-#include "moc_JoinViewsNode.cpp"

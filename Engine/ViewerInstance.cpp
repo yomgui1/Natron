@@ -3546,5 +3546,3 @@ ViewerInstance::reportStats(int time,
 }
 
 using namespace Natron;
-#include "moc_ViewerInstance.cpp"
-#include "moc_ViewerInstancePrivate.cpp"

@@ -4982,4 +4982,3 @@ LinkToTrackDialog::getSelectedKnob() const
 };
 
 using namespace Natron;;
-#include "moc_RotoGui.cpp"

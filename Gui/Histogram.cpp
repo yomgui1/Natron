@@ -2035,4 +2035,3 @@ Histogram::hideViewerCursor()
 }
 
 using namespace Natron;
-#include "moc_Histogram.cpp"

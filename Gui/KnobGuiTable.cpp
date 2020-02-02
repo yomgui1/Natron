@@ -778,4 +778,3 @@ KnobGuiLayers::getKnob() const
 }
 
 using namespace Natron;
-#include "moc_KnobGuiTable.cpp"

@@ -108,4 +108,3 @@ GroupBoxLabel::setChecked(bool b)
 }
 
 using namespace Natron;
-#include "moc_GroupBoxLabel.cpp"

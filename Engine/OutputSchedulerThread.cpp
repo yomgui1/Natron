@@ -4020,4 +4020,3 @@ ViewerCurrentFrameRequestRendererBackup::threadLoopOnce(const GenericThreadStart
 }
 
 using namespace Natron;
-#include "moc_OutputSchedulerThread.cpp"

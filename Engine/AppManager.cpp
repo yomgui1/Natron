@@ -4588,4 +4588,3 @@ Python::getAttrRecursive(const std::string& fullyQualifiedName,
 }
 
 using namespace Natron;
-#include "moc_AppManager.cpp"

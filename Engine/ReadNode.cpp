@@ -1450,4 +1450,3 @@ ReadNode::getFramesNeeded(double time,
 }
 
 using namespace Natron;
-#include "moc_ReadNode.cpp"

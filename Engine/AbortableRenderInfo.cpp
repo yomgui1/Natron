@@ -282,4 +282,3 @@ AbortableRenderInfo::onAbortTimerTimeout()
 }
 using namespace Natron;
 
-#include "moc_AbortableRenderInfo.cpp"

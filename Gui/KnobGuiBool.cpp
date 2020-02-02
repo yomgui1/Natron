@@ -395,4 +395,3 @@ KnobGuiBool::updateToolTip()
 }
 
 using namespace Natron;
-#include "moc_KnobGuiBool.cpp"

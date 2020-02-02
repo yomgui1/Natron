@@ -3226,4 +3226,3 @@ OfxEffectInstance::onInteractViewportSelectionUpdated(const RectD& rectangle, bo
 }
 
 using namespace Natron;
-#include "moc_OfxEffectInstance.cpp"

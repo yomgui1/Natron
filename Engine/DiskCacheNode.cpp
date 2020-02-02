@@ -245,5 +245,4 @@ DiskCacheNode::isHostChannelSelectorSupported(bool* /*defaultR*/,
 }
 using namespace Natron;
 
-#include "moc_DiskCacheNode.cpp"
 

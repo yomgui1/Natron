@@ -1432,4 +1432,3 @@ TrackMarkerPM::initializeKnobs()
 }
 
 using namespace Natron;
-#include "moc_TrackMarker.cpp"

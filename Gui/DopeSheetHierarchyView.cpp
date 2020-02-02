@@ -1119,4 +1119,3 @@ HierarchyView::onSelectionChanged()
 }
 
 using namespace Natron;
-#include "moc_DopeSheetHierarchyView.cpp"

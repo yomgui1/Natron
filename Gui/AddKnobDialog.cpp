@@ -2146,4 +2146,3 @@ AddKnobDialogPrivate::setVisibleDefaultValues(bool visible,
 }
 
 using namespace Natron;
-#include "moc_AddKnobDialog.cpp"

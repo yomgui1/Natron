@@ -168,4 +168,3 @@ LoadProjectSplashScreen::paintEvent(QPaintEvent* /*e*/)
 }
 
 using namespace Natron;
-#include "moc_SplashScreen.cpp"

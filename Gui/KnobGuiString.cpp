@@ -1381,4 +1381,3 @@ KnobGuiString::reflectModificationsState()
 }
 
 using namespace Natron;
-#include "moc_KnobGuiString.cpp"

@@ -194,4 +194,3 @@ TabGroup::onGroupKnobSecretChanged()
 }
 using namespace Natron;
 
-#include "moc_TabGroup.cpp"

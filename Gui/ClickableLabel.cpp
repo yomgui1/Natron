@@ -270,4 +270,3 @@ KnobClickableLabel::focusOutEvent(QFocusEvent* e)
 }
 
 using namespace Natron;
-#include "moc_ClickableLabel.cpp"

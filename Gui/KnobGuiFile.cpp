@@ -1153,4 +1153,3 @@ KnobGuiPath::updateToolTip()
 }
 
 using namespace Natron;
-#include "moc_KnobGuiFile.cpp"

@@ -2686,4 +2686,3 @@ TrackerContextPrivate::setTransformOutOfDate(bool outdated)
 
 }
 using namespace Natron;
-#include "moc_TrackerContextPrivate.cpp"

@@ -350,4 +350,3 @@ EditScriptDialog::keyPressEvent(QKeyEvent* e)
 }
 
 using namespace Natron;
-#include "moc_EditScriptDialog.cpp"

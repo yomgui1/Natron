@@ -2899,4 +2899,3 @@ NodeCollection::exportGroupToPython(const QString& pluginID,
 }
 
 using namespace Natron;
-#include "moc_NodeGroup.cpp"

@@ -235,4 +235,3 @@ ToolButton::sortChildren()
 }
 
 using namespace Natron;
-#include "moc_ToolButton.cpp"

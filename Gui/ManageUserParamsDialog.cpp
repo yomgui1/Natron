@@ -751,4 +751,3 @@ ManageUserParamsDialog::onSelectionChanged()
 }
 
 using namespace Natron;
-#include "moc_ManageUserParamsDialog.cpp"

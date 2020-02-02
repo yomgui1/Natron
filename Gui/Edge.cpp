@@ -962,4 +962,3 @@ LinkArrow::paint(QPainter *painter,
 }
 
 using namespace Natron;
-#include "moc_Edge.cpp"

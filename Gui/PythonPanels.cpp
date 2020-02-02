@@ -687,4 +687,3 @@ PyTabWidget::getScriptName() const
 
 using namespace Natron;
 using namespace Natron::Python;
-#include "moc_PythonPanels.cpp"

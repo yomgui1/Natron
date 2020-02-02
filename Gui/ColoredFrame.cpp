@@ -52,4 +52,3 @@ ColoredFrame::setFrameColor(const QColor& color)
 
 }
 using namespace Natron;
-#include "moc_ColoredFrame.cpp"

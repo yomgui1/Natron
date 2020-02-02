@@ -1233,4 +1233,3 @@ KnobGuiContainerSignalsHandler::onPageLabelChangedInternally()
 }
 
 using namespace Natron;
-#include "moc_KnobGuiContainerHelper.cpp"

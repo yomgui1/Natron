@@ -2793,4 +2793,3 @@ Project::setTimeLine(const TimeLinePtr& timeline)
 }
 
 using namespace Natron;
-#include "moc_Project.cpp"

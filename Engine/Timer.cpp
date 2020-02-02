@@ -339,4 +339,3 @@ TimeLapseReporter::~TimeLapseReporter()
 }
 
 using namespace Natron;
-#include "moc_Timer.cpp"

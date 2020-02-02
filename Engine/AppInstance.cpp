@@ -2363,4 +2363,3 @@ AppInstance::recheckInvalidExpressions()
 }
 
 using namespace Natron;
-#include "moc_AppInstance.cpp"

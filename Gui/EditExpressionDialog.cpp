@@ -176,4 +176,3 @@ EditExpressionDialog::getDeclaredVariables(std::list<std::pair<QString, QString>
 }
 
 using namespace Natron;
-#include "moc_EditExpressionDialog.cpp"

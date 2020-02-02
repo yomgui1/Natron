@@ -434,4 +434,3 @@ ExportGroupTemplateDialog::onOkClicked()
 }
 
 using namespace Natron;
-#include "moc_ExportGroupTemplateDialog.cpp"

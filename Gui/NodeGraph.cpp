@@ -455,4 +455,3 @@ NodeGraph::getUndoStack() const
 }
 
 using namespace Natron;
-#include "moc_NodeGraph.cpp"

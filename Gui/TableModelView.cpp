@@ -1468,4 +1468,3 @@ TableView::dropEvent(QDropEvent* e)
 }
 
 using namespace Natron;
-#include "moc_TableModelView.cpp"

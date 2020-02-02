@@ -177,4 +177,3 @@ LogWindowModal::keyPressEvent(QKeyEvent* e)
 }
 
 using namespace Natron;
-#include "moc_LogWindow.cpp"

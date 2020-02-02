@@ -868,4 +868,3 @@ KnobGui::createDuplicateOnNode(EffectInstance* effect,
 }
 
 using namespace Natron;
-#include "moc_KnobGui.cpp"

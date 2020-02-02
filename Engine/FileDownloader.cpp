@@ -109,4 +109,3 @@ FileDownloader::downloadedData() const
 }
 
 using namespace Natron;
-#include "moc_FileDownloader.cpp"

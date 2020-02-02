@@ -7315,4 +7315,3 @@ Node::getHostMixingValue(double time,
 }
 
 using namespace Natron;
-#include "moc_Node.cpp"

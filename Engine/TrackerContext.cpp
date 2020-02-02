@@ -2015,4 +2015,3 @@ TrackScheduler::doRenderCurrentFrameForViewer(ViewerInstance* viewer)
 }
 
 using namespace Natron;
-#include "moc_TrackerContext.cpp"

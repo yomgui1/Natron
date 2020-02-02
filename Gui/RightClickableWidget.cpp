@@ -104,4 +104,3 @@ RightClickableWidget::isParentSettingsPanelRecursive(QWidget* w)
 }
 
 using namespace Natron;
-#include "moc_RightClickableWidget.cpp"

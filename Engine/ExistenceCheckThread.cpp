@@ -173,5 +173,4 @@ ExistenceCheckerThread::run()
 }
 
 using namespace Natron;
-#include "moc_ExistenceCheckThread.cpp"
 

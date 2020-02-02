@@ -204,4 +204,3 @@ DotGui::shape() const
 }
 
 //using namespace Natron;
-//#include "moc_DotGui.cpp"

@@ -440,4 +440,3 @@ ProcessInputChannel::onOutputPipeConnectionMade()
 }
 
 using namespace Natron;
-#include "moc_ProcessHandler.cpp"

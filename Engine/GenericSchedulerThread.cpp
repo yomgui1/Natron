@@ -622,4 +622,3 @@ GenericSchedulerThread::onExecutionOnMainThreadReceived(const GenericThreadExecO
 }
 
 using namespace Natron;
-#include "moc_GenericSchedulerThread.cpp"

@@ -94,4 +94,3 @@ Backdrop::knobChanged(KnobI* k,
 }
 
 using namespace Natron;
-#include "moc_Backdrop.cpp"

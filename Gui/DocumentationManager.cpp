@@ -661,4 +661,3 @@ DocumentationManager::serverPort()
 }
 
 using namespace Natron;
-#include "moc_DocumentationManager.cpp"

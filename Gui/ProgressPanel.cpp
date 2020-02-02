@@ -657,4 +657,3 @@ ProgressPanel::onItemRightClicked(TableItem* item)
 
 
 using namespace Natron;
-#include "moc_ProgressPanel.cpp"
