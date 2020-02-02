@@ -38,7 +38,7 @@
 #include "Engine/GenericSchedulerThreadWatcher.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 void
 Node::load(const CreateNodeArgs& args)
@@ -784,7 +784,7 @@ Node::doDestroyNodeInternalEnd(bool autoReconnect)
 } // Node::doDestroyNodeInternalEnd
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 class NodeDestroyNodeInternalArgs
     : public GenericWatcherCallerArgs
@@ -803,7 +803,7 @@ public:
 
 typedef boost::shared_ptr<NodeDestroyNodeInternalArgs> NodeDestroyNodeInternalArgsPtr;
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 void
@@ -954,4 +954,4 @@ Node::isSupportedBitDepth(ImageBitDepthEnum depth) const
 }
 
 
-NATRON_NAMESPACE_EXIT
+}

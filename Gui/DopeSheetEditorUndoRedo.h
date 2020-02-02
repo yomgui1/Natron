@@ -48,7 +48,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 typedef std::list<DopeSheetKeyPtr> DopeSheetKeyPtrList;
 
@@ -411,6 +411,6 @@ private:
     DopeSheetEditor *_model;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // DOPESHEETEDITORUNDOREDO_H

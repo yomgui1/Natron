@@ -51,7 +51,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/Label.h"
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct KnobGuiValuePrivate;
 class KnobGuiValue
@@ -242,7 +242,7 @@ private:
     virtual void getIncrements(std::vector<double>* increments) const OVERRIDE FINAL;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 
 #endif // KNOBGUIVALUE_H

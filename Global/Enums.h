@@ -26,11 +26,11 @@ CLANG_DIAG_OFF(deprecated)
 #include <QtCore/QMetaType>
 CLANG_DIAG_ON(deprecated)
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 #ifdef SBK_RUN
 // shiboken doesn't generate SbkNatronEngine_StandardButtonEnum_as_number unless it is put in a class or namespace
-NATRON_NAMESPACE_EXIT
-namespace NATRON_NAMESPACE {
+}
+namespace Natron {
 #endif
 
 enum ScaleTypeEnum
@@ -685,13 +685,13 @@ Q_DECLARE_FLAGS(StandardButtons, StandardButtonEnum)
 
 #ifdef SBK_RUN
 }
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 #endif
 
 
-NATRON_NAMESPACE_EXIT
+}
 
-Q_DECLARE_METATYPE(NATRON_NAMESPACE::StandardButtons)
+Q_DECLARE_METATYPE(Natron::StandardButtons)
 
 
 #endif // NATRON_GLOBAL_ENUMS_H

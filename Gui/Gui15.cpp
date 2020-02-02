@@ -48,7 +48,7 @@
 #include "Gui/SequenceFileDialog.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 void
@@ -440,4 +440,4 @@ Gui::setVisibleProjectSettingsPanel()
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}

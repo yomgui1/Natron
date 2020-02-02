@@ -26,7 +26,7 @@
 
 #include <stdexcept>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 Texture::Texture(U32 target,
                  int minFilter,
@@ -148,4 +148,4 @@ Texture::~Texture()
     glDeleteTextures(1, &_texID);
 }
 
-NATRON_NAMESPACE_EXIT
+}

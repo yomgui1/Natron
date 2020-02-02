@@ -25,9 +25,9 @@
 
 #include "Smooth1D.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 /// IIR Gaussian filter: recursive implementation.
 
@@ -165,7 +165,7 @@ iir_1d_filter(SrcIterator src,
     }
 } // iir_1d_filter
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 namespace Smooth1D {
 
@@ -204,4 +204,4 @@ namespace Smooth1D {
 
 } // namespace Smooth1D
 
-NATRON_NAMESPACE_EXIT
+}

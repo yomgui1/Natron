@@ -33,7 +33,7 @@
 #include "Engine/NodeGroup.h" // kNatronGroupInputIsOptionalParamName, kNatronGroupInputIsMaskParamName
 #include "Engine/ViewIdx.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 std::string
 GroupInput::getPluginDescription() const
@@ -92,7 +92,7 @@ GroupInput::knobChanged(KnobI* k,
     return ret;
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_GroupInput.cpp"

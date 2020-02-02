@@ -77,7 +77,7 @@ CLANG_DIAG_ON(uninitialized)
 #include <ofxNatron.h>
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 using std::make_pair;
 
@@ -249,11 +249,11 @@ NewLayerDialog::getComponents() const
     QString g = _imp->gEdit->text();
     QString b = _imp->bEdit->text();
     QString a = _imp->aEdit->text();
-    std::string layerFixed = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendlyWithDots( layer.toStdString() );
-    std::string rFixed = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendlyWithDots( r.toStdString() );
-    std::string gFixed = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendlyWithDots( g.toStdString() );
-    std::string bFixed = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendlyWithDots( b.toStdString() );
-    std::string aFixed = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendlyWithDots( a.toStdString() );
+    std::string layerFixed = Python::makeNameScriptFriendlyWithDots( layer.toStdString() );
+    std::string rFixed = Python::makeNameScriptFriendlyWithDots( r.toStdString() );
+    std::string gFixed = Python::makeNameScriptFriendlyWithDots( g.toStdString() );
+    std::string bFixed = Python::makeNameScriptFriendlyWithDots( b.toStdString() );
+    std::string aFixed = Python::makeNameScriptFriendlyWithDots( a.toStdString() );
 
     if ( layerFixed.empty() ) {
         return ImagePlaneDesc::getNoneComponents();
@@ -334,7 +334,7 @@ NewLayerDialog::onRGBAButtonClicked()
     _imp->aEdit->setVisible(true);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_NewLayerDialog.cpp"

@@ -79,7 +79,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Engine/RectISerialization.h"
 #include "Engine/RectDSerialization.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 ProjectGui::ProjectGui(Gui* gui)
     : _gui(gui)
@@ -175,10 +175,10 @@ AddFormatDialog::AddFormatDialog(Project *project,
     _fromViewerLineLayout->addWidget(_copyFromViewerCombo);
 
     _copyFromViewerButton = new Button(tr("Copy from"), _fromViewerLine);
-    _copyFromViewerButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(
+    _copyFromViewerButton->setToolTip( Natron::convertFromPlainText(
                                            tr("Fill the new format with the currently"
                                               " displayed region of definition of the viewer"
-                                              " indicated on the left."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+                                              " indicated on the left."), Natron::WhiteSpaceNormal) );
     QObject::connect( _copyFromViewerButton, SIGNAL(clicked()), this, SLOT(onCopyFromViewer()) );
     _mainLayout->addWidget(_fromViewerLine);
 
@@ -528,7 +528,7 @@ ProjectGui::load<boost::archive::xml_iarchive>(bool isAutosave,  boost::archive:
         std::string appID = _gui->getApp()->getAppIDString();
         std::string err;
         std::string script = "app = " + appID + '\n';
-        bool ok = NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0);
+        bool ok = Python::interpretPythonScript(script, &err, 0);
         assert(ok);
         if (!ok) {
             // we have to give the tr() context explicitly due to a bug in lupdate
@@ -538,7 +538,7 @@ ProjectGui::load<boost::archive::xml_iarchive>(bool isAutosave,  boost::archive:
     for (std::list<PythonPanelSerializationPtr>::const_iterator it = pythonPanels.begin(); it != pythonPanels.end(); ++it) {
         std::string script = (*it)->pythonFunction + "()\n";
         std::string err, output;
-        if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, &output) ) {
+        if ( !Python::interpretPythonScript(script, &err, &output) ) {
             _gui->getApp()->appendToScriptEditor(err);
         } else {
             if ( !output.empty() ) {
@@ -548,11 +548,11 @@ ProjectGui::load<boost::archive::xml_iarchive>(bool isAutosave,  boost::archive:
         const RegisteredTabs& registeredTabs = _gui->getRegisteredTabs();
         RegisteredTabs::const_iterator found = registeredTabs.find( (*it)->name );
         if ( found != registeredTabs.end() ) {
-            NATRON_PYTHON_NAMESPACE::PyPanel* panel = dynamic_cast<NATRON_PYTHON_NAMESPACE::PyPanel*>(found->second.first);
+            Python::PyPanel* panel = dynamic_cast<Python::PyPanel*>(found->second.first);
             if (panel) {
                 panel->restore( QString::fromUtf8( (*it)->userData.c_str() ) );
                 for (std::list<KnobSerializationPtr>::iterator it2 = (*it)->knobs.begin(); it2 != (*it)->knobs.end(); ++it2) {
-                    NATRON_PYTHON_NAMESPACE::Param* param = panel->getParam( QString::fromUtf8( (*it2)->getName().c_str() ) );
+                    Python::Param* param = panel->getParam( QString::fromUtf8( (*it2)->getName().c_str() ) );
                     if (param) {
                         param->getInternalKnob()->clone( (*it2)->getKnob() );
                         delete param;
@@ -645,7 +645,7 @@ ProjectGui::setPickersColor(double r,
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_ProjectGui.cpp"

@@ -36,39 +36,13 @@
 #define __NATRON_LINUX__
 #endif
 
-#ifdef SBK_RUN
-
-// run shiboken without the Natron namespace, and add NATRON_NAMESPACE_USING to each cpp afterwards
-#define NATRON_NAMESPACE
-#define NATRON_NAMESPACE_ENTER
-#define NATRON_NAMESPACE_EXIT
-#define NATRON_PYTHON_NAMESPACE
-#define NATRON_PYTHON_NAMESPACE_ENTER
-#define NATRON_PYTHON_NAMESPACE_EXIT
-
-#else // !SBK_RUN
-
-#define NATRON_NAMESPACE Natron
-// Macros to use in each file to enter and exit the right name spaces.
-#define NATRON_NAMESPACE_ENTER namespace NATRON_NAMESPACE {
-#define NATRON_NAMESPACE_EXIT }
-#define NATRON_NAMESPACE_USING using namespace NATRON_NAMESPACE;
-
-#define NATRON_PYTHON_NAMESPACE Python
-#define NATRON_PYTHON_NAMESPACE_ENTER namespace NATRON_PYTHON_NAMESPACE {
-#define NATRON_PYTHON_NAMESPACE_EXIT }
-#define NATRON_PYTHON_NAMESPACE_USING using namespace NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE;
-
+#ifndef SBK_RUN
 #ifdef __cplusplus
 // Establish the name space.
-namespace NATRON_NAMESPACE { }
-namespace NATRON_PYTHON_NAMESPACE { }
+namespace Natron { }
+namespace Python { }
 #endif
-
 #endif
-
-#define NATRON_NAMESPACE_ANONYMOUS_ENTER namespace {
-#define NATRON_NAMESPACE_ANONYMOUS_EXIT }
 
 #define NATRON_APPLICATION_DESCRIPTION "Open-source, cross-platform, nodal video compositing software."
 #define NATRON_COPYRIGHT "Copyright (C) 2013-2018 INRIA and Alexandre Gauthier-Foichat."

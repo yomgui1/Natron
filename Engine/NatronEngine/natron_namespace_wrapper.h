@@ -1,9 +1,9 @@
-#ifndef SBK_NATRON_NAMESPACE_H
-#define SBK_NATRON_NAMESPACE_H
+#ifndef SBK_Natron_H
+#define SBK_Natron_H
 
 #include <shiboken.h>
 
 #include <Enums.h>
 
-#endif // SBK_NATRON_NAMESPACE_H
+#endif // SBK_Natron_H
 

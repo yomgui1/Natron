@@ -60,7 +60,7 @@ GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 #include "Gui/ViewerTab.h"
 #include "Gui/ticks.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 #define TICK_HEIGHT 7
 #define CURSOR_WIDTH 15
@@ -72,7 +72,7 @@ NATRON_NAMESPACE_ENTER
 #define USER_KEYFRAMES_HEIGHT 7
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 struct TimeLineZoomContext
 {
@@ -138,7 +138,7 @@ timecodeString(double value, double fps)
         .arg(f, 2, 10, QLatin1Char('0'));
 }
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 struct TimelineGuiPrivate
@@ -1383,7 +1383,7 @@ TimeLineGui::onTimeFormatChanged(int value)
     update();
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_TimeLineGui.cpp"

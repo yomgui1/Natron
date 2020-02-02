@@ -34,7 +34,7 @@
 #include "Engine/ViewIdx.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 ActionsCache::ActionsCacheInstance::ActionsCacheInstance()
     : _hash(0)
@@ -474,7 +474,7 @@ EffectInstance::Implementation::runChangedParamCallback(KnobI* k,
         return;
     }
     try {
-        NATRON_PYTHON_NAMESPACE::getFunctionArguments(callback, &error, &args);
+        Python::getFunctionArguments(callback, &error, &args);
     } catch (const std::exception& e) {
         _publicInterface->getApp()->appendToScriptEditor( tr("Failed to get signature of onParamChanged callback: %1").arg( QString::fromUtf8( e.what() ) ).toStdString() );
 
@@ -525,7 +525,7 @@ EffectInstance::Implementation::runChangedParamCallback(KnobI* k,
     }
 
     bool alreadyDefined = false;
-    PyObject* nodeObj = NATRON_PYTHON_NAMESPACE::getAttrRecursive(thisNodeVar, NATRON_PYTHON_NAMESPACE::getMainModule(), &alreadyDefined);
+    PyObject* nodeObj = Python::getAttrRecursive(thisNodeVar, Python::getMainModule(), &alreadyDefined);
     if (!nodeObj || !alreadyDefined) {
         return;
     }
@@ -551,7 +551,7 @@ EffectInstance::Implementation::runChangedParamCallback(KnobI* k,
     std::string script = ss.str();
     std::string err;
     std::string output;
-    if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, &output) ) {
+    if ( !Python::interpretPythonScript(script, &err, &output) ) {
         _publicInterface->getApp()->appendToScriptEditor( tr("Failed to execute onParamChanged callback: %1").arg( QString::fromUtf8( err.c_str() ) ).toStdString() );
     } else {
         if ( !output.empty() ) {
@@ -754,6 +754,6 @@ EffectInstance::Implementation::clearInputImagePointers()
     tls->currentRenderArgs.inputImages.clear();
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
 

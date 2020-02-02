@@ -65,10 +65,10 @@ GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 #include "Gui/ZoomContext.h"
 #include "Gui/ticks.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 enum EventStateEnum
 {
@@ -77,7 +77,7 @@ enum EventStateEnum
     eEventStateNone
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 struct HistogramPrivate
@@ -2032,7 +2032,7 @@ Histogram::hideViewerCursor()
     update();
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_Histogram.cpp"

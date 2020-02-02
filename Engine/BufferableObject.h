@@ -30,7 +30,7 @@
 #include <cstddef>
 #include <list>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /**
  * @brief Stub class used by internal implementation of OutputSchedulerThread to pass objects through signal/slots
@@ -63,6 +63,6 @@ typedef boost::shared_ptr<BufferableObject> BufferableObjectPtr;
 
 typedef std::list<BufferableObjectPtr> BufferableObjectPtrList;
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // OUTPUTSCHEDULERTHREAD_H

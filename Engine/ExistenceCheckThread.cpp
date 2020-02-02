@@ -46,7 +46,7 @@
 //After this time, we consider that the crash reporter is dead
 #define NATRON_BREAKPAD_WAIT_FOR_CRASH_REPORTER_ACK_MS 5000
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct ExistenceCheckerThreadPrivate
 {
@@ -170,8 +170,8 @@ ExistenceCheckerThread::run()
     } // for(;;)
 } // ExistenceCheckerThread::run
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_ExistenceCheckThread.cpp"
 

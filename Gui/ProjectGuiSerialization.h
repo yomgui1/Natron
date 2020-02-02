@@ -95,7 +95,7 @@ GCC_DIAG_ON(unused-parameter)
 
 #define kNatronProjectSettingsPanelSerializationName "Natron_Project_Settings_Panel"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 struct ViewerData
 {
     double zoomLeft;
@@ -245,7 +245,7 @@ public:
     std::string pythonFunction;
     std::string userData;
 
-    void initialize(NATRON_PYTHON_NAMESPACE::PyPanel* tab, const std::string& pythonFunction);
+    void initialize(Python::PyPanel* tab, const std::string& pythonFunction);
 
     template<class Archive>
     void save(Archive & ar,
@@ -793,15 +793,15 @@ public:
     BOOST_SERIALIZATION_SPLIT_MEMBER()
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::GuiLayoutSerialization, GUI_LAYOUT_SERIALIZATION_VERSION);
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::ApplicationWindowSerialization, APPLICATION_WINDOW_SERIALIZATION_VERSION)
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::SplitterSerialization, SPLITTER_SERIALIZATION_VERSION)
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::PaneLayout, PANE_SERIALIZATION_VERSION)
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::PythonPanelSerialization, PYTHON_PANEL_SERIALIZATION_VERSION)
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::ViewerData, VIEWER_DATA_SERIALIZATION_VERSION)
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::ProjectGuiSerialization, PROJECT_GUI_SERIALIZATION_VERSION)
+BOOST_CLASS_VERSION(Natron::GuiLayoutSerialization, GUI_LAYOUT_SERIALIZATION_VERSION);
+BOOST_CLASS_VERSION(Natron::ApplicationWindowSerialization, APPLICATION_WINDOW_SERIALIZATION_VERSION)
+BOOST_CLASS_VERSION(Natron::SplitterSerialization, SPLITTER_SERIALIZATION_VERSION)
+BOOST_CLASS_VERSION(Natron::PaneLayout, PANE_SERIALIZATION_VERSION)
+BOOST_CLASS_VERSION(Natron::PythonPanelSerialization, PYTHON_PANEL_SERIALIZATION_VERSION)
+BOOST_CLASS_VERSION(Natron::ViewerData, VIEWER_DATA_SERIALIZATION_VERSION)
+BOOST_CLASS_VERSION(Natron::ProjectGuiSerialization, PROJECT_GUI_SERIALIZATION_VERSION)
 
 
 #endif // PROJECTGUISERIALIZATION_H

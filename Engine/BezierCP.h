@@ -43,7 +43,7 @@
 #include "Engine/ViewIdx.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /**
  * @class A Bezier is an animated control point of a Bezier. It is the starting point
@@ -179,6 +179,6 @@ private:
 
 typedef std::list<BezierCPPtr> BezierCPs;
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Engine_BezierCP_h

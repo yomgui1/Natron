@@ -46,7 +46,7 @@ CLANG_DIAG_ON(deprecated)
 #include "Engine/EngineFwd.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class FrameEntry
     : public CacheEntryHelper<U8, FrameKey, FrameParams>
@@ -96,6 +96,6 @@ public:
 
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_ENGINE_FRAMEENTRY_H

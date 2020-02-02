@@ -27,7 +27,7 @@
 #include <QtCore/QDebug>
 #include <stdexcept>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 ///what a painful mapping!
 Key
@@ -1925,5 +1925,5 @@ QtEnumConvert::toQtCursor(CursorEnum c,
     return b;
 } // toQtCursor
 
-NATRON_NAMESPACE_EXIT
+}
 

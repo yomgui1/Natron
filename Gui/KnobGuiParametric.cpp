@@ -80,7 +80,7 @@ CLANG_DIAG_ON(uninitialized)
 #include <ofxNatron.h>
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 using std::make_pair;
 
 
@@ -132,7 +132,7 @@ KnobGuiParametric::createWidget(QHBoxLayout* layout)
     treeColumnLayout->addWidget(_tree);
 
     _resetButton = new Button(QString::fromUtf8("Reset"), treeColumn);
-    _resetButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Reset the selected curves in the tree to their default shape."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _resetButton->setToolTip( Natron::convertFromPlainText(tr("Reset the selected curves in the tree to their default shape."), Natron::WhiteSpaceNormal) );
     QObject::connect( _resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedCurves()) );
     treeColumnLayout->addWidget(_resetButton);
 
@@ -374,7 +374,7 @@ KnobGuiParametric::restoreOpenGLContext()
     _curveWidget->restoreOpenGLContext();
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_KnobGuiParametric.cpp"

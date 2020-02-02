@@ -57,10 +57,10 @@
 #define kTrackerPMParamTrackingCenterPoint "center"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 class MetaTypesRegistration
 {
@@ -71,7 +71,7 @@ public:
     }
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 static MetaTypesRegistration registration;
 
@@ -395,7 +395,7 @@ TrackMarker::setScriptName(const std::string& name)
     }
 
 
-    std::string cpy = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendly(name);
+    std::string cpy = Python::makeNameScriptFriendly(name);
 
     if ( cpy.empty() || cpy == currentName) {
         return false;
@@ -1429,7 +1429,7 @@ TrackMarkerPM::initializeKnobs()
 } // TrackMarkerPM::initializeKnobs
 
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_TrackMarker.cpp"

@@ -46,7 +46,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/Label.h"
 #include "Gui/QtEnumConvert.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct MessageBoxPrivate
 {
@@ -341,7 +341,7 @@ MessageBox::event(QEvent* e)
     return result;
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_MessageBox.cpp"

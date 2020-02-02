@@ -53,7 +53,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/SpinBox.h"
 #include "Gui/GuiDefines.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class PlaceHolderTextEdit
     : public QTextEdit
@@ -168,21 +168,21 @@ ExportGroupTemplateDialog::ExportGroupTemplateDialog(NodeCollection* group,
 
 
     _imp->idLabel = new Label(tr("Unique ID"), this);
-    QString idTt = NATRON_NAMESPACE::convertFromPlainText(tr("The unique ID is used by %1 to identify the plug-in in various "
+    QString idTt = Natron::convertFromPlainText(tr("The unique ID is used by %1 to identify the plug-in in various "
                                                      "places in the application.\n"
                                                      "Generally, this contains domain and sub-domains names "
                                                      "such as fr.inria.group.XXX.\n"
                                                      "If two plug-ins or more happen to have the same ID, they will be "
                                                      "gathered by version.\n"
                                                      "If two plug-ins or more have the same ID and version, the first loaded in the"
-                                                     " search-paths will take precedence over the other.").arg( QString::fromUtf8(NATRON_APPLICATION_NAME) ), NATRON_NAMESPACE::WhiteSpaceNormal);
+                                                     " search-paths will take precedence over the other.").arg( QString::fromUtf8(NATRON_APPLICATION_NAME) ), Natron::WhiteSpaceNormal);
     _imp->idEdit = new LineEdit(this);
     _imp->idEdit->setPlaceholderText( QString::fromUtf8("org.organization.pyplugs.XXX") );
     _imp->idEdit->setToolTip(idTt);
 
 
     _imp->labelLabel = new Label(tr("Label"), this);
-    QString labelTt = NATRON_NAMESPACE::convertFromPlainText(tr("Set the label of the group as the user will see it in the user interface."), NATRON_NAMESPACE::WhiteSpaceNormal);
+    QString labelTt = Natron::convertFromPlainText(tr("Set the label of the group as the user will see it in the user interface."), Natron::WhiteSpaceNormal);
     _imp->labelLabel->setToolTip(labelTt);
     _imp->labelEdit = new LineEdit(this);
     _imp->labelEdit->setPlaceholderText( QString::fromUtf8("MyPlugin") );
@@ -191,8 +191,8 @@ ExportGroupTemplateDialog::ExportGroupTemplateDialog(NodeCollection* group,
 
 
     _imp->groupingLabel = new Label(tr("Grouping"), this);
-    QString groupingTt = NATRON_NAMESPACE::convertFromPlainText(tr("The grouping of the plug-in specifies where the plug-in will be located in the menus, "
-                                                           "e.g. \"Color/Transform\", or \"Draw\". Each sub-level must be separated by a '/'."), NATRON_NAMESPACE::WhiteSpaceNormal);
+    QString groupingTt = Natron::convertFromPlainText(tr("The grouping of the plug-in specifies where the plug-in will be located in the menus, "
+                                                           "e.g. \"Color/Transform\", or \"Draw\". Each sub-level must be separated by a '/'."), Natron::WhiteSpaceNormal);
     _imp->groupingLabel->setToolTip(groupingTt);
 
     _imp->groupingEdit = new LineEdit(this);
@@ -201,10 +201,10 @@ ExportGroupTemplateDialog::ExportGroupTemplateDialog(NodeCollection* group,
 
 
     _imp->versionLabel = new Label(tr("Version"), this);
-    QString versionTt = NATRON_NAMESPACE::convertFromPlainText(tr("The version can be incremented when changing the behaviour of the plug-in. "
+    QString versionTt = Natron::convertFromPlainText(tr("The version can be incremented when changing the behaviour of the plug-in. "
                                                           "If a user is using and old version of this plug-in in a project, if a newer version "
                                                           "of this plug-in is available, upon opening the project a dialog will ask whether "
-                                                          "the plug-in should update to the newer version in the project or not."), NATRON_NAMESPACE::WhiteSpaceNormal);
+                                                          "the plug-in should update to the newer version in the project or not."), Natron::WhiteSpaceNormal);
     _imp->versionLabel->setToolTip(versionTt);
 
     _imp->versionSpinbox = new SpinBox(this, SpinBox::eSpinBoxTypeInt);
@@ -212,22 +212,22 @@ ExportGroupTemplateDialog::ExportGroupTemplateDialog(NodeCollection* group,
     _imp->versionSpinbox->setToolTip(versionTt);
 
     _imp->iconPathLabel = new Label(tr("Icon relative path"), this);
-    QString iconTt = NATRON_NAMESPACE::convertFromPlainText(tr("Set here the file path of an optional icon to identify the plug-in. "
-                                                       "The path is relative to the Python script."), NATRON_NAMESPACE::WhiteSpaceNormal);
+    QString iconTt = Natron::convertFromPlainText(tr("Set here the file path of an optional icon to identify the plug-in. "
+                                                       "The path is relative to the Python script."), Natron::WhiteSpaceNormal);
     _imp->iconPathLabel->setToolTip(iconTt);
     _imp->iconPath = new LineEdit(this);
     _imp->iconPath->setPlaceholderText( QString::fromUtf8("Label.png") );
     _imp->iconPath->setToolTip(iconTt);
 
     _imp->descriptionLabel = new Label(tr("Description"), this);
-    QString descTt =  NATRON_NAMESPACE::convertFromPlainText(tr("Set here the (optional) plug-in description that the user will see when clicking the "
-                                                        "\"?\" button on the settings panel of the node."), NATRON_NAMESPACE::WhiteSpaceNormal);
+    QString descTt =  Natron::convertFromPlainText(tr("Set here the (optional) plug-in description that the user will see when clicking the "
+                                                        "\"?\" button on the settings panel of the node."), Natron::WhiteSpaceNormal);
     _imp->descriptionEdit = new PlaceHolderTextEdit(this);
     _imp->descriptionEdit->setToolTip(descTt);
     _imp->descriptionEdit->setPlaceHolderText( tr("This plug-in can be used to produce XXX effect...") );
 
     _imp->fileLabel = new Label(tr("Directory"), this);
-    QString fileTt  = NATRON_NAMESPACE::convertFromPlainText(tr("Specify here the directory where to export the Python script."), NATRON_NAMESPACE::WhiteSpaceNormal);
+    QString fileTt  = Natron::convertFromPlainText(tr("Specify here the directory where to export the Python script."), Natron::WhiteSpaceNormal);
     _imp->fileLabel->setToolTip(fileTt);
     _imp->fileEdit = new LineEdit(this);
 
@@ -367,7 +367,7 @@ ExportGroupTemplateDialog::onOkClicked()
 
         return;
     } else {
-        pluginLabel = QString::fromUtf8( NATRON_PYTHON_NAMESPACE::makeNameScriptFriendly( pluginLabel.toStdString() ).c_str() );
+        pluginLabel = QString::fromUtf8( Python::makeNameScriptFriendly( pluginLabel.toStdString() ).c_str() );
     }
 
     QString pluginID = _imp->idEdit->text();
@@ -431,7 +431,7 @@ ExportGroupTemplateDialog::onOkClicked()
     accept();
 } // ExportGroupTemplateDialog::onOkClicked
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_ExportGroupTemplateDialog.cpp"

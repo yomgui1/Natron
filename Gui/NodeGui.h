@@ -61,7 +61,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct NodeGuiIndicatorPrivate;
 
@@ -688,9 +688,9 @@ private:
     NodeGuiIndicatorPtr _passThroughIndicator;
     NodeWPtr _identityInput;
     bool identityStateSet;
-    NATRON_PYTHON_NAMESPACE::PyModalDialogPtr _activeNodeCustomModalDialog;
+    Python::PyModalDialogPtr _activeNodeCustomModalDialog;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Natron_Gui_NodeGui_h

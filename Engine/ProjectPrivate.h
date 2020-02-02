@@ -51,7 +51,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Engine/GenericSchedulerThreadWatcher.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct ProjectPrivate
 {
@@ -229,6 +229,6 @@ public:
     } // generateFormatFromString
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // PROJECTPRIVATE_H

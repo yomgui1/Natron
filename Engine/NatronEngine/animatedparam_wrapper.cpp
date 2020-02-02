@@ -18,7 +18,7 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_OFF
 #include "animatedparam_wrapper.h"
 
 // Extra includes
-NATRON_NAMESPACE_USING NATRON_PYTHON_NAMESPACE_USING
+using namespace Natron; using namespace Natron::Python;
 #include <PyParameter.h>
 
 
@@ -826,14 +826,14 @@ static PyObject* Sbk_AnimatedParamFunc_setInterpolationAtTime(PyObject* self, Py
 
 
     // Overloaded function decisor
-    // 0: setInterpolationAtTime(double,NATRON_NAMESPACE::KeyframeTypeEnum,int)
+    // 0: setInterpolationAtTime(double,Natron::KeyframeTypeEnum,int)
     if (numArgs >= 2
         && (pythonToCpp[0] = Shiboken::Conversions::isPythonToCppConvertible(Shiboken::Conversions::PrimitiveTypeConverter<double>(), (pyArgs[0])))
-        && (pythonToCpp[1] = Shiboken::Conversions::isPythonToCppConvertible(SBK_CONVERTER(SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_KEYFRAMETYPEENUM_IDX]), (pyArgs[1])))) {
+        && (pythonToCpp[1] = Shiboken::Conversions::isPythonToCppConvertible(SBK_CONVERTER(SbkNatronEngineTypes[SBK_Natron_KEYFRAMETYPEENUM_IDX]), (pyArgs[1])))) {
         if (numArgs == 2) {
-            overloadId = 0; // setInterpolationAtTime(double,NATRON_NAMESPACE::KeyframeTypeEnum,int)
+            overloadId = 0; // setInterpolationAtTime(double,Natron::KeyframeTypeEnum,int)
         } else if ((pythonToCpp[2] = Shiboken::Conversions::isPythonToCppConvertible(Shiboken::Conversions::PrimitiveTypeConverter<int>(), (pyArgs[2])))) {
-            overloadId = 0; // setInterpolationAtTime(double,NATRON_NAMESPACE::KeyframeTypeEnum,int)
+            overloadId = 0; // setInterpolationAtTime(double,Natron::KeyframeTypeEnum,int)
         }
     }
 
@@ -855,13 +855,13 @@ static PyObject* Sbk_AnimatedParamFunc_setInterpolationAtTime(PyObject* self, Py
         }
         double cppArg0;
         pythonToCpp[0](pyArgs[0], &cppArg0);
-        ::NATRON_NAMESPACE::KeyframeTypeEnum cppArg1 = ((::NATRON_NAMESPACE::KeyframeTypeEnum)0);
+        ::Natron::KeyframeTypeEnum cppArg1 = ((::Natron::KeyframeTypeEnum)0);
         pythonToCpp[1](pyArgs[1], &cppArg1);
         int cppArg2 = 0;
         if (pythonToCpp[2]) pythonToCpp[2](pyArgs[2], &cppArg2);
 
         if (!PyErr_Occurred()) {
-            // setInterpolationAtTime(double,NATRON_NAMESPACE::KeyframeTypeEnum,int)
+            // setInterpolationAtTime(double,Natron::KeyframeTypeEnum,int)
             bool cppResult = cppSelf->setInterpolationAtTime(cppArg0, cppArg1, cppArg2);
             pyResult = Shiboken::Conversions::copyToPython(Shiboken::Conversions::PrimitiveTypeConverter<bool>(), &cppResult);
         }
@@ -874,7 +874,7 @@ static PyObject* Sbk_AnimatedParamFunc_setInterpolationAtTime(PyObject* self, Py
     return pyResult;
 
     Sbk_AnimatedParamFunc_setInterpolationAtTime_TypeError:
-        const char* overloads[] = {"float, NatronEngine.NATRON_NAMESPACE.KeyframeTypeEnum, int = 0", 0};
+        const char* overloads[] = {"float, NatronEngine.Natron.KeyframeTypeEnum, int = 0", 0};
         Shiboken::setErrorAboutWrongArguments(args, "NatronEngine.AnimatedParam.setInterpolationAtTime", overloads);
         return 0;
 }

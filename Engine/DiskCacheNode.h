@@ -35,7 +35,7 @@
 #include "Engine/ViewIdx.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct DiskCacheNodePrivate;
 
@@ -154,6 +154,6 @@ private:
     boost::scoped_ptr<DiskCacheNodePrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // DISKCACHENODE_H

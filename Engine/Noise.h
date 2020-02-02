@@ -19,7 +19,7 @@
 
 #include "Global/Macros.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 //! One octave of non-periodic Perlin noise
 template <int d_in, int d_out, class T>
@@ -38,6 +38,6 @@ void FBM(const T* in, T* out, int octaves, T lacunarity, T gain);
 template <int d_in, int d_out, class T>
 void CellNoise(const T* in, T* out);
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_ENGINE_NOISE_H

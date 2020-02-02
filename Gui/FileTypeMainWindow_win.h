@@ -45,7 +45,7 @@
 #include <windows.h>
 #include <QMainWindow>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 // —— local includes —————————————————————————-
 // —— pre defines ——————————————————————————-
@@ -275,9 +275,9 @@ private:
     // —— not allowed members ——————————————————————-
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(NATRON_NAMESPACE::DocumentWindow::DdeCommands)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Natron::DocumentWindow::DdeCommands)
 
 #endif // __NATRON_WIN32__
 #endif // FILETYPEMAINWINDOW_WIN_H

@@ -47,7 +47,7 @@
 #include "Gui/NodeGui.h"
 #include "Gui/NodeSettingsPanel.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 typedef std::list<DSKnobPtr> DSKnobPtrList;
 
@@ -1116,7 +1116,7 @@ HierarchyView::onSelectionChanged()
     _imp->selectKeyframes( selectedItems() );
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_DopeSheetHierarchyView.cpp"

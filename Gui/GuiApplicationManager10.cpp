@@ -105,7 +105,7 @@ Q_INIT_RESOURCE_EXTERN(GuiResources);
 //in a way. This way the user will get prompted to restore default shortcuts on next launch
 #define NATRON_SHORTCUTS_DEFAULT_VERSION 8
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 void
@@ -1208,4 +1208,4 @@ GuiApplicationManager::reloadScriptEditorFonts()
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}

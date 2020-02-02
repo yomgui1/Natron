@@ -57,7 +57,7 @@ CLANG_DIAG_ON(deprecated)
 
 #define THIRD_PARTY_LICENSE_DIR_PATH ":"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 AboutWindow::AboutWindow(QWidget* parent)
     : QDialog(parent)
@@ -127,7 +127,7 @@ AboutWindow::AboutWindow(QWidget* parent)
         QString licenseStr;
         QFile license( QString::fromUtf8(":LICENSE_SHORT.txt") );
         license.open(QIODevice::ReadOnly | QIODevice::Text);
-        licenseStr = NATRON_NAMESPACE::convertFromPlainText(QTextCodec::codecForName("UTF-8")->toUnicode( license.readAll() ), NATRON_NAMESPACE::WhiteSpaceNormal);
+        licenseStr = Natron::convertFromPlainText(QTextCodec::codecForName("UTF-8")->toUnicode( license.readAll() ), Natron::WhiteSpaceNormal);
         aboutText.append(licenseStr);
     }
     {
@@ -598,7 +598,7 @@ AboutWindow::updateLibrariesVersions()
     _libsText->setText(libsText);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_AboutWindow.cpp"

@@ -81,7 +81,7 @@ CLANG_DIAG_ON(deprecated)
 
 #define TAB_DRAG_WIDGET_PERCENT_FOR_SPLITTING 0.13
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class TransparentDropRect
     : public QWidget
@@ -278,7 +278,7 @@ TabWidget::TabWidget(Gui* gui,
     _imp->leftCornerButton = new Button(QIcon(pixL), QString(), _imp->header);
     _imp->leftCornerButton->setFixedSize(smallButtonSize);
     _imp->leftCornerButton->setIconSize(smallButtonIconSize);
-    _imp->leftCornerButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr(LEFT_HAND_CORNER_BUTTON_TT), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->leftCornerButton->setToolTip( Natron::convertFromPlainText(tr(LEFT_HAND_CORNER_BUTTON_TT), Natron::WhiteSpaceNormal) );
     _imp->leftCornerButton->setFocusPolicy(Qt::NoFocus);
     _imp->headerLayout->addWidget(_imp->leftCornerButton);
     _imp->headerLayout->addSpacing(10);
@@ -293,7 +293,7 @@ TabWidget::TabWidget(Gui* gui,
     _imp->floatButton = new Button(QIcon(pixM), QString(), _imp->header);
     _imp->floatButton->setFixedSize(smallButtonSize);
     _imp->floatButton->setIconSize(smallButtonIconSize);
-    _imp->floatButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Float pane"), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->floatButton->setToolTip( Natron::convertFromPlainText(tr("Float pane"), Natron::WhiteSpaceNormal) );
     _imp->floatButton->setEnabled(true);
     _imp->floatButton->setFocusPolicy(Qt::NoFocus);
     QObject::connect( _imp->floatButton, SIGNAL(clicked()), this, SLOT(floatCurrentWidget()) );
@@ -302,7 +302,7 @@ TabWidget::TabWidget(Gui* gui,
     _imp->closeButton = new Button(QIcon(pixC), QString(), _imp->header);
     _imp->closeButton->setFixedSize(smallButtonSize);
     _imp->closeButton->setIconSize(smallButtonIconSize);
-    _imp->closeButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Close pane"), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->closeButton->setToolTip( Natron::convertFromPlainText(tr("Close pane"), Natron::WhiteSpaceNormal) );
     _imp->closeButton->setFocusPolicy(Qt::NoFocus);
     QObject::connect( _imp->closeButton, SIGNAL(clicked()), this, SLOT(closePane()) );
     _imp->headerLayout->addWidget(_imp->closeButton);
@@ -440,14 +440,14 @@ TabWidget::createMenu()
     menu.addAction( tr("Progress Panel here"), this, SLOT(moveProgressPanelHere()) );
 
 
-    std::map<NATRON_PYTHON_NAMESPACE::PyPanel*, std::string> userPanels = _imp->gui->getPythonPanels();
+    std::map<Python::PyPanel*, std::string> userPanels = _imp->gui->getPythonPanels();
     if ( !userPanels.empty() ) {
         Menu* userPanelsMenu = new Menu(tr("User panels"), &menu);
         //userPanelsMenu->setFont(f);
         menu.addAction( userPanelsMenu->menuAction() );
 
 
-        for (std::map<NATRON_PYTHON_NAMESPACE::PyPanel*, std::string>::iterator it = userPanels.begin(); it != userPanels.end(); ++it) {
+        for (std::map<Python::PyPanel*, std::string>::iterator it = userPanels.begin(); it != userPanels.end(); ++it) {
             QAction* pAction = new QAction(tr("%1 here").arg( it->first->getPanelLabel() ), userPanelsMenu);
             QObject::connect( pAction, SIGNAL(triggered()), this, SLOT(onUserPanelActionTriggered()) );
             pAction->setData( QString::fromUtf8( it->first->getScriptName().c_str() ) );
@@ -457,7 +457,7 @@ TabWidget::createMenu()
     menu.addSeparator();
 
     QAction* isAnchorAction = new QAction(QIcon(pixA), tr("Set this as anchor"), &menu);
-    isAnchorAction->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("The anchor pane is where viewers will be created by default."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    isAnchorAction->setToolTip( Natron::convertFromPlainText(tr("The anchor pane is where viewers will be created by default."), Natron::WhiteSpaceNormal) );
     isAnchorAction->setCheckable(true);
     bool isVA = isAnchor();
     isAnchorAction->setChecked(isVA);
@@ -1991,7 +1991,7 @@ TabWidget::setObjectName_mt_safe(const QString & str)
 
         setObjectName(str);
     }
-    QString tt = NATRON_NAMESPACE::convertFromPlainText(tr(LEFT_HAND_CORNER_BUTTON_TT), NATRON_NAMESPACE::WhiteSpaceNormal);
+    QString tt = Natron::convertFromPlainText(tr(LEFT_HAND_CORNER_BUTTON_TT), Natron::WhiteSpaceNormal);
     QString toPre = QString::fromUtf8("Script name: <font size=\"4\"><b>%1</font></b><br/>").arg(str);
 
     tt.prepend(toPre);
@@ -2007,7 +2007,7 @@ TabWidget::setObjectName_mt_safe(const QString & str)
 
     std::string script = ss.str();
     std::string err;
-    bool ok = NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0);
+    bool ok = Python::interpretPythonScript(script, &err, 0);
     if (!ok) {
         _imp->gui->getApp()->appendToScriptEditor(err);
     }
@@ -2111,7 +2111,7 @@ TabWidget::onTabScriptNameChanged(PanelWidget* tab,
     std::string err;
     std::string script = ss.str();
     _imp->gui->printAutoDeclaredVariable(script);
-    bool ok = NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0);
+    bool ok = Python::interpretPythonScript(script, &err, 0);
     assert(ok);
     if (!ok) {
         throw std::runtime_error("TabWidget::onTabScriptNameChanged: " + err);
@@ -2123,7 +2123,7 @@ TabWidgetPrivate::declareTabToPython(PanelWidget* widget,
                                      const std::string& tabName)
 {
     ViewerTab* isViewer = dynamic_cast<ViewerTab*>(widget);
-    NATRON_PYTHON_NAMESPACE::PyPanel* isPanel = dynamic_cast<NATRON_PYTHON_NAMESPACE::PyPanel*>(widget);
+    Python::PyPanel* isPanel = dynamic_cast<Python::PyPanel*>(widget);
 
     if (!isViewer && !isPanel) {
         return;
@@ -2143,7 +2143,7 @@ TabWidgetPrivate::declareTabToPython(PanelWidget* widget,
     std::string script = ss.str();
     std::string err;
     gui->printAutoDeclaredVariable(script);
-    bool ok = NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0);
+    bool ok = Python::interpretPythonScript(script, &err, 0);
     assert(ok);
     if (!ok) {
         throw std::runtime_error("TabWidget::declareTabToPython: " + err);
@@ -2158,7 +2158,7 @@ TabWidgetPrivate::removeTabToPython(PanelWidget* widget,
         return;
     }
     ViewerTab* isViewer = dynamic_cast<ViewerTab*>(widget);
-    NATRON_PYTHON_NAMESPACE::PyPanel* isPanel = dynamic_cast<NATRON_PYTHON_NAMESPACE::PyPanel*>(widget);
+    Python::PyPanel* isPanel = dynamic_cast<Python::PyPanel*>(widget);
 
     if (!isViewer && !isPanel) {
         return;
@@ -2172,14 +2172,14 @@ TabWidgetPrivate::removeTabToPython(PanelWidget* widget,
     std::string err;
     std::string script = ss.str();
     gui->printAutoDeclaredVariable(script);
-    bool ok = NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0);
+    bool ok = Python::interpretPythonScript(script, &err, 0);
     assert(ok);
     if (!ok) {
         throw std::runtime_error("TabWidget::removeTabToPython: " + err);
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_TabWidget.cpp"

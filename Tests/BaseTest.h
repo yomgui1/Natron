@@ -42,7 +42,7 @@ CLANG_DIAG_ON(deprecated)
 
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class BaseTest
     : public testing::Test
@@ -95,6 +95,6 @@ protected:
     AppInstanceWPtr _app;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // BASETEST_H

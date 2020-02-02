@@ -43,19 +43,19 @@ extern "C" {
 
 
     std::vector<std::string> commandLineArgsUtf8;
-    NATRON_NAMESPACE::ProcInfo::ensureCommandLineArgsUtf8(argc, argv, &commandLineArgsUtf8);
+    Natron::ProcInfo::ensureCommandLineArgsUtf8(argc, argv, &commandLineArgsUtf8);
     if (commandLineArgsUtf8.empty() || (int)commandLineArgsUtf8.size() != argc) {
         return 1;
     }
 
-    NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::setupPythonEnv(commandLineArgsUtf8[0].c_str());
+    Natron::Python::setupPythonEnv(commandLineArgsUtf8[0].c_str());
 
 
 #if PY_MAJOR_VERSION >= 3
     // Python 3
     std::vector<wchar_t*> wideArgs(argc);
     for (int i = 0; i < argc; ++i) {
-        std::wstring utf16 = NATRON_NAMESPACE::StrUtils::utf8_to_utf16(commandLineArgsUtf8[i]);
+        std::wstring utf16 = Natron::StrUtils::utf8_to_utf16(commandLineArgsUtf8[i]);
         wideArgs[i] = wcsdup(utf16.c_str());
     }
     int ret = Py_Main(commandLineArgsUtf8.size(), &wideArgs[0]);

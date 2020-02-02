@@ -32,7 +32,7 @@
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class ColoredFrame
     : public QFrame
@@ -58,6 +58,6 @@ private:
     QColor _frameColor;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // COLOREDFRAME_H

@@ -79,7 +79,7 @@ using std::make_pair;
 using std::cout;
 using std::endl;
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class CurveEditorTreeWidget
     : public QTreeWidget
@@ -1702,7 +1702,7 @@ CurveEditor::onExprLineEditFinished()
     setSelectedCurveExpression( _imp->knobLineEdit->text() );
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_CurveEditor.cpp"

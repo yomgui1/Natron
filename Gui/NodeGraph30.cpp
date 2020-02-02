@@ -59,7 +59,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Global/QtCompat.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 void
 NodeGraph::connectCurrentViewerToSelection(int inputNB,
                                            bool isASide)
@@ -481,4 +481,4 @@ NodeGraph::areAllNodesVisible()
     return true;
 }
 
-NATRON_NAMESPACE_EXIT
+}

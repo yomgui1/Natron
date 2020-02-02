@@ -57,7 +57,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Global/FloatingPointExceptions.h"
 #endif
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 static QStringList
 getSplitPath(const QString& path)
@@ -1734,7 +1734,7 @@ FileSystemModel::filesListFromPattern(const std::string& pattern, SequenceParsin
     return SequenceParsing::filesListFromPattern_fast(pattern, filesList, sequence);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_FileSystemModel.cpp"

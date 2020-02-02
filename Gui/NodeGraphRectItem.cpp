@@ -27,7 +27,7 @@
 
 #include <QPainter>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 NodeGraphRectItem::NodeGraphRectItem(QGraphicsItem *parent,
                                      int cornerRadiusPx)
@@ -44,4 +44,4 @@ NodeGraphRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem* /*op
     painter->drawRoundedRect(rect(), _cornerRadiusPx, _cornerRadiusPx);
 }
 
-NATRON_NAMESPACE_EXIT
+}

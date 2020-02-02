@@ -44,7 +44,7 @@
 #include "Gui/CurveWidgetPrivate.h"
 #include "Gui/KnobGui.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 CurveGui::CurveGui(CurveWidget *curveWidget,
                    CurvePtr curve,
@@ -810,7 +810,7 @@ BezierCPCurveGui::setKeyFrameInterpolation(KeyframeTypeEnum interp,
     return KeyFrame();
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_CurveGui.cpp"

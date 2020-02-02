@@ -91,7 +91,7 @@ GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 #include "Gui/TimeLineGui.h"
 #include "Gui/ViewerTab.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct LinkToKnobDialogPrivate
 {
@@ -162,7 +162,7 @@ LinkToKnobDialog::LinkToKnobDialog(const KnobGuiPtr& from,
     }
     nodeNames.sort();
     _imp->nodeSelectionCombo = new CompleterLineEdit(nodeNames, nodeNames, false, this);
-    _imp->nodeSelectionCombo->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Input the name of a node in the current project."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->nodeSelectionCombo->setToolTip( Natron::convertFromPlainText(tr("Input the name of a node in the current project."), Natron::WhiteSpaceNormal) );
     _imp->firstLineLayout->addWidget(_imp->nodeSelectionCombo);
 
 
@@ -236,7 +236,7 @@ LinkToKnobDialog::getSelectedKnobs() const
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_LinkToKnobDialog.cpp"

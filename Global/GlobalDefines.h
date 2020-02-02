@@ -71,7 +71,7 @@ typedef boost::uint8_t U8;
 typedef boost::uint16_t U16;
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 typedef int SequenceTime;
 
@@ -153,8 +153,8 @@ typedef OfxRangeD RangeD;
 
 #define NATRON_PY_VERSION_STRING_NO_DOT PY_VERSION_STRINGIZE_NO_DOT(PY_MAJOR_VERSION, PY_MINOR_VERSION)
 
-NATRON_NAMESPACE_EXIT
+}
 
-Q_DECLARE_METATYPE(NATRON_NAMESPACE::SequenceTime)
+Q_DECLARE_METATYPE(Natron::SequenceTime)
 
 #endif // ifndef NATRON_GLOBAL_GLOBALDEFINES_H

@@ -31,7 +31,7 @@
 #include "Engine/KnobTypes.h"
 #include "Engine/Utils.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 // those parameters should be ignored (they are always secret in Natron)
@@ -149,9 +149,9 @@ Node::makeDocumentation(bool genHTML) const
         }
 
         // do not escape characters in the scriptName, since it will be put between backquotes
-        QString knobScriptName = /*NATRON_NAMESPACE::convertFromPlainTextToMarkdown(*/ QString::fromUtf8( (*it)->getName().c_str() )/*, genHTML, true)*/;
-        QString knobLabel = NATRON_NAMESPACE::convertFromPlainTextToMarkdown( QString::fromUtf8( (*it)->getLabel().c_str() ), genHTML, true);
-        QString knobHint = NATRON_NAMESPACE::convertFromPlainTextToMarkdown( QString::fromUtf8( (*it)->getHintToolTip().c_str() ), genHTML, true);
+        QString knobScriptName = /*Natron::convertFromPlainTextToMarkdown(*/ QString::fromUtf8( (*it)->getName().c_str() )/*, genHTML, true)*/;
+        QString knobLabel = Natron::convertFromPlainTextToMarkdown( QString::fromUtf8( (*it)->getLabel().c_str() ), genHTML, true);
+        QString knobHint = Natron::convertFromPlainTextToMarkdown( QString::fromUtf8( (*it)->getHintToolTip().c_str() ), genHTML, true);
 
         // totally ignore the documentation for these parameters (which are always secret in Natron)
         if ( knobScriptName.startsWith( QString::fromUtf8("NatronOfxParam") ) ||
@@ -405,7 +405,7 @@ Node::makeDocumentation(bool genHTML) const
 
     if (!pluginDescriptionIsMarkdown) {
         if (genHTML) {
-            pluginDescription = NATRON_NAMESPACE::convertFromPlainText(pluginDescription, NATRON_NAMESPACE::WhiteSpaceNormal);
+            pluginDescription = Natron::convertFromPlainText(pluginDescription, Natron::WhiteSpaceNormal);
 
             // replace URLs with links
             QRegExp re( QString::fromUtf8("((http|ftp|https)://([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])?)") );
@@ -528,4 +528,4 @@ OUTPUT:
 } // Node::makeDocumentation
 
 
-NATRON_NAMESPACE_EXIT
+}

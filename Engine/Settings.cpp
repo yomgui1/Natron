@@ -74,7 +74,7 @@
 
 #define NATRON_CUSTOM_HOST_NAME_ENTRY "Custom..."
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 Settings::Settings()
     : KnobHolder( AppInstancePtr() ) // < Settings are process wide and do not belong to a single AppInstance
@@ -3707,7 +3707,7 @@ Settings::isDriveLetterToUNCPathConversionEnabled() const
     return !_enableMappingFromDriveLettersToUNCShareNames->getValue();
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_Settings.cpp"

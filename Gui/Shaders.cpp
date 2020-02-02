@@ -26,7 +26,7 @@
 
 #include <stdexcept>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 const char* fragRGB =
     "uniform sampler2D Tex;\n"
@@ -216,4 +216,4 @@ const char *histogramMaximum_frag =
     "}\n"
 ;
 
-NATRON_NAMESPACE_EXIT
+}

@@ -66,10 +66,10 @@ CLANG_DIAG_ON(uninitialized)
 #define NATRON_SHOW_PROGRESS_TOTAL_ESTIMATED_TIME_MS 4000
 #define NATRON_PROGRESS_DIALOG_ETA_REFRESH_MS 1000
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 class MetaTypesRegistration
 {
@@ -80,7 +80,7 @@ public:
     }
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 static MetaTypesRegistration registration;
@@ -633,8 +633,8 @@ ProgressTaskInfo::createCellWidgets()
     _imp->pauseTasksButton->setFixedSize(medButtonSize);
     _imp->pauseTasksButton->setIconSize(medButtonIconSize);
     _imp->pauseTasksButton->setFocusPolicy(Qt::NoFocus);
-    _imp->pauseTasksButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Pause the task. Tasks that can be paused "
-                                                                          "may be restarted with the restart button."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->pauseTasksButton->setToolTip( Natron::convertFromPlainText(tr("Pause the task. Tasks that can be paused "
+                                                                          "may be restarted with the restart button."), Natron::WhiteSpaceNormal) );
     QObject::connect( _imp->pauseTasksButton, SIGNAL(clicked(bool)), this, SLOT(onPauseTriggered()) );
     _imp->pauseTasksButton->setEnabled(_imp->canBePaused);
     layout->addWidget(_imp->pauseTasksButton);
@@ -643,7 +643,7 @@ ProgressTaskInfo::createCellWidgets()
     _imp->restartTasksButton->setFixedSize(medButtonSize);
     _imp->restartTasksButton->setIconSize(medButtonIconSize);
     _imp->restartTasksButton->setFocusPolicy(Qt::NoFocus);
-    _imp->restartTasksButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Restart task"), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->restartTasksButton->setToolTip( Natron::convertFromPlainText(tr("Restart task"), Natron::WhiteSpaceNormal) );
     QObject::connect( _imp->restartTasksButton, SIGNAL(clicked(bool)), this, SLOT(onRestartTriggered()) );
     _imp->restartTasksButton->setEnabled(false);
     layout->addWidget(_imp->restartTasksButton);
@@ -653,7 +653,7 @@ ProgressTaskInfo::createCellWidgets()
     _imp->cancelTasksButton->setFixedSize(medButtonSize);
     _imp->cancelTasksButton->setIconSize(medButtonIconSize);
     _imp->cancelTasksButton->setFocusPolicy(Qt::NoFocus);
-    _imp->cancelTasksButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Cancel and remove the task from the list"), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->cancelTasksButton->setToolTip( Natron::convertFromPlainText(tr("Cancel and remove the task from the list"), Natron::WhiteSpaceNormal) );
     QObject::connect( _imp->cancelTasksButton, SIGNAL(clicked(bool)), this, SLOT(onCancelTriggered()) );
     layout->addWidget(_imp->cancelTasksButton);
 
@@ -729,7 +729,7 @@ ProgressTaskInfoPrivate::refreshButtons()
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_ProgressTaskInfo.cpp"

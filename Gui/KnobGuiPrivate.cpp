@@ -27,7 +27,7 @@
 
 #include "Gui/NodeViewerContext.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 KnobGuiPrivate::KnobGuiPrivate(KnobGuiContainerI* container)
@@ -62,5 +62,5 @@ KnobGuiPrivate::removeFromKnobsOnSameLineVector(const KnobIPtr& knob)
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 

@@ -41,7 +41,7 @@
 
 #define NATRON_TRACKER_UI_BUTTONS_CATEGORIES_SPACING 10
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 TrackerNode::TrackerNode(Natron::NodePtr node)
@@ -2448,7 +2448,7 @@ TrackerNode::refreshExtraStateAfterTimeChanged(bool isPlayback,
     }
 }
 
-NATRON_NAMESPACE_EXIT
-NATRON_NAMESPACE_USING
+}
+using namespace Natron;
 
 #include "moc_TrackerNode.cpp"

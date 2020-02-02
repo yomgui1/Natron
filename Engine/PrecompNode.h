@@ -35,7 +35,7 @@
 #include "Engine/OutputEffectInstance.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct PrecompNodePrivate;
 class PrecompNode
@@ -127,6 +127,6 @@ private:
     boost::scoped_ptr<PrecompNodePrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // PRECOMPNODE_H

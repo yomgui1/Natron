@@ -59,22 +59,22 @@ CLANG_DIAG_ON(keyword-macro)
 #include <set>
 
 // Type indices
-#define SBK_NATRON_NAMESPACE_IDX                                     30
-#define SBK_NATRON_NAMESPACE_STATUSENUM_IDX                          41
-#define SBK_NATRON_NAMESPACE_STANDARDBUTTONENUM_IDX                  40
-#define SBK_QFLAGS_NATRON_NAMESPACE_STANDARDBUTTONENUM__IDX          52
-#define SBK_NATRON_NAMESPACE_KEYFRAMETYPEENUM_IDX                    35
-#define SBK_NATRON_NAMESPACE_PIXMAPENUM_IDX                          38
-#define SBK_NATRON_NAMESPACE_VALUECHANGEDREASONENUM_IDX              42
-#define SBK_NATRON_NAMESPACE_ANIMATIONLEVELENUM_IDX                  31
-#define SBK_NATRON_NAMESPACE_IMAGEPREMULTIPLICATIONENUM_IDX          34
-#define SBK_NATRON_NAMESPACE_VIEWERCOMPOSITINGOPERATORENUM_IDX       44
-#define SBK_NATRON_NAMESPACE_VIEWERCOLORSPACEENUM_IDX                43
-#define SBK_NATRON_NAMESPACE_IMAGEBITDEPTHENUM_IDX                   33
-#define SBK_NATRON_NAMESPACE_ORIENTATIONENUM_IDX                     37
-#define SBK_NATRON_NAMESPACE_PLAYBACKMODEENUM_IDX                    39
-#define SBK_NATRON_NAMESPACE_DISPLAYCHANNELSENUM_IDX                 32
-#define SBK_NATRON_NAMESPACE_MERGINGFUNCTIONENUM_IDX                 36
+#define SBK_Natron_IDX                                     30
+#define SBK_Natron_STATUSENUM_IDX                          41
+#define SBK_Natron_STANDARDBUTTONENUM_IDX                  40
+#define SBK_QFLAGS_Natron_STANDARDBUTTONENUM__IDX          52
+#define SBK_Natron_KEYFRAMETYPEENUM_IDX                    35
+#define SBK_Natron_PIXMAPENUM_IDX                          38
+#define SBK_Natron_VALUECHANGEDREASONENUM_IDX              42
+#define SBK_Natron_ANIMATIONLEVELENUM_IDX                  31
+#define SBK_Natron_IMAGEPREMULTIPLICATIONENUM_IDX          34
+#define SBK_Natron_VIEWERCOMPOSITINGOPERATORENUM_IDX       44
+#define SBK_Natron_VIEWERCOLORSPACEENUM_IDX                43
+#define SBK_Natron_IMAGEBITDEPTHENUM_IDX                   33
+#define SBK_Natron_ORIENTATIONENUM_IDX                     37
+#define SBK_Natron_PLAYBACKMODEENUM_IDX                    39
+#define SBK_Natron_DISPLAYCHANNELSENUM_IDX                 32
+#define SBK_Natron_MERGINGFUNCTIONENUM_IDX                 36
 #define SBK_RECTD_IDX                                                53
 #define SBK_RECTI_IDX                                                54
 #define SBK_NODECREATIONPROPERTY_IDX                                 45
@@ -161,69 +161,69 @@ namespace Shiboken
 {
 
 // PyType functions, to get the PyObjectType for a type T
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::StatusEnum >() { return SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_STATUSENUM_IDX]; }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::StandardButtonEnum >() { return SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_STANDARDBUTTONENUM_IDX]; }
-template<> inline PyTypeObject* SbkType< ::QFlags<NATRON_NAMESPACE::StandardButtonEnum> >() { return SbkNatronEngineTypes[SBK_QFLAGS_NATRON_NAMESPACE_STANDARDBUTTONENUM__IDX]; }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::KeyframeTypeEnum >() { return SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_KEYFRAMETYPEENUM_IDX]; }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::PixmapEnum >() { return SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_PIXMAPENUM_IDX]; }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::ValueChangedReasonEnum >() { return SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_VALUECHANGEDREASONENUM_IDX]; }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::AnimationLevelEnum >() { return SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_ANIMATIONLEVELENUM_IDX]; }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::ImagePremultiplicationEnum >() { return SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_IMAGEPREMULTIPLICATIONENUM_IDX]; }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::ViewerCompositingOperatorEnum >() { return SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_VIEWERCOMPOSITINGOPERATORENUM_IDX]; }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::ViewerColorSpaceEnum >() { return SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_VIEWERCOLORSPACEENUM_IDX]; }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::ImageBitDepthEnum >() { return SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_IMAGEBITDEPTHENUM_IDX]; }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::OrientationEnum >() { return SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_ORIENTATIONENUM_IDX]; }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::PlaybackModeEnum >() { return SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_PLAYBACKMODEENUM_IDX]; }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::DisplayChannelsEnum >() { return SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_DISPLAYCHANNELSENUM_IDX]; }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::MergingFunctionEnum >() { return SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_MERGINGFUNCTIONENUM_IDX]; }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::RectD >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_RECTD_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::RectI >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_RECTI_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::NodeCreationProperty >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_NODECREATIONPROPERTY_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::BoolNodeCreationProperty >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_BOOLNODECREATIONPROPERTY_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::IntNodeCreationProperty >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_INTNODECREATIONPROPERTY_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::AppSettings >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_APPSETTINGS_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::Group >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_GROUP_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::PyCoreApplication >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_PYCOREAPPLICATION_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::ExprUtils >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_EXPRUTILS_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::ColorTuple >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_COLORTUPLE_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::Double3DTuple >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_DOUBLE3DTUPLE_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::Double2DTuple >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_DOUBLE2DTUPLE_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::Int3DTuple >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_INT3DTUPLE_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::Int2DTuple >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_INT2DTUPLE_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::Param >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_PARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::GroupParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_GROUPPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::SeparatorParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_SEPARATORPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::ButtonParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_BUTTONPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::AnimatedParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_ANIMATEDPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::DoubleParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_DOUBLEPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::Double2DParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_DOUBLE2DPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::Double3DParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_DOUBLE3DPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::IntParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_INTPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::Int2DParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_INT2DPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::Int3DParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_INT3DPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::StringParamBase >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_STRINGPARAMBASE_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::PathParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_PATHPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::OutputFileParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_OUTPUTFILEPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::FileParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_FILEPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::StringParam::TypeEnum >() { return SbkNatronEngineTypes[SBK_STRINGPARAM_TYPEENUM_IDX]; }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::StringParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_STRINGPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::BooleanParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_BOOLEANPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::ChoiceParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_CHOICEPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::ColorParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_COLORPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::ParametricParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_PARAMETRICPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::PageParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_PAGEPARAM_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::App >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_APP_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::StringNodeCreationProperty >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_STRINGNODECREATIONPROPERTY_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::FloatNodeCreationProperty >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_FLOATNODECREATIONPROPERTY_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::UserParamHolder >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_USERPARAMHOLDER_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::Effect >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_EFFECT_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::ImageLayer >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_IMAGELAYER_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::Tracker >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_TRACKER_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::Track >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_TRACK_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::Roto >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_ROTO_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::ItemBase >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_ITEMBASE_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::BezierCurve >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_BEZIERCURVE_IDX]); }
-template<> inline PyTypeObject* SbkType<NATRON_NAMESPACE::NATRON_PYTHON_NAMESPACE::Layer >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_LAYER_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::StatusEnum >() { return SbkNatronEngineTypes[SBK_Natron_STATUSENUM_IDX]; }
+template<> inline PyTypeObject* SbkType<Natron::StandardButtonEnum >() { return SbkNatronEngineTypes[SBK_Natron_STANDARDBUTTONENUM_IDX]; }
+template<> inline PyTypeObject* SbkType< ::QFlags<Natron::StandardButtonEnum> >() { return SbkNatronEngineTypes[SBK_QFLAGS_Natron_STANDARDBUTTONENUM__IDX]; }
+template<> inline PyTypeObject* SbkType<Natron::KeyframeTypeEnum >() { return SbkNatronEngineTypes[SBK_Natron_KEYFRAMETYPEENUM_IDX]; }
+template<> inline PyTypeObject* SbkType<Natron::PixmapEnum >() { return SbkNatronEngineTypes[SBK_Natron_PIXMAPENUM_IDX]; }
+template<> inline PyTypeObject* SbkType<Natron::ValueChangedReasonEnum >() { return SbkNatronEngineTypes[SBK_Natron_VALUECHANGEDREASONENUM_IDX]; }
+template<> inline PyTypeObject* SbkType<Natron::AnimationLevelEnum >() { return SbkNatronEngineTypes[SBK_Natron_ANIMATIONLEVELENUM_IDX]; }
+template<> inline PyTypeObject* SbkType<Natron::ImagePremultiplicationEnum >() { return SbkNatronEngineTypes[SBK_Natron_IMAGEPREMULTIPLICATIONENUM_IDX]; }
+template<> inline PyTypeObject* SbkType<Natron::ViewerCompositingOperatorEnum >() { return SbkNatronEngineTypes[SBK_Natron_VIEWERCOMPOSITINGOPERATORENUM_IDX]; }
+template<> inline PyTypeObject* SbkType<Natron::ViewerColorSpaceEnum >() { return SbkNatronEngineTypes[SBK_Natron_VIEWERCOLORSPACEENUM_IDX]; }
+template<> inline PyTypeObject* SbkType<Natron::ImageBitDepthEnum >() { return SbkNatronEngineTypes[SBK_Natron_IMAGEBITDEPTHENUM_IDX]; }
+template<> inline PyTypeObject* SbkType<Natron::OrientationEnum >() { return SbkNatronEngineTypes[SBK_Natron_ORIENTATIONENUM_IDX]; }
+template<> inline PyTypeObject* SbkType<Natron::PlaybackModeEnum >() { return SbkNatronEngineTypes[SBK_Natron_PLAYBACKMODEENUM_IDX]; }
+template<> inline PyTypeObject* SbkType<Natron::DisplayChannelsEnum >() { return SbkNatronEngineTypes[SBK_Natron_DISPLAYCHANNELSENUM_IDX]; }
+template<> inline PyTypeObject* SbkType<Natron::MergingFunctionEnum >() { return SbkNatronEngineTypes[SBK_Natron_MERGINGFUNCTIONENUM_IDX]; }
+template<> inline PyTypeObject* SbkType<Natron::RectD >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_RECTD_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::RectI >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_RECTI_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::NodeCreationProperty >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_NODECREATIONPROPERTY_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::BoolNodeCreationProperty >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_BOOLNODECREATIONPROPERTY_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::IntNodeCreationProperty >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_INTNODECREATIONPROPERTY_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::AppSettings >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_APPSETTINGS_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::Group >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_GROUP_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::PyCoreApplication >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_PYCOREAPPLICATION_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::ExprUtils >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_EXPRUTILS_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::ColorTuple >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_COLORTUPLE_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::Double3DTuple >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_DOUBLE3DTUPLE_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::Double2DTuple >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_DOUBLE2DTUPLE_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::Int3DTuple >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_INT3DTUPLE_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::Int2DTuple >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_INT2DTUPLE_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::Param >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_PARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::GroupParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_GROUPPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::SeparatorParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_SEPARATORPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::ButtonParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_BUTTONPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::AnimatedParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_ANIMATEDPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::DoubleParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_DOUBLEPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::Double2DParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_DOUBLE2DPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::Double3DParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_DOUBLE3DPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::IntParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_INTPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::Int2DParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_INT2DPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::Int3DParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_INT3DPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::StringParamBase >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_STRINGPARAMBASE_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::PathParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_PATHPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::OutputFileParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_OUTPUTFILEPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::FileParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_FILEPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::StringParam::TypeEnum >() { return SbkNatronEngineTypes[SBK_STRINGPARAM_TYPEENUM_IDX]; }
+template<> inline PyTypeObject* SbkType<Natron::Python::StringParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_STRINGPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::BooleanParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_BOOLEANPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::ChoiceParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_CHOICEPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::ColorParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_COLORPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::ParametricParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_PARAMETRICPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::PageParam >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_PAGEPARAM_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::App >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_APP_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::StringNodeCreationProperty >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_STRINGNODECREATIONPROPERTY_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::FloatNodeCreationProperty >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_FLOATNODECREATIONPROPERTY_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::UserParamHolder >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_USERPARAMHOLDER_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::Effect >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_EFFECT_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::ImageLayer >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_IMAGELAYER_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::Tracker >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_TRACKER_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::Track >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_TRACK_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::Roto >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_ROTO_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::ItemBase >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_ITEMBASE_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::BezierCurve >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_BEZIERCURVE_IDX]); }
+template<> inline PyTypeObject* SbkType<Natron::Python::Layer >() { return reinterpret_cast<PyTypeObject*>(SbkNatronEngineTypes[SBK_LAYER_IDX]); }
 
 } // namespace Shiboken
 

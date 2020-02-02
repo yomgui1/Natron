@@ -57,7 +57,7 @@ GCC_DIAG_ON(unused-parameter)
 #define BEZIER_SERIALIZATION_INTRODUCES_OPEN_BEZIER 4
 #define BEZIER_SERIALIZATION_VERSION BEZIER_SERIALIZATION_INTRODUCES_OPEN_BEZIER
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class BezierSerialization
     : public RotoDrawableItemSerialization
@@ -146,8 +146,8 @@ private:
 };
 
 
-NATRON_NAMESPACE_EXIT
+}
 
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::BezierSerialization, BEZIER_SERIALIZATION_VERSION)
+BOOST_CLASS_VERSION(Natron::BezierSerialization, BEZIER_SERIALIZATION_VERSION)
 
 #endif // Engine_BezierSerialization_h

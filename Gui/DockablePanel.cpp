@@ -91,7 +91,7 @@ GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 using std::make_pair;
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 // called by NodeSettingsPanel::NodeSettingsPanel()
 DockablePanel::DockablePanel(Gui* gui,
@@ -222,7 +222,7 @@ DockablePanel::DockablePanel(Gui* gui,
             _imp->_centerNodeButton = new Button( QIcon(pixCenter), QString(), getHeaderWidget() );
             _imp->_centerNodeButton->setFixedSize(mediumBSize);
             _imp->_centerNodeButton->setIconSize(mediumIconSize);
-            _imp->_centerNodeButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Centers the node graph on this item."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+            _imp->_centerNodeButton->setToolTip( Natron::convertFromPlainText(tr("Centers the node graph on this item."), Natron::WhiteSpaceNormal) );
             _imp->_centerNodeButton->setFocusPolicy(Qt::NoFocus);
             QObject::connect( _imp->_centerNodeButton, SIGNAL(clicked()), this, SLOT(onCenterButtonClicked()) );
             _imp->_headerLayout->addWidget(_imp->_centerNodeButton);
@@ -237,7 +237,7 @@ DockablePanel::DockablePanel(Gui* gui,
                 _imp->_enterInGroupButton->setFixedSize(mediumBSize);
                 _imp->_enterInGroupButton->setIconSize(mediumIconSize);
                 _imp->_enterInGroupButton->setFocusPolicy(Qt::NoFocus);
-                _imp->_enterInGroupButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Pressing this button will show the underlying node graph used for the implementation of this node."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+                _imp->_enterInGroupButton->setToolTip( Natron::convertFromPlainText(tr("Pressing this button will show the underlying node graph used for the implementation of this node."), Natron::WhiteSpaceNormal) );
             }
 
             QPixmap pixHelp;
@@ -257,7 +257,7 @@ DockablePanel::DockablePanel(Gui* gui,
             icHideShow.addPixmap(pixShow, QIcon::Normal, QIcon::Off);
             icHideShow.addPixmap(pixHide, QIcon::Normal, QIcon::On);
             _imp->_hideUnmodifiedButton = new Button(icHideShow, QString(), _imp->_headerWidget);
-            _imp->_hideUnmodifiedButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Show/Hide all parameters without modifications."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+            _imp->_hideUnmodifiedButton->setToolTip( Natron::convertFromPlainText(tr("Show/Hide all parameters without modifications."), Natron::WhiteSpaceNormal) );
             _imp->_hideUnmodifiedButton->setFocusPolicy(Qt::NoFocus);
             _imp->_hideUnmodifiedButton->setFixedSize(mediumBSize);
             _imp->_hideUnmodifiedButton->setIconSize(mediumIconSize);
@@ -310,10 +310,10 @@ DockablePanel::DockablePanel(Gui* gui,
             _imp->_colorButton = new Button(QIcon(p), QString(), _imp->_headerWidget);
             _imp->_colorButton->setFixedSize(mediumBSize);
             _imp->_colorButton->setIconSize(mediumIconSize);
-            _imp->_colorButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Set here the color of the node in the nodegraph. "
+            _imp->_colorButton->setToolTip( Natron::convertFromPlainText(tr("Set here the color of the node in the nodegraph. "
                                                                               "By default the color of the node is the one set in the "
                                                                               "preferences of %1.").arg( QString::fromUtf8(NATRON_APPLICATION_NAME) ),
-                                                                           NATRON_NAMESPACE::WhiteSpaceNormal) );
+                                                                           Natron::WhiteSpaceNormal) );
             _imp->_colorButton->setFocusPolicy(Qt::NoFocus);
             QObject::connect( _imp->_colorButton, SIGNAL(clicked()), this, SLOT(onColorButtonClicked()) );
 
@@ -330,9 +330,9 @@ DockablePanel::DockablePanel(Gui* gui,
                 _imp->_overlayButton = new OverlayColorButton(this, QIcon(pixOverlay), _imp->_headerWidget);
                 _imp->_overlayButton->setFixedSize(mediumBSize);
                 _imp->_overlayButton->setIconSize(mediumIconSize);
-                _imp->_overlayButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("You can suggest here a color for the overlay on the viewer. "
+                _imp->_overlayButton->setToolTip( Natron::convertFromPlainText(tr("You can suggest here a color for the overlay on the viewer. "
                                                                                     "Some plug-ins understand it and will use it to change the color of "
-                                                                                    "the overlay."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+                                                                                    "the overlay."), Natron::WhiteSpaceNormal) );
                 _imp->_overlayButton->setFocusPolicy(Qt::NoFocus);
                 QObject::connect( _imp->_overlayButton, SIGNAL(clicked()), this, SLOT(onOverlayButtonClicked()) );
             }
@@ -347,7 +347,7 @@ DockablePanel::DockablePanel(Gui* gui,
         _imp->_undoButton = new Button(icUndo, QString(), _imp->_headerWidget);
         _imp->_undoButton->setFixedSize(mediumBSize);
         _imp->_undoButton->setIconSize(mediumIconSize);
-        _imp->_undoButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Undo the last change made to this operator."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->_undoButton->setToolTip( Natron::convertFromPlainText(tr("Undo the last change made to this operator."), Natron::WhiteSpaceNormal) );
         _imp->_undoButton->setEnabled(false);
         _imp->_undoButton->setFocusPolicy(Qt::NoFocus);
         QPixmap pixRedo;
@@ -360,7 +360,7 @@ DockablePanel::DockablePanel(Gui* gui,
         _imp->_redoButton = new Button(icRedo, QString(), _imp->_headerWidget);
         _imp->_redoButton->setFixedSize(mediumBSize);
         _imp->_redoButton->setIconSize(mediumIconSize);
-        _imp->_redoButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Redo the last change undone to this operator."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->_redoButton->setToolTip( Natron::convertFromPlainText(tr("Redo the last change undone to this operator."), Natron::WhiteSpaceNormal) );
         _imp->_redoButton->setEnabled(false);
         _imp->_redoButton->setFocusPolicy(Qt::NoFocus);
 
@@ -371,7 +371,7 @@ DockablePanel::DockablePanel(Gui* gui,
         _imp->_restoreDefaultsButton = new Button(icRestore, QString(), _imp->_headerWidget);
         _imp->_restoreDefaultsButton->setFixedSize(mediumBSize);
         _imp->_restoreDefaultsButton->setIconSize(mediumIconSize);
-        _imp->_restoreDefaultsButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Restore default values for this operator."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->_restoreDefaultsButton->setToolTip( Natron::convertFromPlainText(tr("Restore default values for this operator."), Natron::WhiteSpaceNormal) );
         _imp->_restoreDefaultsButton->setFocusPolicy(Qt::NoFocus);
         QObject::connect( _imp->_restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(onRestoreDefaultsButtonClicked()) );
         QObject::connect( _imp->_undoButton, SIGNAL(clicked()), this, SLOT(onUndoClicked()) );
@@ -930,7 +930,7 @@ DockablePanel::helpString() const
     if (Qt::mightBeRichText(_imp->_helpToolTip) || isMarkdown) {
         tt = _imp->_helpToolTip;
     } else {
-        tt = NATRON_NAMESPACE::convertFromPlainText(_imp->_helpToolTip, NATRON_NAMESPACE::WhiteSpaceNormal);
+        tt = Natron::convertFromPlainText(_imp->_helpToolTip, Natron::WhiteSpaceNormal);
     }
 
     if (iseffect) {
@@ -1799,7 +1799,7 @@ DockablePanel::onHideUnmodifiedButtonClicked(bool checked)
     }
 }
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 struct TreeItem
 {
@@ -1846,10 +1846,10 @@ struct ManageUserParamsDialogPrivate
     void rebuildUserPages();
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
-    NATRON_NAMESPACE_EXIT
+    }
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_DockablePanel.cpp"

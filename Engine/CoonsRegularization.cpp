@@ -71,7 +71,7 @@
 #endif
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 static Point
@@ -1572,4 +1572,4 @@ CoonsRegularization::regularize(const BezierCPs &patch,
     splitAt(patch, time, 0.5, fixedPatch);
 } // CoonsRegularization::regularize
 
-NATRON_NAMESPACE_EXIT
+}

@@ -36,7 +36,7 @@
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /******************************KNOB_FACTORY**************************************/
 //Maybe the factory should move to a separate file since it is used to create KnobGui as well
@@ -64,6 +64,6 @@ private:
     void loadBultinKnobs();
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_GUI_KNOBGUIFACTORY_H

@@ -116,7 +116,7 @@ CLANG_DIAG_ON(uninitialized)
 #define NATRON_PLUGIN_ICON_SIZE 20
 #define PLUGIN_ICON_OFFSET 2
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 using std::make_pair;
 
@@ -654,8 +654,8 @@ NodeGui::createGui()
     exprGrad.push_back( qMakePair( 0.3, QColor(Qt::green) ) );
     exprGrad.push_back( qMakePair( 1., QColor(69, 96, 63) ) );
     _expressionIndicator.reset( new NodeGuiIndicator(getDagGui(), depth + 2, QString::fromUtf8("E"), bbox.topRight(), ellipseDiam, ellipseDiam, exprGrad, QColor(255, 255, 255), this) );
-    _expressionIndicator->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("This node has one or several expression(s) involving values of parameters of other "
-                                                                        "nodes in the project. Hover the mouse on the green connections to see what are the effective links."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _expressionIndicator->setToolTip( Natron::convertFromPlainText(tr("This node has one or several expression(s) involving values of parameters of other "
+                                                                        "nodes in the project. Hover the mouse on the green connections to see what are the effective links."), Natron::WhiteSpaceNormal) );
     _expressionIndicator->setActive(false);
 
     _availableViewsIndicator.reset( new NodeGuiIndicator(getDagGui(), depth + 2, QString::fromUtf8("V"), bbox.topLeft(), ellipseDiam, ellipseDiam, exprGrad, QColor(255, 255, 255), this) );
@@ -2801,7 +2801,7 @@ NodeGui::onStreamWarningsChanged()
             continue;
         }
         QString tt = QString::fromUtf8("<p><b>") + tr("Stream issue:") + QString::fromUtf8("</b></p>");
-        tt += NATRON_NAMESPACE::convertFromPlainText(it->second.trimmed(), NATRON_NAMESPACE::WhiteSpaceNormal);
+        tt += Natron::convertFromPlainText(it->second.trimmed(), Natron::WhiteSpaceNormal);
         tooltip += tt;
     }
     setToolTip(tooltip);
@@ -3407,7 +3407,7 @@ NodeGui::setName(const QString & newName)
 {
     std::string stdName = newName.toStdString();
 
-    stdName = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendly(stdName);
+    stdName = Python::makeNameScriptFriendly(stdName);
 
     NodePtr node = getNode();
     assert(node);
@@ -4015,7 +4015,7 @@ NodeGui::setCurrentCursor(const QString& customCursorFilePath)
 }
 
 class GroupKnobDialog
-    : public NATRON_PYTHON_NAMESPACE::PyModalDialog
+    : public Python::PyModalDialog
 {
 public:
 
@@ -4030,7 +4030,7 @@ public:
 
 GroupKnobDialog::GroupKnobDialog(Gui* gui,
                                  const KnobGroup* group)
-    : NATRON_PYTHON_NAMESPACE::PyModalDialog(gui, eStandardButtonNoButton)
+    : Python::PyModalDialog(gui, eStandardButtonNoButton)
 {
     setWindowTitle( QString::fromUtf8( group->getLabel().c_str() ) );
     std::vector<KnobIPtr> children = group->getChildren();
@@ -4175,7 +4175,7 @@ NodeGui::onInputVisibilityChanged(int /*inputNb*/)
     refreshEdgesVisility();
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_NodeGui.cpp"

@@ -98,10 +98,10 @@ CLANG_DIAG_ON(uninitialized)
 #define kTransformArrowOffsetFromPoint 15
 
 
-NATRON_NAMESPACE_ENTER;
+namespace Natron {;
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 ///A list of points and their counter-part, that is: either a control point and its feather point, or
 ///the feather point and its associated control point
@@ -154,7 +154,7 @@ enum SelectedCpsTransformModeEnum
     eSelectedCpsTransformModeRotateAndSkew = 1
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 ///A small structure of all the data shared by all the viewers watching the same Roto
@@ -4979,7 +4979,7 @@ LinkToTrackDialog::getSelectedKnob() const
     return _choice->activeIndex();
 }
 
-NATRON_NAMESPACE_EXIT;
+};
 
-NATRON_NAMESPACE_USING;
+using namespace Natron;;
 #include "moc_RotoGui.cpp"

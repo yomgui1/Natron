@@ -45,7 +45,7 @@ GCC_DIAG_ON(unused-parameter)
 #include "Engine/Node.h"
 #include "Engine/TrackerContext.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 namespace  {
 struct FrameAccessorCacheKey
@@ -532,4 +532,4 @@ TrackerFrameAccessor::NumFrames(int /*clip*/)
     return 0;
 }
 
-NATRON_NAMESPACE_EXIT
+}

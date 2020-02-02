@@ -43,7 +43,7 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_ON
 #include "Engine/OSGLContext.h"
 #include "Engine/GLShader.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 #define BM_GET(i, j) (&_map[( i - _bounds.bottom() ) * _bounds.width() + ( j - _bounds.left() )])
 
@@ -2449,4 +2449,4 @@ Image::unpremultImage(const RectI& roi)
     premultForDepth<false>(roi);
 }
 
-NATRON_NAMESPACE_EXIT
+}

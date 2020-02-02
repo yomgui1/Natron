@@ -94,7 +94,7 @@ class QWidget;
 typedef boost::shared_ptr<QUndoStack> QUndoStackPtr;
 
 // Natron Gui
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 class AboutWindow;
 class ActionWithShortcut;
 class AnimItemBase;
@@ -232,7 +232,7 @@ namespace QtMac {
 bool isHighDPIInternal(const QWidget* w);
 }
 
-NATRON_PYTHON_NAMESPACE_ENTER
+namespace Python {
 class GuiApp;
 class PyModalDialog;
 class PyPanel;
@@ -242,7 +242,7 @@ class StringParam;
 typedef boost::shared_ptr<StringParam> StringParamPtr;
 typedef boost::shared_ptr<IntParam> IntParamPtr;
 typedef boost::shared_ptr<PyModalDialog> PyModalDialogPtr;
-NATRON_PYTHON_NAMESPACE_EXIT
+}
 
 typedef boost::shared_ptr<AnimItemBase> AnimItemBasePtr;
 typedef boost::shared_ptr<AnimationModule> AnimationModulePtr;
@@ -312,7 +312,7 @@ typedef boost::weak_ptr<TableModel> TableModelWPtr;
 typedef std::list<NodeGuiPtr> NodesGuiList;
 typedef std::list<NodeGuiWPtr> NodesGuiWList;
 
-NATRON_NAMESPACE_EXIT
+}
 
 
 #endif // Natron_Gui_GuiFwd_h

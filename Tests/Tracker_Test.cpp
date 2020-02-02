@@ -44,7 +44,7 @@ GCC_DIAG_ON(maybe-uninitialized)
 #include "Engine/Transform.h"
 #include "Global/GlobalDefines.h"
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 
 using namespace openMVG::robust;
 

@@ -43,7 +43,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class RightClickableWidget
     : public QWidget
@@ -84,6 +84,6 @@ private:
     virtual void mousePressEvent(QMouseEvent* e) OVERRIDE FINAL;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_RightClickableWidget_h

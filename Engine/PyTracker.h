@@ -37,8 +37,8 @@
 #include "Engine/PyParameter.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER;
-NATRON_PYTHON_NAMESPACE_ENTER;
+namespace Natron {;
+namespace Python {;
 
 class Track
 {
@@ -100,7 +100,7 @@ private:
     TrackerContextWPtr _ctx;
 };
 
-NATRON_PYTHON_NAMESPACE_EXIT;
-NATRON_NAMESPACE_EXIT;
+};
+};
 
 #endif // Engine_PyTracker_H

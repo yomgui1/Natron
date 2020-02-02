@@ -55,7 +55,7 @@ CLANG_DIAG_ON(deprecated)
 #include "Engine/EffectInstance.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /*This file contains the classes that connect the knobs to the OpenFX params.
    Note that all the get(...) and set(...) functions are called BY PLUGIN and you should
@@ -980,7 +980,7 @@ public:
     KnobParametricWPtr _knob;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_ENGINE_OFXPARAMINSTANCE_H
 

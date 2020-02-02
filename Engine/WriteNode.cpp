@@ -73,7 +73,7 @@ CLANG_DIAG_ON(uninitialized)
 #define WRITE_NODE_DEFAULT_WRITER PLUGINID_OFX_WRITEOIIO
 #define kPluginSelectorParamEntryDefault "Default"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 //Generic Writer
 #define kParamFilename kOfxImageEffectFileParamName
@@ -1315,7 +1315,7 @@ WriteNode::onSequenceRenderFinished()
 
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_WriteNode.cpp"

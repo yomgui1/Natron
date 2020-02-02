@@ -35,7 +35,7 @@
 #include "Engine/AbortableRenderInfo.h"
 #include "Engine/Node.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 struct AbortableThreadPrivate
@@ -177,7 +177,7 @@ AbortableThread::getAbortInfo(bool* isRenderResponseToUserInteraction,
 // of the EffectInstance::aborted() function
 #ifdef QT_CUSTOM_THREADPOOL
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 class ThreadPoolThread
     : public QThreadPoolThread
@@ -196,7 +196,7 @@ public:
     virtual ~ThreadPoolThread() {}
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 ThreadPool::ThreadPool()
@@ -220,5 +220,5 @@ ThreadPool::createThreadPoolThread() const
 
 #endif // ifdef QT_CUSTOM_THREADPOOL
 
-NATRON_NAMESPACE_EXIT
+}
 

@@ -57,7 +57,7 @@
 
 #define ROTOPAINT_VIEWER_UI_SECTIONS_SPACING_PX 5
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 std::string
@@ -3306,7 +3306,7 @@ RotoPaint::onSelectionChanged(int reason)
     }
 }
 
-NATRON_NAMESPACE_EXIT
-NATRON_NAMESPACE_USING
+}
+using namespace Natron;
 #include "moc_RotoPaint.cpp"
 

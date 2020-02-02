@@ -30,7 +30,7 @@
 #include "Engine/Transform.h"
 #include "Engine/KnobTypes.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct BackdropPrivate
 {
@@ -91,7 +91,7 @@ Backdrop::knobChanged(KnobI* k,
     return false;
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_Backdrop.cpp"

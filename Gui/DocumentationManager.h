@@ -39,7 +39,7 @@ class QHttpServer;
 class QHttpRequest;
 class QHttpResponse;
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class DocumentationManager
     : public QObject
@@ -63,6 +63,6 @@ private:
     QHttpServer *server;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_DocumentationManager_h

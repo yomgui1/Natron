@@ -54,7 +54,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/CurveEditorUndoRedo.h"
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class CurveWidgetPrivate;
 
@@ -263,8 +263,8 @@ private:
 };
 
 
-NATRON_NAMESPACE_EXIT
+}
 
-Q_DECLARE_METATYPE(NATRON_NAMESPACE::CurveWidget*)
+Q_DECLARE_METATYPE(Natron::CurveWidget*)
 
 #endif // CURVE_WIDGET_H

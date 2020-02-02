@@ -38,7 +38,7 @@ CLANG_DIAG_ON(deprecated)
 
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class Variant
     : public QVariant
@@ -213,8 +213,8 @@ Variant::setValue(const char* const & str)
     QVariant::setValue( QString::fromUtf8(str) );
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-Q_DECLARE_METATYPE(NATRON_NAMESPACE::Variant);
+Q_DECLARE_METATYPE(Natron::Variant);
 
 #endif // Engine_Variant_h

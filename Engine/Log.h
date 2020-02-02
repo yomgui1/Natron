@@ -33,7 +33,7 @@
 #include "Engine/EngineFwd.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class LogPrivate;
 class Log
@@ -83,13 +83,13 @@ public:
     }
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #else
 
 #include <string>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 // no-op class
 class Log
@@ -136,7 +136,7 @@ public:
     }
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // ifdef NATRON_LOG
 

@@ -105,7 +105,7 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_ON
 #define M_PI        3.14159265358979323846264338327950288   /* pi             */
 #endif
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 ////////////////////////////////////RotoContext////////////////////////////////////
 
@@ -4612,7 +4612,7 @@ RotoContext::changeItemScriptName(const std::string& oldFullyQualifiedName,
     if ( !appPTR->isBackground() ) {
         getNode()->getApp()->printAutoDeclaredVariable(script);
     }
-    if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0) ) {
+    if ( !Python::interpretPythonScript(script, &err, 0) ) {
         getNode()->getApp()->appendToScriptEditor(err);
     }
 }
@@ -4634,7 +4634,7 @@ RotoContext::removeItemAsPythonField(const RotoItemPtr& item)
     if ( !appPTR->isBackground() ) {
         getNode()->getApp()->printAutoDeclaredVariable(script);
     }
-    if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0) ) {
+    if ( !Python::interpretPythonScript(script, &err, 0) ) {
         getNode()->getApp()->appendToScriptEditor(err);
     }
 }
@@ -4788,7 +4788,7 @@ RotoContext::declareItemAsPythonField(const RotoItemPtr& item)
     if ( !appPTR->isBackground() ) {
         getNode()->getApp()->printAutoDeclaredVariable(script);
     }
-    if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0) ) {
+    if ( !Python::interpretPythonScript(script, &err, 0) ) {
         getNode()->getApp()->appendToScriptEditor(err);
     }
 
@@ -4808,7 +4808,7 @@ RotoContext::declarePythonFields()
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_RotoContext.cpp"

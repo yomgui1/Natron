@@ -51,7 +51,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class HierarchyViewPrivate;
 
@@ -285,6 +285,6 @@ public:
     virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const OVERRIDE FINAL;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // DOPESHEETHIERARCHYVIEW_H

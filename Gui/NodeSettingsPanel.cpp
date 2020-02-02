@@ -59,7 +59,7 @@
 
 
 using std::make_pair;
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 NodeSettingsPanel::NodeSettingsPanel(const MultiInstancePanelPtr & multiPanel,
@@ -94,7 +94,7 @@ NodeSettingsPanel::NodeSettingsPanel(const MultiInstancePanelPtr & multiPanel,
     _settingsButton = new Button( QIcon(pixSettings), QString(), getHeaderWidget() );
     _settingsButton->setFixedSize(mediumBSize);
     _settingsButton->setIconSize(mediumIconSize);
-    _settingsButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Settings and presets."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _settingsButton->setToolTip( Natron::convertFromPlainText(tr("Settings and presets."), Natron::WhiteSpaceNormal) );
     _settingsButton->setFocusPolicy(Qt::NoFocus);
     QObject::connect( _settingsButton, SIGNAL(clicked()), this, SLOT(onSettingsButtonClicked()) );
     insertHeaderWidget(1, _settingsButton);
@@ -307,7 +307,7 @@ NodeSettingsPanel::onExportPresetsActionTriggered()
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_NodeSettingsPanel.cpp"

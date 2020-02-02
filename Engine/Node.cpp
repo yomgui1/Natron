@@ -113,7 +113,7 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_ON
 ///at most every...
 #define NATRON_RENDER_GRAPHS_HINTS_REFRESH_RATE_SECONDS 1
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 using std::make_pair;
 using std::cout; using std::endl;
@@ -121,11 +121,11 @@ using boost::shared_ptr;
 
 
 // protect local classes in anonymous namespace
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 
@@ -669,7 +669,7 @@ Node::declareRotoPythonField()
     if ( !appPTR->isBackground() ) {
         getApp()->printAutoDeclaredVariable(script);
     }
-    bool ok = NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0);
+    bool ok = Python::interpretPythonScript(script, &err, 0);
     assert(ok);
     if (!ok) {
         throw std::runtime_error("Node::declareRotoPythonField(): interpretPythonScript(" + script + ") failed!");
@@ -693,7 +693,7 @@ Node::declareTrackerPythonField()
     if ( !appPTR->isBackground() ) {
         getApp()->printAutoDeclaredVariable(script);
     }
-    bool ok = NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0);
+    bool ok = Python::interpretPythonScript(script, &err, 0);
     assert(ok);
     if (!ok) {
         throw std::runtime_error("Node::declareTrackerPythonField(): interpretPythonScript(" + script + ") failed!");
@@ -3151,7 +3151,7 @@ Node::getKnobByName(const std::string & name) const
     return _imp->effect->getKnobByName(name);
 }
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 ///output is always RGBA with alpha = 255
 template<typename PIX, int maxValue, int srcNComps>
@@ -3253,7 +3253,7 @@ renderPreviewForDepth(const Image & srcImg,
     }
 }     // renderPreviewForDepth
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 class ComputingPreviewSetter_RAII
@@ -6529,7 +6529,7 @@ Node::declareNodeVariableToPython(const std::string& nodeName)
     std::string appID = getApp()->getAppIDString();
     std::string nodeFullName = appID + "." + nodeName;
     bool alreadyDefined = false;
-    PyObject* nodeObj = NATRON_PYTHON_NAMESPACE::getAttrRecursive(nodeFullName, mainModule, &alreadyDefined);
+    PyObject* nodeObj = Python::getAttrRecursive(nodeFullName, mainModule, &alreadyDefined);
     assert(nodeObj);
     Q_UNUSED(nodeObj);
 
@@ -6546,7 +6546,7 @@ Node::declareNodeVariableToPython(const std::string& nodeName)
         if ( !appPTR->isBackground() ) {
             getApp()->printAutoDeclaredVariable(script);
         }
-        if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, &output) ) {
+        if ( !Python::interpretPythonScript(script, &err, &output) ) {
             qDebug() << err.c_str();
         }
     }
@@ -6570,7 +6570,7 @@ Node::setNodeVariableToPython(const std::string& oldName,
     if ( !appPTR->isBackground() ) {
         getApp()->printAutoDeclaredVariable(script);
     }
-    if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0) ) {
+    if ( !Python::interpretPythonScript(script, &err, 0) ) {
         qDebug() << err.c_str();
     }
 }
@@ -6596,7 +6596,7 @@ Node::deleteNodeVariableToPython(const std::string& nodeName)
     QString appID = QString::fromUtf8( getApp()->getAppIDString().c_str() );
     std::string nodeFullName = appID.toStdString() + "." + nodeName;
     bool alreadyDefined = false;
-    PyObject* nodeObj = NATRON_PYTHON_NAMESPACE::getAttrRecursive(nodeFullName, appPTR->getMainModule(), &alreadyDefined);
+    PyObject* nodeObj = Python::getAttrRecursive(nodeFullName, appPTR->getMainModule(), &alreadyDefined);
     assert(nodeObj);
     Q_UNUSED(nodeObj);
     if (alreadyDefined) {
@@ -6605,7 +6605,7 @@ Node::deleteNodeVariableToPython(const std::string& nodeName)
         if ( !appPTR->isBackground() ) {
             getApp()->printAutoDeclaredVariable(script);
         }
-        if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0) ) {
+        if ( !Python::interpretPythonScript(script, &err, 0) ) {
             qDebug() << err.c_str();
         }
     }
@@ -6637,7 +6637,7 @@ Node::declarePythonFields()
     std::string appID = getApp()->getAppIDString();
     bool alreadyDefined = false;
     std::string nodeFullName = appID + "." + nodeName;
-    PyObject* nodeObj = NATRON_PYTHON_NAMESPACE::getAttrRecursive(nodeFullName, NATRON_PYTHON_NAMESPACE::getMainModule(), &alreadyDefined);
+    PyObject* nodeObj = Python::getAttrRecursive(nodeFullName, Python::getMainModule(), &alreadyDefined);
     assert(nodeObj);
     Q_UNUSED(nodeObj);
     if (!alreadyDefined) {
@@ -6670,7 +6670,7 @@ Node::declarePythonFields()
         }
         std::string err;
         std::string output;
-        if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, &output) ) {
+        if ( !Python::interpretPythonScript(script, &err, &output) ) {
             qDebug() << err.c_str();
         }
     }
@@ -6696,7 +6696,7 @@ Node::removeParameterFromPython(const std::string& parameterName)
     }
     std::string nodeFullName = appID + "." + nodeName;
     bool alreadyDefined = false;
-    PyObject* nodeObj = NATRON_PYTHON_NAMESPACE::getAttrRecursive(nodeFullName, NATRON_PYTHON_NAMESPACE::getMainModule(), &alreadyDefined);
+    PyObject* nodeObj = Python::getAttrRecursive(nodeFullName, Python::getMainModule(), &alreadyDefined);
     assert(nodeObj);
     Q_UNUSED(nodeObj);
     if (!alreadyDefined) {
@@ -6709,7 +6709,7 @@ Node::removeParameterFromPython(const std::string& parameterName)
         getApp()->printAutoDeclaredVariable(script);
     }
     std::string err;
-    if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0) ) {
+    if ( !Python::interpretPythonScript(script, &err, 0) ) {
         qDebug() << err.c_str();
     }
 }
@@ -6761,7 +6761,7 @@ Node::Implementation::runOnNodeCreatedCBInternal(const std::string& cb,
         return;
     }
     try {
-        NATRON_PYTHON_NAMESPACE::getFunctionArguments(cb, &error, &args);
+        Python::getFunctionArguments(cb, &error, &args);
     } catch (const std::exception& e) {
         _publicInterface->getApp()->appendToScriptEditor( std::string("Failed to get signature onNodeCreated callback: ")
                                                           + e.what() );
@@ -6805,7 +6805,7 @@ Node::Implementation::runOnNodeCreatedCBInternal(const std::string& cb,
     ss << ")\n";
     std::string output;
     std::string script = ss.str();
-    if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &error, &output) ) {
+    if ( !Python::interpretPythonScript(script, &error, &output) ) {
         _publicInterface->getApp()->appendToScriptEditor("Failed to run onNodeCreated callback: " + error);
     } else if ( !output.empty() ) {
         _publicInterface->getApp()->appendToScriptEditor(output);
@@ -6819,7 +6819,7 @@ Node::Implementation::runOnNodeDeleteCBInternal(const std::string& cb)
     std::string error;
 
     try {
-        NATRON_PYTHON_NAMESPACE::getFunctionArguments(cb, &error, &args);
+        Python::getFunctionArguments(cb, &error, &args);
     } catch (const std::exception& e) {
         _publicInterface->getApp()->appendToScriptEditor( std::string("Failed to get signature of onNodeDeletion callback: ")
                                                           + e.what() );
@@ -6854,7 +6854,7 @@ Node::Implementation::runOnNodeDeleteCBInternal(const std::string& cb)
 
     std::string err;
     std::string output;
-    if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(ss.str(), &err, &output) ) {
+    if ( !Python::interpretPythonScript(ss.str(), &err, &output) ) {
         _publicInterface->getApp()->appendToScriptEditor("Failed to run onNodeDeletion callback: " + err);
     } else if ( !output.empty() ) {
         _publicInterface->getApp()->appendToScriptEditor(output);
@@ -6991,7 +6991,7 @@ Node::Implementation::runInputChangedCallback(int index,
     std::string error;
 
     try {
-        NATRON_PYTHON_NAMESPACE::getFunctionArguments(cb, &error, &args);
+        Python::getFunctionArguments(cb, &error, &args);
     } catch (const std::exception& e) {
         _publicInterface->getApp()->appendToScriptEditor( std::string("Failed to get signature of onInputChanged callback: ")
                                                           + e.what() );
@@ -7042,7 +7042,7 @@ Node::Implementation::runInputChangedCallback(int index,
 
     std::string script = ss.str();
     std::string output;
-    if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &error, &output) ) {
+    if ( !Python::interpretPythonScript(script, &error, &output) ) {
         _publicInterface->getApp()->appendToScriptEditor( tr("Failed to execute callback: %1").arg( QString::fromUtf8( error.c_str() ) ).toStdString() );
     } else {
         if ( !output.empty() ) {
@@ -7312,7 +7312,7 @@ Node::getHostMixingValue(double time,
 }
 
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_Node.cpp"

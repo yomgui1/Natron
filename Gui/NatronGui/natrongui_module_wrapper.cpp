@@ -15,7 +15,7 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_OFF
 
 
 // Extra includes
-NATRON_NAMESPACE_USING NATRON_PYTHON_NAMESPACE_USING
+using namespace Natron; using namespace Natron::Python;
 
 // Current module's type array.
 PyTypeObject** SbkNatronGuiTypes;

@@ -82,7 +82,7 @@ CLANG_DIAG_ON(uninitialized)
 #include <ofxNatron.h>
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 using std::make_pair;
 
 
@@ -399,7 +399,7 @@ KnobGuiChoice::updateGUI(int /*dimension*/)
         bool activeIndexPresent = knob->isActiveEntryPresentInEntries();
         if (!activeIndexPresent) {
             QString error = tr("The value %1 no longer exist in the menu.").arg(activeEntryLabel);
-            setWarningValue( KnobGui::eKnobWarningChoiceMenuOutOfDate, NATRON_NAMESPACE::convertFromPlainText(error, NATRON_NAMESPACE::WhiteSpaceNormal) );
+            setWarningValue( KnobGui::eKnobWarningChoiceMenuOutOfDate, Natron::convertFromPlainText(error, Natron::WhiteSpaceNormal) );
         } else {
             setWarningValue( KnobGui::eKnobWarningChoiceMenuOutOfDate, QString() );
         }
@@ -489,7 +489,7 @@ KnobGuiChoice::reflectModificationsState()
     _comboBox->setAltered(!hasModif);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_KnobGuiChoice.cpp"

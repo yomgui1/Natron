@@ -47,7 +47,7 @@
 #include "Gui/DopeSheet.h"
 #include "Gui/DopeSheetView.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 typedef std::map<KnobIWPtr, KnobGui *> KnobsAndGuis;
 
@@ -55,7 +55,7 @@ typedef std::map<KnobIWPtr, KnobGui *> KnobsAndGuis;
 ////////////////////////// Helpers //////////////////////////
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 /**
  * @brief Move the node 'reader' on project timeline, by offsetting its
@@ -148,7 +148,7 @@ moveGroupNode(DopeSheetEditor* model,
     }
 } // moveGroupNode
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 ////////////////////////// DSMoveKeysCommand //////////////////////////
@@ -996,4 +996,4 @@ DSPasteKeysCommand::addOrRemoveKeyframe(bool add)
     _model->refreshSelectionBboxAndRedrawView();
 } // DSPasteKeysCommand::addOrRemoveKeyframe
 
-NATRON_NAMESPACE_EXIT
+}

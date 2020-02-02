@@ -43,7 +43,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class VerticalColorBar
     : public QWidget
@@ -69,6 +69,6 @@ private:
     virtual void paintEvent(QPaintEvent* e) OVERRIDE FINAL;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_VerticalColorBar_h

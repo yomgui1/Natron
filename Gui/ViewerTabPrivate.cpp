@@ -45,7 +45,7 @@
 #include "Gui/ViewerTab.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 ViewerTabPrivate::ViewerTabPrivate(ViewerTab* publicInterface,
@@ -414,4 +414,4 @@ ViewerTabPrivate::hasInactiveNodeViewerContext(const NodePtr& node)
     return n->getNode() != node;
 }
 
-NATRON_NAMESPACE_EXIT
+}

@@ -40,7 +40,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/DocumentationManager.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 GuiApplicationManagerPrivate::GuiApplicationManagerPrivate(GuiApplicationManager* publicInterface)
@@ -444,4 +444,4 @@ GuiApplicationManagerPrivate::updateFontConfigCache()
     qDebug() << "Fontconfig fonts built";
 }
 
-NATRON_NAMESPACE_EXIT
+}

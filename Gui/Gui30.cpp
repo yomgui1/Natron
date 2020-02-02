@@ -59,7 +59,7 @@
 #include "Gui/TabWidget.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 void
@@ -335,7 +335,7 @@ Gui::onDoDialog(int type,
         isActiveWindowADialog = qobject_cast<QDialog*>(currentActiveWindow);
     }
 
-    QString msg = useHtml ? content : NATRON_NAMESPACE::convertFromPlainText(content.trimmed(), NATRON_NAMESPACE::WhiteSpaceNormal);
+    QString msg = useHtml ? content : Natron::convertFromPlainText(content.trimmed(), Natron::WhiteSpaceNormal);
 
     if (type == 0) { // error dialog
         QMessageBox critical(QMessageBox::Critical, title, msg, QMessageBox::NoButton, this, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::WindowStaysOnTopHint);
@@ -488,7 +488,7 @@ Gui::onDoDialogWithStopAskingCheckbox(int type,
                                       StandardButtons buttons,
                                       int defaultB)
 {
-    QString message = useHtml ? content : NATRON_NAMESPACE::convertFromPlainText(content.trimmed(), NATRON_NAMESPACE::WhiteSpaceNormal);
+    QString message = useHtml ? content : Natron::convertFromPlainText(content.trimmed(), Natron::WhiteSpaceNormal);
     MessageBox dialog(title, content, (MessageBox::MessageBoxTypeEnum)type, buttons, (StandardButtonEnum)defaultB, this);
     QCheckBox* stopAskingCheckbox = new QCheckBox(tr("Do Not Show This Again"), &dialog);
 
@@ -696,4 +696,4 @@ Gui::onCurrentUndoStackChanged(QUndoStack* stack)
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}

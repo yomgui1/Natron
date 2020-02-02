@@ -77,7 +77,7 @@ GCC_DIAG_ON(deprecated)
 
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct AppManagerPrivate
 {
@@ -254,7 +254,7 @@ public:
     void copyUtf8ArgsToMembers(const std::vector<std::string>& utf8Args);
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Engine_AppManagerPrivate_h
 

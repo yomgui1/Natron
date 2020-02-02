@@ -27,7 +27,7 @@
 
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 namespace Smooth1D
 {
@@ -38,6 +38,6 @@ namespace Smooth1D
 
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_ENGINE_SMOOTH_1D_H

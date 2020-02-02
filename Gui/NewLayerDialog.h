@@ -39,7 +39,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct NewLayerDialogPrivate;
 class NewLayerDialog
@@ -64,6 +64,6 @@ private:
     boost::scoped_ptr<NewLayerDialogPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_NewLayerDialog_h

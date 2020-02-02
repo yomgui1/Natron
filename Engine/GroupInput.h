@@ -34,7 +34,7 @@
 #include "Engine/NoOpBase.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class GroupInput
     : public NoOpBase
@@ -93,6 +93,6 @@ public:
                              bool /*originatedFromMainThread*/) OVERRIDE FINAL;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NOOP_H

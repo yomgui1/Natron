@@ -51,7 +51,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/Label.h"
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 //================================
 
@@ -189,6 +189,6 @@ private:
     bool _useSimplifiedUI;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_KnobGuiColor_h

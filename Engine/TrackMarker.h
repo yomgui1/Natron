@@ -97,7 +97,7 @@
 #define kTrackerParamEnabledHint "When checked, this track data will be used to generate the resulting Transform/CornerPin out of the tracker. You can animate this parameter to control the lifetime of the track."
 //#define NATRON_TRACK_MARKER_USE_WEIGHT
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct TrackMarkerPrivate;
 class TrackMarker
@@ -284,7 +284,7 @@ private:
     virtual void initializeKnobs() OVERRIDE FINAL;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 
 #endif // Engine_TrackMarker_h

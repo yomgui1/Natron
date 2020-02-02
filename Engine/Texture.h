@@ -33,7 +33,7 @@
 #include "Engine/EngineFwd.h"
 #include "Global/GLIncludes.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class Texture
 {
@@ -169,6 +169,6 @@ private:
     DataTypeEnum _type;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif /* defined(NATRON_GUI_TEXTURE_H_) */

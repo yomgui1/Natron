@@ -44,7 +44,7 @@
 #include "Global/GlobalDefines.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class FileSystemModel;
 struct FileSystemItemPrivate;
@@ -359,6 +359,6 @@ private:
     boost::scoped_ptr<FileSystemModelPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // FILESYSTEMMODEL_H

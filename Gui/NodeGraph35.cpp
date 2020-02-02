@@ -55,7 +55,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Global/QtCompat.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 QImage
 NodeGraph::getFullSceneScreenShot()
 {
@@ -494,4 +494,4 @@ NodeGraph::showMenu(const QPoint & pos)
     }
 } // NodeGraph::showMenu
 
-NATRON_NAMESPACE_EXIT
+}

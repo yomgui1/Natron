@@ -38,7 +38,7 @@
 
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct HistogramCPUPrivate;
 
@@ -93,6 +93,6 @@ private:
     boost::scoped_ptr<HistogramCPUPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // HISTOGRAMCPU_H

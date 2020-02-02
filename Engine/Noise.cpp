@@ -41,7 +41,7 @@ namespace {
 
 using boost::uint32_t;
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 inline double floorSSE(double val) {
 #ifdef SEEXPR_USE_SSE
@@ -252,7 +252,7 @@ template void FBM<3, 3, false, double>(const double*, double*, int, double, doub
 template void FBM<3, 3, true, double>(const double*, double*, int, double, double);
 template void FBM<4, 1, false, double>(const double*, double*, int, double, double);
 template void FBM<4, 3, false, double>(const double*, double*, int, double, double);
-NATRON_NAMESPACE_EXIT
+}
 
 #ifdef MAINTEST
 int main(int argc, char* argv[]) {

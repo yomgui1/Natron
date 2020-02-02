@@ -61,7 +61,7 @@
 
 #define NATRON_PYPLUG_EXPORTER_VERSION 10
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct NodeCollectionPrivate
 {
@@ -475,7 +475,7 @@ NodeCollection::checkNodeName(const Node* node,
         return;
     }
     ///Remove any non alpha-numeric characters from the baseName
-    std::string cpy = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendly(baseName);
+    std::string cpy = Python::makeNameScriptFriendly(baseName);
     if ( cpy.empty() ) {
         throw std::runtime_error( tr("Invalid script-name.").toStdString() );
 
@@ -2896,7 +2896,7 @@ NodeCollection::exportGroupToPython(const QString& pluginID,
     WRITE_INDENT(2); WRITE_STRING("extModule.createInstanceExt(app,group)");
 } // NodeCollection::exportGroupToPython
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_NodeGroup.cpp"

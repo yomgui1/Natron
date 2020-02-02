@@ -36,7 +36,7 @@
 
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class OfxMemory
     : public OFX::Host::Memory::Instance
@@ -58,6 +58,6 @@ public:
 private:
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // OFXMEMORY_H

@@ -49,7 +49,7 @@ CLANG_DIAG_ON(uninitialized)
 #define NATRON_SETTINGS_VERTICAL_SPACING_PIXELS 3
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct KnobGuiContainerHelperPrivate
 {
@@ -1230,7 +1230,7 @@ KnobGuiContainerSignalsHandler::onPageLabelChangedInternally()
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_KnobGuiContainerHelper.cpp"

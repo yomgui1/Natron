@@ -29,7 +29,7 @@
 
 #include "Engine/EffectInstance.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct OneViewNodePrivate;
 class OneViewNode
@@ -137,6 +137,6 @@ private:
     boost::scoped_ptr<OneViewNodePrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // ENGINE_ONEVIEWNODE_H

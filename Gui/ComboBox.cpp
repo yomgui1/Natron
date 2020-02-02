@@ -55,7 +55,7 @@ CLANG_DIAG_ON(deprecated-register)
 #include "Gui/Menu.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 /*
@@ -513,7 +513,7 @@ ComboBox::insertItem(int index,
     action->setText(item);
     action->setData( QVariant(index) );
     if ( !toolTip.isEmpty() ) {
-        action->setToolTip( NATRON_NAMESPACE::convertFromPlainText(toolTip.trimmed(), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        action->setToolTip( Natron::convertFromPlainText(toolTip.trimmed(), Natron::WhiteSpaceNormal) );
     }
     if ( !icon.isNull() ) {
         action->setIcon(icon);
@@ -608,7 +608,7 @@ ComboBox::addItem(const QString & item,
             action->setShortcut(key);
         }
         if ( !toolTip.isEmpty() ) {
-            action->setToolTip( NATRON_NAMESPACE::convertFromPlainText(toolTip.trimmed(), NATRON_NAMESPACE::WhiteSpaceNormal) );
+            action->setToolTip( Natron::convertFromPlainText(toolTip.trimmed(), Natron::WhiteSpaceNormal) );
         }
 
         addAction(action);
@@ -659,7 +659,7 @@ ComboBox::addItem(const QString & item,
                         action->setShortcut(key);
                     }
                     if ( !toolTip.isEmpty() ) {
-                        action->setToolTip( NATRON_NAMESPACE::convertFromPlainText(toolTip.trimmed(), NATRON_NAMESPACE::WhiteSpaceNormal) );
+                        action->setToolTip( Natron::convertFromPlainText(toolTip.trimmed(), Natron::WhiteSpaceNormal) );
                     }
 
                     node->isLeaf = action;
@@ -1100,7 +1100,7 @@ ComboBox::getAltered() const
     return _altered;
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_ComboBox.cpp"

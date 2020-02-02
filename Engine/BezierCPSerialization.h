@@ -50,7 +50,7 @@ GCC_DIAG_ON(unused-parameter)
 #define BEZIER_CP_REMOVE_OFFSET 4
 #define BEZIER_CP_VERSION BEZIER_CP_REMOVE_OFFSET
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 template<class Archive>
 void
@@ -149,9 +149,9 @@ BezierCP::load(Archive & ar,
     }
 } // BezierCP::load
 
-NATRON_NAMESPACE_EXIT
+}
 
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::BezierCP, BEZIER_CP_VERSION)
+BOOST_CLASS_VERSION(Natron::BezierCP, BEZIER_CP_VERSION)
 
 
 #endif // Engine_BezierCPSerialization_h

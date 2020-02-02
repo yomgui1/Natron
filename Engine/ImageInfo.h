@@ -28,7 +28,7 @@
 #include "Engine/Format.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER;
+namespace Natron {;
 
 class ImageInfo
 {
@@ -83,6 +83,6 @@ private:
     Format _displayWindow; // display window of the data
 };
 
-NATRON_NAMESPACE_EXIT;
+};
 
 #endif // NATRON_ENGINE_IMAGEINFO_H

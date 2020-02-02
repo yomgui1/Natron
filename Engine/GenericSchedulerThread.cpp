@@ -41,10 +41,10 @@
 //#define TRACE_GENERIC_SCHEDULER_THREAD
 #endif
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 class GenericSchedulerThreadMetaTypesRegistration
 {
@@ -55,7 +55,7 @@ public:
     }
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 static GenericSchedulerThreadMetaTypesRegistration registration;
 struct GenericSchedulerThreadPrivate
 {
@@ -619,7 +619,7 @@ GenericSchedulerThread::onExecutionOnMainThreadReceived(const GenericThreadExecO
     _imp->executingOnMainThreadCond.wakeOne();
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_GenericSchedulerThread.cpp"

@@ -41,7 +41,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class InfoViewerWidget
     : public QWidget
@@ -108,6 +108,6 @@ private:
     double currentColor[4];
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif /* defined(NATRON_GUI_INFOVIEWERWIDGET_H_) */

@@ -67,7 +67,7 @@ GCC_DIAG_ON(unused-parameter)
 #define kNatronDisparityComponentsLabel "Disparity"
 #define kNatronMotionComponentsLabel "Motion"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class ImagePlaneDesc
 {
@@ -257,9 +257,9 @@ private:
     BOOST_SERIALIZATION_SPLIT_MEMBER()
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::ImagePlaneDesc, IMAGEPLANEDESC_SERIALIZATION_VERSION)
+BOOST_CLASS_VERSION(Natron::ImagePlaneDesc, IMAGEPLANEDESC_SERIALIZATION_VERSION)
 
 
 #endif // IMAGECOMPONENTS_H

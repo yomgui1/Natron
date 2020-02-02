@@ -73,10 +73,10 @@
 
 #define NATRON_DOPESHEET_MIN_RANGE_FIT 10
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 //Protect declarations in an anonymous namespace
 
@@ -118,7 +118,7 @@ running_in_main_thread_and_context(const QGLWidget *glWidget)
     running_in_main_context(glWidget);
 }
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 ////////////////////////// DopeSheetView //////////////////////////
@@ -3681,7 +3681,7 @@ DopeSheetView::focusInEvent(QFocusEvent *e)
     QGLWidget::focusInEvent(e);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_DopeSheetView.cpp"

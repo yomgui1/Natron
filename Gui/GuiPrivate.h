@@ -56,7 +56,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #define kPropertiesBinName "properties"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 #define NATRON_CONNECT_INPUT_NB (2 * 10)
 
@@ -89,7 +89,7 @@ public:
     mutable QMutex _splittersMutex;
     std::list<Splitter*> _splitters;
     mutable QMutex _pyPanelsMutex;
-    std::map<NATRON_PYTHON_NAMESPACE::PyPanel*, std::string> _userPanels;
+    std::map<Python::PyPanel*, std::string> _userPanels;
     bool _isTripleSyncEnabled;
     mutable QMutex areRenderStatsEnabledMutex;
     bool areRenderStatsEnabled;
@@ -298,6 +298,6 @@ public:
     bool checkProjectLockAndWarn(const QString& projectPath, const QString& projectName);
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_GuiPrivate_h

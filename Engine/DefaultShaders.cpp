@@ -25,7 +25,7 @@
 
 #include "DefaultShaders.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 const char* fillConstant_FragmentShader =
     "uniform vec4 fillColor;\n"
@@ -80,4 +80,4 @@ const char* copyUnprocessedChannels_FragmentShader =
     "#endif\n"
     "}";
 
-NATRON_NAMESPACE_EXIT
+}

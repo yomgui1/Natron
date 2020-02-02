@@ -30,7 +30,7 @@
 #include "Global/GlobalDefines.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /**
  * @brief An interface to implement to manage keyframes that are to be displayed on the timeline
@@ -136,6 +136,6 @@ public:
     virtual void getUserKeyframes(std::list<SequenceTime>* /*keys*/) const { }
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // TIMELINEKEYFRAMES_H

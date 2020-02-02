@@ -76,7 +76,7 @@ CLANG_DIAG_ON(unknown-pragmas)
 #endif
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 using std::cout; using std::endl; using std::string;
 
@@ -3223,7 +3223,7 @@ OfxEffectInstance::onInteractViewportSelectionUpdated(const RectD& rectangle, bo
     k->setValue(onRelease ? 2 : 1);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_OfxEffectInstance.cpp"

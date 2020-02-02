@@ -42,7 +42,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/Label.h"
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class ClickableLabel
     : public Label
@@ -162,6 +162,6 @@ private:
     KnobWidgetDnDPtr _dnd;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_GUI_CLICKABLELABEL_H

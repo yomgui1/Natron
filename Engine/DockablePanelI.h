@@ -29,7 +29,7 @@
 
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /**
  * @brief Interface used by the Engine Knob class to interact with the gui for dynamic parameter creation
@@ -58,6 +58,6 @@ public:
     virtual void deleteKnobGui(const KnobIPtr& knob) = 0;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // DOCKABLEPANELI_H

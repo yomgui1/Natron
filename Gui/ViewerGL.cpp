@@ -108,7 +108,7 @@ GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 /*This class is the the core of the viewer : what displays images, overlays, etc...
    Everything related to OpenGL will (almost always) be in this class */
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 ViewerGL::ViewerGL(ViewerTab* parent,
@@ -1050,7 +1050,7 @@ ViewerGL::drawPickerPixel()
     } // GLProtectAttrib a(GL_CURRENT_BIT | GL_ENABLE_BIT | GL_POINT_BIT | GL_COLOR_BUFFER_BIT);
 }
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 static QStringList
 explode(const QString& str)
@@ -1141,7 +1141,7 @@ wordWrap(const QFontMetrics& fm,
     return stringL;
 } // wordWrap
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 void
@@ -4636,7 +4636,7 @@ ViewerGL::currentTimeForEvent(QInputEvent* e)
     return now.tv_sec + now.tv_usec / 1000000.0;
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_ViewerGL.cpp"

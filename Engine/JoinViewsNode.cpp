@@ -31,7 +31,7 @@
 #include "Engine/Node.h"
 #include "Engine/NodeMetadata.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct JoinViewsNodePrivate
 {
@@ -167,7 +167,7 @@ JoinViewsNode::onProjectViewsChanged()
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_JoinViewsNode.cpp"

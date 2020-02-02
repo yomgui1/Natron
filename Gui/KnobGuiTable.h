@@ -34,7 +34,7 @@
 #include "Gui/GuiFwd.h"
 #include "Gui/KnobGui.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct KnobGuiTablePrivate;
 class KnobGuiTable
@@ -150,6 +150,6 @@ private:
     KnobLayersWPtr _knob;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_KnobGuiLayer_h

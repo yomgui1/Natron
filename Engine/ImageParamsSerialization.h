@@ -67,7 +67,7 @@ serialize(Archive & ar,
 }
 }
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 template<class Archive>
 void
@@ -117,6 +117,6 @@ ImageParams::serialize(Archive & ar,
     ar & ::boost::serialization::make_nvp("Fielding", _fielding);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // IMAGEPARAMSSERIALIZATION_H

@@ -38,7 +38,7 @@
 #include <algorithm> // min, max
 #include <stdexcept>
 
-using NATRON_NAMESPACE::ipow;
+using Natron::ipow;
 
 // tick_size_10
 //

@@ -46,7 +46,7 @@ GCC_DIAG_ON(unused-parameter)
 #include "Engine/CurvePrivate.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 template<class Archive>
 void
@@ -69,6 +69,6 @@ Curve::serialize(Archive & ar,
     ar & ::boost::serialization::make_nvp("KeyFrameSet", _imp->keyFrames);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_ENGINE_CURVESERIALIZATION_H

@@ -55,7 +55,7 @@ GCC_DIAG_ON(unused-parameter)
 #define ROTO_DRAWABLE_ITEM_CHANGES_TO_LIST 4
 #define ROTO_DRAWABLE_ITEM_VERSION ROTO_DRAWABLE_ITEM_CHANGES_TO_LIST
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class RotoDrawableItemSerialization
     : public RotoItemSerialization
@@ -156,9 +156,9 @@ private:
     double _overlayColor[4];
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::RotoDrawableItemSerialization, ROTO_DRAWABLE_ITEM_VERSION)
+BOOST_CLASS_VERSION(Natron::RotoDrawableItemSerialization, ROTO_DRAWABLE_ITEM_VERSION)
 
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(RotoDrawableItemSerialization);
 

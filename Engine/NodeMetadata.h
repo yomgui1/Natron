@@ -36,7 +36,7 @@
 #include "Engine/ImagePlaneDesc.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /**
  * @brief These meta-data are represents what's flowing through a node. They change
@@ -108,6 +108,6 @@ private:
     boost::scoped_ptr<NodeMetadataPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Engine_NodeMetadata_h

@@ -62,7 +62,7 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_ON
 #include "Engine/ViewIdx.h"
 #include "Engine/WriteNode.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 struct OfxKeyFrames_compare
@@ -4895,7 +4895,7 @@ OfxParametricInstance::copyFrom(const OFX::Host::Param::Instance &instance,
     return OfxKeyFrame::copyFrom(other.getKnob(), getKnob(), offset, range);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_OfxParamInstance.cpp"

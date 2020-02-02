@@ -35,7 +35,7 @@
 
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class GroupOutput
     : public NoOpBase
@@ -79,6 +79,6 @@ public:
     }
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Engine_GroupOutput_h

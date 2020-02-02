@@ -15,7 +15,7 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_OFF
 
 
 // Extra includes
-NATRON_NAMESPACE_USING NATRON_PYTHON_NAMESPACE_USING
+using namespace Natron; using namespace Natron::Python;
 
 // Current module's type array.
 PyTypeObject** SbkNatronEngineTypes;
@@ -82,7 +82,7 @@ void init_BoolNodeCreationProperty(PyObject* module);
 void init_StringNodeCreationProperty(PyObject* module);
 void init_RectI(PyObject* module);
 void init_RectD(PyObject* module);
-void init_NATRON_NAMESPACE(PyObject* module);
+void init_Natron(PyObject* module);
 
 // Required modules' type and converter arrays.
 PyTypeObject** SbkPySide_QtCoreTypes;
@@ -905,7 +905,7 @@ SBK_MODULE_INIT_FUNCTION_BEGIN(NatronEngine)
     init_StringNodeCreationProperty(module);
     init_RectI(module);
     init_RectD(module);
-    init_NATRON_NAMESPACE(module);
+    init_Natron(module);
 
     // Register converter for type 'NatronEngine.std::size_t'.
     SbkNatronEngineTypeConverters[SBK_STD_SIZE_T_IDX] = Shiboken::Conversions::createConverter(&PyLong_Type, std_size_t_CppToPython_std_size_t);

@@ -66,7 +66,7 @@ CLANG_DIAG_ON(deprecated)
 
 class QDir;
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 enum AppInstanceStatusEnum
 {
@@ -745,7 +745,7 @@ StandardButtonEnum questionDialog(const std::string & title, const std::string &
 } // namespace Dialogs
 
 // put global functions in a namespace, see https://google.github.io/styleguide/cppguide.html#Nonmember,_Static_Member,_and_Global_Functions
-namespace NATRON_PYTHON_NAMESPACE {
+namespace Python {
 /**
  * @brief Ensures that the given Python script as imported the given module
  * and returns the position of the start of the next line after the imports. Note that this position
@@ -799,7 +799,7 @@ void getFunctionArguments(const std::string& pyFunc, std::string* error, std::ve
  * If app1 or Group1 does not exist at this point, this is a failure.
  **/
 PyObject* getAttrRecursive(const std::string& fullyQualifiedName, PyObject* parentObj, bool* isDefined);
-} // namespace NATRON_PYTHON_NAMESPACE
+} // namespace Python
 
 // #define DEBUG_PYTHON_GIL // to debug Python GIL issues
 
@@ -822,7 +822,7 @@ public:
     ~PythonGILLocker();
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 
 #endif // Engine_AppManager_h

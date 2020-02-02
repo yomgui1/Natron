@@ -35,7 +35,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class LogEntry
 {
@@ -66,7 +66,7 @@ public:
 
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 
 #endif // LOGENTRY_H

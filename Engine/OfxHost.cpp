@@ -113,7 +113,7 @@ CLANG_DIAG_ON(unknown-pragmas)
 //An effect may not use more than this amount of threads
 #define NATRON_MULTI_THREAD_SUITE_MAX_NUM_CPU 4
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 // to disambiguate with the global-scope ::OfxHost
 
 // see second answer of http://stackoverflow.com/questions/2342162/stdstring-formatting-like-sprintf
@@ -1201,7 +1201,7 @@ OfxHost::setThreadAsActionCaller(OfxImageEffectInstance* instance,
     }
 }
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 ///Using QtConcurrent doesn't work with The Foundry Furnace plug-ins because they expect fresh threads
 ///to be created. As QtConcurrent's thread-pool recycles thread, it seems to make Furnace crash.
@@ -1308,7 +1308,7 @@ private:
     OfxStatus *_stat;
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 // Function to spawn SMP threads
@@ -1727,5 +1727,5 @@ OfxHost::flushOpenGLResources() const
 
 #endif
 
-NATRON_NAMESPACE_EXIT
+}
 

@@ -37,7 +37,7 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_ON
 #include "Engine/LibraryBinary.h"
 #include "Engine/Settings.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 Plugin::~Plugin()
 {
@@ -366,4 +366,4 @@ FormatExtensionCompareCaseInsensitive::operator() (const std::string& lhs,
     return boost::algorithm::lexicographical_compare( lhs, rhs, boost::algorithm::is_iless() );
 }
 
-NATRON_NAMESPACE_EXIT
+}

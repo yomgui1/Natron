@@ -38,8 +38,8 @@
 #include "Engine/PyParameter.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER;
-NATRON_PYTHON_NAMESPACE_ENTER;
+namespace Natron {;
+namespace Python {;
 
 class Layer; // defined below
 
@@ -157,8 +157,8 @@ public:
     ColorTuple getColor(double time);
     void setColor(double time, double r, double g, double b);
 
-    void setCompositingOperator(NATRON_NAMESPACE::MergingFunctionEnum op);
-    NATRON_NAMESPACE::MergingFunctionEnum getCompositingOperator() const;
+    void setCompositingOperator(Natron::MergingFunctionEnum op);
+    Natron::MergingFunctionEnum getCompositingOperator() const;
     BooleanParam* getActivatedParam() const;
     DoubleParam* getOpacityParam() const;
     DoubleParam* getFeatherDistanceParam() const;
@@ -191,7 +191,7 @@ private:
     RotoContextPtr _ctx;
 };
 
-NATRON_PYTHON_NAMESPACE_EXIT;
-NATRON_NAMESPACE_EXIT;
+};
+};
 
 #endif // ROTOWRAPPER_H

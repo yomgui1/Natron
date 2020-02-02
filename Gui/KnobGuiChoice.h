@@ -56,7 +56,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/ComboBox.h"
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class KnobComboBox
     : public ComboBox
@@ -139,6 +139,6 @@ private:
     KnobChoiceWPtr _knob;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_KnobGuiChoice_h

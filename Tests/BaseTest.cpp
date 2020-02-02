@@ -55,7 +55,7 @@ CLANG_DIAG_ON(unknown-pragmas)
 #include "Engine/CLArgs.h"
 #include "Engine/ViewIdx.h"
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 
 BaseTest::BaseTest()
     : testing::Test()

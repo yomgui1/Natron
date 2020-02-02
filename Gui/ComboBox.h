@@ -48,7 +48,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #define DROP_DOWN_ICON_SIZE 6
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 class ComboBoxMenuNode
@@ -234,6 +234,6 @@ private:
     void updateLabel();
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // ifndef NATRON_GUI_COMBOBOX_H

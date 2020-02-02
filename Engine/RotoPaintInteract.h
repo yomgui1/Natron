@@ -41,7 +41,7 @@
 #include "Engine/BezierCP.h"
 #include "Engine/Bezier.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 #define kControlPointMidSize 3
@@ -767,6 +767,6 @@ public:
     void removeCurve(const RotoDrawableItemPtr& curve);
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // ROTOPAINTINTERACT_H

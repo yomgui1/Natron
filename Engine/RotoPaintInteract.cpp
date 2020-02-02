@@ -42,7 +42,7 @@
 #include "Engine/AppInstance.h"
 #include "Engine/ViewerInstance.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 RotoPaintPrivate::RotoPaintPrivate(RotoPaint* publicInterface,
                                    bool isPaintByDefault)
@@ -1899,4 +1899,4 @@ RotoPaintInteract::removeCurve(const RotoDrawableItemPtr& curve)
     getContext()->removeItem(curve);
 }
 
-NATRON_NAMESPACE_EXIT
+}

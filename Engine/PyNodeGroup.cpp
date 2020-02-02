@@ -31,8 +31,8 @@
 #include "Engine/NodeGroup.h"
 #include "Engine/PyNode.h"
 #include "Engine/ReadNode.h"
-NATRON_NAMESPACE_ENTER
-NATRON_PYTHON_NAMESPACE_ENTER
+namespace Natron {
+namespace Python {
 
 Group::Group()
     : _collection()
@@ -93,5 +93,5 @@ Group::getChildren() const
     return ret;
 }
 
-NATRON_PYTHON_NAMESPACE_EXIT
-NATRON_NAMESPACE_EXIT
+}
+}

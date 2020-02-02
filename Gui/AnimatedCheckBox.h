@@ -39,7 +39,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/GuiFwd.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class AnimatedCheckBox
     : public QFrame
@@ -110,6 +110,6 @@ private:
     virtual void paintEvent(QPaintEvent* e) OVERRIDE FINAL;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_GUI_ANIMATEDCHECKBOX_H

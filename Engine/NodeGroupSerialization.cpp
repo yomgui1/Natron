@@ -40,7 +40,7 @@
 
 #include <SequenceParsing.h> // for removePath
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 void
 NodeCollectionSerialization::initialize(const NodeCollection& group)
@@ -196,7 +196,7 @@ NodeCollectionSerialization::restoreFromSerialization(const std::list<NodeSerial
 
                 std::string stdModuleName = pythonModuleName.toStdString();
                 bool istoolset;
-                if ( NATRON_PYTHON_NAMESPACE::getGroupInfos(pythonModuleInfo.path().toStdString() + '/', stdModuleName, &pythonPluginID, &pythonPluginLabel, &pythonIcFilePath, &pythonGrouping, &pythonDesc, &istoolset, &pyVersion) ) {
+                if ( Python::getGroupInfos(pythonModuleInfo.path().toStdString() + '/', stdModuleName, &pythonPluginID, &pythonPluginLabel, &pythonIcFilePath, &pythonGrouping, &pythonDesc, &istoolset, &pyVersion) ) {
                     if (pyVersion != savedPythonModuleVersion) {
                         std::map<std::string, bool>::iterator found = moduleUpdatesProcessed->find(stdModuleName);
                         if ( found != moduleUpdatesProcessed->end() ) {
@@ -455,4 +455,4 @@ NodeCollectionSerialization::restoreFromSerialization(const std::list<NodeSerial
     return !mustShowErrorsLog;
 } // NodeCollectionSerialization::restoreFromSerialization
 
-NATRON_NAMESPACE_EXIT
+}

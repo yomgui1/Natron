@@ -42,7 +42,7 @@
 #include "Gui/ClickableLabel.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 /////////////// KnobGui
@@ -865,7 +865,7 @@ KnobGui::createDuplicateOnNode(EffectInstance* effect,
     return ret;
 } // KnobGui::createDuplicateOnNode
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_KnobGui.cpp"

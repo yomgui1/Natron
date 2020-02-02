@@ -39,10 +39,10 @@
 
 #include "StrUtils.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 #if defined(__NATRON_WIN32__)
 static std::string
@@ -401,7 +401,7 @@ NatronCFString::operator CFStringRef() const
 
 #endif // defined(__NATRON_OSX__)
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 std::string
@@ -741,4 +741,4 @@ ProcInfo::checkIfProcessIsRunning(const char* processAbsoluteFilePath,
 #endif // ifdef Q_OS_WIN
 } // ProcInfo::checkIfProcessIsRunning
 
-NATRON_NAMESPACE_EXIT
+}

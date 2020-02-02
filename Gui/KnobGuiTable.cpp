@@ -45,10 +45,10 @@
 #include "Gui/NewLayerDialog.h"
 #include "Gui/TableModelView.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 struct Row
 {
@@ -57,7 +57,7 @@ struct Row
 
 typedef std::vector<Row> Variables;
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 struct KnobGuiTablePrivate
@@ -256,17 +256,17 @@ KnobGuiTable::createWidget(QHBoxLayout* layout)
     buttonsLayout->setContentsMargins(0, 0, 0, 0);
 
     _imp->addPathButton = new Button( tr("Add..."), buttonsContainer );
-    _imp->addPathButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Add a new value"), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->addPathButton->setToolTip( Natron::convertFromPlainText(tr("Add a new value"), Natron::WhiteSpaceNormal) );
 
     QObject::connect( _imp->addPathButton, SIGNAL(clicked()), this, SLOT(onAddButtonClicked()) );
 
     _imp->removePathButton = new Button( tr("Remove"), buttonsContainer);
     QObject::connect( _imp->removePathButton, SIGNAL(clicked()), this, SLOT(onRemoveButtonClicked()) );
-    _imp->removePathButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Remove selected values"), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->removePathButton->setToolTip( Natron::convertFromPlainText(tr("Remove selected values"), Natron::WhiteSpaceNormal) );
 
     _imp->editPathButton = new Button( tr("Edit..."), buttonsContainer);
     QObject::connect( _imp->editPathButton, SIGNAL(clicked()), this, SLOT(onEditButtonClicked()) );
-    _imp->editPathButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Click to edit selected value."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->editPathButton->setToolTip( Natron::convertFromPlainText(tr("Click to edit selected value."), Natron::WhiteSpaceNormal) );
 
 
     buttonsLayout->addWidget(_imp->addPathButton);
@@ -761,7 +761,7 @@ KnobGuiLayers::tableChanged(int row,
     if ( row < (int)table.size() ) {
         std::list<std::vector<std::string> >::iterator it = table.begin();
         std::advance(it, row);
-        std::string copy = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendlyWithDots( (*it)[0] );
+        std::string copy = Python::makeNameScriptFriendlyWithDots( (*it)[0] );
         if (copy != (*it)[0]) {
             (*it)[0] = copy;
             *newEncodedValue = knob->encodeToKnobTableFormat(table);
@@ -775,7 +775,7 @@ KnobGuiLayers::getKnob() const
     return _knob.lock();
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_KnobGuiTable.cpp"

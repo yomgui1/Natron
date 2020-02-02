@@ -72,7 +72,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Global/FloatingPointExceptions.h"
 #endif
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 // see second answer of http://stackoverflow.com/questions/2342162/stdstring-formatting-like-sprintf
 static
@@ -1500,4 +1500,4 @@ OfxImageEffectInstance::ofxCursorToNatronCursor(const std::string &ofxCursor,
     return ret;
 } // OfxImageEffectInstance::ofxCursorToNatronCursor
 
-NATRON_NAMESPACE_EXIT
+}

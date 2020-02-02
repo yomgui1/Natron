@@ -35,7 +35,7 @@
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class CurveSelection
 {
@@ -48,6 +48,6 @@ public:
     virtual void getSelectedCurves(std::vector<CurveGuiPtr>* selection) = 0;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // CURVESELECTION_H

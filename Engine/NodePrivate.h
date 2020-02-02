@@ -35,7 +35,7 @@
 
 #include "Engine/Hash64.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /*The output node was connected from inputNumber to this...*/
 typedef std::map<NodeWPtr, int > DeactivatedState;
@@ -484,6 +484,6 @@ public:
 };
 
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_ENGINE_NODE_PRIVATE_H

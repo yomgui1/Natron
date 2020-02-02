@@ -46,7 +46,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/CurveGui.h" // CurveGui
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class ImportExportCurveDialog
     : public QDialog
@@ -174,6 +174,6 @@ private:
     boost::scoped_ptr<EditKeyFrameDialogPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_CurveGuiDialogs_h

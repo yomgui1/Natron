@@ -38,7 +38,7 @@
 #include "Engine/ViewIdx.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class UpdateViewerParams; // ViewerInstancePrivate
 
@@ -446,6 +446,6 @@ private:
     boost::scoped_ptr<ViewerInstancePrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_ENGINE_VIEWERNODE_H

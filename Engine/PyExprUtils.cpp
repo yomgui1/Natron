@@ -37,8 +37,8 @@ using boost::uint32_t;
 #define UINT32_MAX  ((uint32_t)-1)
 #endif
 
-NATRON_NAMESPACE_ENTER
-NATRON_PYTHON_NAMESPACE_ENTER
+namespace Natron {
+namespace Python {
 
 double
 ExprUtils::linearstep(double x, double a, double b) {
@@ -378,5 +378,5 @@ ExprUtils::pnoise(const Double3DTuple& p, const Double3DTuple& period)
 
 }
 
-NATRON_PYTHON_NAMESPACE_EXIT
-NATRON_NAMESPACE_EXIT
+}
+}

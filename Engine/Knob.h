@@ -52,7 +52,7 @@
 #define NATRON_USER_MANAGED_KNOBS_PAGE_LABEL "User"
 #define NATRON_USER_MANAGED_KNOBS_PAGE "userNatron"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class KnobSignalSlotHandler
     : public QObject
@@ -2848,6 +2848,6 @@ boost::shared_ptr<K> KnobHolder::createKnob(const std::string &label,
     return AppManager::createKnob<K>(this, label, dimension);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Engine_Knob_h

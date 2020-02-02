@@ -48,7 +48,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct TimelineGuiPrivate;
 
@@ -182,6 +182,6 @@ private:
     boost::scoped_ptr<TimelineGuiPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif /* defined(NATRON_GUI_TIMELINE_H_) */

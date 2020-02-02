@@ -57,7 +57,7 @@ class AutoTrack;
 }
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class TrackerParamsProvider
 {
@@ -548,6 +548,6 @@ private:
     boost::scoped_ptr<TrackSchedulerPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // TRACKERCONTEXT_H

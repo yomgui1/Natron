@@ -45,8 +45,8 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/DockablePanel.h"
 #include "Gui/PyGuiApp.h"
 
-NATRON_NAMESPACE_ENTER
-NATRON_PYTHON_NAMESPACE_ENTER
+namespace Natron {
+namespace Python {
 
 struct DialogParamHolderPrivate
 {
@@ -110,7 +110,7 @@ DialogParamHolder::onKnobValueChanged(KnobI* k,
         std::vector<std::string> args;
         std::string error;
         try {
-            NATRON_PYTHON_NAMESPACE::getFunctionArguments(callback, &error, &args);
+            Python::getFunctionArguments(callback, &error, &args);
         } catch (const std::exception& e) {
             getApp()->appendToScriptEditor( std::string("Failed to get signature of onParamChanged callback: ")
                                             + e.what() );
@@ -152,7 +152,7 @@ DialogParamHolder::onKnobValueChanged(KnobI* k,
         std::string script = ss.str();
         std::string err;
         std::string output;
-        if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, &output) ) {
+        if ( !Python::interpretPythonScript(script, &err, &output) ) {
             getApp()->appendToScriptEditor( tr("Failed to execute callback: %1").arg( QString::fromUtf8( err.c_str() ) ).toStdString() );
         } else if ( !output.empty() ) {
             getApp()->appendToScriptEditor(output);
@@ -361,7 +361,7 @@ PyPanel::PyPanel(const QString& scriptName,
 
 
     int idx = 1;
-    std::string name = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendly( scriptName.toStdString() );
+    std::string name = Python::makeNameScriptFriendly( scriptName.toStdString() );
     PanelWidget* existing = 0;
     existing = getGui()->findExistingTab(name);
     while (existing) {
@@ -682,9 +682,9 @@ PyTabWidget::getScriptName() const
     return _tab->objectName_mt_safe();
 }
 
-NATRON_PYTHON_NAMESPACE_EXIT
-NATRON_NAMESPACE_EXIT
+}
+}
 
-NATRON_NAMESPACE_USING
-NATRON_PYTHON_NAMESPACE_USING
+using namespace Natron;
+using namespace Natron::Python;
 #include "moc_PythonPanels.cpp"

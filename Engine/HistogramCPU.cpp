@@ -37,7 +37,7 @@
 #include "Engine/Image.h"
 #include "Engine/Smooth1D.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct HistogramRequest
 {
@@ -446,7 +446,7 @@ HistogramCPU::run()
     }
 } // run
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_HistogramCPU.cpp"

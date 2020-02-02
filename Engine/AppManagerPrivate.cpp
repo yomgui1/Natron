@@ -77,10 +77,10 @@ GCC_DIAG_ON(unused-parameter)
 #define NATRON_OPENGL_VERSION_REQUIRED_MAJOR 2
 #define NATRON_OPENGL_VERSION_REQUIRED_MINOR 0
 
-BOOST_CLASS_EXPORT(NATRON_NAMESPACE::FrameParams)
-BOOST_CLASS_EXPORT(NATRON_NAMESPACE::ImageParams)
+BOOST_CLASS_EXPORT(Natron::FrameParams)
+BOOST_CLASS_EXPORT(Natron::ImageParams)
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 AppManagerPrivate::AppManagerPrivate()
     : globalTLS()
     , _appType(AppManager::eAppTypeBackground)
@@ -1067,4 +1067,4 @@ AppManagerPrivate::handleCommandLineArgsW(int argc, wchar_t** argv)
     copyUtf8ArgsToMembers(utf8Args);
 }
 
-NATRON_NAMESPACE_EXIT
+}

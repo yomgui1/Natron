@@ -41,7 +41,7 @@
 #include "Engine/ThreadPool.h"
 #include "Engine/OpenGLViewerI.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /**
  * @brief Resolves links of the graph in the case of containers (that do not do any rendering but only contain nodes inside)
@@ -1979,4 +1979,4 @@ InspectorNode::setInputB(int inputNb)
     Q_EMIT refreshOptionalState();
 }
 
-NATRON_NAMESPACE_EXIT
+}

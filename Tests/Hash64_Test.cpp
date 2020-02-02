@@ -29,7 +29,7 @@
 
 #include "Engine/Hash64.h"
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 
 TEST(Hash64,
      GeneralTest)

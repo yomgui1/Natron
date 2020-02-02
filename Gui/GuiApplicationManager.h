@@ -67,7 +67,7 @@
 #define getKeybind(group, action) ( appPTR->getKeySequenceForAction(group, action) )
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct PythonUserCommand
 {
@@ -240,7 +240,7 @@ private:
     boost::scoped_ptr<GuiApplicationManagerPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 
 #endif // Gui_GuiApplicationManager_h

@@ -63,7 +63,7 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_ON
 #include <ofxOpenGLRender.h>
 #include <ofxNatron.h>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct OfxClipInstancePrivate
 {
@@ -1360,7 +1360,7 @@ OfxImageCommon::getComponentsString() const
 
 OfxImageCommon::OfxImageCommon(OFX::Host::ImageEffect::ImageBase* ofxImageBase,
                                const OfxClipInstance::RenderActionDataPtr& renderData,
-                               const NATRON_NAMESPACE::ImagePtr& internalImage,
+                               const Natron::ImagePtr& internalImage,
                                bool isSrcImage,
                                const RectI& renderWindow,
                                const Transform::Matrix3x3Ptr& mat,
@@ -1374,7 +1374,7 @@ OfxImageCommon::OfxImageCommon(OFX::Host::ImageEffect::ImageBase* ofxImageBase,
     assert(internalImage);
 
     unsigned int mipMapLevel = internalImage->getMipMapLevel();
-    RenderScale scale( NATRON_NAMESPACE::Image::getScaleFromMipMapLevel(mipMapLevel) );
+    RenderScale scale( Natron::Image::getScaleFromMipMapLevel(mipMapLevel) );
     ofxImageBase->setDoubleProperty(kOfxImageEffectPropRenderScale, scale.x, 0);
     ofxImageBase->setDoubleProperty(kOfxImageEffectPropRenderScale, scale.y, 1);
 
@@ -1400,7 +1400,7 @@ OfxImageCommon::OfxImageCommon(OFX::Host::ImageEffect::ImageBase* ofxImageBase,
         // when this OfxImage is destroyed. By default this local copy is deactivated, to activate it, the user has to go
         // in the preferences and check "Use input image copy for plug-ins rendering"
         const bool copySrcToPluginLocalData = appPTR->isCopyInputImageForPluginRenderEnabled();
-        NATRON_NAMESPACE::Image::ReadAccessPtr access( new NATRON_NAMESPACE::Image::ReadAccess( internalImage.get() ) );
+        Natron::Image::ReadAccessPtr access( new Natron::Image::ReadAccess( internalImage.get() ) );
 
         // data ptr
         const RectI bounds = internalImage->getBounds();
@@ -1451,7 +1451,7 @@ OfxImageCommon::OfxImageCommon(OFX::Host::ImageEffect::ImageBase* ofxImageBase,
         // row bytes
         ofxImageBase->setIntProperty(kOfxImagePropRowBytes, srcRowSize);
         
-        NATRON_NAMESPACE::Image::WriteAccessPtr access( new NATRON_NAMESPACE::Image::WriteAccess( internalImage.get() ) );
+        Natron::Image::WriteAccessPtr access( new Natron::Image::WriteAccess( internalImage.get() ) );
 
         // data ptr
         renderWindow.intersect(bounds, &pluginsSeenBounds);
@@ -1709,5 +1709,5 @@ OfxClipInstance::findSupportedComp(const std::string &s) const
     return none;
 } // OfxClipInstance::findSupportedComp
 
-NATRON_NAMESPACE_EXIT
+}
 

@@ -62,7 +62,7 @@
 #include "Gui/ViewerGL.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 void
 ViewerTab::onInputChanged(int inputNb)
@@ -1309,4 +1309,4 @@ ViewerTab::onPanelMadeCurrent()
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}

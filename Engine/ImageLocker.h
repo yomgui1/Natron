@@ -36,7 +36,7 @@
 
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 
@@ -126,6 +126,6 @@ private:
 typedef ImageLockerHelper<Image> ImageLocker;
 typedef ImageLockerHelper<FrameEntry> FrameEntryLocker;
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // IMAGELOCKER_H

@@ -5,7 +5,7 @@
 
 #include <PyParameter.h>
 
-NATRON_NAMESPACE_ENTER NATRON_PYTHON_NAMESPACE_ENTER
+namespace Natron { namespace Python {
 class StringParamBaseWrapper : public StringParamBase
 {
 public:
@@ -13,7 +13,7 @@ public:
     virtual ~StringParamBaseWrapper();
     static void pysideInitQtMetaTypes();
 };
-NATRON_PYTHON_NAMESPACE_EXIT NATRON_NAMESPACE_EXIT
+} }
 
 #endif // SBK_STRINGPARAMBASEWRAPPER_H
 

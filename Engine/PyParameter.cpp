@@ -34,8 +34,8 @@
 #include "Engine/Curve.h"
 #include "Engine/ViewIdx.h"
 
-NATRON_NAMESPACE_ENTER
-NATRON_PYTHON_NAMESPACE_ENTER
+namespace Natron {
+namespace Python {
 
 Param::Param(const KnobIPtr& knob)
     : _knob(knob)
@@ -2629,6 +2629,6 @@ ParametricParam::setDefaultCurvesFromCurrentCurves()
     param->setDefaultCurvesFromCurves();
 }
 
-NATRON_PYTHON_NAMESPACE_EXIT
-NATRON_NAMESPACE_EXIT
+}
+}
 

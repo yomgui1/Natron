@@ -58,7 +58,7 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_ON
 #include "Engine/TrackerContext.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 ValueSerialization::ValueSerialization()
 : _serialization(0)
@@ -357,7 +357,7 @@ equalsStringCaseInsensitive(const std::string& str1, const std::string& str2)
 
 typedef bool (*stringFuncPtr)(const std::string&,const std::string&);
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 struct FilterMatcher
 {
@@ -926,7 +926,7 @@ bool matchKnobFilterInternal(const FILTER& filter, const std::string& name, cons
     return true;
 }
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 bool
 filterKnobNameCompat(const std::string& pluginID, int pluginVersionMajor, int pluginVersionMinor,
@@ -969,4 +969,4 @@ filterKnobChoiceOptionCompat(const std::string& pluginID, int pluginVersionMajor
 }
 
 
-NATRON_NAMESPACE_EXIT
+}

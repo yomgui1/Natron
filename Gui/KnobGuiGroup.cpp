@@ -80,7 +80,7 @@ CLANG_DIAG_ON(uninitialized)
 #include <ofxNatron.h>
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 using std::make_pair;
 
 
@@ -320,7 +320,7 @@ KnobGuiGroup::getKnob() const
     return _knob.lock();
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_KnobGuiGroup.cpp"

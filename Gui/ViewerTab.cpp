@@ -61,7 +61,7 @@
 #include "Gui/ViewerGL.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 static void
@@ -232,7 +232,7 @@ ViewerTab::ViewerTab(const std::list<NodeGuiPtr> & existingNodesContext,
 
     _imp->syncViewerButton = new Button(lockIcon, QString(), _imp->firstSettingsRow);
     _imp->syncViewerButton->setCheckable(true);
-    _imp->syncViewerButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("When enabled, all viewers will be synchronized to the same portion of the image in the viewport."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->syncViewerButton->setToolTip( Natron::convertFromPlainText(tr("When enabled, all viewers will be synchronized to the same portion of the image in the viewport."), Natron::WhiteSpaceNormal) );
     _imp->syncViewerButton->setFixedSize(buttonSize);
     _imp->syncViewerButton->setIconSize(buttonIconSize);
     _imp->syncViewerButton->setFocusPolicy(Qt::NoFocus);
@@ -295,8 +295,8 @@ ViewerTab::ViewerTab(const std::list<NodeGuiPtr> & existingNodesContext,
 
     _imp->renderScaleCombo = new ComboBox(_imp->firstSettingsRow);
     _imp->renderScaleCombo->setFocusPolicy(Qt::NoFocus);
-    _imp->renderScaleCombo->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("When proxy mode is activated, it scales down the rendered image by this factor "
-                                                                          "to accelerate the rendering."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->renderScaleCombo->setToolTip( Natron::convertFromPlainText(tr("When proxy mode is activated, it scales down the rendered image by this factor "
+                                                                          "to accelerate the rendering."), Natron::WhiteSpaceNormal) );
 
     QAction* proxy2 = new ActionWithShortcut(kShortcutGroupViewer, kShortcutIDActionProxyLevel2, "2", _imp->renderScaleCombo);
     QAction* proxy4 = new ActionWithShortcut(kShortcutGroupViewer, kShortcutIDActionProxyLevel4, "4", _imp->renderScaleCombo);
@@ -354,7 +354,7 @@ ViewerTab::ViewerTab(const std::list<NodeGuiPtr> & existingNodesContext,
     addSpacer(_imp->firstRowLayout);
 
     _imp->firstInputLabel = new Label(QString::fromUtf8("A:"), _imp->firstSettingsRow);
-    _imp->firstInputLabel->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Viewer input A."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->firstInputLabel->setToolTip( Natron::convertFromPlainText(tr("Viewer input A."), Natron::WhiteSpaceNormal) );
     _imp->firstRowLayout->addWidget(_imp->firstInputLabel);
 
     _imp->firstInputImage = new ComboBox(_imp->firstSettingsRow);
@@ -369,7 +369,7 @@ ViewerTab::ViewerTab(const std::list<NodeGuiPtr> & existingNodesContext,
     appPTR->getIcon(NATRON_PIXMAP_MERGE_GROUPING, pixmapIconSize, &pixMerge);
     _imp->compositingOperatorLabel = new Label(QString(), _imp->firstSettingsRow);
     _imp->compositingOperatorLabel->setPixmap(pixMerge);
-    _imp->compositingOperatorLabel->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Operation applied between viewer inputs A and B. a and b are the alpha components of each input. d is the wipe dissolve factor, controlled by the arc handle."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->compositingOperatorLabel->setToolTip( Natron::convertFromPlainText(tr("Operation applied between viewer inputs A and B. a and b are the alpha components of each input. d is the wipe dissolve factor, controlled by the arc handle."), Natron::WhiteSpaceNormal) );
     _imp->firstRowLayout->addWidget(_imp->compositingOperatorLabel);
 
 
@@ -393,7 +393,7 @@ ViewerTab::ViewerTab(const std::list<NodeGuiPtr> & existingNodesContext,
     _imp->firstRowLayout->addWidget(_imp->compositingOperator);
 
     _imp->secondInputLabel = new Label(QString::fromUtf8("B:"), _imp->firstSettingsRow);
-    _imp->secondInputLabel->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Viewer input B."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->secondInputLabel->setToolTip( Natron::convertFromPlainText(tr("Viewer input B."), Natron::WhiteSpaceNormal) );
     _imp->firstRowLayout->addWidget(_imp->secondInputLabel);
 
     _imp->secondInputImage = new ComboBox(_imp->firstSettingsRow);
@@ -427,7 +427,7 @@ ViewerTab::ViewerTab(const std::list<NodeGuiPtr> & existingNodesContext,
     _imp->toggleGainButton->setFocusPolicy(Qt::NoFocus);
     _imp->toggleGainButton->setFixedSize(buttonSize);
     _imp->toggleGainButton->setIconSize(buttonIconSize);
-    _imp->toggleGainButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Switch between \"neutral\" 1.0 gain f-stop and the previous setting."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->toggleGainButton->setToolTip( Natron::convertFromPlainText(tr("Switch between \"neutral\" 1.0 gain f-stop and the previous setting."), Natron::WhiteSpaceNormal) );
     _imp->secondRowLayout->addWidget(_imp->toggleGainButton);
     QObject::connect( _imp->toggleGainButton, SIGNAL(clicked(bool)), this, SLOT(onGainToggled(bool)) );
 
@@ -476,11 +476,11 @@ ViewerTab::ViewerTab(const std::list<NodeGuiPtr> & existingNodesContext,
     _imp->toggleGammaButton->setFocusPolicy(Qt::NoFocus);
     _imp->toggleGammaButton->setFixedSize(buttonSize);
     _imp->toggleGammaButton->setIconSize(buttonIconSize);
-    _imp->toggleGammaButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Viewer gamma correction: switch between gamma=1.0 and user setting."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->toggleGammaButton->setToolTip( Natron::convertFromPlainText(tr("Viewer gamma correction: switch between gamma=1.0 and user setting."), Natron::WhiteSpaceNormal) );
     _imp->secondRowLayout->addWidget(_imp->toggleGammaButton);
 
     _imp->gammaBox = new SpinBox(_imp->secondSettingsRow, SpinBox::eSpinBoxTypeDouble);
-    QString gammaTt = NATRON_NAMESPACE::convertFromPlainText(tr("Viewer gamma correction level (applied after gain and before colorspace correction)."), NATRON_NAMESPACE::WhiteSpaceNormal);
+    QString gammaTt = Natron::convertFromPlainText(tr("Viewer gamma correction level (applied after gain and before colorspace correction)."), Natron::WhiteSpaceNormal);
     _imp->gammaBox->setToolTip(gammaTt);
     QObject::connect( _imp->gammaBox, SIGNAL(valueChanged(double)), this, SLOT(onGammaSpinBoxValueChanged(double)) );
     _imp->gammaBox->setValue(1.0);
@@ -516,7 +516,7 @@ ViewerTab::ViewerTab(const std::list<NodeGuiPtr> & existingNodesContext,
     _imp->checkerboardButton->setCheckable(true);
     _imp->checkerboardButton->setChecked(false);
     _imp->checkerboardButton->setDown(false);
-    _imp->checkerboardButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("If checked, the viewer draws a checkerboard under input A instead of black (disabled under the wipe area and in stack modes)."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->checkerboardButton->setToolTip( Natron::convertFromPlainText(tr("If checked, the viewer draws a checkerboard under input A instead of black (disabled under the wipe area and in stack modes)."), Natron::WhiteSpaceNormal) );
     _imp->checkerboardButton->setFixedSize(buttonSize);
     _imp->checkerboardButton->setIconSize(buttonIconSize);
     QObject::connect( _imp->checkerboardButton, SIGNAL(clicked(bool)), this, SLOT(onCheckerboardButtonClicked()) );
@@ -540,7 +540,7 @@ ViewerTab::ViewerTab(const std::list<NodeGuiPtr> & existingNodesContext,
     _imp->pickerButton->setCheckable(true);
     _imp->pickerButton->setChecked(true);
     _imp->pickerButton->setDown(true);
-    _imp->pickerButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Show/Hide information bar in the bottom of the viewer and if unchecked deactivate any active color picker."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->pickerButton->setToolTip( Natron::convertFromPlainText(tr("Show/Hide information bar in the bottom of the viewer and if unchecked deactivate any active color picker."), Natron::WhiteSpaceNormal) );
     _imp->pickerButton->setFixedSize(buttonSize);
     _imp->pickerButton->setIconSize(buttonIconSize);
     QObject::connect( _imp->pickerButton, SIGNAL(clicked(bool)), this, SLOT(onPickerButtonClicked(bool)) );
@@ -741,7 +741,7 @@ ViewerTab::ViewerTab(const std::list<NodeGuiPtr> & existingNodesContext,
     _imp->playbackMode_Button->setFocusPolicy(Qt::NoFocus);
     _imp->playbackMode_Button->setFixedSize(buttonSize);
     _imp->playbackMode_Button->setIconSize(buttonIconSize);
-    _imp->playbackMode_Button->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Behaviour to adopt when the playback hit the end of the range: loop,bounce or stop."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->playbackMode_Button->setToolTip( Natron::convertFromPlainText(tr("Behaviour to adopt when the playback hit the end of the range: loop,bounce or stop."), Natron::WhiteSpaceNormal) );
 
 
     TimeLinePtr timeline = getGui()->getApp()->getTimeLine();
@@ -753,7 +753,7 @@ ViewerTab::ViewerTab(const std::list<NodeGuiPtr> & existingNodesContext,
     tripleSyncIc.addPixmap(tripleSyncUnlockPix, QIcon::Normal, QIcon::Off);
     tripleSyncIc.addPixmap(tripleSyncLockedPix, QIcon::Normal, QIcon::On);
     _imp->tripleSyncButton = new Button(tripleSyncIc, QString(), _imp->playerButtonsContainer);
-    _imp->tripleSyncButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("When activated, the timeline frame-range is synchronized with the Dope Sheet and the Curve Editor."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->tripleSyncButton->setToolTip( Natron::convertFromPlainText(tr("When activated, the timeline frame-range is synchronized with the Dope Sheet and the Curve Editor."), Natron::WhiteSpaceNormal) );
     _imp->tripleSyncButton->setCheckable(true);
     _imp->tripleSyncButton->setChecked(false);
     _imp->tripleSyncButton->setFixedSize(buttonSize);
@@ -764,10 +764,10 @@ ViewerTab::ViewerTab(const std::list<NodeGuiPtr> & existingNodesContext,
 
     _imp->canEditFpsBox = new QCheckBox(_imp->playerButtonsContainer);
 
-    QString canEditFpsBoxTT = NATRON_NAMESPACE::convertFromPlainText(tr("When unchecked, the playback frame rate is automatically set from "
+    QString canEditFpsBoxTT = Natron::convertFromPlainText(tr("When unchecked, the playback frame rate is automatically set from "
                                                                 " the Viewer A input.  "
                                                                 "When checked, the user setting is used.")
-                                                             , NATRON_NAMESPACE::WhiteSpaceNormal);
+                                                             , Natron::WhiteSpaceNormal);
 
     _imp->canEditFpsBox->setFixedSize(buttonSize);
     //_imp->canEditFpsBox->setIconSize(buttonIconSize);
@@ -794,8 +794,8 @@ ViewerTab::ViewerTab(const std::list<NodeGuiPtr> & existingNodesContext,
     _imp->timeFormat->addItem(tr("TC"), QIcon(), QKeySequence(), tr("Timecode") );
     _imp->timeFormat->addItem(tr("TF"), QIcon(), QKeySequence(), tr("Timeline Frames") );
     _imp->timeFormat->setCurrentIndex_no_emit(1);
-    _imp->timeFormat->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Set the time display format.")
-                                                                         , NATRON_NAMESPACE::WhiteSpaceNormal));
+    _imp->timeFormat->setToolTip( Natron::convertFromPlainText(tr("Set the time display format.")
+                                                                         , Natron::WhiteSpaceNormal));
     const QSize timeFormatSize( TO_DPIX(NATRON_LARGE_BUTTON_SIZE), TO_DPIY(NATRON_MEDIUM_BUTTON_SIZE) );
     _imp->timeFormat->setFixedSize(timeFormatSize);
 
@@ -1106,7 +1106,7 @@ ViewerTab::ViewerTab(const std::list<NodeGuiPtr> & existingNodesContext,
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_ViewerTab.cpp"

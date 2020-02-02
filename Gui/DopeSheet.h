@@ -57,7 +57,7 @@ CLANG_DIAG_ON(uninitialized)
 #define kTimeOffsetParamNameTimeOffset "timeOffset"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class DopeSheetPrivate;
 class DopeSheetSelectionModel;
@@ -469,8 +469,8 @@ private:
     boost::scoped_ptr<DopeSheetSelectionModelPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(NATRON_NAMESPACE::DopeSheetSelectionModel::SelectionTypeFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Natron::DopeSheetSelectionModel::SelectionTypeFlags)
 
 #endif // DOPESHEET_H

@@ -44,7 +44,7 @@
 #include "Gui/GuiMacros.h"
 #include "Engine/TimeLine.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 ////////////////////////// DopeSheetEditor //////////////////////////
 
@@ -288,4 +288,4 @@ DopeSheetEditor::getUndoStack() const
     return _imp->model ? _imp->model->getUndoStack() : 0;
 }
 
-NATRON_NAMESPACE_EXIT
+}

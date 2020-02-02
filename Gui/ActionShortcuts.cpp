@@ -30,7 +30,7 @@
 
 #include "Gui/GuiApplicationManager.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 ActionWithShortcut::ActionWithShortcut(const std::string & group,
                                        const std::string & actionID,
@@ -333,7 +333,7 @@ ToolTipActionShortcut::setShortcutWrapper(const QString& actionID,
     setToolTipFromOriginalToolTip();
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_ActionShortcuts.cpp"

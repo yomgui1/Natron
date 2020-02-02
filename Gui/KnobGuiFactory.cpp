@@ -51,7 +51,7 @@
 #include "Gui/KnobGuiParametric.h"
 #include "Gui/DockablePanel.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 using std::make_pair;
 using std::pair;
 
@@ -128,4 +128,4 @@ KnobGuiFactory::createGuiForKnob(KnobIPtr knob,
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}

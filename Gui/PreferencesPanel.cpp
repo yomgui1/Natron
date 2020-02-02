@@ -71,9 +71,9 @@ CLANG_DIAG_ON(uninitialized)
 #define COL_MT_ENABLED COL_RS_ENABLED + 1
 #define COL_GL_ENABLED COL_MT_ENABLED + 1
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 struct PreferenceTab
 {
@@ -136,7 +136,7 @@ struct GuiShortCutGroup
     QTreeWidgetItem* item;
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 static QString
 keybindToString(const Qt::KeyboardModifiers & modifiers,
@@ -629,14 +629,14 @@ PreferencesPanel::createShortcutEditor(QTreeWidgetItem* uiPageTreeItem)
     _imp->shortcutsTree->setSelectionMode(QAbstractItemView::SingleSelection);
     _imp->shortcutsTree->setAttribute(Qt::WA_MacShowFocusRect, 0);
     _imp->shortcutsTree->setSortingEnabled(false);
-    _imp->shortcutsTree->setToolTip( NATRON_NAMESPACE::convertFromPlainText(
+    _imp->shortcutsTree->setToolTip( Natron::convertFromPlainText(
                                          tr("In this table is represented each action of the application that can have a possible keybind/mouse shortcut."
                                             " Note that this table also have some special assignments which also involve the mouse. "
                                             "You cannot assign a keybind to a shortcut involving the mouse and vice versa. "
                                             "Note that internally %1 does an emulation of a three-button mouse "
                                             "if your computer doesn't have one, that is: \n"
                                             "---> Middle mouse button is emulated by holding down Options (alt) coupled with a left click.\n "
-                                            "---> Right mouse button is emulated by holding down Command (cmd) coupled with a left click.").arg( QString::fromUtf8(NATRON_APPLICATION_NAME) ), NATRON_NAMESPACE::WhiteSpaceNormal) );
+                                            "---> Right mouse button is emulated by holding down Command (cmd) coupled with a left click.").arg( QString::fromUtf8(NATRON_APPLICATION_NAME) ), Natron::WhiteSpaceNormal) );
     _imp->shortcutsTree->setItemDelegate( new ShortcutDelegate(_imp->shortcutsTree) );
 
     const AppShortcuts & appShortcuts = appPTR->getAllShortcuts();
@@ -687,7 +687,7 @@ PreferencesPanel::createShortcutEditor(QTreeWidgetItem* uiPageTreeItem)
 
 
     _imp->validateShortcutButton = new Button(tr("Validate"), _imp->shortcutGroup);
-    _imp->validateShortcutButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Validates the shortcut on the field editor and set the selected shortcut."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->validateShortcutButton->setToolTip( Natron::convertFromPlainText(tr("Validates the shortcut on the field editor and set the selected shortcut."), Natron::WhiteSpaceNormal) );
     _imp->shortcutGroupLayout->addWidget(_imp->validateShortcutButton);
     QObject::connect( _imp->validateShortcutButton, SIGNAL(clicked(bool)), this, SLOT(onValidateShortcutButtonClicked()) );
 
@@ -771,15 +771,15 @@ PreferencesPanel::createGui()
 
     _imp->buttonBox = new DialogButtonBox(Qt::Horizontal);
     _imp->restoreDefaultsB = new Button( tr("Restore Defaults") );
-    _imp->restoreDefaultsB->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Restore default values for all preferences."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->restoreDefaultsB->setToolTip( Natron::convertFromPlainText(tr("Restore default values for all preferences."), Natron::WhiteSpaceNormal) );
 
     _imp->prefsHelp = new Button( tr("Help") );
-    _imp->prefsHelp->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Display help for preferences in an external browser."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->prefsHelp->setToolTip( Natron::convertFromPlainText(tr("Display help for preferences in an external browser."), Natron::WhiteSpaceNormal) );
 
     _imp->cancelB = new Button( tr("Discard") );
-    _imp->cancelB->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Cancel changes that were not saved and close the window."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->cancelB->setToolTip( Natron::convertFromPlainText(tr("Cancel changes that were not saved and close the window."), Natron::WhiteSpaceNormal) );
     _imp->okB = new Button( tr("Save") );
-    _imp->okB->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Save changes on disk and close the window."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->okB->setToolTip( Natron::convertFromPlainText(tr("Save changes on disk and close the window."), Natron::WhiteSpaceNormal) );
     _imp->buttonBox->addButton(_imp->restoreDefaultsB, QDialogButtonBox::ResetRole);
     _imp->buttonBox->addButton(_imp->prefsHelp, QDialogButtonBox::HelpRole);
     _imp->buttonBox->addButton(_imp->cancelB, QDialogButtonBox::RejectRole);
@@ -1653,7 +1653,7 @@ PreferencesPanel::onRestoreDefaultShortcutsButtonClicked()
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_PreferencesPanel.cpp"

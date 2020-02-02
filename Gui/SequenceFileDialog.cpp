@@ -117,7 +117,7 @@ CLANG_DIAG_ON(uninitialized)
 #define FILE_DIALOG_DISABLE_ICONS
 
 using std::make_pair;
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 #if 0
 static inline bool
@@ -295,28 +295,28 @@ SequenceFileDialog::SequenceFileDialog( QWidget* parent, // necessary to transmi
     _previousButton = new Button(style()->standardIcon(QStyle::SP_ArrowBack), QString(), _buttonsWidget);
     _previousButton->setFixedSize(buttonSize);
     _previousButton->setIconSize(buttonIconSize);
-    _previousButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Go back in the directory history."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _previousButton->setToolTip( Natron::convertFromPlainText(tr("Go back in the directory history."), Natron::WhiteSpaceNormal) );
     _buttonsLayout->addWidget(_previousButton);
     QObject::connect( _previousButton, SIGNAL(clicked()), this, SLOT(previousFolder()) );
 
     _nextButton = new Button(style()->standardIcon(QStyle::SP_ArrowForward), QString(), _buttonsWidget);
     _nextButton->setFixedSize(buttonSize);
     _nextButton->setIconSize(buttonIconSize);
-    _nextButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Go forward in the directory history."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _nextButton->setToolTip( Natron::convertFromPlainText(tr("Go forward in the directory history."), Natron::WhiteSpaceNormal) );
     _buttonsLayout->addWidget(_nextButton);
     QObject::connect( _nextButton, SIGNAL(clicked()), this, SLOT(nextFolder()) );
 
     _upButton = new Button(style()->standardIcon(QStyle::SP_ArrowUp), QString(), _buttonsWidget);
     _upButton->setIconSize(buttonIconSize);
     _upButton->setFixedSize(buttonSize);
-    _upButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Go to the parent directory."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _upButton->setToolTip( Natron::convertFromPlainText(tr("Go to the parent directory."), Natron::WhiteSpaceNormal) );
     _buttonsLayout->addWidget(_upButton);
     QObject::connect( _upButton, SIGNAL(clicked()), this, SLOT(parentFolder()) );
 
     _createDirButton = new Button(style()->standardIcon(QStyle::SP_FileDialogNewFolder), QString(), _buttonsWidget);
     _createDirButton->setIconSize(buttonIconSize);
     _createDirButton->setFixedSize(buttonSize);
-    _createDirButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Create a new directory here."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _createDirButton->setToolTip( Natron::convertFromPlainText(tr("Create a new directory here."), Natron::WhiteSpaceNormal) );
     _buttonsLayout->addWidget(_createDirButton);
     QObject::connect( _createDirButton, SIGNAL(clicked()), this, SLOT(createDir()) );
 
@@ -346,19 +346,19 @@ SequenceFileDialog::SequenceFileDialog( QWidget* parent, // necessary to transmi
 
     _addFavoriteButton = new Button(QString::fromUtf8(" + "), this);
     _addFavoriteButton->setMaximumSize(20, 20);
-    _addFavoriteButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Add the current directory to the favorites list."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _addFavoriteButton->setToolTip( Natron::convertFromPlainText(tr("Add the current directory to the favorites list."), Natron::WhiteSpaceNormal) );
     _favoriteButtonsLayout->addWidget(_addFavoriteButton);
     QObject::connect( _addFavoriteButton, SIGNAL(clicked()), this, SLOT(addFavorite()) );
 
     // we don't need an editor: just romove favorite and add a new one
     //_editFavoriteButton = new Button(tr("Edit"), this);
-    //_editFavoriteButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Edit the selected favorite."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    //_editFavoriteButton->setToolTip( Natron::convertFromPlainText(tr("Edit the selected favorite."), Natron::WhiteSpaceNormal) );
     //_favoriteButtonsLayout->addWidget(_editFavoriteButton);
     //QObject::connect( _editFavoriteButton, SIGNAL(clicked()), this, SLOT(editUrl()) );
 
     _removeFavoriteButton = new Button(QString::fromUtf8(" - "), this);
     _removeFavoriteButton->setMaximumSize(20, 20);
-    _removeFavoriteButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Remove the selected directory from the favorites list."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _removeFavoriteButton->setToolTip( Natron::convertFromPlainText(tr("Remove the selected directory from the favorites list."), Natron::WhiteSpaceNormal) );
     _favoriteButtonsLayout->addWidget(_removeFavoriteButton);
     QObject::connect( _removeFavoriteButton, SIGNAL(clicked()), _favoriteView, SLOT(removeEntry()) );
 
@@ -380,7 +380,7 @@ SequenceFileDialog::SequenceFileDialog( QWidget* parent, // necessary to transmi
 
     _relativeChoice = new ComboBox(_selectionWidget);
     QObject::connect( _relativeChoice, SIGNAL(currentIndexChanged(int)), this, SLOT(onRelativeChoiceChanged(int)) );
-    _relativeChoice->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("This controls how the selected file path is referred to. It can be either Absolute, or relative to one of the project paths. Note that the [Project] path exists only once the project is saved, so it is best to save an empty project before opening any external file."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _relativeChoice->setToolTip( Natron::convertFromPlainText(tr("This controls how the selected file path is referred to. It can be either Absolute, or relative to one of the project paths. Note that the [Project] path exists only once the project is saved, so it is best to save an empty project before opening any external file."), Natron::WhiteSpaceNormal) );
     _selectionLayout->addWidget(_relativeChoice);
     _relativeChoice->addItem( tr("Absolute") );
     std::map<std::string, std::string> projectPaths;
@@ -401,7 +401,7 @@ SequenceFileDialog::SequenceFileDialog( QWidget* parent, // necessary to transmi
     _sequenceButton = new ComboBox(_selectionWidget);
     _sequenceButton->addItem( tr("Sequence:") );
     _sequenceButton->addItem( tr("File:") );
-    _sequenceButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Control whether to select a file sequence or a single file."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _sequenceButton->setToolTip( Natron::convertFromPlainText(tr("Control whether to select a file sequence or a single file."), Natron::WhiteSpaceNormal) );
 
 
     if (isSequenceDialog) {
@@ -1425,9 +1425,9 @@ SequenceFileDialog::createDir()
 {
     _favoriteView->clearSelection();
 
-    NATRON_PYTHON_NAMESPACE::PyModalDialog dialog(_gui);
+    Python::PyModalDialog dialog(_gui);
     dialog.setWindowTitle( tr("New Folder") );
-    NATRON_PYTHON_NAMESPACE::StringParamPtr folderName( dialog.createStringParam( QString::fromUtf8("folderName"), QString::fromUtf8("Folder Name") ) );
+    Python::StringParamPtr folderName( dialog.createStringParam( QString::fromUtf8("folderName"), QString::fromUtf8("Folder Name") ) );
     dialog.refreshUserParamsGUI();
     if ( dialog.exec() ) {
         QString newFolderString = folderName->getValue();
@@ -2468,7 +2468,7 @@ FavoriteView::rename()
         }
     }
     QString newName;
-    #warning "TODO: use NATRON_PYTHON_NAMESPACE::PyModalDialog"
+    #warning "TODO: use Python::PyModalDialog"
     QInputDialog dialog(this);
     dialog.setLabelText( tr("Favorite Name:") );
     dialog.setWindowTitle( tr("Rename Favorite") );
@@ -2506,7 +2506,7 @@ FavoriteView::editUrl()
         }
     }
     QString newName;
-    #warning "TODO: use NATRON_PYTHON_NAMESPACE::PyModalDialog"
+    #warning "TODO: use Python::PyModalDialog"
     QInputDialog dialog(this);
     dialog.setLabelText( tr("Folder Path:") );
     dialog.setWindowTitle( tr("Change Folder Path") );
@@ -3052,7 +3052,7 @@ SequenceFileDialog::done(int r)
     QDialog::done(r);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_SequenceFileDialog.cpp"

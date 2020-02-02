@@ -62,7 +62,7 @@ CLANG_DIAG_ON(deprecated)
 #define M_PI 3.14159265358979323846264338327950288419717
 #endif
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 DefaultInteractI::DefaultInteractI(HostOverlay* overlay)
     : _overlay(overlay)
@@ -217,7 +217,7 @@ DefaultInteractI::loseFocus(double /*time*/,
     return false;
 }
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 enum PositionInteractState
 {
@@ -819,7 +819,7 @@ fround(double val,
 typedef std::list<DefaultInteractIPtr> DefaultInteractIPtrList;
 typedef std::list<TransformInteract> TransformInteracts;
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 struct HostOverlayPrivate
@@ -2998,4 +2998,4 @@ HostOverlay::isEmpty() const
     return false;
 }
 
-NATRON_NAMESPACE_EXIT
+}

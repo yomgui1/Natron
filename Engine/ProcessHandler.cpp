@@ -46,7 +46,7 @@
 #include "Engine/Node.h"
 #include "Engine/OutputEffectInstance.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 ProcessHandler::ProcessHandler(const QString & projectPath,
                                OutputEffectInstance* writer)
@@ -437,7 +437,7 @@ ProcessInputChannel::onOutputPipeConnectionMade()
     qDebug() << "The output channel was successfully created and connected.";
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_ProcessHandler.cpp"

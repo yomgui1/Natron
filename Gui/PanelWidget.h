@@ -37,7 +37,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class PanelWidget
     : public ScriptObject
@@ -104,7 +104,7 @@ protected:
     void leaveEventBase();
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 
 #endif // PANELWIDGET_H

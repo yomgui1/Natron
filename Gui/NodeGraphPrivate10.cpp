@@ -47,7 +47,7 @@
 #include "Gui/NodeGuiSerialization.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 void
@@ -384,4 +384,4 @@ NodeGraphPrivate::toggleSelectedNodesEnabled()
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}

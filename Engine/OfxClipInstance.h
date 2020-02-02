@@ -55,7 +55,7 @@ CLANG_DIAG_ON(unknown-pragmas)
 #include "Engine/ViewIdx.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class OfxImageCommon;
 struct OfxClipInstancePrivate;
@@ -325,7 +325,7 @@ class OfxImageCommon
 public:
     explicit OfxImageCommon(OFX::Host::ImageEffect::ImageBase* ofxImageBase,
                             const OfxClipInstance::RenderActionDataPtr& renderData,
-                            const NATRON_NAMESPACE::ImagePtr& internalImage,
+                            const Natron::ImagePtr& internalImage,
                             bool isSrcImage,
                             const RectI& renderWindow,
                             const Transform::Matrix3x3Ptr& mat,
@@ -336,7 +336,7 @@ public:
     virtual ~OfxImageCommon();
 
     const std::string& getComponentsString() const;
-    NATRON_NAMESPACE::ImagePtr getInternalImage() const;
+    Natron::ImagePtr getInternalImage() const;
 
 private:
 
@@ -349,7 +349,7 @@ class OfxImage
 {
 public:
     explicit OfxImage( const OfxClipInstance::RenderActionDataPtr& renderData,
-                       const NATRON_NAMESPACE::ImagePtr& internalImage,
+                       const Natron::ImagePtr& internalImage,
                        bool isSrcImage,
                        const RectI& renderWindow,
                        const Transform::Matrix3x3Ptr& mat,
@@ -368,7 +368,7 @@ class OfxTexture
 {
 public:
     explicit OfxTexture( const OfxClipInstance::RenderActionDataPtr& renderData,
-                         const NATRON_NAMESPACE::ImagePtr& internalImage,
+                         const Natron::ImagePtr& internalImage,
                          bool isSrcImage,
                          const RectI& renderWindow,
                          const Transform::Matrix3x3Ptr& mat,
@@ -381,6 +381,6 @@ public:
     }
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_ENGINE_OFXCLIPINSTANCE_H

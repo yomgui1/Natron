@@ -50,7 +50,7 @@
 #include "Engine/ViewerInstance.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 ProjectPrivate::ProjectPrivate(Project* project)
     : _publicInterface(project)
@@ -321,7 +321,7 @@ ProjectPrivate::runOnProjectSaveCallback(const std::string& filename,
         std::vector<std::string> args;
         std::string error;
         try {
-            NATRON_PYTHON_NAMESPACE::getFunctionArguments(onProjectSave, &error, &args);
+            Python::getFunctionArguments(onProjectSave, &error, &args);
         } catch (const std::exception& e) {
             _publicInterface->getApp()->appendToScriptEditor( std::string("Failed to get signature of onProjectSave callback: ")
                                                               + e.what() );
@@ -357,14 +357,14 @@ ProjectPrivate::runOnProjectSaveCallback(const std::string& filename,
             onProjectSave = ss.str();
             std::string err;
             std::string output;
-            if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(onProjectSave, &err, &output) ) {
+            if ( !Python::interpretPythonScript(onProjectSave, &err, &output) ) {
                 _publicInterface->getApp()->appendToScriptEditor("Failed to run onProjectSave callback: " + err);
 
                 return filename;
             } else {
                 PythonGILLocker pgl;
 
-                PyObject* mainModule = NATRON_PYTHON_NAMESPACE::getMainModule();
+                PyObject* mainModule = Python::getMainModule();
                 assert(mainModule);
                 PyObject* ret = PyObject_GetAttrString(mainModule, "ret");
                 if (!ret) {
@@ -372,9 +372,9 @@ ProjectPrivate::runOnProjectSaveCallback(const std::string& filename,
                 }
                 std::string filePath = filename;
                 if (ret) {
-                    filePath = NATRON_PYTHON_NAMESPACE::PyStringToStdString(ret);
+                    filePath = Python::PyStringToStdString(ret);
                     std::string script = "del ret\n";
-                    bool ok = NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0);
+                    bool ok = Python::interpretPythonScript(script, &err, 0);
                     assert(ok);
                     if (!ok) {
                         throw std::runtime_error("ProjectPrivate::runOnProjectSaveCallback(): interpretPythonScript(" + script + ") failed!");
@@ -401,7 +401,7 @@ ProjectPrivate::runOnProjectCloseCallback()
         std::vector<std::string> args;
         std::string error;
         try {
-            NATRON_PYTHON_NAMESPACE::getFunctionArguments(onProjectClose, &error, &args);
+            Python::getFunctionArguments(onProjectClose, &error, &args);
         } catch (const std::exception& e) {
             _publicInterface->getApp()->appendToScriptEditor( std::string("Failed to get signature of onProjectClose callback: ")
                                                               + e.what() );
@@ -431,7 +431,7 @@ ProjectPrivate::runOnProjectCloseCallback()
         script = script + "\n" + onProjectClose + "(" + appID + ")\n";
         std::string err;
         std::string output;
-        if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, &output) ) {
+        if ( !Python::interpretPythonScript(script, &err, &output) ) {
             _publicInterface->getApp()->appendToScriptEditor("Failed to run onProjectClose callback: " + err);
         } else {
             if ( !output.empty() ) {
@@ -450,7 +450,7 @@ ProjectPrivate::runOnProjectLoadCallback()
         std::vector<std::string> args;
         std::string error;
         try {
-            NATRON_PYTHON_NAMESPACE::getFunctionArguments(cb, &error, &args);
+            Python::getFunctionArguments(cb, &error, &args);
         } catch (const std::exception& e) {
             _publicInterface->getApp()->appendToScriptEditor( std::string("Failed to get signature of onProjectLoaded callback: ")
                                                               + e.what() );
@@ -481,7 +481,7 @@ ProjectPrivate::runOnProjectLoadCallback()
         script =  script + "\n" + cb + "(" + appID + ")\n";
         std::string err;
         std::string output;
-        if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, &output) ) {
+        if ( !Python::interpretPythonScript(script, &err, &output) ) {
             _publicInterface->getApp()->appendToScriptEditor("Failed to run onProjectLoaded callback: " + err);
         } else {
             if ( !output.empty() ) {
@@ -515,4 +515,4 @@ ProjectPrivate::getProjectPath() const
     return projectPath->getValue();
 }
 
-NATRON_NAMESPACE_EXIT
+}

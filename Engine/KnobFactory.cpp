@@ -36,7 +36,7 @@
 #include "Engine/AppManager.h"
 #include "Engine/LibraryBinary.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 //using std::make_pair;
 //using std::pair;
@@ -123,4 +123,4 @@ KnobHelperPtr KnobFactory::createKnob(const std::string &id,
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}

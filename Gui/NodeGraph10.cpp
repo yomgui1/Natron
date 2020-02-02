@@ -52,7 +52,7 @@ GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 
 #include "Global/QtCompat.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 static NodeGui*
 isNodeGuiChild(QGraphicsItem* item)
 {
@@ -415,4 +415,4 @@ NodeGraph::mousePressEvent(QMouseEvent* e)
     }
 } // mousePressEvent
 
-NATRON_NAMESPACE_EXIT
+}

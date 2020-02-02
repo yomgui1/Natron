@@ -41,7 +41,7 @@
 #include "Engine/Transform.h" // Point3D
 #include "Engine/ViewIdx.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 ////////////////////////////////////ControlPoint////////////////////////////////////
@@ -560,7 +560,7 @@ BezierCP::isNearbyTangent(bool useGuiCurves,
 #define TANGENTS_CUSP_LIMIT 25
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 static void
 cuspTangent(double x,
@@ -696,7 +696,7 @@ smoothTangent(bool useGuiCurves,
     }
 } // smoothTangent
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 bool
@@ -930,5 +930,5 @@ BezierCP::cloneGuiCurvesToInternalCurves()
     _imp->rightY = _imp->guiRightY;
 }
 
-NATRON_NAMESPACE_EXIT
+}
 

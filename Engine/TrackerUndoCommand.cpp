@@ -29,7 +29,7 @@
 #include "Engine/AppInstance.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 AddTrackCommand::AddTrackCommand(const TrackMarkerPtr &marker,
                                  const TrackerContextPtr& context)
@@ -149,4 +149,4 @@ RemoveTracksCommand::redo()
     context->getNode()->getApp()->triggerAutoSave();
 }
 
-NATRON_NAMESPACE_EXIT
+}

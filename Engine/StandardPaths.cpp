@@ -64,7 +64,7 @@ CLANG_DIAG_ON(deprecated)
 
 #endif
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 StandardPaths::StandardPaths()
 {
@@ -91,7 +91,7 @@ StandardPaths::appendOrganizationAndApp(QString &path)
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 #if defined(Q_OS_WIN)
 static QString
@@ -219,47 +219,47 @@ CLANG_DIAG_OFF(deprecated)
 
 static
 OSType
-translateLocation(NATRON_NAMESPACE::StandardPaths::StandardLocationEnum type)
+translateLocation(Natron::StandardPaths::StandardLocationEnum type)
 {
     switch (type) {
-        case NATRON_NAMESPACE::StandardPaths::eStandardLocationConfig:
+        case Natron::StandardPaths::eStandardLocationConfig:
 
             return kPreferencesFolderType;
-        case NATRON_NAMESPACE::StandardPaths::eStandardLocationDesktop:
+        case Natron::StandardPaths::eStandardLocationDesktop:
 
             return kDesktopFolderType;
-        case NATRON_NAMESPACE::StandardPaths::eStandardLocationDownload: // needs NSSearchPathForDirectoriesInDomains with NSDownloadsDirectory
+        case Natron::StandardPaths::eStandardLocationDownload: // needs NSSearchPathForDirectoriesInDomains with NSDownloadsDirectory
             // which needs an objective-C *.mm file...
-        case NATRON_NAMESPACE::StandardPaths::eStandardLocationDocuments:
+        case Natron::StandardPaths::eStandardLocationDocuments:
 
             return kDocumentsFolderType;
-        case NATRON_NAMESPACE::StandardPaths::eStandardLocationFonts:
+        case Natron::StandardPaths::eStandardLocationFonts:
             // There are at least two different font directories on the mac: /Library/Fonts and ~/Library/Fonts.
 
             // To select a specific one we have to specify a different first parameter when calling FSFindFolder.
             return kFontsFolderType;
-        case NATRON_NAMESPACE::StandardPaths::eStandardLocationApplications:
+        case Natron::StandardPaths::eStandardLocationApplications:
 
             return kApplicationsFolderType;
-        case NATRON_NAMESPACE::StandardPaths::eStandardLocationMusic:
+        case Natron::StandardPaths::eStandardLocationMusic:
 
             return kMusicDocumentsFolderType;
-        case NATRON_NAMESPACE::StandardPaths::eStandardLocationMovies:
+        case Natron::StandardPaths::eStandardLocationMovies:
 
             return kMovieDocumentsFolderType;
-        case NATRON_NAMESPACE::StandardPaths::eStandardLocationPictures:
+        case Natron::StandardPaths::eStandardLocationPictures:
 
             return kPictureDocumentsFolderType;
-        case NATRON_NAMESPACE::StandardPaths::eStandardLocationTemp:
+        case Natron::StandardPaths::eStandardLocationTemp:
 
             return kTemporaryFolderType;
-        case NATRON_NAMESPACE::StandardPaths::eStandardLocationGenericData:
-        case NATRON_NAMESPACE::StandardPaths::eStandardLocationRuntime:
-        case NATRON_NAMESPACE::StandardPaths::eStandardLocationData:
+        case Natron::StandardPaths::eStandardLocationGenericData:
+        case Natron::StandardPaths::eStandardLocationRuntime:
+        case Natron::StandardPaths::eStandardLocationData:
 
             return kApplicationSupportFolderType;
-        case NATRON_NAMESPACE::StandardPaths::eStandardLocationGenericCache:
-        case NATRON_NAMESPACE::StandardPaths::eStandardLocationCache:
+        case Natron::StandardPaths::eStandardLocationGenericCache:
+        case Natron::StandardPaths::eStandardLocationCache:
             
             return kCachedDataFolderType;
         default:
@@ -286,7 +286,7 @@ getFullPath(const FSRef &ref)
 
 
 static QString
-macLocation(NATRON_NAMESPACE::StandardPaths::StandardLocationEnum type, short domain)
+macLocation(Natron::StandardPaths::StandardLocationEnum type, short domain)
 {
     // http://developer.apple.com/documentation/Carbon/Reference/Folder_Manager/Reference/reference.html
     FSRef ref;
@@ -299,8 +299,8 @@ macLocation(NATRON_NAMESPACE::StandardPaths::StandardLocationEnum type, short do
     QString path = getFullPath(ref);
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    if ( (type == NATRON_NAMESPACE::StandardPaths::eStandardLocationData) || (type == NATRON_NAMESPACE::StandardPaths::eStandardLocationCache) ) {
-        NATRON_NAMESPACE::StandardPaths::appendOrganizationAndApp(path);
+    if ( (type == Natron::StandardPaths::eStandardLocationData) || (type == Natron::StandardPaths::eStandardLocationCache) ) {
+        Natron::StandardPaths::appendOrganizationAndApp(path);
     }
 #endif
 
@@ -310,7 +310,7 @@ macLocation(NATRON_NAMESPACE::StandardPaths::StandardLocationEnum type, short do
 CLANG_DIAG_ON(deprecated)
 #endif // defined(Q_OS_MAC)
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 QString
@@ -664,4 +664,4 @@ StandardPaths::writableLocation(StandardLocationEnum type)
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 } // writableLocation
 
-NATRON_NAMESPACE_EXIT
+}

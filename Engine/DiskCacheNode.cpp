@@ -34,7 +34,7 @@
 #include "Engine/TimeLine.h"
 #include "Engine/ViewIdx.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct DiskCacheNodePrivate
 {
@@ -242,8 +242,8 @@ DiskCacheNode::isHostChannelSelectorSupported(bool* /*defaultR*/,
     return false;
 }
 
-NATRON_NAMESPACE_EXIT
-NATRON_NAMESPACE_USING
+}
+using namespace Natron;
 
 #include "moc_DiskCacheNode.cpp"
 

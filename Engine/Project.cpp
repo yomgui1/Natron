@@ -87,7 +87,7 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_ON
 #include "Engine/ViewerInstance.h"
 #include "Engine/ViewIdx.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 using std::cout; using std::endl;
 using std::make_pair;
@@ -172,7 +172,7 @@ Project::~Project()
     //removeAutoSaves();
 }
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 class LoadProjectSplashScreen_RAII
 {
@@ -199,7 +199,7 @@ public:
     }
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 bool
 Project::loadProject(const QString & path,
@@ -2790,7 +2790,7 @@ Project::setTimeLine(const TimeLinePtr& timeline)
     _imp->timeline = timeline;
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_Project.cpp"

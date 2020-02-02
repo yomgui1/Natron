@@ -52,7 +52,7 @@ GCC_DIAG_ON(unused-parameter)
 #define ROTO_ITEM_INTRODUCES_LABEL 2
 #define ROTO_ITEM_VERSION ROTO_ITEM_INTRODUCES_LABEL
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class RotoItemSerialization
 {
@@ -110,9 +110,9 @@ private:
     bool locked;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::RotoItemSerialization, ROTO_ITEM_VERSION)
+BOOST_CLASS_VERSION(Natron::RotoItemSerialization, ROTO_ITEM_VERSION)
 
 
 //BOOST_SERIALIZATION_ASSUME_ABSTRACT(RotoItemSerialization);

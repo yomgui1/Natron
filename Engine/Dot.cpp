@@ -27,7 +27,7 @@
 #include <cassert>
 #include <stdexcept>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 std::string
 Dot::getPluginDescription() const
@@ -35,4 +35,4 @@ Dot::getPluginDescription() const
     return "Does not do anything to the input image, this is used in the node graph to make bends in the links.";
 }
 
-NATRON_NAMESPACE_EXIT
+}

@@ -37,7 +37,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/LineEdit.h"
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 struct PreferencesPanelPrivate;
@@ -133,6 +133,6 @@ private:
     virtual void keyPressEvent(QKeyEvent* e) OVERRIDE FINAL;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // PREFERENCESPANEL_H

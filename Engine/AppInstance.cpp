@@ -73,7 +73,7 @@ CLANG_DIAG_ON(unknown-pragmas)
 #include "Engine/Settings.h"
 #include "Engine/WriteNode.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 FlagSetter::FlagSetter(bool initialValue,
                        bool* p)
@@ -530,7 +530,7 @@ AppInstancePrivate::executeCommandLinePythonCommands(const CLArgs& args)
     for (std::list<std::string>::const_iterator it = commands.begin(); it != commands.end(); ++it) {
         std::string err;
         std::string output;
-        bool ok  = NATRON_PYTHON_NAMESPACE::interpretPythonScript(*it, &err, &output);
+        bool ok  = Python::interpretPythonScript(*it, &err, &output);
         if (!ok) {
             const QString sp( QString::fromUtf8(" ") );
             QString m = tr("Failed to execute the following Python command:") + sp +
@@ -711,14 +711,14 @@ AppInstance::loadPythonScript(const QFileInfo& file)
     addToPythonPath += "\")\n";
 
     std::string err;
-    bool ok  = NATRON_PYTHON_NAMESPACE::interpretPythonScript(addToPythonPath, &err, 0);
+    bool ok  = Python::interpretPythonScript(addToPythonPath, &err, 0);
     assert(ok);
     if (!ok) {
         throw std::runtime_error("AppInstance::loadPythonScript(" + file.path().toStdString() + "): interpretPythonScript(" + addToPythonPath + " failed!");
     }
 
     std::string s = "app = app1\n";
-    ok = NATRON_PYTHON_NAMESPACE::interpretPythonScript(s, &err, 0);
+    ok = Python::interpretPythonScript(s, &err, 0);
     assert(ok);
     if (!ok) {
         throw std::runtime_error("AppInstance::loadPythonScript(" + file.path().toStdString() + "): interpretPythonScript(" + s + " failed!");
@@ -764,7 +764,7 @@ AppInstance::loadPythonScript(const QFileInfo& file)
         std::string output;
         FlagIncrementer flag(&_imp->_creatingGroup, &_imp->creatingGroupMutex);
         CreatingNodeTreeFlag_RAII createNodeTree( shared_from_this() );
-        if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(ss.str(), &err, &output) ) {
+        if ( !Python::interpretPythonScript(ss.str(), &err, &output) ) {
             if ( !err.empty() ) {
                 Dialogs::errorDialog(tr("Python").toStdString(), err);
             }
@@ -786,7 +786,7 @@ AppInstance::loadPythonScript(const QFileInfo& file)
 
         PyRun_SimpleString( content.toStdString().c_str() );
 
-        PyObject* mainModule = NATRON_PYTHON_NAMESPACE::getMainModule();
+        PyObject* mainModule = Python::getMainModule();
         std::string error;
         ///Gui session, do stdout, stderr redirection
         PyObject *errCatcher = 0;
@@ -801,7 +801,7 @@ AppInstance::loadPythonScript(const QFileInfo& file)
         if (errCatcher) {
             errorObj = PyObject_GetAttrString(errCatcher, "value"); //get the  stderr from our catchErr object, new ref
             assert(errorObj);
-            error = NATRON_PYTHON_NAMESPACE::PyStringToStdString(errorObj);
+            error = Python::PyStringToStdString(errorObj);
             PyObject* unicode = PyUnicode_FromString("");
             PyObject_SetAttrString(errCatcher, "value", unicode);
             Py_DECREF(errorObj);
@@ -916,7 +916,7 @@ AppInstance::createNodeFromPythonModule(Plugin* plugin,
         ss << ")\n";
         std::string err;
         std::string output;
-        if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(ss.str(), &err, &output) ) {
+        if ( !Python::interpretPythonScript(ss.str(), &err, &output) ) {
             Dialogs::errorDialog(tr("Group plugin creation error").toStdString(), err);
             if (containerNode) {
                 containerNode->destroyNode(false, false);
@@ -959,7 +959,7 @@ AppInstance::setGroupLabelIDAndVersion(const NodePtr& node,
     unsigned int version;
     bool istoolset;
 
-    if ( NATRON_PYTHON_NAMESPACE::getGroupInfos(pythonModulePath.toStdString(), pythonModule.toStdString(), &pluginID, &pluginLabel, &iconFilePath, &pluginGrouping, &description, &istoolset, &version) ) {
+    if ( Python::getGroupInfos(pythonModulePath.toStdString(), pythonModule.toStdString(), &pluginID, &pluginLabel, &iconFilePath, &pluginGrouping, &description, &istoolset, &version) ) {
         QString groupingStr = QString::fromUtf8( pluginGrouping.c_str() );
         QStringList groupingSplits = groupingStr.split( QLatin1Char('/') );
         std::list<std::string> stdGrouping;
@@ -2075,7 +2075,7 @@ AppInstance::declareCurrentAppVariable_Python()
     }
     std::string script = ss.str();
     std::string err;
-    bool ok = NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0);
+    bool ok = Python::interpretPythonScript(script, &err, 0);
     assert(ok);
     if (!ok) {
         throw std::runtime_error("AppInstance::declareCurrentAppVariable_Python() failed!");
@@ -2083,7 +2083,7 @@ AppInstance::declareCurrentAppVariable_Python()
 
     if ( appPTR->isBackground() ) {
         std::string err;
-        ok = NATRON_PYTHON_NAMESPACE::interpretPythonScript("app = app1\n", &err, 0);
+        ok = Python::interpretPythonScript("app = app1\n", &err, 0);
         assert(ok);
     }
 }
@@ -2138,7 +2138,7 @@ AppInstance::execOnProjectCreatedCallback()
     std::vector<std::string> args;
     std::string error;
     try {
-        NATRON_PYTHON_NAMESPACE::getFunctionArguments(cb, &error, &args);
+        Python::getFunctionArguments(cb, &error, &args);
     } catch (const std::exception& e) {
         appendToScriptEditor( std::string("Failed to get signature of onProjectCreated callback: ")
                               + e.what() );
@@ -2173,7 +2173,7 @@ AppInstance::execOnProjectCreatedCallback()
     script = script + "\n" + cb + "(" + appID + ")\n";
     std::string err;
     std::string output;
-    if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, &output) ) {
+    if ( !Python::interpretPythonScript(script, &err, &output) ) {
         appendToScriptEditor("Failed to run onProjectCreated callback: " + err);
     } else {
         if ( !output.empty() ) {
@@ -2360,7 +2360,7 @@ AppInstance::recheckInvalidExpressions()
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_AppInstance.cpp"

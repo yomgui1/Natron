@@ -453,7 +453,7 @@ CallbacksManager::initW(int& argc, wchar_t** argv)
     _argv.resize(argc);
     for (int i = 0; i < argc; ++i) {
         std::wstring ws(argv[i]);
-        std::string str = NATRON_NAMESPACE::StrUtils::utf16_to_utf8(ws);
+        std::string str = Natron::StrUtils::utf16_to_utf8(ws);
         _argv[i] = strdup(str.c_str());
     }
     initInternal();

@@ -41,7 +41,7 @@ CLANG_DIAG_ON(deprecated)
 
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /******************************KnobFile**************************************/
 
@@ -262,6 +262,6 @@ private:
     bool _isStringList;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_ENGINE_KNOBFILE_H

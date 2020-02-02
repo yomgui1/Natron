@@ -146,7 +146,7 @@ typedef VOID (*PFNWGLBLITCONTEXTFRAMEBUFFERAMD)(HGLRC dstCtx, GLint srcX0, GLint
 #define GPU_MEMORY_INFO_EVICTION_COUNT_NVX            0x904A
 #define GPU_MEMORY_INFO_EVICTED_MEMORY_NVX            0x904B
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct OSGLContext_wgl_data
 {
@@ -237,7 +237,7 @@ private:
 };
 
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // __NATRON_WIN32__
 

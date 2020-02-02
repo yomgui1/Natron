@@ -48,7 +48,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #define MAX_MIP_MAP_LEVELS 20
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /*This class is the the core of the viewer : what displays images, overlays, etc...
    Everything related to OpenGL will (almost always) be in this class */
@@ -288,6 +288,6 @@ private:
     bool initAndCheckGlExtensions ();
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif //_Gui_ViewerGLPrivate_h_

@@ -35,7 +35,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class AboutWindow
     : public QDialog
@@ -73,6 +73,6 @@ public Q_SLOTS:
                             const QItemSelection & oldSelection);
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // ABOUTWINDOW_H

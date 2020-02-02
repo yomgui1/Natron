@@ -40,7 +40,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct PickKnobDialogPrivate;
 
@@ -69,6 +69,6 @@ private:
     boost::scoped_ptr<PickKnobDialogPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_PickKnobDialog_h

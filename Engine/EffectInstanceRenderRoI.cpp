@@ -82,7 +82,7 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_ON
 //#define NATRON_ALWAYS_ALLOCATE_FULL_IMAGE_BOUNDS
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /*
  * @brief Split all rects to render in smaller rects and check if each one of them is identity.
@@ -2053,4 +2053,4 @@ EffectInstance::renderRoIInternal(EffectInstance* self,
     return retCode;
 } // renderRoIInternal
 
-NATRON_NAMESPACE_EXIT
+}

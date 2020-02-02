@@ -57,7 +57,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #define kMainSplitterObjectName "ToolbarSplitter"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct GuiPrivate;
 
@@ -251,10 +251,10 @@ public:
     void registerSplitter(Splitter* s);
     void unregisterSplitter(Splitter* s);
 
-    void registerPyPanel(NATRON_PYTHON_NAMESPACE::PyPanel* panel, const std::string& pythonFunction);
-    void unregisterPyPanel(NATRON_PYTHON_NAMESPACE::PyPanel* panel);
+    void registerPyPanel(Python::PyPanel* panel, const std::string& pythonFunction);
+    void unregisterPyPanel(Python::PyPanel* panel);
 
-    std::map<NATRON_PYTHON_NAMESPACE::PyPanel*, std::string> getPythonPanels() const;
+    std::map<Python::PyPanel*, std::string> getPythonPanels() const;
 
 
     /**
@@ -721,6 +721,6 @@ private:
     boost::scoped_ptr<GuiPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_Gui_h

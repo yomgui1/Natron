@@ -29,7 +29,7 @@
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class KnobGuiContainerI
 {
@@ -73,6 +73,6 @@ protected:
     QWidget* _containerWidget;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // KNOBGUICONTAINERI_H

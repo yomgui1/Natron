@@ -55,7 +55,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/Label.h"
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 //================================
 
@@ -148,6 +148,6 @@ private:
     KnobBoolWPtr _knob;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_KnobGuiBool_h

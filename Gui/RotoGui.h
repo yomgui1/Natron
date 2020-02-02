@@ -46,7 +46,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER;
+namespace Natron {;
 
 class RotoToolButton
     : public QToolButton
@@ -354,6 +354,6 @@ public:
     virtual ~LinkToTrackDialog() {};
 };
 
-NATRON_NAMESPACE_EXIT;
+};
 
 #endif // ROTOGUI_H

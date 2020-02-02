@@ -53,7 +53,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #define NATRON_TRACKER_REPORT_PROGRESS_DELTA_MS 200
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 void
@@ -1066,7 +1066,7 @@ TrackerContext::removeItemAsPythonField(const TrackMarkerPtr& item)
     if ( !appPTR->isBackground() ) {
         getNode()->getApp()->printAutoDeclaredVariable(script);
     }
-    if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0) ) {
+    if ( !Python::interpretPythonScript(script, &err, 0) ) {
         getNode()->getApp()->appendToScriptEditor(err);
     }
 }
@@ -1094,7 +1094,7 @@ TrackerContext::declareItemAsPythonField(const TrackMarkerPtr& item)
     if ( !appPTR->isBackground() ) {
         getNode()->getApp()->printAutoDeclaredVariable(script);
     }
-    if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0) ) {
+    if ( !Python::interpretPythonScript(script, &err, 0) ) {
         getNode()->getApp()->appendToScriptEditor(err);
     }
 }
@@ -1782,7 +1782,7 @@ TrackSchedulerPrivate::trackStepFunctor(int trackIndex,
     return ret;
 }
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 class IsTrackingFlagSetter_RAII
 {
@@ -1829,7 +1829,7 @@ public:
     }
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 GenericSchedulerThread::ThreadStateEnum
 TrackScheduler::threadLoopOnce(const GenericThreadStartArgsPtr& inArgs)
@@ -2012,7 +2012,7 @@ TrackScheduler::doRenderCurrentFrameForViewer(ViewerInstance* viewer)
     viewer->renderCurrentFrame(true);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_TrackerContext.cpp"

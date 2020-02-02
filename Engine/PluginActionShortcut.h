@@ -30,7 +30,7 @@
 #include "Global/GlobalDefines.h"
 #include "Global/KeySymbols.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct PluginActionShortcut
 {
@@ -58,6 +58,6 @@ struct PluginActionShortcut
     {}
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // PLUGINACTIONSHORTCUT_H

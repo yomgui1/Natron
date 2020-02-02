@@ -44,7 +44,7 @@
 #include "Engine/AppManager.h"
 #include "Engine/CLArgs.h"
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 
 
 #ifdef Q_OS_WIN

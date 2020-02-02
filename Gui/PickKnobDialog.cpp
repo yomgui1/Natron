@@ -51,7 +51,7 @@
 #include "Gui/NodeGui.h"
 #include "Gui/NodeSettingsPanel.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct PickKnobDialogPrivate
 {
@@ -174,17 +174,17 @@ PickKnobDialog::PickKnobDialog(DockablePanel* panel,
     _imp->mainLayout = new QGridLayout(this);
     _imp->selectNodeLabel = new Label( tr("Node:") );
     _imp->nodeSelectionCombo = new CompleterLineEdit(nodeNames, nodeNames, false, this);
-    _imp->nodeSelectionCombo->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Input the name of a node in the current project."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->nodeSelectionCombo->setToolTip( Natron::convertFromPlainText(tr("Input the name of a node in the current project."), Natron::WhiteSpaceNormal) );
     _imp->nodeSelectionCombo->setFocus(Qt::PopupFocusReason);
 
     _imp->knobSelectionCombo = new ComboBox(this);
     QObject::connect( _imp->knobSelectionCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(onKnobComboIndexChanged(int)) );
-    QString useAliasTt = NATRON_NAMESPACE::convertFromPlainText(tr("If checked, an alias of the selected parameter will be created, coyping entirely its state. "
+    QString useAliasTt = Natron::convertFromPlainText(tr("If checked, an alias of the selected parameter will be created, coyping entirely its state. "
                                                            "Only the script-name, label and tooltip will be editable.\n"
                                                            "For choice parameters this will also "
                                                            "dynamically refresh the menu entries when the original parameter's menu is changed.\n"
                                                            "When unchecked, a simple expression will be set linking the two parameters, but things such as dynamic menus "
-                                                           "will be disabled."), NATRON_NAMESPACE::WhiteSpaceNormal);
+                                                           "will be disabled."), Natron::WhiteSpaceNormal);
     _imp->useAliasLabel = new Label(tr("Make Alias:"), this);
     _imp->useAliasLabel->setToolTip(useAliasTt);
     _imp->useAliasCheckBox = new QCheckBox(this);
@@ -194,7 +194,7 @@ PickKnobDialog::PickKnobDialog(DockablePanel* panel,
     QObject::connect( _imp->nodeSelectionCombo, SIGNAL(itemCompletionChosen()), this, SLOT(onNodeComboEditingFinished()) );
 
     _imp->destPageLabel = new Label(tr("Page:"), this);
-    QString pagett = NATRON_NAMESPACE::convertFromPlainText(tr("Select the page into which the parameter will be created."), NATRON_NAMESPACE::WhiteSpaceNormal);
+    QString pagett = Natron::convertFromPlainText(tr("Select the page into which the parameter will be created."), Natron::WhiteSpaceNormal);
     _imp->destPageLabel->setToolTip(pagett);
     _imp->destPageCombo = new ComboBox(this);
     _imp->destPageCombo->setToolTip(pagett);
@@ -221,7 +221,7 @@ PickKnobDialog::PickKnobDialog(DockablePanel* panel,
 
 
     _imp->groupLabel = new Label(tr("Group:"), this);
-    QString grouptt = NATRON_NAMESPACE::convertFromPlainText(tr("Select the group into which the parameter will be created."), NATRON_NAMESPACE::WhiteSpaceNormal);
+    QString grouptt = Natron::convertFromPlainText(tr("Select the group into which the parameter will be created."), Natron::WhiteSpaceNormal);
     _imp->groupCombo = new ComboBox(this);
     _imp->groupLabel->setToolTip(grouptt);
     _imp->groupCombo->setToolTip(grouptt);
@@ -415,7 +415,7 @@ PickKnobDialog::getSelectedKnob(bool* makeAlias,
     return _imp->selectedKnob;
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_PickKnobDialog.cpp"

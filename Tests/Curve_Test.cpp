@@ -31,7 +31,7 @@
 
 #include "Engine/Curve.h"
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 
 TEST(KeyFrame,
      Basic)

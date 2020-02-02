@@ -99,10 +99,10 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_ON
 #define COL_SCRIPT_NAME 1
 #define COL_FIRST_KNOB 2
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 typedef std::list<std::pair<NodeWPtr, bool> > Nodes;
 
@@ -118,7 +118,7 @@ getCenterKnobForTracker(Node* node)
     return dblKnob;
 }
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 struct MultiInstancePanelPrivate
@@ -566,13 +566,13 @@ MultiInstancePanel::createMultiInstanceGui(QVBoxLayout* layout)
     _imp->addButton = new Button(QIcon(), QString::fromUtf8("+"), _imp->buttonsContainer);
     _imp->addButton->setFixedSize(NATRON_SMALL_BUTTON_SIZE, NATRON_SMALL_BUTTON_SIZE);
     _imp->addButton->setIconSize( QSize(NATRON_SMALL_BUTTON_ICON_SIZE, NATRON_SMALL_BUTTON_ICON_SIZE) );
-    _imp->addButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Add new."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->addButton->setToolTip( Natron::convertFromPlainText(tr("Add new."), Natron::WhiteSpaceNormal) );
     _imp->buttonsLayout->addWidget(_imp->addButton);
 
     QObject::connect( _imp->addButton, SIGNAL(clicked(bool)), this, SLOT(onAddButtonClicked()) );
 
     _imp->removeButton = new Button(QIcon(), QString::fromUtf8("-"), _imp->buttonsContainer);
-    _imp->removeButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Remove selection."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->removeButton->setToolTip( Natron::convertFromPlainText(tr("Remove selection."), Natron::WhiteSpaceNormal) );
     _imp->removeButton->setFixedSize(NATRON_SMALL_BUTTON_SIZE, NATRON_SMALL_BUTTON_SIZE);
     _imp->removeButton->setIconSize( QSize(NATRON_SMALL_BUTTON_ICON_SIZE, NATRON_SMALL_BUTTON_ICON_SIZE) );
     _imp->buttonsLayout->addWidget(_imp->removeButton);
@@ -583,7 +583,7 @@ MultiInstancePanel::createMultiInstanceGui(QVBoxLayout* layout)
     _imp->selectAll = new Button(QIcon(selectAll), QString(), _imp->buttonsContainer);
     _imp->selectAll->setFixedSize(NATRON_SMALL_BUTTON_SIZE, NATRON_SMALL_BUTTON_SIZE);
     _imp->selectAll->setIconSize( QSize(NATRON_SMALL_BUTTON_ICON_SIZE, NATRON_SMALL_BUTTON_ICON_SIZE) );
-    _imp->selectAll->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Select all."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->selectAll->setToolTip( Natron::convertFromPlainText(tr("Select all."), Natron::WhiteSpaceNormal) );
     _imp->buttonsLayout->addWidget(_imp->selectAll);
 
     QObject::connect( _imp->selectAll, SIGNAL(clicked(bool)), this, SLOT(onSelectAllButtonClicked()) );
@@ -591,7 +591,7 @@ MultiInstancePanel::createMultiInstanceGui(QVBoxLayout* layout)
     _imp->resetTracksButton = new Button(QString::fromUtf8("Reset"), _imp->buttonsContainer);
     QObject::connect( _imp->resetTracksButton, SIGNAL(clicked(bool)), this, SLOT(resetSelectedInstances()) );
     _imp->buttonsLayout->addWidget(_imp->resetTracksButton);
-    _imp->resetTracksButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Reset selected items."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->resetTracksButton->setToolTip( Natron::convertFromPlainText(tr("Reset selected items."), Natron::WhiteSpaceNormal) );
 
     layout->addWidget(_imp->buttonsContainer);
     appendButtons(_imp->buttonsLayout);
@@ -1874,7 +1874,7 @@ TrackerPanelV1::appendButtons(QHBoxLayout* buttonLayout)
         return;
     }
     _imp->averageTracksButton = new Button( tr("Average tracks"), buttonLayout->parentWidget() );
-    _imp->averageTracksButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Make a new track which is the average of the selected tracks."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->averageTracksButton->setToolTip( Natron::convertFromPlainText(tr("Make a new track which is the average of the selected tracks."), Natron::WhiteSpaceNormal) );
     QObject::connect( _imp->averageTracksButton, SIGNAL(clicked(bool)), this, SLOT(onAverageTracksButtonClicked()) );
     buttonLayout->addWidget(_imp->averageTracksButton);
 }
@@ -2442,7 +2442,7 @@ TrackerPanelV1::showMenuForInstance(Node* instance)
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_MultiInstancePanel.cpp"

@@ -38,7 +38,7 @@
 #include "Engine/NodeSerialization.h"
 #include "Gui/NodeGuiSerialization.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class NodeClipBoard
 {
@@ -95,6 +95,6 @@ public:
     BOOST_SERIALIZATION_SPLIT_MEMBER()
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_NodeClipBoard_h

@@ -51,7 +51,7 @@ GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 
 #include "Global/QtCompat.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 void
 NodeGraph::checkForHints(bool shiftdown,
                          bool controlDown,
@@ -411,8 +411,8 @@ NodeGraph::mouseMoveEvent(QMouseEvent* e)
             QPoint pos = mapToGlobal( e->pos() );
             // Unfortunately, the timeout delay for the tooltip is hardcoded in Qt 4, and the last parameter to showText doesn't seem to influence anything
             // Can not fix https://github.com/MrKepzie/Natron/issues/1151 (at least in Qt4)
-            QToolTip::showText( pos, NATRON_NAMESPACE::convertFromPlainText(QCoreApplication::translate("NodeGraph", "Clicking the unlock button will convert the PyPlug to a regular group saved in the project and detach it from the script.\n"
-                                                                                                "Any modification will not be written to the Python script. Subsequent loading of the project will no longer load this group from the python script."), NATRON_NAMESPACE::WhiteSpaceNormal),
+            QToolTip::showText( pos, Natron::convertFromPlainText(QCoreApplication::translate("NodeGraph", "Clicking the unlock button will convert the PyPlug to a regular group saved in the project and detach it from the script.\n"
+                                                                                                "Any modification will not be written to the Python script. Subsequent loading of the project will no longer load this group from the python script."), Natron::WhiteSpaceNormal),
                                this, selRect);
         }
     }
@@ -576,5 +576,5 @@ NodeGraph::mouseMoveEvent(QMouseEvent* e)
     QGraphicsView::mouseMoveEvent(e);
 } // mouseMoveEvent
 
-NATRON_NAMESPACE_EXIT
+}
 

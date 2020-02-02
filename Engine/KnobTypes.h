@@ -56,7 +56,7 @@ GCC_ONLY_DIAG_ON(class-memaccess)
 #define kItalicStartTag "<i>"
 #define kItalicEndTag "</i>"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /******************************KnobInt**************************************/
 
@@ -1209,6 +1209,6 @@ private:
     static const std::string _typeNameStr;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_ENGINE_KNOBTYPES_H

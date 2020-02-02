@@ -79,7 +79,7 @@ CLANG_DIAG_ON(uninitialized)
 #include <ofxNatron.h>
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 using std::make_pair;
 
 
@@ -105,7 +105,7 @@ GroupBoxLabel::setChecked(bool b)
     setPixmap(pix);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_GroupBoxLabel.cpp"

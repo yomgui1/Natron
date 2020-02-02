@@ -41,7 +41,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/LineEdit.h"
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct CompleterLineEditPrivate;
 
@@ -121,6 +121,6 @@ private:
     boost::scoped_ptr<NodeCreationDialogPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NODECREATIONDIALOG_H

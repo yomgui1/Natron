@@ -44,7 +44,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #define kMainSplitterObjectName "ToolbarSplitter"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /*This class represents a floating pane that embeds a widget*/
 class FloatingWidget
@@ -92,6 +92,6 @@ private:
     Gui* _gui;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_FloatingWidget_h

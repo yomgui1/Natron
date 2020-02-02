@@ -53,7 +53,7 @@
 #include "Gui/SpinBox.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 struct AddKnobDialogPrivate
@@ -479,7 +479,7 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
 
         _imp->nameLabel = new Label(tr("Script name:"), this);
         _imp->nameLineEdit = new LineEdit(firstRowContainer);
-        _imp->nameLineEdit->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("The name of the parameter as it will be used in Python scripts"), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->nameLineEdit->setToolTip( Natron::convertFromPlainText(tr("The name of the parameter as it will be used in Python scripts"), Natron::WhiteSpaceNormal) );
 
         if (knob) {
             _imp->nameLineEdit->setText( QString::fromUtf8( knob->getName().c_str() ) );
@@ -496,7 +496,7 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
         secondRowLayout->setContentsMargins(0, 0, 15, 0);
         _imp->labelLabel = new Label(tr("Label:"), secondRowContainer);
         _imp->labelLineEdit = new LineEdit(secondRowContainer);
-        _imp->labelLineEdit->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("The label of the parameter as displayed on the graphical user interface"), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->labelLineEdit->setToolTip( Natron::convertFromPlainText(tr("The label of the parameter as displayed on the graphical user interface"), Natron::WhiteSpaceNormal) );
         if (knob) {
             _imp->labelLineEdit->setText( QString::fromUtf8( knob->getLabel().c_str() ) );
         }
@@ -504,7 +504,7 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
         _imp->hideLabel = new Label(tr("Hide:"), secondRowContainer);
         secondRowLayout->addWidget(_imp->hideLabel);
         _imp->hideBox = new QCheckBox(secondRowContainer);
-        _imp->hideBox->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("If checked the parameter will not be visible on the user interface"), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->hideBox->setToolTip( Natron::convertFromPlainText(tr("If checked the parameter will not be visible on the user interface"), Natron::WhiteSpaceNormal) );
         if (knob) {
             _imp->hideBox->setChecked( knob->getIsSecret() );
         }
@@ -513,7 +513,7 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
         _imp->startNewLineLabel = new Label(tr("Start new line:"), secondRowContainer);
         secondRowLayout->addWidget(_imp->startNewLineLabel);
         _imp->startNewLineBox = new QCheckBox(secondRowContainer);
-        _imp->startNewLineBox->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("If unchecked the parameter will be on the same line as the previous parameter"), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->startNewLineBox->setToolTip( Natron::convertFromPlainText(tr("If unchecked the parameter will be on the same line as the previous parameter"), Natron::WhiteSpaceNormal) );
         if (knob) {
             // get the flag on the previous knob
             bool startNewLine = true;
@@ -556,7 +556,7 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
         if (!knob) {
             _imp->typeLabel = new Label(tr("Type:"), thirdRowContainer);
             _imp->typeChoice = new ComboBox(thirdRowContainer);
-            _imp->typeChoice->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("The data type of the parameter."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+            _imp->typeChoice->setToolTip( Natron::convertFromPlainText(tr("The data type of the parameter."), Natron::WhiteSpaceNormal) );
             for (int i = 0; i < (int)eParamDataTypeCount; ++i) {
                 assert(_imp->typeChoice->count() == i);
                 _imp->typeChoice->addItem( tr( dataTypeString( (ParamDataTypeEnum)i ) ) );
@@ -571,16 +571,16 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
             thirdRowLayout->addWidget(_imp->animatesLabel);
         }
         _imp->animatesCheckbox = new QCheckBox(thirdRowContainer);
-        _imp->animatesCheckbox->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("When checked this parameter will be able to animate with keyframes."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->animatesCheckbox->setToolTip( Natron::convertFromPlainText(tr("When checked this parameter will be able to animate with keyframes."), Natron::WhiteSpaceNormal) );
         if (knob) {
             _imp->animatesCheckbox->setChecked( knob->isAnimationEnabled() );
         }
 
         thirdRowLayout->addWidget(_imp->animatesCheckbox);
-        _imp->evaluatesLabel = new Label(NATRON_NAMESPACE::convertFromPlainText(tr("Render on change:"), NATRON_NAMESPACE::WhiteSpaceNormal), thirdRowContainer);
+        _imp->evaluatesLabel = new Label(Natron::convertFromPlainText(tr("Render on change:"), Natron::WhiteSpaceNormal), thirdRowContainer);
         thirdRowLayout->addWidget(_imp->evaluatesLabel);
         _imp->evaluatesOnChange = new QCheckBox(thirdRowContainer);
-        _imp->evaluatesOnChange->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("If checked, when the value of this parameter changes a new render will be triggered."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->evaluatesOnChange->setToolTip( Natron::convertFromPlainText(tr("If checked, when the value of this parameter changes a new render will be triggered."), Natron::WhiteSpaceNormal) );
         if (knob) {
             _imp->evaluatesOnChange->setChecked( knob->getEvaluateOnChange() );
         }
@@ -596,7 +596,7 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
     {
         _imp->tooltipLabel = new Label(tr("ToolTip:"), this);
         _imp->tooltipArea = new QTextEdit(this);
-        _imp->tooltipArea->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("The help tooltip that will appear when hovering the parameter with the mouse."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->tooltipArea->setToolTip( Natron::convertFromPlainText(tr("The help tooltip that will appear when hovering the parameter with the mouse."), Natron::WhiteSpaceNormal) );
         _imp->mainLayout->addRow(_imp->tooltipLabel, _imp->tooltipArea);
         if (knob) {
             _imp->tooltipArea->setPlainText( QString::fromUtf8( knob->getHintToolTip().c_str() ) );
@@ -605,11 +605,11 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
     {
         _imp->menuItemsLabel = new Label(tr("Menu items:"), this);
         _imp->menuItemsEdit = new QTextEdit(this);
-        QString tt = NATRON_NAMESPACE::convertFromPlainText(tr("The entries of the drop-down menu. \n"
+        QString tt = Natron::convertFromPlainText(tr("The entries of the drop-down menu. \n"
                                                        "Each line defines a new menu entry. You can specify a specific help tooltip for each entry "
                                                        "by separating the entry text from the help with the following characters on the line: "
                                                        "<?> \n\n"
-                                                       "e.g.: Special function<?>Will use our very own special function."), NATRON_NAMESPACE::WhiteSpaceNormal);
+                                                       "e.g.: Special function<?>Will use our very own special function."), Natron::WhiteSpaceNormal);
         _imp->menuItemsEdit->setToolTip(tt);
         _imp->mainLayout->addRow(_imp->menuItemsLabel, _imp->menuItemsEdit);
 
@@ -637,7 +637,7 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
 
         _imp->multiLineLabel = new Label(tr("Multi-line:"), optContainer);
         _imp->multiLine = new QCheckBox(optContainer);
-        _imp->multiLine->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Should this text be multi-line or single-line?"), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->multiLine->setToolTip( Natron::convertFromPlainText(tr("Should this text be multi-line or single-line?"), Natron::WhiteSpaceNormal) );
         optLayout->addWidget(_imp->multiLine);
         _imp->mainLayout->addRow(_imp->multiLineLabel, optContainer);
 
@@ -655,8 +655,8 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
 
         _imp->richTextLabel = new Label(tr("Rich text:"), optContainer);
         _imp->richText = new QCheckBox(optContainer);
-        QString tt = NATRON_NAMESPACE::convertFromPlainText(tr("If checked, the text area will be able to use rich text encoding with a sub-set of html.\n "
-                                                       "This property is only valid for multi-line input text only."), NATRON_NAMESPACE::WhiteSpaceNormal);
+        QString tt = Natron::convertFromPlainText(tr("If checked, the text area will be able to use rich text encoding with a sub-set of html.\n "
+                                                       "This property is only valid for multi-line input text only."), Natron::WhiteSpaceNormal);
 
         _imp->richText->setToolTip(tt);
         optLayout->addWidget(_imp->richText);
@@ -676,7 +676,7 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
 
         _imp->sequenceDialogLabel = new Label(tr("Use sequence dialog:"), optContainer);
         _imp->sequenceDialog = new QCheckBox(optContainer);
-        _imp->sequenceDialog->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("If checked the file dialog for this parameter will be able to decode image sequences."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->sequenceDialog->setToolTip( Natron::convertFromPlainText(tr("If checked the file dialog for this parameter will be able to decode image sequences."), Natron::WhiteSpaceNormal) );
         optLayout->addWidget(_imp->sequenceDialog);
         _imp->mainLayout->addRow(_imp->sequenceDialogLabel, optContainer);
 
@@ -697,9 +697,9 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
         QHBoxLayout* optLayout = new QHBoxLayout(optContainer);
         optLayout->setContentsMargins(0, 0, 15, 0);
 
-        _imp->multiPathLabel = new Label(NATRON_NAMESPACE::convertFromPlainText(tr("Multiple paths:"), NATRON_NAMESPACE::WhiteSpaceNormal), optContainer);
+        _imp->multiPathLabel = new Label(Natron::convertFromPlainText(tr("Multiple paths:"), Natron::WhiteSpaceNormal), optContainer);
         _imp->multiPath = new QCheckBox(optContainer);
-        _imp->multiPath->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("If checked the parameter will be a table where each entry points to a different path."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->multiPath->setToolTip( Natron::convertFromPlainText(tr("If checked the parameter will be a table where each entry points to a different path."), Natron::WhiteSpaceNormal) );
         optLayout->addWidget(_imp->multiPath);
         _imp->mainLayout->addRow(_imp->multiPathLabel, optContainer);
 
@@ -717,7 +717,7 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
 
         _imp->groupAsTabLabel = new Label(tr("Group as tab:"), optContainer);
         _imp->groupAsTab = new QCheckBox(optContainer);
-        _imp->groupAsTab->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("If checked the group will be a tab instead."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->groupAsTab->setToolTip( Natron::convertFromPlainText(tr("If checked the group will be a tab instead."), Natron::WhiteSpaceNormal) );
         optLayout->addWidget(_imp->groupAsTab);
         _imp->mainLayout->addRow(_imp->groupAsTabLabel, optContainer);
 
@@ -738,30 +738,30 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
         _imp->minLabel = new Label(tr("Minimum:"), minMaxContainer);
 
         _imp->minBox = new SpinBox(minMaxContainer, SpinBox::eSpinBoxTypeDouble);
-        _imp->minBox->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Set the minimum value for the parameter. Even though the user might input "
+        _imp->minBox->setToolTip( Natron::convertFromPlainText(tr("Set the minimum value for the parameter. Even though the user might input "
                                                                     "a value higher or lower than the specified min/max range, internally the "
-                                                                    "real value will be clamped to this interval."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+                                                                    "real value will be clamped to this interval."), Natron::WhiteSpaceNormal) );
         minMaxLayout->addWidget(_imp->minBox);
 
         _imp->maxLabel = new Label(tr("Maximum:"), minMaxContainer);
         _imp->maxBox = new SpinBox(minMaxContainer, SpinBox::eSpinBoxTypeDouble);
-        _imp->maxBox->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Set the maximum value for the parameter. Even though the user might input "
+        _imp->maxBox->setToolTip( Natron::convertFromPlainText(tr("Set the maximum value for the parameter. Even though the user might input "
                                                                     "a value higher or lower than the specified min/max range, internally the "
-                                                                    "real value will be clamped to this interval."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+                                                                    "real value will be clamped to this interval."), Natron::WhiteSpaceNormal) );
         minMaxLayout->addWidget(_imp->maxLabel);
         minMaxLayout->addWidget(_imp->maxBox);
         minMaxLayout->addStretch();
 
         _imp->dminLabel = new Label(tr("Display Minimum:"), dminMaxContainer);
         _imp->dminBox = new SpinBox(dminMaxContainer, SpinBox::eSpinBoxTypeDouble);
-        _imp->dminBox->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Set the display minimum value for the parameter. This is a hint that is typically "
-                                                                     "used to set the range of the slider."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->dminBox->setToolTip( Natron::convertFromPlainText(tr("Set the display minimum value for the parameter. This is a hint that is typically "
+                                                                     "used to set the range of the slider."), Natron::WhiteSpaceNormal) );
         dminMaxLayout->addWidget(_imp->dminBox);
 
         _imp->dmaxLabel = new Label(tr("Display Maximum:"), dminMaxContainer);
         _imp->dmaxBox = new SpinBox(dminMaxContainer, SpinBox::eSpinBoxTypeDouble);
-        _imp->dmaxBox->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Set the display maximum value for the parameter. This is a hint that is typically "
-                                                                     "used to set the range of the slider."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->dmaxBox->setToolTip( Natron::convertFromPlainText(tr("Set the display maximum value for the parameter. This is a hint that is typically "
+                                                                     "used to set the range of the slider."), Natron::WhiteSpaceNormal) );
         dminMaxLayout->addWidget(_imp->dmaxLabel);
         dminMaxLayout->addWidget(_imp->dmaxBox);
 
@@ -813,32 +813,32 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
 
         _imp->default0 = new SpinBox(defValContainer, SpinBox::eSpinBoxTypeDouble);
         _imp->default0->setValue(0);
-        _imp->default0->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Set the default value for the parameter (dimension 0)."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->default0->setToolTip( Natron::convertFromPlainText(tr("Set the default value for the parameter (dimension 0)."), Natron::WhiteSpaceNormal) );
         defValLayout->addWidget(_imp->default0);
 
         _imp->default1 = new SpinBox(defValContainer, SpinBox::eSpinBoxTypeDouble);
         _imp->default1->setValue(0);
-        _imp->default1->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Set the default value for the parameter (dimension 1)."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->default1->setToolTip( Natron::convertFromPlainText(tr("Set the default value for the parameter (dimension 1)."), Natron::WhiteSpaceNormal) );
         defValLayout->addWidget(_imp->default1);
 
         _imp->default2 = new SpinBox(defValContainer, SpinBox::eSpinBoxTypeDouble);
         _imp->default2->setValue(0);
-        _imp->default2->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Set the default value for the parameter (dimension 2)."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->default2->setToolTip( Natron::convertFromPlainText(tr("Set the default value for the parameter (dimension 2)."), Natron::WhiteSpaceNormal) );
         defValLayout->addWidget(_imp->default2);
 
         _imp->default3 = new SpinBox(defValContainer, SpinBox::eSpinBoxTypeDouble);
         _imp->default3->setValue(0);
-        _imp->default3->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Set the default value for the parameter (dimension 3)."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->default3->setToolTip( Natron::convertFromPlainText(tr("Set the default value for the parameter (dimension 3)."), Natron::WhiteSpaceNormal) );
         defValLayout->addWidget(_imp->default3);
 
 
         _imp->defaultStr = new LineEdit(defValContainer);
-        _imp->defaultStr->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Set the default value for the parameter."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->defaultStr->setToolTip( Natron::convertFromPlainText(tr("Set the default value for the parameter."), Natron::WhiteSpaceNormal) );
         defValLayout->addWidget(_imp->defaultStr);
 
 
         _imp->defaultBool = new QCheckBox(defValContainer);
-        _imp->defaultBool->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Set the default value for the parameter."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->defaultBool->setToolTip( Natron::convertFromPlainText(tr("Set the default value for the parameter."), Natron::WhiteSpaceNormal) );
         _imp->defaultBool->setFixedSize(NATRON_MEDIUM_BUTTON_SIZE, NATRON_MEDIUM_BUTTON_SIZE);
         defValLayout->addWidget(_imp->defaultBool);
 
@@ -905,7 +905,7 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
         _imp->parentGroupLabel = new Label(tr("Group:"), optContainer);
         _imp->parentGroup = new ComboBox(optContainer);
 
-        _imp->parentGroup->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("The name of the group under which this parameter will appear."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->parentGroup->setToolTip( Natron::convertFromPlainText(tr("The name of the group under which this parameter will appear."), Natron::WhiteSpaceNormal) );
         optLayout->addWidget(_imp->parentGroup);
 
         _imp->mainLayout->addRow(_imp->parentGroupLabel, optContainer);
@@ -931,7 +931,7 @@ AddKnobDialog::AddKnobDialog(DockablePanel* panel,
     for (std::list<KnobPagePtr>::iterator it = _imp->userPages.begin(); it != _imp->userPages.end(); ++it) {
         _imp->parentPage->addItem( QString::fromUtf8( (*it)->getName().c_str() ) );
     }
-    _imp->parentPage->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("The tab under which this parameter will appear."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _imp->parentPage->setToolTip( Natron::convertFromPlainText(tr("The tab under which this parameter will appear."), Natron::WhiteSpaceNormal) );
     optLayout->addWidget(_imp->parentPage);
 
     int pageIndexLoaded = -1;
@@ -2143,7 +2143,7 @@ AddKnobDialogPrivate::setVisibleDefaultValues(bool visible,
     }
 } // AddKnobDialogPrivate::setVisibleDefaultValues
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_AddKnobDialog.cpp"

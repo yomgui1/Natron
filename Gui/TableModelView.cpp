@@ -43,12 +43,12 @@
 #include "Gui/ComboBox.h"
 #include "Gui/SpinBox.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 //////////////TableItem
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 class MetaTypesRegistration
 {
@@ -59,7 +59,7 @@ public:
     }
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 static MetaTypesRegistration registration;
@@ -1465,7 +1465,7 @@ TableView::dropEvent(QDropEvent* e)
     Q_EMIT itemDropped();
 } // TableView::dropEvent
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_TableModelView.cpp"

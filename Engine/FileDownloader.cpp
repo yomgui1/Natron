@@ -35,7 +35,7 @@
 
 #define NATRON_FILE_DOWNLOAD_HEARBEAT_TIMEOUT_MS 5000
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 FileDownloader::FileDownloader(const QUrl& imageUrl,
                                bool useNetworkCache,
@@ -106,7 +106,7 @@ FileDownloader::downloadedData() const
     return *m_DownloadedData;
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_FileDownloader.cpp"

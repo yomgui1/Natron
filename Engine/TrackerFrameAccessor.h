@@ -36,7 +36,7 @@
 #include <libmv/autotrack/frame_accessor.h>
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct TrackerFrameAccessorPrivate;
 class TrackerFrameAccessor
@@ -103,5 +103,5 @@ private:
     boost::scoped_ptr<TrackerFrameAccessorPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 #endif // TRACKERFRAMEACCESSOR_H

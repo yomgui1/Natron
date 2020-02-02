@@ -61,7 +61,7 @@ GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 #include "Gui/TabWidget.h"
 #include "Gui/ViewerGL.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /*****************************CURVE WIDGET***********************************************/
 
@@ -1916,10 +1916,10 @@ CurveWidget::loopSelectedCurve()
     if (!knobCurve) {
         throw std::logic_error("CurveWidget::loopSelectedCurve");
     }
-    NATRON_PYTHON_NAMESPACE::PyModalDialog dialog(_imp->_gui);
-    NATRON_PYTHON_NAMESPACE::IntParamPtr firstFrame( dialog.createIntParam( QString::fromUtf8("firstFrame"), QString::fromUtf8("First frame") ) );
+    Python::PyModalDialog dialog(_imp->_gui);
+    Python::IntParamPtr firstFrame( dialog.createIntParam( QString::fromUtf8("firstFrame"), QString::fromUtf8("First frame") ) );
     firstFrame->setAnimationEnabled(false);
-    NATRON_PYTHON_NAMESPACE::IntParamPtr lastFrame( dialog.createIntParam( QString::fromUtf8("lastFrame"), QString::fromUtf8("Last frame") ) );
+    Python::IntParamPtr lastFrame( dialog.createIntParam( QString::fromUtf8("lastFrame"), QString::fromUtf8("Last frame") ) );
     lastFrame->setAnimationEnabled(false);
     dialog.refreshUserParamsGUI();
     if ( dialog.exec() ) {
@@ -2429,7 +2429,7 @@ CurveWidget::addKey(const CurveGuiPtr& curve, double xCurve, double yCurve)
     _imp->insertSelectedKeyFrameConditionnaly(selected);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_CurveWidget.cpp"

@@ -27,7 +27,7 @@
 
 #include "Global/Macros.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 extern const char* fragRGB;
 extern const char* vertRGB;
@@ -43,6 +43,6 @@ extern const char *histogramRenderingVertex_vert;
 extern const char* minimal_vert;
 extern const char *histogramMaximum_frag;
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif

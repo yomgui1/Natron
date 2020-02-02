@@ -44,7 +44,7 @@
 
 #include <QtCore/QSize>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 typedef std::map<NodePtr, NodeRenderStats > RenderStatsMap;
 
@@ -478,6 +478,6 @@ private:
     boost::scoped_ptr<ViewerTabPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_GUI_VIEWERTAB_H

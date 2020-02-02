@@ -38,7 +38,7 @@
 #include "Global/GlobalDefines.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 // GLX-specific global data
@@ -83,7 +83,7 @@ private:
     boost::scoped_ptr<OSGLContext_x11Private> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // __NATRON_LINUX__
 

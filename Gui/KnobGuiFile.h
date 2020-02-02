@@ -41,7 +41,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/KnobGuiTable.h"
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 //================================
 class KnobGuiFile
@@ -253,7 +253,7 @@ private:
     KnobPathWPtr _knob;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_KnobGuiFile_h
 

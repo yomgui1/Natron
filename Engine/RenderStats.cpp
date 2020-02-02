@@ -35,7 +35,7 @@
 #include "Engine/RectI.h"
 #include "Engine/RectD.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct NodeRenderStatsPrivate
 {
@@ -453,4 +453,4 @@ RenderStats::getStats(double *totalTimeSpent) const
     return ret;
 }
 
-NATRON_NAMESPACE_EXIT
+}

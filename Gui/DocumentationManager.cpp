@@ -49,7 +49,7 @@ GCC_ONLY_DIAG_ON(class-memaccess)
 #include "Engine/WriteNode.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 DocumentationManager::DocumentationManager(QObject *parent)
     : QObject(parent)
     , server(NULL)
@@ -658,7 +658,7 @@ DocumentationManager::serverPort()
     return server->serverPort();
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_DocumentationManager.cpp"

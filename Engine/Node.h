@@ -78,7 +78,7 @@ CLANG_DIAG_ON(deprecated)
 #define kWriteOIIOParamViewsSelector "viewsSelector"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class Node
     : public QObject
@@ -1597,6 +1597,6 @@ public:
     ~RenderingFlagSetter();
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_ENGINE_NODE_H

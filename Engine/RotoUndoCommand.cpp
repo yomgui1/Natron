@@ -49,7 +49,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Engine/ViewIdx.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 typedef BezierCPPtr CpPtr;
 typedef std::pair<CpPtr, CpPtr> SelectedCp;
@@ -781,7 +781,7 @@ MoveTangentUndoCommand::~MoveTangentUndoCommand()
 {
 }
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 static void
 getDeltaForPoint(const BezierCP& p,
@@ -853,7 +853,7 @@ dragTangent(double time,
     }
 }
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 void
@@ -1803,4 +1803,4 @@ MakeRectangleUndoCommand::mergeWith(const UndoCommandPtr &other)
     return true;
 }
 
-NATRON_NAMESPACE_EXIT
+}

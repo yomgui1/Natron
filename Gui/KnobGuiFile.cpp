@@ -59,7 +59,7 @@
 
 #include <SequenceParsing.h>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 //===========================FILE_KNOB_GUI=====================================
@@ -132,7 +132,7 @@ KnobGuiFile::createWidget(QHBoxLayout* layout)
         QPixmap pixRefresh;
         appPTR->getIcon(NATRON_PIXMAP_VIEWER_REFRESH, NATRON_MEDIUM_BUTTON_ICON_SIZE, &pixRefresh);
         _reloadButton->setIcon( QIcon(pixRefresh) );
-        _reloadButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Reload the file."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _reloadButton->setToolTip( Natron::convertFromPlainText(tr("Reload the file."), Natron::WhiteSpaceNormal) );
         QObject::connect( _reloadButton, SIGNAL(clicked()), this, SLOT(onReloadClicked()) );
         layout->addWidget(_reloadButton);
     }
@@ -533,7 +533,7 @@ KnobGuiOutputFile::createWidget(QHBoxLayout* layout)
         QPixmap pixRefresh;
         appPTR->getIcon(NATRON_PIXMAP_VIEWER_REFRESH, NATRON_MEDIUM_BUTTON_ICON_SIZE, &pixRefresh);
         _rewriteButton->setIcon( QIcon(pixRefresh) );
-        _rewriteButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Rewrite the file."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _rewriteButton->setToolTip( Natron::convertFromPlainText(tr("Rewrite the file."), Natron::WhiteSpaceNormal) );
         QObject::connect( _rewriteButton, SIGNAL(clicked()), this, SLOT(onRewriteClicked()) );
         layout->addWidget(_rewriteButton);
     }
@@ -808,7 +808,7 @@ KnobGuiPath::createWidget(QHBoxLayout* layout)
         enableRightClickMenu(_lineEdit, 0);
         _openFileButton = new Button( layout->parentWidget() );
         _openFileButton->setFixedSize(NATRON_MEDIUM_BUTTON_SIZE, NATRON_MEDIUM_BUTTON_SIZE);
-        _openFileButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Click to select a path to append to/replace this variable."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _openFileButton->setToolTip( Natron::convertFromPlainText(tr("Click to select a path to append to/replace this variable."), Natron::WhiteSpaceNormal) );
         QPixmap pix;
         appPTR->getIcon(NATRON_PIXMAP_OPEN_FILE, NATRON_MEDIUM_BUTTON_ICON_SIZE, &pix);
         _openFileButton->setIcon( QIcon(pix) );
@@ -1150,7 +1150,7 @@ KnobGuiPath::updateToolTip()
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_KnobGuiFile.cpp"

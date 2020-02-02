@@ -59,7 +59,7 @@ GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 #include "Gui/RenderStatsDialog.h"
 #include "Gui/ViewerTab.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 // Helper function: Get the icon with the given name from the icon theme.
@@ -788,7 +788,7 @@ Gui::dockClicked()
 }
 #endif
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_Gui.cpp"

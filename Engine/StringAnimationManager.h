@@ -37,7 +37,7 @@
 
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct StringAnimationManagerPrivate;
 
@@ -83,6 +83,6 @@ private:
     boost::scoped_ptr<StringAnimationManagerPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // STRINGANIMATIONMANAGER_H

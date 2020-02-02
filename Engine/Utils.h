@@ -30,7 +30,7 @@
 #include "Engine/EngineFwd.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 // same as Qt::WhiteSpaceMode
 enum WhiteSpaceMode {
@@ -40,7 +40,7 @@ enum WhiteSpaceMode {
     WhiteSpaceModeUndefined = -1
 };
 
-QString convertFromPlainText(const QString &plain, NATRON_NAMESPACE::WhiteSpaceMode mode);
+QString convertFromPlainText(const QString &plain, Natron::WhiteSpaceMode mode);
 
 // use genHTML=true when generating markdown for hoedown. false for pandoc
 QString convertFromPlainTextToMarkdown(const QString &plain, bool genHTML, bool isTableElement);
@@ -76,6 +76,6 @@ ipow(T base,
     return result;
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Natron_Gui_Utils_h

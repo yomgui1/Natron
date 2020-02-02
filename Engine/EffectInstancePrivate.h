@@ -46,7 +46,7 @@
 #include "Engine/ViewIdx.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct ActionKey
 {
@@ -404,6 +404,6 @@ public:
 };
 
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Engine_EffectInstancePrivate_h

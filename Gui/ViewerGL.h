@@ -49,7 +49,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/GuiFwd.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /**
  *@class ViewerGL
@@ -638,6 +638,6 @@ private:
     boost::scoped_ptr<Implementation> _imp; // PIMPL: hide implementation details
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // GLVIEWER_H

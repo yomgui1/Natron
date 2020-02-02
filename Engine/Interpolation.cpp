@@ -42,7 +42,7 @@ GCC_DIAG_ON(unused-parameter)
 #define M_PI        3.14159265358979323846264338327950288   /* pi             */
 #endif
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 using boost::math::cbrt;
 using std::sqrt;
@@ -621,7 +621,7 @@ Interpolation::integrate(double tcur,
     return ret * (tnext - tcur);
 }
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 enum SolTypeEnum
 {
@@ -661,7 +661,7 @@ struct Sol_less_than_t
     }
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 // comptute the function type after sol, from the function type before sol
@@ -1111,5 +1111,5 @@ Interpolation::autoComputeDerivatives(KeyframeTypeEnum interpPrev,
     assert( !(boost::math::isnan)(*vcurDerivRight) && !(boost::math::isnan)(*vcurDerivLeft) );
 } // autoComputeDerivatives
 
-NATRON_NAMESPACE_EXIT
+}
 

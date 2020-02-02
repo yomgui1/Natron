@@ -57,7 +57,7 @@ GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 #define SPINBOX_MAX_WIDTH 50
 #define SPINBOX_MIN_WIDTH 35
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 struct SpinBoxPrivate
@@ -1121,7 +1121,7 @@ KnobSpinBox::focusOutEvent(QFocusEvent* e)
     SpinBox::focusOutEvent(e);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_SpinBox.cpp"

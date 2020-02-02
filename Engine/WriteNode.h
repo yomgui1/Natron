@@ -50,7 +50,7 @@
 
 #define kNatronWriteParamStartRender "startRender"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /**
  * @brief A wrapper around all OpenFX Writers nodes so that to the user they all appear under a single Write node that has a dynamic
@@ -130,6 +130,6 @@ private:
     boost::scoped_ptr<WriteNodePrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Engine_WriteNode_h

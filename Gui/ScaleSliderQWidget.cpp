@@ -59,7 +59,7 @@ GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 #define SLIDER_WIDTH 4
 #define SLIDER_HEIGHT 15
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct ScaleSliderQWidgetPrivate
 {
@@ -651,7 +651,7 @@ ScaleSliderQWidget::setUseLineColor(bool use,
     update();
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_ScaleSliderQWidget.cpp"

@@ -46,7 +46,7 @@
 #include "Engine/GPUContextPool.h"
 #include "Engine/GLShader.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 FramebufferConfig::FramebufferConfig()
     : redBits(8)
@@ -606,4 +606,4 @@ OSGLContext::getGPUInfos(std::list<OpenGLRendererInfo>& renderers)
 #endif
 }
 
-NATRON_NAMESPACE_EXIT
+}

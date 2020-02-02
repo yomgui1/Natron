@@ -35,7 +35,7 @@
 #include <dlfcn.h>
 #endif
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 LibraryBinary::LibraryBinary(LibraryBinary::LibraryTypeEnum type)
     : _type(type)
@@ -122,12 +122,12 @@ LibraryBinary::loadBinary(const std::string & binaryPath)
 // 8 Converting a function pointer to an object pointer type or vice versa is conditionally-supported. The meaning of such a conversion is implementation-defined, except that if an implementation supports conversions in both directions, converting a prvalue of one type to the other type and back, possibly with different cvqualification, shall yield the original pointer value.
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 typedef void (*value_type)();
 typedef value_type (*value_dlsym_t)(void *, const char *);
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 #endif
@@ -168,5 +168,5 @@ LibraryBinary::~LibraryBinary()
 #endif
 }
 
-NATRON_NAMESPACE_EXIT
+}
 

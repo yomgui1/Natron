@@ -79,7 +79,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include <ofxNatron.h>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 using std::make_pair;
 
 
@@ -416,7 +416,7 @@ KnobGuiString::createWidget(QHBoxLayout* layout)
 
             _fontCombo = new QFontComboBox(_richTextOptions);
             _fontCombo->setCurrentFont( QApplication::font() );
-            _fontCombo->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Font."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+            _fontCombo->setToolTip( Natron::convertFromPlainText(tr("Font."), Natron::WhiteSpaceNormal) );
             _richTextOptionsLayout->addWidget(_fontCombo);
 
             _fontSizeSpinBox = new SpinBox(_richTextOptions);
@@ -424,7 +424,7 @@ KnobGuiString::createWidget(QHBoxLayout* layout)
             _fontSizeSpinBox->setMaximum(100);
             _fontSizeSpinBox->setValue(6);
             QObject::connect( _fontSizeSpinBox, SIGNAL(valueChanged(double)), this, SLOT(onFontSizeChanged(double)) );
-            _fontSizeSpinBox->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Font size."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+            _fontSizeSpinBox->setToolTip( Natron::convertFromPlainText(tr("Font size."), Natron::WhiteSpaceNormal) );
             _richTextOptionsLayout->addWidget(_fontSizeSpinBox);
 
             QPixmap pixBoldChecked, pixBoldUnchecked, pixItalicChecked, pixItalicUnchecked;
@@ -438,7 +438,7 @@ KnobGuiString::createWidget(QHBoxLayout* layout)
             _setBoldButton = new Button(boldIcon, QString(), _richTextOptions);
             _setBoldButton->setIconSize( QSize(NATRON_MEDIUM_BUTTON_ICON_SIZE, NATRON_MEDIUM_BUTTON_ICON_SIZE) );
             _setBoldButton->setCheckable(true);
-            _setBoldButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Bold."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+            _setBoldButton->setToolTip( Natron::convertFromPlainText(tr("Bold."), Natron::WhiteSpaceNormal) );
             _setBoldButton->setMaximumSize(18, 18);
             QObject::connect( _setBoldButton, SIGNAL(clicked(bool)), this, SLOT(boldChanged(bool)) );
             _richTextOptionsLayout->addWidget(_setBoldButton);
@@ -450,7 +450,7 @@ KnobGuiString::createWidget(QHBoxLayout* layout)
             _setItalicButton = new Button(italicIcon, QString(), _richTextOptions);
             _setItalicButton->setCheckable(true);
             _setItalicButton->setIconSize( QSize(NATRON_MEDIUM_BUTTON_ICON_SIZE, NATRON_MEDIUM_BUTTON_ICON_SIZE) );
-            _setItalicButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Italic."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+            _setItalicButton->setToolTip( Natron::convertFromPlainText(tr("Italic."), Natron::WhiteSpaceNormal) );
             _setItalicButton->setMaximumSize(18, 18);
             QObject::connect( _setItalicButton, SIGNAL(clicked(bool)), this, SLOT(italicChanged(bool)) );
             _richTextOptionsLayout->addWidget(_setItalicButton);
@@ -460,7 +460,7 @@ KnobGuiString::createWidget(QHBoxLayout* layout)
             _fontColorButton = new Button(QIcon(pixBlack), QString(), _richTextOptions);
             _fontColorButton->setCheckable(false);
             _fontColorButton->setIconSize( QSize(NATRON_MEDIUM_BUTTON_ICON_SIZE, NATRON_MEDIUM_BUTTON_ICON_SIZE) );
-            _fontColorButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Font color."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+            _fontColorButton->setToolTip( Natron::convertFromPlainText(tr("Font color."), Natron::WhiteSpaceNormal) );
             _fontColorButton->setMaximumSize(18, 18);
             QObject::connect( _fontColorButton, SIGNAL(clicked(bool)), this, SLOT(colorFontButtonClicked()) );
             _richTextOptionsLayout->addWidget(_fontColorButton);
@@ -1378,7 +1378,7 @@ KnobGuiString::reflectModificationsState()
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_KnobGuiString.cpp"

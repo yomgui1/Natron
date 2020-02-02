@@ -41,7 +41,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class QtEnumConvert
 {
@@ -61,6 +61,6 @@ public:
     static bool toQtCursor(CursorEnum c, Qt::CursorShape* ret);
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_QtEnumConvert_h

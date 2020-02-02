@@ -66,7 +66,7 @@ GCC_DIAG_ON(unused-parameter)
 ///When defined, number of opened files, memory size and disk size of the cache are printed whenever there's activity.
 //#define NATRON_DEBUG_CACHE
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /*Saves cache to disk as a settings file.
  */
@@ -229,7 +229,7 @@ struct Cache<EntryType>::SerializedEntry
     }
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 
 #endif // Engine_CacheSerialization_h

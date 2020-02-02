@@ -42,14 +42,14 @@ CLANG_DIAG_OFF(deprecated)
 #include <QtOpenGL/QGLWidget>
 CLANG_DIAG_ON(deprecated)
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 #define TEXTURE_SIZE 256
 
 #define NATRON_TEXT_RENDERER_USE_CACHE
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 struct CharBitmap
 {
@@ -91,7 +91,7 @@ struct TextRendererPrivate
 typedef boost::shared_ptr<TextRendererPrivate> TextRendererPrivatePtr;
 typedef std::map<QFont, TextRendererPrivatePtr> FontRenderers;
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 TextRendererPrivate::TextRendererPrivate(const QFont &font)
@@ -347,5 +347,5 @@ TextRenderer::renderText(float x,
     glCheckError();
 } // renderText
 
-NATRON_NAMESPACE_EXIT
+}
 

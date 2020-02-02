@@ -36,7 +36,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/GuiFwd.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class Menu
     : public QMenu
@@ -60,6 +60,6 @@ public:
     bool event(QEvent* e);
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_GUI_MENUWITHTOOLTIPS_H

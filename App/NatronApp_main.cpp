@@ -47,7 +47,7 @@
 
 #include "Engine/CLArgs.h"
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 
 #ifdef Q_OS_WIN
 // g++ knows nothing about wmain

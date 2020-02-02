@@ -37,10 +37,10 @@
 #endif
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 class GenericWatcherCallerArgsMetaTypesRegistration
 {
@@ -51,7 +51,7 @@ public:
     }
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 static GenericWatcherCallerArgsMetaTypesRegistration registration;
 struct GenericWatcherPrivate
 {
@@ -257,7 +257,7 @@ NodeRenderWatcher::handleBlockingTask(int taskID)
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_GenericSchedulerThreadWatcher.cpp"

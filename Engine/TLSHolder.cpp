@@ -38,7 +38,7 @@
 #include <QtCore/QThread>
 #include <QtCore/QDebug>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 AppTLS::AppTLS()
@@ -189,11 +189,11 @@ AppTLS::cleanupTLSForThread()
 } // AppTLS::cleanupTLSForThread
 
 template class TLSHolder<EffectInstance::EffectTLSData>;
-template class TLSHolder<NATRON_NAMESPACE::OfxHost::OfxHostTLSData>;
+template class TLSHolder<Natron::OfxHost::OfxHostTLSData>;
 template class TLSHolder<KnobHelper::KnobTLSData>;
 template class TLSHolder<Project::ProjectTLSData>;
 template class TLSHolder<OfxClipInstance::ClipTLSData>;
 template class TLSHolder<OfxParamToKnob::OfxParamTLSData>;
 
-NATRON_NAMESPACE_EXIT
+}
 

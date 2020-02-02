@@ -48,7 +48,7 @@
 //do not all stick altogether in memory
 #define NATRON_MAX_FRAMES_NEEDED_PRE_FETCHING 4
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 typedef std::map<EffectInstancePtr, RectD> RoIMap; // RoIs are in canonical coordinates
 typedef std::map<ViewIdx, std::vector<RangeD> > FrameRangesMap;
@@ -283,6 +283,6 @@ public:
     virtual ~ParallelRenderArgsSetter();
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // PARALLELRENDERARGS_H

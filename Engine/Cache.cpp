@@ -27,8 +27,8 @@
 #include <cassert>
 #include <stdexcept>
 
-NATRON_NAMESPACE_ENTER
-NATRON_NAMESPACE_EXIT
+namespace Natron {
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_Cache.cpp"

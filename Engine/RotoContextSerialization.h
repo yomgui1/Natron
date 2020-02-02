@@ -53,7 +53,7 @@ GCC_DIAG_ON(unused-parameter)
 #define ROTO_CTX_REMOVE_COUNTERS 2
 #define ROTO_CTX_VERSION ROTO_CTX_REMOVE_COUNTERS
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class RotoContextSerialization
 {
@@ -116,9 +116,9 @@ private:
     bool _featherLink;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::RotoContextSerialization, ROTO_CTX_VERSION)
+BOOST_CLASS_VERSION(Natron::RotoContextSerialization, ROTO_CTX_VERSION)
 
 
 #endif // Engine_RotoContextSerialization_h

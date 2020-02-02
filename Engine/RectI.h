@@ -44,7 +44,7 @@
 GCC_DIAG_OFF(strict-overflow)
 #endif
 
-NATRON_NAMESPACE_ENTER;
+namespace Natron {;
 
 /**
  * @brief A rectangle where x1 < x2 and y1 < y2 such as width() == (x2 - x1) && height() == (y2 - y1)
@@ -469,8 +469,8 @@ operator!=(const RectI & b1,
     return !(b1 == b2);
 }
 
-NATRON_NAMESPACE_EXIT;
+};
 
-Q_DECLARE_METATYPE(NATRON_NAMESPACE::RectI)
+Q_DECLARE_METATYPE(Natron::RectI)
 
 #endif // Engine_RectI_h

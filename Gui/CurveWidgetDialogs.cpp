@@ -52,7 +52,7 @@ GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 #include "Gui/GuiApplicationManager.h"
 #include "Gui/Label.h" // Label
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 ImportExportCurveDialog::ImportExportCurveDialog(bool isExportDialog,
                                                  const std::vector<CurveGuiPtr> & curves,
@@ -129,7 +129,7 @@ ImportExportCurveDialog::ImportExportCurveDialog(bool isExportDialog,
     _startLayout->addWidget(_startLabel);
     _startLineEdit = new LineEdit(_startContainer);
     _startLineEdit->setText(QString::number(xstart,'g',10));
-    _startLineEdit->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("The X of the first value in the ASCII file. This can be a python expression."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _startLineEdit->setToolTip( Natron::convertFromPlainText(tr("The X of the first value in the ASCII file. This can be a python expression."), Natron::WhiteSpaceNormal) );
     _startLayout->addWidget(_startLineEdit);
     _mainLayout->addWidget(_startContainer);
 
@@ -144,7 +144,7 @@ ImportExportCurveDialog::ImportExportCurveDialog(bool isExportDialog,
     } else {
         _incrLineEdit->setText(QString::number(1));
     }
-    _incrLineEdit->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("The X increment between two consecutive values. This can be a python expression."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+    _incrLineEdit->setToolTip( Natron::convertFromPlainText(tr("The X increment between two consecutive values. This can be a python expression."), Natron::WhiteSpaceNormal) );
     _incrLayout->addWidget(_incrLineEdit);
     _mainLayout->addWidget(_incrContainer);
 
@@ -157,7 +157,7 @@ ImportExportCurveDialog::ImportExportCurveDialog(bool isExportDialog,
         _endLayout->addWidget(_endLabel);
         _endLineEdit = new LineEdit(_endContainer);
         _endLineEdit->setText(QString::number(xend,'g',10));
-        _incrLineEdit->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("The X of the last value in the ASCII file. This can be a python expression."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _incrLineEdit->setToolTip( Natron::convertFromPlainText(tr("The X of the last value in the ASCII file. This can be a python expression."), Natron::WhiteSpaceNormal) );
         _endLayout->addWidget(_endLineEdit);
         _mainLayout->addWidget(_endContainer);
     }
@@ -595,7 +595,7 @@ EditKeyFrameDialog::changeEvent(QEvent* e)
     QDialog::changeEvent(e);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_CurveWidgetDialogs.cpp"

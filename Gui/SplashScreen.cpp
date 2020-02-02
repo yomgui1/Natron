@@ -38,7 +38,7 @@ CLANG_DIAG_ON(deprecated)
 #include "Global/FloatingPointExceptions.h"
 #endif
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 SplashScreen::SplashScreen(const QString & filePath)
     : QWidget(0, Qt::ToolTip | Qt::FramelessWindowHint | Qt::X11BypassWindowManagerHint)
@@ -165,7 +165,7 @@ LoadProjectSplashScreen::paintEvent(QPaintEvent* /*e*/)
     p.drawText(loadStrPos, loadString);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_SplashScreen.cpp"

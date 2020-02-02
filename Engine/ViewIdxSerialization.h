@@ -41,7 +41,7 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_ON
 
 #define VIEWIDX_SERIALIZATION_VERSION 1
 
-NATRON_NAMESPACE_ENTER;
+namespace Natron {;
 
 template<class Archive>
 void
@@ -59,9 +59,9 @@ ImageKey::serialize(Archive & ar,
     ar & ::boost::serialization::make_nvp("Draft", _draftMode);
 }
 
-NATRON_NAMESPACE_EXIT;
+};
 
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::ImageKey, IMAGE_KEY_SERIALIZATION_VERSION)
+BOOST_CLASS_VERSION(Natron::ImageKey, IMAGE_KEY_SERIALIZATION_VERSION)
 
 
 #endif // Engine_ViewIdxSerialization_h_H

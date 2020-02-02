@@ -154,7 +154,7 @@
 
 #endif // __MAC_OS_X_VERSION_MIN_REQUIRED
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class OSGLContext_mac::Implementation
 {
@@ -672,6 +672,6 @@ OSGLContext_mac::~OSGLContext_mac()
        _object = nil;*/
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // __NATRON_OSX__

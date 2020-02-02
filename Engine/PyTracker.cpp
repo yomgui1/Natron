@@ -29,8 +29,8 @@
 #include "Engine/TrackerContext.h"
 
 
-NATRON_NAMESPACE_ENTER
-NATRON_PYTHON_NAMESPACE_ENTER
+namespace Natron {
+namespace Python {
 
 Track::Track(const TrackMarkerPtr& marker)
     : _marker(marker)
@@ -206,5 +206,5 @@ Tracker::createTrack()
     return new Track(track);
 }
 
-NATRON_PYTHON_NAMESPACE_EXIT
-NATRON_NAMESPACE_EXIT
+}
+}

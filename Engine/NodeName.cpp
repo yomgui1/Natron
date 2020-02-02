@@ -33,7 +33,7 @@
 #include "Engine/NodeGroup.h"
 #include "Engine/NodeSerialization.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 void
 Node::initNodeScriptName(const NodeSerialization* serialization, const QString& fixedName)
@@ -106,7 +106,7 @@ Node::initNodeScriptName(const NodeSerialization* serialization, const QString& 
             if (group) {
                 group->initNodeName(isMultiInstanceChild ? _imp->multiInstanceParentName + '_' : pluginLabel.toStdString(), &name);
             } else {
-                name = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendly( pluginLabel.toStdString() );
+                name = Python::makeNameScriptFriendly( pluginLabel.toStdString() );
             }
         } catch (...) {
         }
@@ -313,7 +313,7 @@ Node::setNameInternal(const std::string& name,
     if ( !newName.empty() ) {
         bool isAttrDefined = false;
         std::string newPotentialQualifiedName = getApp()->getAppIDString() + "." + getFullyQualifiedNameInternal(newName);
-        PyObject* obj = NATRON_PYTHON_NAMESPACE::getAttrRecursive(newPotentialQualifiedName, appPTR->getMainModule(), &isAttrDefined);
+        PyObject* obj = Python::getAttrRecursive(newPotentialQualifiedName, appPTR->getMainModule(), &isAttrDefined);
         Q_UNUSED(obj);
         if (isAttrDefined) {
             std::stringstream ss;
@@ -418,4 +418,4 @@ Node::setScriptName(const std::string& name)
     setNameInternal(newName, true);
 }
 
-NATRON_NAMESPACE_EXIT
+}

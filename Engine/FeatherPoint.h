@@ -30,7 +30,7 @@
 #include "Engine/BezierCP.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class FeatherPoint
     : public BezierCP
@@ -53,6 +53,6 @@ public:
     }
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Engine_BezierCP_h

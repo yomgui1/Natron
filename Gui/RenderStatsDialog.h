@@ -44,7 +44,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct RenderStatsDialogPrivate;
 
@@ -79,6 +79,6 @@ private:
     boost::scoped_ptr<RenderStatsDialogPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // RENDERSTATSDIALOG_H

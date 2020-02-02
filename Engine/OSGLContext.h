@@ -72,7 +72,7 @@
 #include "Engine/EngineFwd.h"
 #include "Global/GLIncludes.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 /* @brief Framebuffer configuration.
@@ -282,6 +282,6 @@ public:
     }
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // OSGLCONTEXT_H

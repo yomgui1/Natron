@@ -28,8 +28,8 @@
 #include <gtest/gtest.h>
 #include "Engine/Lut.h"
 
-NATRON_NAMESPACE_USING
-using namespace NATRON_NAMESPACE::Color;
+using namespace Natron;
+using namespace Natron::Color;
 
 TEST(Lut, IntConversions) {
     for (int i = 0; i < 0x10000; ++i) {

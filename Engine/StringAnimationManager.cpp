@@ -36,10 +36,10 @@
 
 #include "Engine/Knob.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 struct StringKeyFrame
 {
@@ -58,7 +58,7 @@ struct StringKeyFrame_compare_time
 
 typedef std::set<StringKeyFrame, StringKeyFrame_compare_time> Keyframes;
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 struct StringAnimationManagerPrivate
@@ -345,4 +345,4 @@ StringAnimationManager::save(std::map<int, std::string>* keyframes) const
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}

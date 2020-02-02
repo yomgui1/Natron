@@ -40,8 +40,8 @@
 #include "../Global/ProcInfo.h"
 #include "../Global/StrUtils.h"
 
-NATRON_NAMESPACE_ENTER
-NATRON_PYTHON_NAMESPACE_ENTER
+namespace Natron {
+namespace Python {
 
 static bool fileExists(const std::string& path)
 {
@@ -347,6 +347,6 @@ PyObject* initializePython2(const std::vector<char*>& commandLineArgsUtf8)
 
     return mainModule;
 } // initializePython
-NATRON_PYTHON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_EXIT
+}

@@ -36,7 +36,7 @@
 #include "Gui/GuiFwd.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct SpinBoxPrivate;
 
@@ -194,6 +194,6 @@ private:
     KnobWidgetDnDPtr _dnd;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif /* defined(NATRON_GUI_FEEDBACKSPINBOX_H_) */

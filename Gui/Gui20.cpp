@@ -78,7 +78,7 @@
 
 #define PLUGIN_GROUP_DEFAULT_ICON_PATH NATRON_IMAGES_PATH "GroupingIcons/Set" NATRON_ICON_SET_NUMBER "/other_grouping_" NATRON_ICON_SET_NUMBER ".png"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 // Group ordering is set at every place in the code where GROUP_ORDER appears in the comments
 static std::string namedGroupsOrdered[NAMED_PLUGIN_GROUP_NO] = {
@@ -98,7 +98,7 @@ static std::string namedGroupsOrdered[NAMED_PLUGIN_GROUP_NO] = {
     PLUGIN_GROUP_OTHER,
     PLUGIN_GROUP_DEFAULT
 };
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 static void
 getPixmapForGrouping(QPixmap* pixmap,
@@ -140,7 +140,7 @@ getPixmapForGrouping(QPixmap* pixmap,
     appPTR->getIcon(e, size, pixmap);
 }
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 void
 Gui::reloadStylesheet()
@@ -732,11 +732,11 @@ Gui::unregisterSplitter(Splitter* s)
 }
 
 void
-Gui::registerPyPanel(NATRON_PYTHON_NAMESPACE::PyPanel* panel,
+Gui::registerPyPanel(Python::PyPanel* panel,
                      const std::string & pythonFunction)
 {
     QMutexLocker l(&_imp->_pyPanelsMutex);
-    std::map<NATRON_PYTHON_NAMESPACE::PyPanel*, std::string>::iterator found = _imp->_userPanels.find(panel);
+    std::map<Python::PyPanel*, std::string>::iterator found = _imp->_userPanels.find(panel);
 
     if ( found == _imp->_userPanels.end() ) {
         _imp->_userPanels.insert( std::make_pair(panel, pythonFunction) );
@@ -744,17 +744,17 @@ Gui::registerPyPanel(NATRON_PYTHON_NAMESPACE::PyPanel* panel,
 }
 
 void
-Gui::unregisterPyPanel(NATRON_PYTHON_NAMESPACE::PyPanel* panel)
+Gui::unregisterPyPanel(Python::PyPanel* panel)
 {
     QMutexLocker l(&_imp->_pyPanelsMutex);
-    std::map<NATRON_PYTHON_NAMESPACE::PyPanel*, std::string>::iterator found = _imp->_userPanels.find(panel);
+    std::map<Python::PyPanel*, std::string>::iterator found = _imp->_userPanels.find(panel);
 
     if ( found != _imp->_userPanels.end() ) {
         _imp->_userPanels.erase(found);
     }
 }
 
-std::map<NATRON_PYTHON_NAMESPACE::PyPanel*, std::string>
+std::map<Python::PyPanel*, std::string>
 Gui::getPythonPanels() const
 {
     QMutexLocker l(&_imp->_pyPanelsMutex);
@@ -1479,5 +1479,5 @@ Gui::isAboutToClose() const
     return _imp->_aboutToClose;
 }
 
-NATRON_NAMESPACE_EXIT
+}
 

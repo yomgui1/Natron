@@ -39,7 +39,7 @@
 #include "Gui/Splitter.h"
 #include "Gui/TabWidget.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 FloatingWidget::FloatingWidget(Gui* gui,
                                QWidget* parent)
@@ -164,7 +164,7 @@ FloatingWidget::closeEvent(QCloseEvent* e)
     QWidget::closeEvent(e);
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_FloatingWidget.cpp"

@@ -41,10 +41,10 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_ON
 #include "Engine/KnobFile.h"
 #include "Engine/Smooth1D.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 struct KeyFrameCloner
 {
@@ -71,7 +71,7 @@ private:
     double _t;
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 /************************************KEYFRAME************************************/
@@ -1917,4 +1917,4 @@ Curve::smooth(const RangeD* range)
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}

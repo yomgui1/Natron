@@ -65,7 +65,7 @@
 #include "Gui/NodeGraph.h"
 #include "Gui/NodeGraphUndoRedo.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 typedef std::map<KnobIWPtr, KnobGui *> KnobsAndGuis;
 typedef std::pair<QTreeWidgetItem *, DSNodePtr> TreeItemAndDSNode;
@@ -92,7 +92,7 @@ nodeHasAnimation(const NodeGuiPtr &nodeGui)
     return false;
 }
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 bool
 nodeCanAnimate(const NodePtr &node)
@@ -139,7 +139,7 @@ createKnobNameItem(const QString &text,
     return ret;
 }
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 ////////////////////////// DopeSheet //////////////////////////
@@ -594,7 +594,7 @@ DopeSheet::deleteSelectedKeyframes()
     _imp->pushUndoCommand( new DSRemoveKeysCommand(toRemove, _imp->editor) );
 }
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 struct SortIncreasingFunctor
 {
@@ -633,7 +633,7 @@ struct SortDecreasingFunctor
     }
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 void
@@ -1627,7 +1627,7 @@ DSNode::containsNodeContext() const
     return false;
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_DopeSheet.cpp"

@@ -41,7 +41,7 @@ CLANG_DIAG_ON(deprecated)
 #include "Gui/GuiFwd.h"
 #include "Gui/KnobGuiContainerI.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 struct NodeViewerContextPrivate;
@@ -143,6 +143,6 @@ private:
 };
 
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NODEVIEWERCONTEXT_H

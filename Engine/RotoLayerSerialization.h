@@ -55,7 +55,7 @@ GCC_DIAG_ON(unused-parameter)
 #define ROTO_LAYER_SERIALIZATION_REMOVES_IS_BEZIER 2
 #define ROTO_LAYER_SERIALIZATION_VERSION ROTO_LAYER_SERIALIZATION_REMOVES_IS_BEZIER
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class RotoLayerSerialization
     : public RotoItemSerialization
@@ -156,8 +156,8 @@ private:
     std::list<RotoItemSerializationPtr> children;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::RotoLayerSerialization, ROTO_LAYER_SERIALIZATION_VERSION)
+BOOST_CLASS_VERSION(Natron::RotoLayerSerialization, ROTO_LAYER_SERIALIZATION_VERSION)
 
 #endif // Engine_RotoLayerSerialization_h

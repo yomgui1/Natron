@@ -49,7 +49,7 @@
 //#define NATRON_PLAYBACK_USES_THREAD_POOL
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 typedef RenderStatsPtr RenderStatsPtr;
 
@@ -879,6 +879,6 @@ private:
     virtual OutputSchedulerThread* createScheduler(const OutputEffectInstancePtr& effect) OVERRIDE FINAL WARN_UNUSED_RETURN;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Engine_OutputSchedulerThread_h

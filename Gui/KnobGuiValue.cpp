@@ -80,7 +80,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include <ofxNatron.h>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct KnobGuiValuePrivate
 {
@@ -449,7 +449,7 @@ KnobGuiValue::createWidget(QHBoxLayout* layout)
 
     if (isRectangleParam) {
         _imp->rectangleFormatButton = new Button(QIcon(), QString::fromUtf8("wh"), _imp->container);
-        _imp->rectangleFormatButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Switch between width/height and right/top notation"), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->rectangleFormatButton->setToolTip( Natron::convertFromPlainText(tr("Switch between width/height and right/top notation"), Natron::WhiteSpaceNormal) );
         _imp->rectangleFormatButton->setFixedSize(medSize);
         _imp->rectangleFormatButton->setIconSize(medIconSize);
         _imp->rectangleFormatButton->setFocusPolicy(Qt::NoFocus);
@@ -462,7 +462,7 @@ KnobGuiValue::createWidget(QHBoxLayout* layout)
 
     if ( (nDims > 1) && !isSliderDisabled() && sliderVisible ) {
         _imp->dimensionSwitchButton = new Button(QIcon(), QString::number(nDims), _imp->container);
-        _imp->dimensionSwitchButton->setToolTip( NATRON_NAMESPACE::convertFromPlainText(tr("Switch between a single value for all dimensions and multiple values."), NATRON_NAMESPACE::WhiteSpaceNormal) );
+        _imp->dimensionSwitchButton->setToolTip( Natron::convertFromPlainText(tr("Switch between a single value for all dimensions and multiple values."), Natron::WhiteSpaceNormal) );
         _imp->dimensionSwitchButton->setFixedSize(medSize);
         _imp->dimensionSwitchButton->setIconSize(medIconSize);
         _imp->dimensionSwitchButton->setFocusPolicy(Qt::NoFocus);
@@ -1364,7 +1364,7 @@ KnobGuiInt::getIncrements(std::vector<double>* increments) const
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_KnobGuiValue.cpp"

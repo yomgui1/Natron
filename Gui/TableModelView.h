@@ -51,7 +51,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/LineEdit.h"
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class TableItem
 {
@@ -469,8 +469,8 @@ private:
     boost::scoped_ptr<TableModelPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
-Q_DECLARE_METATYPE(NATRON_NAMESPACE::TableItem*)
+Q_DECLARE_METATYPE(Natron::TableItem*)
 
 #endif // TABLEMODELVIEW_H

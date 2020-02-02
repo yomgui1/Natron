@@ -34,7 +34,7 @@
 
 #include <SequenceParsing.h>
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 using namespace SequenceParsing;
 
 TEST(SequenceParsing, TestHashCharacter) {

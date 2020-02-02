@@ -50,7 +50,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/DockablePanel.h"
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class NodeSettingsPanel
     : public DockablePanel
@@ -115,6 +115,6 @@ public Q_SLOTS:
     void onExportPresetsActionTriggered();
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_NodeSettingsPanel_h

@@ -32,15 +32,15 @@
 #define M_PI_2      1.57079632679489661923132169163975144   /* pi/2           */
 #endif
 
-using namespace NATRON_NAMESPACE::FitCurve;
-NATRON_NAMESPACE_ENTER
+using namespace Natron::FitCurve;
+namespace Natron {
 
 /*
  * This implementation is based on Graphic Gems I
  */
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 static double
 euclideanDistance(const Point& a,
@@ -504,7 +504,7 @@ fit_cubic_for_sub_set(const std::vector<Point>& points,
     fit_cubic_internal(points, tHat1, tHat2, error, generatedBezier);
 }
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 void
@@ -617,5 +617,5 @@ FitCurve::fit_cubic(const std::vector<Point>& points,
     }
 } // FitCurve::fit_cubic
 
-NATRON_NAMESPACE_EXIT
+}
 

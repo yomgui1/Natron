@@ -45,7 +45,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/GuiFwd.h"
 #include "Gui/KnobGuiContainerI.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 typedef std::list<std::pair<KnobIWPtr, KnobGuiPtr> > KnobsGuiMapping;
 
@@ -349,6 +349,6 @@ private:
     boost::scoped_ptr<KnobGuiContainerHelperPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // KNOBGUICONTAINERHELPER_H

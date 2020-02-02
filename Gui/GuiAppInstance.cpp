@@ -65,7 +65,7 @@
 #include "Gui/ScriptEditor.h"
 #include "Gui/ViewerGL.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct RotoPaintData
 {
@@ -1016,7 +1016,7 @@ GuiAppInstance::declareCurrentAppVariable_Python()
     std::string script = ss.str();
     std::string err;
     _imp->declareAppAndParamsString = script;
-    bool ok = NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &err, 0);
+    bool ok = Python::interpretPythonScript(script, &err, 0);
     if (!ok) {
         throw std::runtime_error("GuiAppInstance::declareCurrentAppVariable_Python() failed!");
     }
@@ -1666,7 +1666,7 @@ GuiAppInstance::reloadScriptEditorFonts()
     _imp->_gui->getScriptEditor()->reloadFont();
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_GuiAppInstance.cpp"

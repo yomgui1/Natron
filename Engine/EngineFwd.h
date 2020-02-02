@@ -115,7 +115,7 @@ typedef boost::shared_ptr<AutoTrack> AutoTrackPtr;
 
 // Natron Engine
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 class AbortableRenderInfo;
 class AbortableThread;
 class AbstractOfxEffectInstance;
@@ -285,7 +285,7 @@ struct OSGLContext_wgl_data;
 class OSGLContext_glx_data;
 #endif
 
-NATRON_PYTHON_NAMESPACE_ENTER
+namespace Python {
 class App;
 class AppSettings;
 class BezierCurve;
@@ -318,7 +318,7 @@ class Track;
 class Tracker;
 class UserParamHolder;
 
-NATRON_PYTHON_NAMESPACE_EXIT
+}
 
 
 typedef boost::shared_ptr<AbortableRenderInfo> AbortableRenderInfoPtr;
@@ -491,6 +491,6 @@ typedef std::list<NodePtr> NodesList;
 typedef std::list<NodeWPtr> NodesWList;
 typedef std::vector<KnobIPtr> KnobsVec;
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Engine_EngineFwd_h

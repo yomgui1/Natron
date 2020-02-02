@@ -30,7 +30,7 @@
 #include "Engine/KnobTypes.h"
 #include "Engine/NodeGuiI.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 bool
@@ -477,5 +477,5 @@ Node::setCurrentViewportForHostOverlays(OverlaySupport* viewPort)
     }
 }
 
-NATRON_NAMESPACE_EXIT
+}
 

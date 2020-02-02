@@ -30,10 +30,10 @@
 #include <QtCore/QChar>
 #include <QtCore/QDebug>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /*!
-   \fn QString NATRON_NAMESPACE::convertFromPlainText(const QString &plain, WhiteSpaceMode mode)
+   \fn QString Natron::convertFromPlainText(const QString &plain, WhiteSpaceMode mode)
 
    Converts the plain text string \a plain to an HTML-formatted
    paragraph while preserving most of its look.
@@ -42,11 +42,11 @@ NATRON_NAMESPACE_ENTER
 
    This function was adapted from Qt::convertFromPlainText()
    (see src/gui/text/qtextdocument.cpp in the Qt sources)
-   The difference is that in NATRON_NAMESPACE::WhiteSpaceNormal mode, spaces are preserved at the beginning of the line.
+   The difference is that in Natron::WhiteSpaceNormal mode, spaces are preserved at the beginning of the line.
  */
 QString
 convertFromPlainText(const QString &plain,
-                     NATRON_NAMESPACE::WhiteSpaceMode mode)
+                     Natron::WhiteSpaceMode mode)
 {
     int col = 0;
     bool bol = true;
@@ -73,7 +73,7 @@ convertFromPlainText(const QString &plain,
             bol = true;
         } else {
             bool bolagain = false;
-            if ( (mode == NATRON_NAMESPACE::WhiteSpacePre) && ( plain[i] == QLatin1Char('\t') ) ) {
+            if ( (mode == Natron::WhiteSpacePre) && ( plain[i] == QLatin1Char('\t') ) ) {
                 rich += QChar(0x00a0U);
                 ++col;
                 while (col % 8) {
@@ -81,7 +81,7 @@ convertFromPlainText(const QString &plain,
                     ++col;
                 }
                 bolagain = bol;
-            } else if ( ( bol || (mode == NATRON_NAMESPACE::WhiteSpacePre) ) && plain[i].isSpace() ) {
+            } else if ( ( bol || (mode == Natron::WhiteSpacePre) ) && plain[i].isSpace() ) {
                 rich += QChar(0x00a0U);
                 bolagain = bol;
             } else if ( plain[i] == QLatin1Char('<') ) {
@@ -202,4 +202,4 @@ convertFromPlainTextToMarkdown(const QString &plain_, bool genHTML, bool isTable
     return escaped;
 } // convertFromPlainText
 
-NATRON_NAMESPACE_EXIT
+}

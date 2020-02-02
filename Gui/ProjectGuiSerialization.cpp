@@ -57,7 +57,7 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/ViewerGL.h"
 #include "Gui/ViewerTab.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 void
 ProjectGuiSerialization::initialize(const ProjectGui* projectGui)
@@ -159,8 +159,8 @@ ProjectGuiSerialization::initialize(const ProjectGui* projectGui)
 
     _scriptEditorInput = projectGui->getGui()->getScriptEditor()->getAutoSavedScript().toStdString();
 
-    std::map<NATRON_PYTHON_NAMESPACE::PyPanel*, std::string> pythonPanels = projectGui->getGui()->getPythonPanels();
-    for (std::map<NATRON_PYTHON_NAMESPACE::PyPanel*, std::string>::iterator it = pythonPanels.begin(); it != pythonPanels.end(); ++it) {
+    std::map<Python::PyPanel*, std::string> pythonPanels = projectGui->getGui()->getPythonPanels();
+    for (std::map<Python::PyPanel*, std::string>::iterator it = pythonPanels.begin(); it != pythonPanels.end(); ++it) {
         PythonPanelSerializationPtr s = boost::make_shared<PythonPanelSerialization>();
         s->initialize(it->first, it->second);
         _pythonPanels.push_back(s);
@@ -290,13 +290,13 @@ GuiLayoutSerialization::initialize(Gui* gui)
 }
 
 void
-PythonPanelSerialization::initialize(NATRON_PYTHON_NAMESPACE::PyPanel* tab,
+PythonPanelSerialization::initialize(Python::PyPanel* tab,
                                      const std::string& func)
 {
     name = tab->getLabel();
     pythonFunction = func;
-    std::list<NATRON_PYTHON_NAMESPACE::Param*> parameters = tab->getParams();
-    for (std::list<NATRON_PYTHON_NAMESPACE::Param*>::iterator it = parameters.begin(); it != parameters.end(); ++it) {
+    std::list<Python::Param*> parameters = tab->getParams();
+    for (std::list<Python::Param*>::iterator it = parameters.begin(); it != parameters.end(); ++it) {
         KnobIPtr knob = (*it)->getInternalKnob();
         KnobGroup* isGroup = dynamic_cast<KnobGroup*>( knob.get() );
         KnobPage* isPage = dynamic_cast<KnobPage*>( knob.get() );
@@ -313,4 +313,4 @@ PythonPanelSerialization::initialize(NATRON_PYTHON_NAMESPACE::PyPanel* tab,
     userData = tab->save_serialization_thread().toStdString();
 }
 
-NATRON_NAMESPACE_EXIT
+}

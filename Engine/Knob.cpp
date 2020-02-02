@@ -61,7 +61,7 @@
 
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 using std::make_pair; using std::pair;
 
@@ -2342,7 +2342,7 @@ KnobHelperPrivate::declarePythonVariables(bool addTab,
 
                 std::string nodeFullName = appID + "." + fullName;
                 bool isAttrDefined;
-                PyObject* obj = NATRON_PYTHON_NAMESPACE::getAttrRecursive(nodeFullName, appPTR->getMainModule(), &isAttrDefined);
+                PyObject* obj = Python::getAttrRecursive(nodeFullName, appPTR->getMainModule(), &isAttrDefined);
                 Q_UNUSED(obj);
                 if (isAttrDefined) {
                     ss << tabStr << "if hasattr(" << node->getScriptName_mt_safe() << ",\"" << scriptName << "\"):\n";
@@ -2406,7 +2406,7 @@ KnobHelperPrivate::parseListenersFromExpression(int dimension)
     script = ss.str();
     ///This will register the listeners
     std::string error;
-    bool ok = NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &error, NULL);
+    bool ok = Python::interpretPythonScript(script, &error, NULL);
     if ( !error.empty() ) {
         qDebug() << error.c_str();
     }
@@ -2444,7 +2444,7 @@ KnobHelper::validateExpression(const std::string& expression,
         // first check that the expression does not contain return
         EXPR_RECURSION_LEVEL();
 
-        if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(expression, &error, 0) ) {
+        if ( !Python::interpretPythonScript(expression, &error, 0) ) {
             throw std::runtime_error(error);
         }
     }
@@ -2513,17 +2513,17 @@ KnobHelper::validateExpression(const std::string& expression,
    {
         EXPR_RECURSION_LEVEL();
 
-        if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(script, &error, 0) ) {
+        if ( !Python::interpretPythonScript(script, &error, 0) ) {
             throw std::runtime_error(error);
         }
 
         std::stringstream ss;
         ss << funcExecScript << '(' << getCurrentTime() << ", " <<  getCurrentView() << ")\n";
-        if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(ss.str(), &error, 0) ) {
+        if ( !Python::interpretPythonScript(ss.str(), &error, 0) ) {
             throw std::runtime_error(error);
         }
 
-        PyObject *ret = PyObject_GetAttrString(NATRON_PYTHON_NAMESPACE::getMainModule(), "ret"); //get our ret variable created above
+        PyObject *ret = PyObject_GetAttrString(Python::getMainModule(), "ret"); //get our ret variable created above
 
         if ( !ret || PyErr_Occurred() ) {
 #ifdef DEBUG
@@ -2710,7 +2710,7 @@ KnobHelper::setExpressionInternal(int dimension,
         _imp->expressions[dimension].exprInvalid = exprInvalid;
 
         ///This may throw an exception upon failure
-        //NATRON_PYTHON_NAMESPACE::compilePyScript(exprCpy, &_imp->expressions[dimension].code);
+        //Python::compilePyScript(exprCpy, &_imp->expressions[dimension].code);
     }
 
     if ( getHolder() ) {
@@ -2897,7 +2897,7 @@ catchErrors(PyObject* mainModule,
             if (errCatcher) {
                 errorObj = PyObject_GetAttrString(errCatcher, "value"); //get the  stderr from our catchErr object, new ref
                 assert(errorObj);
-                *error = NATRON_PYTHON_NAMESPACE::PyStringToStdString(errorObj);
+                *error = Python::PyStringToStdString(errorObj);
                 PyObject* unicode = PyUnicode_FromString("");
                 PyObject_SetAttrString(errCatcher, "value", unicode);
                 Py_DECREF(errorObj);
@@ -2940,7 +2940,7 @@ KnobHelper::executeExpression(const std::string& expr,
 
     //returns a new ref, this function's documentation is not clear onto what it returns...
     //https://docs.python.org/2/c-api/veryhigh.html
-    PyObject* mainModule = NATRON_PYTHON_NAMESPACE::getMainModule();
+    PyObject* mainModule = Python::getMainModule();
     PyObject* globalDict = PyModule_GetDict(mainModule);
 
     PyErr_Clear();
@@ -3010,7 +3010,7 @@ KnobHelper::setName(const std::string & name,
                     bool throwExceptions)
 {
     _imp->originalName = name;
-    _imp->name = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendly(name);
+    _imp->name = Python::makeNameScriptFriendly(name);
 
     if ( !getHolder() ) {
         return;
@@ -3045,7 +3045,7 @@ KnobHelper::setName(const std::string & name,
             newPotentialQualifiedName += finalName;
 
             bool isAttrDefined = false;
-            PyObject* obj = NATRON_PYTHON_NAMESPACE::getAttrRecursive(newPotentialQualifiedName, appPTR->getMainModule(), &isAttrDefined);
+            PyObject* obj = Python::getAttrRecursive(newPotentialQualifiedName, appPTR->getMainModule(), &isAttrDefined);
             Q_UNUSED(obj);
             if (isAttrDefined) {
                 QString message = tr("A Python attribute with the name %1 already exists.").arg(QString::fromUtf8(newPotentialQualifiedName.c_str()));
@@ -6346,7 +6346,7 @@ template class Knob<double>;
 template class Knob<bool>;
 template class Knob<std::string>;
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_Knob.cpp"

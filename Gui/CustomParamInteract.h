@@ -45,7 +45,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #include "Gui/GuiFwd.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct CustomParamInteractPrivate;
 class CustomParamInteract
@@ -129,6 +129,6 @@ private:
     boost::scoped_ptr<CustomParamInteractPrivate> _imp;
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // CUSTOMPARAMINTERACT_H

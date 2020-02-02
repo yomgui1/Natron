@@ -50,7 +50,7 @@
 #endif
 
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 /**
  * @brief Creates a duplicate of the knob identified by knobName which is a knob in the internalNode onto the effect and add it to the given page.
@@ -2684,6 +2684,6 @@ TrackerContextPrivate::setTransformOutOfDate(bool outdated)
     transformOutOfDateLabel.lock()->setSecret(!outdated);
 }
 
-NATRON_NAMESPACE_EXIT
-NATRON_NAMESPACE_USING
+}
+using namespace Natron;
 #include "moc_TrackerContextPrivate.cpp"

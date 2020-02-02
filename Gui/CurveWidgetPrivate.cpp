@@ -61,7 +61,7 @@
 #define AXIS_MAX 100000.
 #define AXIS_MIN -100000.
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 CurveWidgetPrivate::CurveWidgetPrivate(Gui* gui,
@@ -1594,5 +1594,5 @@ CurveWidgetPrivate::updateDopeSheetViewFrameRange()
     _gui->getDopeSheetEditor()->centerOn( zoomCtx.left(), zoomCtx.right() );
 }
 
-NATRON_NAMESPACE_EXIT
+}
 

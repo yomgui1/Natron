@@ -51,7 +51,7 @@ endsWith(const std::string& str,
             (str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0) );
 }
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 namespace StrUtils {
 
@@ -424,4 +424,4 @@ namespace StrUtils {
 
 } // StrUtils
 
-NATRON_NAMESPACE_EXIT
+}

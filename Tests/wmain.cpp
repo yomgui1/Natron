@@ -5,7 +5,7 @@
 #include "Engine/AppManager.h"
 #include "Engine/CLArgs.h"
 
-using namespace NATRON_NAMESPACE;
+using namespace Natron;
 
 #if defined(_WIN32) && defined(UNICODE)
 GTEST_API_ int wmain(int argc, wchar_t **argv)

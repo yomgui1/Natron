@@ -103,7 +103,7 @@ GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 #include "Gui/PropertiesBinWrapper.h"
 #include "Gui/Histogram.h"
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 void
@@ -528,7 +528,7 @@ Gui::keyPressEvent(QKeyEvent* e)
                 handleOpenFilesFromUrls( urls, QCursor::pos() );
             } else {
                 std::string error, output;
-                if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(str.toStdString(), &error, &output) ) {
+                if ( !Python::interpretPythonScript(str.toStdString(), &error, &output) ) {
                     _imp->_scriptEditor->appendToScriptEditor( QString::fromUtf8( error.c_str() ) );
                     ensureScriptEditorVisible();
                 } else if ( !output.empty() ) {
@@ -969,7 +969,7 @@ Gui::onUserCommandTriggered()
     if ( found != _imp->pythonCommands.end() ) {
         std::string err;
         std::string output;
-        if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(found->second, &err, &output) ) {
+        if ( !Python::interpretPythonScript(found->second, &err, &output) ) {
             getApp()->appendToScriptEditor(err);
         } else {
             getApp()->appendToScriptEditor(output);
@@ -1290,4 +1290,4 @@ Gui::dropEvent(QDropEvent* e)
     handleOpenFilesFromUrls( urls, mapToGlobal( e->pos() ) );
 } // dropEvent
 
-NATRON_NAMESPACE_EXIT
+}

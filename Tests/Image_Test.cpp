@@ -30,7 +30,7 @@
 #include "Engine/Image.h"
 #include "Engine/ViewIdx.h"
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 
 TEST(BitmapTest,
      SimpleRect)

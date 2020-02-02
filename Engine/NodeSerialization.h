@@ -69,7 +69,7 @@ GCC_DIAG_ON(unused-parameter)
 #define NODE_SERIALIZATION_INTRODUCES_TRACKER_CONTEXT 15
 #define NODE_SERIALIZATION_CURRENT_VERSION NODE_SERIALIZATION_INTRODUCES_TRACKER_CONTEXT
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 class NodeSerialization
 {
@@ -332,7 +332,7 @@ private:
         if (version >= NODE_SERIALIZATION_INTRODUCES_SCRIPT_NAME) {
             ar & ::boost::serialization::make_nvp("Plugin_script_name", _nodeScriptName);
         } else {
-            _nodeScriptName = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendly(_nodeLabel);
+            _nodeScriptName = Python::makeNameScriptFriendly(_nodeLabel);
         }
         ar & ::boost::serialization::make_nvp("Plugin_id", _pluginID);
 
@@ -360,7 +360,7 @@ private:
             ar & ::boost::serialization::make_nvp("Inputs_map", _oldInputs);
             if (version < NODE_SERIALIZATION_INTRODUCES_SCRIPT_NAME) {
                 for (U32 i = 0; i < _oldInputs.size(); ++i) {
-                    _oldInputs[i] = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendly(_oldInputs[i]);
+                    _oldInputs[i] = Python::makeNameScriptFriendly(_oldInputs[i]);
                 }
             }
         } else {
@@ -370,7 +370,7 @@ private:
         ar & ::boost::serialization::make_nvp("KnobsAge", _knobsAge);
         ar & ::boost::serialization::make_nvp("MasterNode", _masterNodeName);
         if (version < NODE_SERIALIZATION_INTRODUCES_SCRIPT_NAME) {
-            _masterNodeName = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendly(_masterNodeName);
+            _masterNodeName = Python::makeNameScriptFriendly(_masterNodeName);
         }
         _isNull = false;
 
@@ -390,7 +390,7 @@ private:
         if (version >= NODE_SERIALIZATION_INTRODUCES_MULTI_INSTANCE) {
             ar & ::boost::serialization::make_nvp("MultiInstanceParent", _multiInstanceParentName);
             if (version < NODE_SERIALIZATION_INTRODUCES_SCRIPT_NAME) {
-                _multiInstanceParentName = NATRON_PYTHON_NAMESPACE::makeNameScriptFriendly(_multiInstanceParentName);
+                _multiInstanceParentName = Python::makeNameScriptFriendly(_multiInstanceParentName);
             }
         }
 
@@ -434,9 +434,9 @@ private:
     BOOST_SERIALIZATION_SPLIT_MEMBER()
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
-BOOST_CLASS_VERSION(NATRON_NAMESPACE::NodeSerialization, NODE_SERIALIZATION_CURRENT_VERSION)
+BOOST_CLASS_VERSION(Natron::NodeSerialization, NODE_SERIALIZATION_CURRENT_VERSION)
 
 
 #endif // NODESERIALIZATION_H

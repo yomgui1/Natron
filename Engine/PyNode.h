@@ -43,8 +43,8 @@
 #include "Engine/RectD.h"
 #include "Engine/EngineFwd.h"
 
-NATRON_NAMESPACE_ENTER;
-NATRON_PYTHON_NAMESPACE_ENTER;
+namespace Natron {;
+namespace Python {;
 
 class ImageLayer
 {
@@ -385,13 +385,13 @@ public:
 
     double getPixelAspectRatio() const;
 
-    NATRON_NAMESPACE::ImageBitDepthEnum getBitDepth() const;
-    NATRON_NAMESPACE::ImagePremultiplicationEnum getPremult() const;
+    Natron::ImageBitDepthEnum getBitDepth() const;
+    Natron::ImagePremultiplicationEnum getPremult() const;
 
     void setPagesOrder(const QStringList& pages);
 };
 
-NATRON_PYTHON_NAMESPACE_EXIT
-NATRON_NAMESPACE_EXIT
+}
+}
 
 #endif // NODEWRAPPER_H

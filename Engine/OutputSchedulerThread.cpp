@@ -90,7 +90,7 @@
 
 #define NATRON_SCHEDULER_ABORT_AFTER_X_UNSUCCESSFUL_ITERATIONS 5000
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 ///Sort the frames by time and then by view
@@ -112,7 +112,7 @@ struct BufferedFrameCompare_less
 typedef std::multimap<BufferedFrameKey, BufferedFrame, BufferedFrameCompare_less> FrameBuffer;
 
 
-NATRON_NAMESPACE_ANONYMOUS_ENTER
+namespace {
 
 class MetaTypesRegistration
 {
@@ -124,7 +124,7 @@ public:
     }
 };
 
-NATRON_NAMESPACE_ANONYMOUS_EXIT
+}
 
 
 static MetaTypesRegistration registration;
@@ -1689,7 +1689,7 @@ OutputSchedulerThread::notifyFrameRendered(int frame,
             std::vector<std::string> args;
             std::string error;
             try {
-                NATRON_PYTHON_NAMESPACE::getFunctionArguments(cb, &error, &args);
+                Python::getFunctionArguments(cb, &error, &args);
             } catch (const std::exception& e) {
                 effect->getApp()->appendToScriptEditor( std::string("Failed to get signature of onFrameRendered callback: ")
                                                         + e.what() );
@@ -1961,7 +1961,7 @@ OutputSchedulerThread::runCallbackWithVariables(const QString& callback)
         script.append( QString::fromUtf8(")\n") );
 
         std::string err, output;
-        if ( !NATRON_PYTHON_NAMESPACE::interpretPythonScript(callback.toStdString(), &err, &output) ) {
+        if ( !Python::interpretPythonScript(callback.toStdString(), &err, &output) ) {
             effect->getApp()->appendToScriptEditor("Failed to run callback: " + err);
             throw std::runtime_error(err);
         } else if ( !output.empty() ) {
@@ -2206,7 +2206,7 @@ private:
             std::vector<std::string> args;
             std::string error;
             try {
-                NATRON_PYTHON_NAMESPACE::getFunctionArguments(cb, &error, &args);
+                Python::getFunctionArguments(cb, &error, &args);
             } catch (const std::exception& e) {
                 output->getApp()->appendToScriptEditor( std::string("Failed to get signature of beforeFrameRendered callback: ")
                                                         + e.what() );
@@ -2575,7 +2575,7 @@ DefaultScheduler::aboutToStartRender()
         std::vector<std::string> args;
         std::string error;
         try {
-            NATRON_PYTHON_NAMESPACE::getFunctionArguments(cb, &error, &args);
+            Python::getFunctionArguments(cb, &error, &args);
         } catch (const std::exception& e) {
             effect->getApp()->appendToScriptEditor( std::string("Failed to get signature of beforeRender callback: ")
                                                     + e.what() );
@@ -2634,7 +2634,7 @@ DefaultScheduler::onRenderStopped(bool aborted)
         std::vector<std::string> args;
         std::string error;
         try {
-            NATRON_PYTHON_NAMESPACE::getFunctionArguments(cb, &error, &args);
+            Python::getFunctionArguments(cb, &error, &args);
         } catch (const std::exception& e) {
             effect->getApp()->appendToScriptEditor( std::string("Failed to get signature of afterRender callback: ")
                                                     + e.what() );
@@ -4017,7 +4017,7 @@ ViewerCurrentFrameRequestRendererBackup::threadLoopOnce(const GenericThreadStart
     return eThreadStateActive;
 }
 
-NATRON_NAMESPACE_EXIT
+}
 
-NATRON_NAMESPACE_USING
+using namespace Natron;
 #include "moc_OutputSchedulerThread.cpp"

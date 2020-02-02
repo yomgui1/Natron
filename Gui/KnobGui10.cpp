@@ -38,7 +38,7 @@
 #include "Gui/KnobGuiPrivate.h"
 #include "Gui/KnobUndoCommand.h" // SetExpressionCommand...
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 
 void
@@ -558,7 +558,7 @@ KnobGui::toolTip() const
 
     if ( !realTt.isEmpty() ) {
         if (!isMarkdown) {
-            realTt = NATRON_NAMESPACE::convertFromPlainText(realTt.trimmed(), NATRON_NAMESPACE::WhiteSpaceNormal);
+            realTt = Natron::convertFromPlainText(realTt.trimmed(), Natron::WhiteSpaceNormal);
         }
         tt.append(realTt);
     }
@@ -779,4 +779,4 @@ KnobGui::getFieldContainer() const
     return _imp->field;
 }
 
-NATRON_NAMESPACE_EXIT
+}

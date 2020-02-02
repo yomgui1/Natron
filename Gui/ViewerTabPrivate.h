@@ -49,7 +49,7 @@ CLANG_DIAG_ON(uninitialized)
 
 #define NATRON_TRANSFORM_AFFECTS_OVERLAYS
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 struct ViewerTabPrivate
 {
@@ -225,6 +225,6 @@ struct ViewerTabPrivate
     bool hasInactiveNodeViewerContext(const NodePtr& node);
 };
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // Gui_ViewerTabPrivate_h

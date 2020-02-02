@@ -25,7 +25,7 @@
 #include <QtCore/QDir>
 #include <QtCore/QString>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 namespace QtCompat {
 inline bool
@@ -53,7 +53,7 @@ removeRecursively(const QString & dirName)
 }
 } // namespace QtCompat
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif
 
@@ -61,7 +61,7 @@ NATRON_NAMESPACE_EXIT
 #include <QtCore/QUrl>
 #include <QtCore/QFileInfo>
 
-NATRON_NAMESPACE_ENTER
+namespace Natron {
 
 namespace QtCompat {
 /*Removes the . and the extension from the filename and also
@@ -93,6 +93,6 @@ toLocalFileUrlFixed(const QUrl& url) { return url; }
 #endif // #if defined(Q_OS_MAC) && QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 } // namespace QtCompat
 
-NATRON_NAMESPACE_EXIT
+}
 
 #endif // NATRON_GLOBAL_QTCOMPAT_H

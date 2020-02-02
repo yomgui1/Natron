@@ -19,7 +19,7 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_OFF
 #include "effect_wrapper.h"
 
 // Extra includes
-NATRON_NAMESPACE_USING NATRON_PYTHON_NAMESPACE_USING
+using namespace Natron; using namespace Natron::Python;
 #include <PyNode.h>
 #include <PyParameter.h>
 #include <PyRoto.h>
@@ -455,8 +455,8 @@ static PyObject* Sbk_EffectFunc_getBitDepth(PyObject* self)
 
         if (!PyErr_Occurred()) {
             // getBitDepth()const
-            NATRON_NAMESPACE::ImageBitDepthEnum cppResult = NATRON_NAMESPACE::ImageBitDepthEnum(const_cast<const ::Effect*>(cppSelf)->getBitDepth());
-            pyResult = Shiboken::Conversions::copyToPython(SBK_CONVERTER(SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_IMAGEBITDEPTHENUM_IDX]), &cppResult);
+            Natron::ImageBitDepthEnum cppResult = Natron::ImageBitDepthEnum(const_cast<const ::Effect*>(cppSelf)->getBitDepth());
+            pyResult = Shiboken::Conversions::copyToPython(SBK_CONVERTER(SbkNatronEngineTypes[SBK_Natron_IMAGEBITDEPTHENUM_IDX]), &cppResult);
         }
     }
 
@@ -939,8 +939,8 @@ static PyObject* Sbk_EffectFunc_getPremult(PyObject* self)
 
         if (!PyErr_Occurred()) {
             // getPremult()const
-            NATRON_NAMESPACE::ImagePremultiplicationEnum cppResult = NATRON_NAMESPACE::ImagePremultiplicationEnum(const_cast<const ::Effect*>(cppSelf)->getPremult());
-            pyResult = Shiboken::Conversions::copyToPython(SBK_CONVERTER(SbkNatronEngineTypes[SBK_NATRON_NAMESPACE_IMAGEPREMULTIPLICATIONENUM_IDX]), &cppResult);
+            Natron::ImagePremultiplicationEnum cppResult = Natron::ImagePremultiplicationEnum(const_cast<const ::Effect*>(cppSelf)->getPremult());
+            pyResult = Shiboken::Conversions::copyToPython(SBK_CONVERTER(SbkNatronEngineTypes[SBK_Natron_IMAGEPREMULTIPLICATIONENUM_IDX]), &cppResult);
         }
     }
 
