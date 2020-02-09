@@ -512,7 +512,7 @@ win32-msvc*{
         else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../libs/qhttpserver/build/ -lqhttpserver
         else:*-xcode:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../libs/qhttpserver/src/build/Release/ -lqhttpserver
         else:*-xcode:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../libs/qhttpserver/src/build/Debug/ -lqhttpserver
-        else:unix: LIBS += -L$$OUT_PWD/../libs/qhttpserver/build/ -lqhttpserver
+        else:unix: LIBS += -L$$OUT_PWD/../libs/qhttpserver/ -lqhttpserver
 }
 
 win32-msvc*{
@@ -530,7 +530,7 @@ win32-msvc*{
         else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../libs/qhttpserver/build/debug/libqhttpserver.lib
         else:*-xcode:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../libs/qhttpserver/src/build/Release/libqhttpserver.a
         else:*-xcode:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../libs/qhttpserver/src/build/Debug/libqhttpserver.a
-        else:unix: PRE_TARGETDEPS += $$OUT_PWD/../libs/qhttpserver/build/libqhttpserver.a
+        else:unix: PRE_TARGETDEPS += $$OUT_PWD/../libs/qhttpserver/libqhttpserver.a
 }
 } # static-qhttpserver
 
@@ -555,7 +555,7 @@ win32-msvc*{
         else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../libs/hoedown/build/ -lhoedown
         else:*-xcode:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../libs/hoedown/build/Release/ -lhoedown
         else:*-xcode:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../libs/hoedown/build/Debug/ -lhoedown
-        else:unix: LIBS += -L$$OUT_PWD/../libs/hoedown/build/ -lhoedown
+        else:unix: LIBS += -L$$OUT_PWD/../libs/hoedown/ -lhoedown
 }
 
 win32-msvc*{
@@ -573,7 +573,7 @@ win32-msvc*{
         else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../libs/hoedown/build/debug/libhowdown.lib
         else:*-xcode:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../libs/hoedown/build/Release/libhoedown.a
         else:*-xcode:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../libs/hoedown/build/Debug/libhoedown.a
-        else:unix: PRE_TARGETDEPS += $$OUT_PWD/../libs/hoedown/build/libhoedown.a
+        else:unix: PRE_TARGETDEPS += $$OUT_PWD/../libs/hoedown/libhoedown.a
 }
 } # static-hoedown
 

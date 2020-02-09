@@ -3,7 +3,7 @@
 
 #include <shiboken.h>
 
-#include <Enums.h>
+#include "Global/Enums.h"
 
 #endif // SBK_Natron_H
 

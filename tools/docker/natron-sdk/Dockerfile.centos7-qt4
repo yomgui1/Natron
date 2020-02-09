@@ -42,13 +42,16 @@ RUN yum install -y rh-git29
 # Developing tools
 RUN yum install -y nano which less nasm time bzip2 p7zip-plugins ccache gettext wget zip unzip rsync file tree gperf gcc-c++ xz patch bison flex libtool-ltdl texinfo make cmake3 autoconf-archive cppunit-devel
 
-RUN yum install -y python-docutils  python-pygments python-jinja2 python-sphinx
+RUN yum install -y python-docutils python-pygments python-jinja2 python-sphinx python3-pip
 
 # X11/OpenGL native (baseline for Natron, not included in final binary)
 RUN yum install -y "libX*devel" "*GL*devel" "*xcb*devel" "xorg*devel" xorg-x11-fonts-Type1 libdrm-devel "mesa-libGL*-devel" "mesa-libEGL*-devel" "*glut*devel" "libxkbcommon*devel"
 
 # Add perl modules for qt4webkit
 RUN yum install -y perl-version perl-XML-Parser perl-Digest-MD5
+
+# Add meson and ninja
+RUN pip3 install meson ninja
 
 # Add to system some libraries needed by GIT as build scripts destroy LD_LIBRARY_PATH
 RUN ldconfig /opt/rh/httpd24/root/usr/lib64/
@@ -71,13 +74,20 @@ ENV SRC_PATH="$NATRON_TARBALLS"
 ENV TMP_PATH="/tmp/natron-tmp"
 ENV OFX_PLUGIN_PATH=/usr/OFX
 
+ENV PATH=$SDK/bin${PATH:+:$PATH}
+ENV LD_LIBRARY_PATH=/usr/lib64:/usr/lib:$SDK/lib64:$SDK/lib:$SDK/qt4/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+ENV PKG_CONFIG_PATH=$SDK/qt4/lib/pkgconfig:$SDK/lib64/pkgconfig:$SDK/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}
+ENV CPPFLAGS="-I$SDK/include"
+ENV LDFLAGS="-L$SDK/lib -L$SDK/lib64"
+
 # Backup volumes
 VOLUME $SDK
 VOLUME $NATRON_BUILD_DIR
 VOLUME $OFX_PLUGIN_PATH
 VOLUME $NATRON_TARBALLS
 
-WORKDIR $NATRON_SRC_DIR/tools/jenkins
+WORKDIR $NATRON_BUILD_DIR
 
-ENTRYPOINT ["scl", "enable", "devtoolset-8", "httpd24", "rh-git29", "--"]
-CMD bash
+RUN echo -e "#!/bin/bash\n"'scl enable devtoolset-8 httpd24 rh-git29 -- "${@:-bash}"' > /usr/bin/run.sh && chmod +x /usr/bin/run.sh
+
+CMD run.sh

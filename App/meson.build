@@ -1,0 +1,30 @@
+################################################################################
+## App
+################################################################################
+
+executable('Natron',
+           'NatronApp_main.cpp',
+           include_directories: incs,
+           build_rpath: '$ORIGIN/../lib',
+           dependencies: [Engine_dep,
+                          Gui_dep,
+                          HostSupport_dep,
+                          libmv_dep,
+                          openmvg_dep,
+                          ceres_dep,
+                          glog_dep,
+                          gflags_dep,
+                          qhttpserver_dep,
+                          hoedown_dep,
+                          libtess_dep,
+                          python_dep,
+                          shiboken_dep,
+                          pyside_dep,
+                          qt4_dep,
+                          cairo_dep,
+                          pixman1_dep,
+                          freetype2_dep,
+                          fontconfig_dep,
+                          expat_dep,
+                          x11_dep,
+                          dl_dep])

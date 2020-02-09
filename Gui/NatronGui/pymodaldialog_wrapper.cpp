@@ -23,7 +23,7 @@ CLANG_DIAG_OFF(header-guard)
 
 // Extra includes
 using namespace Natron; using namespace Natron::Python;
-#include <PyParameter.h>
+#include "Engine/PyParameter.h"
 #include <QList>
 #include <qaction.h>
 #include <qbitmap.h>

@@ -19,8 +19,8 @@ GCC_DIAG_UNUSED_LOCAL_TYPEDEFS_OFF
 
 // Extra includes
 using namespace Natron; using namespace Natron::Python;
-#include <PyAppInstance.h>
-#include <PyGuiApp.h>
+#include "Engine/PyAppInstance.h"
+#include "Gui/PyGuiApp.h"
 
 
 // Native ---------------------------------------------------------

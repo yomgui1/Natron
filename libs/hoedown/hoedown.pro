@@ -20,7 +20,7 @@ include(../../config.pri)
 
 OBJECTS_DIR = build
 MOC_DIR = build
-DESTDIR = build
+DESTDIR = 
 
 # Input
 HEADERS += \

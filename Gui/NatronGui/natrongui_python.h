@@ -26,12 +26,12 @@ CLANG_DIAG_OFF(keyword-macro)
 CLANG_DIAG_ON(deprecated)
 CLANG_DIAG_ON(uninitialized)
 CLANG_DIAG_ON(keyword-macro)
-#include <natronengine_python.h>
+#include "Engine/NatronEngine/natronengine_python.h"
 
 // Binded library includes
-#include <PyGuiApp.h>
-#include <PythonPanels.h>
-#include <PyGlobalGui.h>
+#include "PyGuiApp.h"
+#include "PythonPanels.h"
+#include "PyGlobalGui.h"
 // Conversion Includes - Primitive Types
 #include <QStringList>
 #include <qabstractitemmodel.h>

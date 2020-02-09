@@ -21,17 +21,17 @@ CLANG_DIAG_ON(uninitialized)
 CLANG_DIAG_ON(keyword-macro)
 
 // Binded library includes
-#include <Enums.h>
-#include <RectD.h>
-#include <RectI.h>
-#include <PyExprUtils.h>
-#include <PyTracker.h>
-#include <PyParameter.h>
-#include <PyRoto.h>
-#include <PyGlobalFunctions.h>
-#include <PyAppInstance.h>
-#include <PyNodeGroup.h>
-#include <PyNode.h>
+#include "Global/Enums.h"
+#include "Engine/RectD.h"
+#include "Engine/RectI.h"
+#include "Engine/PyExprUtils.h"
+#include "Engine/PyTracker.h"
+#include "Engine/PyParameter.h"
+#include "Engine/PyRoto.h"
+#include "Engine/PyGlobalFunctions.h"
+#include "Engine/PyAppInstance.h"
+#include "Engine/PyNodeGroup.h"
+#include "Engine/PyNode.h"
 // Conversion Includes - Primitive Types
 #include <QString>
 #include <signalmanager.h>
