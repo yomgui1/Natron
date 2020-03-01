@@ -237,7 +237,7 @@ struct KnobHelperPrivate
     KnobHelper* publicInterface;
 
 #ifdef DEBUG
-#pragma message WARN("This should be a weak_ptr")
+// #pragma message WARN("This should be a weak_ptr")
 #endif
     KnobHolder* holder;
     mutable QMutex labelMutex;

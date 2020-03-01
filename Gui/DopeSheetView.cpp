@@ -1951,7 +1951,7 @@ DopeSheetViewPrivate::computeRetimeRange(DSNode *retimer)
 
         FrameRange range;
 #ifdef DEBUG
-#pragma message WARN("only considering first view")
+// #pragma message WARN("only considering first view")
 #endif
         {
             const FrameRangesMap& rangeFirst = framesFirst[0];

@@ -419,7 +419,7 @@ ReadNodePrivate::cloneGenericKnobs()
                         std::string optionID = choiceData->_choiceString;
                         // first, try to get the id the easy way ( see choiceMatch() )
                         int id = isChoice->choiceRestorationId(choiceSerialized, optionID);
-#pragma message WARN("TODO: choice id filters")
+// #pragma message WARN("TODO: choice id filters")
                         //if (id < 0) {
                         //    // no luck, try the filters
                         //    filterKnobChoiceOptionCompat(getPluginID(), serialization.getPluginMajorVersion(), serialization.getPluginMinorVersion(), projectInfos.vMajor, projectInfos.vMinor, projectInfos.vRev, serializedName, &optionID);
@@ -553,7 +553,7 @@ ReadNodePrivate::destroyReadNode()
     
     //This will remove the GUI of non generic parameters
     _publicInterface->recreateKnobs(true);
-#pragma message WARN("TODO: if Gui, refresh pluginID, version, help tooltip in DockablePanel to reflect embedded node change")
+// #pragma message WARN("TODO: if Gui, refresh pluginID, version, help tooltip in DockablePanel to reflect embedded node change")
 
     QMutexLocker k(&embeddedPluginMutex);
     if (embeddedPlugin) {
@@ -794,7 +794,7 @@ ReadNodePrivate::createReadNode(bool throwErrors,
 
     //This will refresh the GUI with this Reader specific parameters
     _publicInterface->recreateKnobs(true);
-#pragma message WARN("TODO: if Gui, refresh pluginID, version, help tooltip in DockablePanel to reflect embedded node change")
+// #pragma message WARN("TODO: if Gui, refresh pluginID, version, help tooltip in DockablePanel to reflect embedded node change")
 
     KnobIPtr knob = node ? node->getKnobByName(kOfxImageEffectFileParamName) : _publicInterface->getKnobByName(kOfxImageEffectFileParamName);
     if (knob) {

@@ -4172,7 +4172,7 @@ Python::makeNameScriptFriendly(const std::string& str)
 }
 
 #if !defined(NDEBUG) && !defined(DEBUG_PYTHON_GIL)
-#pragma message WARN("define DEBUG_PYTHON_GIL in AppManager.h to debug Python GIL issues")
+// #pragma message WARN("define DEBUG_PYTHON_GIL in AppManager.h to debug Python GIL issues")
 #endif
 
 #ifdef DEBUG_PYTHON_GIL
