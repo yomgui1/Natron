@@ -36,14 +36,6 @@
 #define __NATRON_LINUX__
 #endif
 
-#ifndef SBK_RUN
-#ifdef __cplusplus
-// Establish the name space.
-namespace Natron { }
-namespace Python { }
-#endif
-#endif
-
 #define NATRON_APPLICATION_DESCRIPTION "Open-source, cross-platform, nodal video compositing software."
 #define NATRON_COPYRIGHT "Copyright (C) 2013-2018 INRIA and Alexandre Gauthier-Foichat."
 #define NATRON_ORGANIZATION_NAME "INRIA"
