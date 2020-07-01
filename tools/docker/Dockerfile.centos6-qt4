@@ -1,0 +1,55 @@
+#
+# Copyright 2019 Guillaume Roguez <yomgui1@gmail.com>
+#
+# WARNING: this script must run from the top directory of Natron sources
+#
+
+FROM centos:6
+
+# Enable EPEL repository (https://fedoraproject.org/wiki/EPEL)
+RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+
+# RPM-Fusion repositories (https://rpmfusion.org/Configuration)
+RUN yum install -y --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-6.noarch.rpm
+
+# devtoolsets from RedHat Software Collections
+RUN yum install -y centos-release-scl
+
+# GCC 8 toolchain
+RUN yum install -y devtoolset-8-toolchain
+
+# Update base image
+RUN yum update -y
+
+# From genuine setup-contos6.sh
+RUN yum install -y zip gettext make wget glibc-devel glibc-devel.i686 vixie-cron crontabs unzip rsync git screen file tree bc gcc-c++ kernel-devel "libX*devel" "*GL*devel" "*xcb*devel" "xorg*devel" xorg-x11-fonts-Type1 libdrm-devel "mesa*devel" "*glut*devel" xz patch bison flex libtool-ltdl-devel texinfo nano cmake
+
+RUN yum install -y python-docutils  python-pygments python-jinja2 python-sphinx
+
+# Remove png/jpeg dev (that's also remove qt-devel)
+RUN yum remove -y libpng-devel libjpeg-turbo-devel
+
+# Replace 1.x git by 2.x version
+RUN yum remove -y git
+RUN yum install -y rh-git29
+
+# Natron Environment
+ENV NATRON_SRC_DIR=/opt/Natron-src
+ENV NATRON_SDK_DIR=/opt/Natron-sdk
+ENV NATRON_TARBALLS=/opt/Natron-tarballs
+
+# Pre-setup some env vars used by build scripts
+ENV BUILD_FROM_DOCKER=1
+ENV SDK="$NATRON_SDK_DIR"
+ENV SRC_PATH="$NATRON_TARBALLS"
+ENV TMP_PATH="/tmp/natron-tmp"
+ENV OFX_PLUGIN_PATH=/usr/OFX
+
+VOLUME $SDK
+VOLUME $OFX_PLUGIN_PATH
+VOLUME $NATRON_TARBALLS
+
+WORKDIR $NATRON_SRC_DIR/tools/jenkins
+
+ENTRYPOINT ["scl", "enable", "devtoolset-8", "rh-git29", "--"]
+CMD bash

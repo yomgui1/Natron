@@ -1,0 +1,8 @@
+boost-serialization-lib: LIBS += -lboost_serialization
+boost: LIBS += -lboost_thread -lboost_system
+
+# Use system cairo
+cairo {
+PKGCONFIG += cairo
+LIBS -= $$system(pkg-config --variable=libdir cairo)/libcairo.a
+}

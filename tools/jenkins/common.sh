@@ -23,8 +23,8 @@ if [ -z "${CWD:-}" ]; then
 fi
 
 # Set common paths used across scripts
-TMP_PATH="${WORKSPACE:-}/tmp"
-SRC_PATH="${WORKSPACE:-}/src"
+TMP_PATH=${TMP_PATH:-"$CWD/tmp"}
+SRC_PATH=${SRC_PATH:-"$CWD/src"}
 INC_PATH="$CWD/include"
 # posix name for temporary directory
 TMPDIR=${TMPDIR:-/tmp}
@@ -39,6 +39,8 @@ TIMEOUT="timeout"
 # tell curl to continue downloads and follow redirects
 curlopts="--location --continue-at -"
 CURL="curl $curlopts"
+
+[ -d "$TMP_PATH" ] || mkdir -p "$TMP_PATH"
 
 # Get OS
 #
@@ -59,7 +61,9 @@ Darwin)
     ;;
 esac
 
-unset LD_LIBRARY_PATH LD_RUN_PATH DYLD_LIBRARY_PATH LIBRARY_PATH CPATH PKG_CONFIG_PATH
+#unset LD_LIBRARY_PATH LD_RUN_PATH DYLD_LIBRARY_PATH LIBRARY_PATH CPATH PKG_CONFIG_PATH
+unset LD_RUN_PATH DYLD_LIBRARY_PATH LIBRARY_PATH CPATH PKG_CONFIG_PATH
+
 # save the default PATH to avoid growing it each time we source this file
 DEFAULT_PATH="${DEFAULT_PATH:-$PATH}"
 PATH="$DEFAULT_PATH"
@@ -172,6 +176,7 @@ if [ "$PKGOS" = "Windows" ]; then
 elif [ -x "$SDK_HOME/bin/git" ]; then
     GIT="env LD_LIBRARY_PATH=$SDK_HOME/lib $SDK_HOME/bin/git"
 fi
+echo "Found GIT version $($GIT --version | awk '{print $3}')"
 
 # The version of Python used by the SDK and to build Natron
 # Python 2 or 3, NOTE! v3 is probably broken, been untested for a long while
@@ -330,7 +335,7 @@ PKG_CONFIG_PATH=
 if [ "$PKGOS" = "Linux" ]; then
     PATH="$SDK_HOME/bin:$QTDIR/bin:$SDK_HOME/gcc/bin:$FFMPEG_PATH/bin:$LIBRAW_PATH/bin:$PATH"
     LIBRARY_PATH="$SDK_HOME/lib:$QTDIR/lib:$SDK_HOME/gcc/lib64:$SDK_HOME/gcc/lib:$FFMPEG_PATH/lib:$LIBRAW_PATH/lib"
-    LD_LIBRARY_PATH="$SDK_HOME/lib:$QTDIR/lib:$SDK_HOME/gcc/lib64:$SDK_HOME/gcc/lib:$FFMPEG_PATH/lib:$LIBRAW_PATH/lib"
+    LD_LIBRARY_PATH="$SDK_HOME/lib:$QTDIR/lib:$SDK_HOME/gcc/lib64:$SDK_HOME/gcc/lib:$FFMPEG_PATH/lib:$LIBRAW_PATH/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
     #LD_RUN_PATH="$SDK_HOME/lib:$QTDIR/lib:$SDK_HOME/gcc/lib:$FFMPEG_PATH/lib:$LIBRAW_PATH/lib"
     PKG_CONFIG_PATH="$SDK_HOME/lib/pkgconfig:$SDK_HOME/share/pkgconfig:$SDK_HOME/libdata/pkgconfig:$FFMPEG_PATH/lib/pkgconfig:$LIBRAW_PATH/lib/pkgconfig:$OSMESA_PATH/lib/pkgconfig:$QTDIR/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
 elif [ "$PKGOS" = "Windows" ]; then

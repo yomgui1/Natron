@@ -1,0 +1,108 @@
+#
+# Copyright 2019 Guillaume Roguez <yomgui1@gmail.com>
+#
+
+FROM fedora:29
+
+# RPM-Fusion repositories
+RUN dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-29.noarch.rpm
+RUN dnf update -y
+
+# Development tools and libraries
+RUN dnf groupinstall -y 'Development Tools' 'C Development Tools and Libraries'
+
+# Basic developing tools
+RUN dnf install -y wget cmake gperf nano xz cppunit meson bzip2
+
+# SDK for X11/OpenGL
+RUN dnf install -y "libX*devel" "*xcb*devel" libxkbcommon-devel libxkbcommon-x11-devel "xorg*devel" xorg-x11-fonts-Type1 libdrm-devel "mesa*devel" freeglut-devel
+
+# Tools to build PySide2
+RUN dnf install -y libxslt-devel clang-devel llvm-devel
+
+# Other Natron deps
+RUN dnf install -y \
+	pcre-devel \
+	pcre-static \
+	pcre2-devel \
+	pcre2-static \
+	libmount-devel \
+	dbus-devel \
+	at-spi2-core-devel \
+	boost-devel \
+ 	cairo-devel \
+	readline-devel \
+	bzip2-devel \
+	libzip-devel
+#	libselinux-devel
+
+# OPENFX Plugin deps
+RUN dnf install -y \
+	ImageMagick-c++-devel \
+	pango-devel \
+	poppler-glib-devel \
+	pango-devel \
+	OpenColorIO-devel \
+	librsvg2-devel \
+ 	librevenge-devel \
+ 	libcdr-devel \
+ 	fftw-devel \
+ 	libtool-ltdl-devel
+
+# OPENFX Plugin deps
+# RUN dnf install -y \
+# 	ffmpeg-devel \
+# 	OpenImageIO-devel \
+# 	OpenEXR-devel \
+# 	OpenColorIO-devel \
+# 	LibRaw-devel \
+# 	jasper-devel \
+# 	libtiff-devel \
+# 	libwebp-devel \
+# 	mariadb-devel \
+# 	postgresql-devel \
+# 	gdk-pixbuf2-devel \
+# 	poppler-devel \
+# 	poppler-glib-devel \
+# 	librsvg2-devel \
+# 	ImageMagick-devel \
+# 	ImageMagick-c++-devel \
+# 	pango-devel \
+# 	librevenge-devel \
+# 	libcdr-devel \
+# 	fftw-devel \
+# 	libtool-ltdl-devel
+
+# Natron Environment
+ENV NATRON_SRC_DIR=/opt/Natron-src
+ENV NATRON_BUILD_DIR=/opt/Natron-build
+ENV NATRON_TARBALLS=/opt/Natron-tarballs
+
+# Pre-setup some env vars used by build scripts
+ENV SDK=/opt/Natron-sdk
+ENV PATH="$SDK/bin${PATH:+:$PATH}"
+ENV LD_LIBRARY_PATH="$SDK/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+ENV PKG_CONFIG_PATH="$SDK/lib/pkgconfig:/usr/lib64/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
+ENV OFX_PLUGIN_PATH="/usr/OFX"
+
+# OpenFX Plugins Environment
+ENV SEEXPR_HOME="$SDK"
+ENV PATHTOROOT="$NATRON_SRC_DIR/libs/OpenFX/Support"
+ENV OBJECTPATH="$NATRON_BUILD_DIR/tmp"
+
+# Customize qmake config
+COPY configs/config.pri.redhat ${NATRON_SRC_DIR}/
+
+# Prepare SDK volume tree
+RUN mkdir -p $SDK/lib && mkdir -p $SDK/bin && cd $SDK && \
+	ln -s lib lib64 && \
+	cd bin && \
+	ln -s ../plugins/platforms platforms && \
+	ln -s ../plugins/xcbglintegrations xcbglintegrations
+
+VOLUME $SDK
+VOLUME $NATRON_BUILD_DIR
+VOLUME $OFX_PLUGIN_PATH
+VOLUME $NATRON_TARBALLS
+
+WORKDIR $NATRON_BUILD_DIR
