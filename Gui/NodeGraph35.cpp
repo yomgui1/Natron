@@ -37,6 +37,7 @@ CLANG_DIAG_OFF(uninitialized)
 #include <QMenu>
 #include <QApplication>
 #include <QClipboard>
+#include <QMimeData>
 GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 CLANG_DIAG_ON(deprecated)
 CLANG_DIAG_ON(uninitialized)

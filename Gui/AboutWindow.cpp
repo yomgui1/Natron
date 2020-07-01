@@ -577,6 +577,7 @@ AboutWindow::updateLibrariesVersions()
     libsText += QString::fromUtf8("<p> Ceres %1 </p>").arg( appPTR->getCeresVersion() );
     libsText += QString::fromUtf8("<p> OpenMVG %1 </p>").arg( appPTR->getOpenMVGVersion() );
 
+#if 0
     std::list<OpenGLRendererInfo> openGLRenderers;
     OSGLContext::getGPUInfos(openGLRenderers);
     if ( !openGLRenderers.empty() ) {
@@ -598,6 +599,7 @@ AboutWindow::updateLibrariesVersions()
     int mesaMajor, mesaMinor, mesaRev;
     OSGLContext_osmesa::getOSMesaVersion(&mesaMajor, &mesaMinor, &mesaRev);
     libsText += QString::fromUtf8("<p> OSMesa %1.%2.%3 </p>").arg(mesaMajor).arg(mesaMinor).arg(mesaRev);
+#endif
 #endif
 
     _libsText->setText(libsText);

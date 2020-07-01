@@ -33,6 +33,10 @@
 #include <QMouseEvent>
 #include <QtCore/QByteArray>
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#include <QWindow>
+#endif
+
 #include "Engine/OverlayInteractBase.h"
 #include "Engine/Knob.h"
 #include "Engine/AppInstance.h"
@@ -216,7 +220,7 @@ double
 CustomParamInteract::getScreenPixelRatio() const
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-    return windowHandle()->devicePixelRatio()
+    return windowHandle()->devicePixelRatio();
 #else
     return 1.;
 #endif

@@ -202,6 +202,7 @@ pch
 *repo.sh*
 *local.sh*
 OpenColorIO-Configs
+OpenColorIO-Configs-Natron-v*
 PortIndex
 PortIndex.quick
 *.7z*

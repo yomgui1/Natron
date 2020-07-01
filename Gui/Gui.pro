@@ -56,7 +56,6 @@ DEPENDPATH += $$PWD/../Engine
 DEPENDPATH += $$PWD/../Global
 
 INCLUDEPATH += $$PWD/../Engine
-INCLUDEPATH += $$PWD/../Engine/NatronEngine
 INCLUDEPATH += $$PWD/../Global
 
 #qhttpserver
@@ -64,8 +63,6 @@ INCLUDEPATH += $$PWD/../libs/qhttpserver/src
 
 #To overcome wrongly generated #include <...> by shiboken
 INCLUDEPATH += $$PWD
-INCLUDEPATH += $$PWD/NatronGui
-DEPENDPATH += $$PWD/NatronGui
 
 win32-msvc* {
         CONFIG(64bit) {
@@ -225,13 +222,7 @@ SOURCES += \
     ViewerTabOverlays.cpp \
     ViewerTabPrivate.cpp \
     ViewerToolButton.cpp \
-    ticks.cpp \
-    NatronGui/guiapp_wrapper.cpp \
-    NatronGui/natrongui_module_wrapper.cpp \
-    NatronGui/pyguiapplication_wrapper.cpp \
-    NatronGui/pymodaldialog_wrapper.cpp \
-    NatronGui/pypanel_wrapper.cpp \
-    NatronGui/pytabwidget_wrapper.cpp \
+    ticks.cpp
 
 HEADERS += \
     AboutWindow.h \
@@ -331,7 +322,6 @@ HEADERS += \
     PropertiesBinWrapper.h \
     PyGlobalGui.h \
     PyGuiApp.h \
-    Pyside_Gui_Python.h \
     PythonPanels.h \
     QtEnumConvert.h \
     RegisteredTabs.h \
@@ -384,13 +374,57 @@ HEADERS += \
     ../libs/OpenFX/include/nuke/fnOfxExtensions.h \
     ../libs/OpenFX/include/nuke/fnPublicOfxExtensions.h \
     ../libs/OpenFX/include/tuttle/ofxReadWrite.h \
-    ../libs/OpenFX_extensions/ofxhParametricParam.h \
-    NatronGui/guiapp_wrapper.h \
-    NatronGui/natrongui_python.h \
-    NatronGui/pyguiapplication_wrapper.h \
-    NatronGui/pymodaldialog_wrapper.h \
-    NatronGui/pypanel_wrapper.h \
-    NatronGui/pytabwidget_wrapper.h \
+    ../libs/OpenFX_extensions/ofxhParametricParam.h
+
+
+# Shiboken generated files for Qt4
+equals(QT_MAJOR_VERSION, 4) {
+INCLUDEPATH += $$PWD/../Engine/NatronEngine_Qt4
+INCLUDEPATH += $$PWD/NatronGui_Qt4
+DEPENDPATH += $$PWD/NatronGui_Qt4
+
+SOURCES += \
+    NatronGui_Qt4/guiapp_wrapper.cpp \
+    NatronGui_Qt4/natrongui_module_wrapper.cpp \
+    NatronGui_Qt4/pyguiapplication_wrapper.cpp \
+    NatronGui_Qt4/pymodaldialog_wrapper.cpp \
+    NatronGui_Qt4/pypanel_wrapper.cpp \
+    NatronGui_Qt4/pytabwidget_wrapper.cpp
+
+HEADERS += \
+    Pyside_Gui_Python.h \
+    NatronGui_Qt4/guiapp_wrapper.h \
+    NatronGui_Qt4/natrongui_python.h \
+    NatronGui_Qt4/pyguiapplication_wrapper.h \
+    NatronGui_Qt4/pymodaldialog_wrapper.h \
+    NatronGui_Qt4/pypanel_wrapper.h \
+    NatronGui_Qt4/pytabwidget_wrapper.h
+}
+
+# Shiboken2 generated files for Qt5
+equals(QT_MAJOR_VERSION, 5) {
+INCLUDEPATH += $$PWD/../Engine/NatronEngine_Qt5
+INCLUDEPATH += $$PWD/NatronGui_Qt5
+DEPENDPATH += $$PWD/NatronGui_Qt5
+
+SOURCES += \
+    NatronGui_Qt5/natrongui_module_wrapper.cpp \
+    NatronGui_Qt5/natron_python_guiapp_wrapper.cpp \
+    NatronGui_Qt5/natron_python_pyguiapplication_wrapper.cpp \
+    NatronGui_Qt5/natron_python_pymodaldialog_wrapper.cpp \
+    NatronGui_Qt5/natron_python_pypanel_wrapper.cpp \
+    NatronGui_Qt5/natron_python_pytabwidget_wrapper.cpp
+
+HEADERS += \
+    Pyside2_Gui_Python.h \
+    NatronGui_Qt5/natron_python_guiapp_wrapper.h \
+    NatronGui_Qt5/natrongui_python.h \
+    NatronGui_Qt5/natron_python_pyguiapplication_wrapper.h \
+    NatronGui_Qt5/natron_python_pymodaldialog_wrapper.h \
+    NatronGui_Qt5/natron_python_pypanel_wrapper.h \
+    NatronGui_Qt5/natron_python_pytabwidget_wrapper.h
+}
+
 
 RESOURCES += \
     GuiResources.qrc

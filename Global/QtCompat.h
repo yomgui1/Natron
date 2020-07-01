@@ -22,7 +22,6 @@
 #include "Global/Macros.h"
 
 #include <QtCore/QtGlobal> // for Q_OS_*
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #include <QtCore/QDir>
 #include <QtCore/QString>
 
@@ -55,8 +54,6 @@ removeRecursively(const QString & dirName)
 } // namespace QtCompat
 
 NATRON_NAMESPACE_EXIT
-
-#endif
 
 #include <QtCore/QString>
 #include <QtCore/QUrl>

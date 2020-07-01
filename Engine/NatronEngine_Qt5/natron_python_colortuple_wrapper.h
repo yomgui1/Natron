@@ -1,0 +1,7 @@
+#ifndef SBK_NATRON_PYTHON_COLORTUPLE_H
+#define SBK_NATRON_PYTHON_COLORTUPLE_H
+
+#include <PyParameter.h>
+
+#endif // SBK_NATRON_PYTHON_COLORTUPLE_H
+

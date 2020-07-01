@@ -62,6 +62,7 @@ GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 #include <QCursor>
 #include <QCheckBox>
 #include <QTreeView>
+#include <QMimeData>
 
 #include "Global/QtCompat.h"
 

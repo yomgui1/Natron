@@ -3784,8 +3784,10 @@ NATRON_PYTHON_NAMESPACE::interpretPythonScript(const std::string& script,
     status = PyRun_SimpleString(script.c_str());
 #else
     PyObject* dict = PyModule_GetDict(mainModule);
+    PyObject* v = nullptr;
 
-    PyErr_Clear();
+    if (not PyErr_Occurred()) {
+        PyErr_Clear();
 
     ///This is faster than PyRun_SimpleString since is doesn't call PyImport_AddModule("__main__")
     PyObject* v = PyRun_String(script.c_str(), Py_file_input, dict, 0);

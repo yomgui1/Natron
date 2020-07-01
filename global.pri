@@ -443,6 +443,7 @@ unix {
          cairo {
              PKGCONFIG += pixman-1
              LIBS +=  $$system(pkg-config --variable=libdir cairo)/libcairo.a
+             #y PKGCONFIG += pixman-1 cairo
          }
          LIBS += -lrt
          QMAKE_LFLAGS += '-Wl,-rpath,\'\$$ORIGIN/../lib\',-z,origin'
@@ -467,12 +468,21 @@ unix {
           PYTHON_INCLUDEPATH = $$find(PYTHON_CFLAGS, ^-I.*)
           PYTHON_INCLUDEPATH ~= s/^-I(.*)/\\1/g
           INCLUDEPATH *= $$PYTHON_INCLUDEPATH
+          #y QMAKE_CXXFLAGS += $$PYTHON_CFLAGS
      }
 
      equals(QT_MAJOR_VERSION, 5) {
          shiboken:  INCLUDEPATH += $$system(python2 -c \"from distutils.sysconfig import get_python_lib; print(get_python_lib())\")/PySide2/include/shiboken
     	 pyside:    INCLUDEPATH += $$system(python2 -c \"from distutils.sysconfig import get_python_lib; print(get_python_lib())\")/PySide2/include/PySide2
    	 pyside:    INCLUDEPATH += $$system(python2 -c \"from distutils.sysconfig import get_python_lib; print(get_python_lib())\")/PySide2/include/PySide2/QtCore
+	 #y    PYTHON_LIB_PATH = $$system(python2 -c \"from distutils.sysconfig import get_python_lib; print(get_python_lib())\")
+	 #y    shiboken:  INCLUDEPATH += $$PYTHON_LIB_PATH/shiboken2_generator/include
+	 #y	 shiboken:  LIBS += $$PYTHON_LIB_PATH/shiboken2/libshiboken2-python2.7.so.5.12
+	 #y	 pyside:    INCLUDEPATH += $$PYTHON_LIB_PATH/PySide2/include
+	 #y	 pyside:    INCLUDEPATH += $$PYTHON_LIB_PATH/PySide2/include/QtCore
+	 #y	 pyside:    INCLUDEPATH += $$PYTHON_LIB_PATH/PySide2/include/QtGui
+	 #y	 pyside:    QMAKE_CXXFLAGS += -DBUILD_FOR_PYSIDE2
+	 #y	 pyside:    LIBS += $$PYTHON_LIB_PATH/PySide2/libpyside2-python2.7.so.5.12
      }
 
      equals(QT_MAJOR_VERSION, 4) {

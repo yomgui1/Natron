@@ -88,7 +88,7 @@ PyGuiApplication::getGuiInstance(int idx) const
         }
         GuiApp* cppApp = 0;
         if (pyApp && Shiboken::Object::isValid(pyApp)) {
-            cppApp = (GuiApp*)Shiboken::Conversions::cppPointer(SbkNatronGuiTypes[SBK_GUIAPP_IDX], (SbkObject*)pyApp);
+            cppApp = (GuiApp*)Shiboken::Conversions::cppPointer(SbkNatronGuiTypes[SBK_NATRON_PYTHON_GUIAPP_IDX], (SbkObject*)pyApp);
         }
         NATRON_PYTHON_NAMESPACE::interpretPythonScript("del " kPythonTmpCheckerVariable, 0, 0);
         NATRON_PYTHON_NAMESPACE::clearPythonStdErr();

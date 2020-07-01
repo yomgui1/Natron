@@ -37,6 +37,16 @@
 #define __NATRON_LINUX__
 #endif
 
+#ifndef BUILD_FOR_PYSIDE2
+#warning "Using old Pyside for Qt4, remove me when Qt4 is dropped"
+#define SBK_NATRON_PYTHON_APP_IDX SBK_APP_IDX
+#define SBK_NATRON_PYTHON_EFFECT_IDX SBK_EFFECT_IDX
+#define SBK_NATRON_PYTHON_ITEMBASE_IDX SBK_ITEMBASE_IDX
+#define SBK_NATRON_PYTHON_ITEMSTABLE_IDX SBK_ITEMSTABLE_IDX
+#define SBK_NATRON_PYTHON_PARAM_IDX SBK_PARAM_IDX
+#define SBK_NATRON_PYTHON_GUIAPP_IDX SBK_GUIAPP_IDX
+#endif
+
 #ifdef SBK_RUN
 
 // run shiboken without the Natron namespace, and add NATRON_NAMESPACE_USING to each cpp afterwards

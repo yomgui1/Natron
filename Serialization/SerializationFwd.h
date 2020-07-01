@@ -80,8 +80,10 @@ typedef std::list<KnobSerializationPtr> KnobSerializationList;
 
 SERIALIZATION_NAMESPACE_EXIT
 
+#ifndef SBK2_RUN
 #ifndef YAML
 #error "YAML should be defined to YAML_NATRON"
+#endif
 #endif
 
 namespace YAML {

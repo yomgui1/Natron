@@ -1,0 +1,1901 @@
+<?xml version="1.0"?>
+<!-- ***** BEGIN LICENSE BLOCK *****
+  - This file is part of Natron <http://www.natron.fr/>,
+  - Copyright (C) 2016 INRIA and Alexandre Gauthier
+  -
+  - Natron is free software: you can redistribute it and/or modify
+  - it under the terms of the GNU General Public License as published by
+  - the Free Software Foundation; either version 2 of the License, or
+  - (at your option) any later version.
+  -
+  - Natron is distributed in the hope that it will be useful,
+  - but WITHOUT ANY WARRANTY; without even the implied warranty of
+  - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  - GNU General Public License for more details.
+  -
+  - You should have received a copy of the GNU General Public License
+  - along with Natron.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>
+   - ***** END LICENSE BLOCK ***** -->
+<typesystem package="NatronEngine">
+
+    <!--Load QtCore typesystem-->
+    <load-typesystem name="typesystem_core.xml" generate="no" />
+
+    <!--Primitives-->
+    <primitive-type name="bool"/>
+    <primitive-type name="double"/>
+    <primitive-type name="real"/>
+    <primitive-type name="int"/>
+    <primitive-type name="short"/>
+    <primitive-type name="unsigned short"/>
+    <primitive-type name="ushort"/>
+    <primitive-type name="unsigned int" />
+    <primitive-type name="signed int" />
+    <primitive-type name="char"/>
+    <primitive-type name="unsigned char"/>
+    <primitive-type name="long"/>
+    <primitive-type name="unsigned long"/>
+    <primitive-type name="long long"/>
+    <primitive-type name="unsigned long long"/>
+    <primitive-type name="std::string"/>
+    <primitive-type name="std::size_t" target-lang-api-name="PyLong">
+        <conversion-rule>
+            <native-to-target>
+                return PyLong_FromSize_t(%in);
+            </native-to-target>
+            <target-to-native>
+                <add-conversion type="PyLong">
+                    %out = %OUTTYPE(PyLong_AsSsize_t(%in));
+                </add-conversion>
+            </target-to-native>
+        </conversion-rule>
+    </primitive-type>
+
+    <!--std::pair from/to Python pair-->
+    <container-type name="std::pair" type="pair">
+        <include file-name="utility" location="global"/>
+        <conversion-rule>
+            <native-to-target>
+                PyObject* %out = PyTuple_New(2);
+                PyTuple_SET_ITEM(%out, 0, %CONVERTTOPYTHON[%INTYPE_0](%in.first));
+                PyTuple_SET_ITEM(%out, 1, %CONVERTTOPYTHON[%INTYPE_1](%in.second));
+                return %out;
+            </native-to-target>
+            <target-to-native>
+                <add-conversion type="PySequence">
+                    %out.first = %CONVERTTOCPP[%OUTTYPE_0](PySequence_Fast_GET_ITEM(%in, 0));
+                    %out.second = %CONVERTTOCPP[%OUTTYPE_1](PySequence_Fast_GET_ITEM(%in, 1));
+                </add-conversion>
+            </target-to-native>
+        </conversion-rule>
+    </container-type>
+
+    <!--Templates for type conversions used many times-->
+    <template name="stdListToPyList">
+        PyObject* %out = PyList_New((int) %in.size());
+        %INTYPE::const_iterator it = %in.begin();
+        for (int idx = 0; it != %in.end(); ++it, ++idx) {
+        %INTYPE_0 cppItem(*it);
+        PyList_SET_ITEM(%out, idx, %CONVERTTOPYTHON[%INTYPE_0](cppItem));
+        }
+        return %out;
+    </template>
+    <template name="pyListToStdList">
+        for (int i = 0; i &lt; PySequence_Size(%in); i++) {
+        Shiboken::AutoDecRef pyItem(PySequence_GetItem(%in, i));
+        %OUTTYPE_0 cppItem = %CONVERTTOCPP[%OUTTYPE_0](pyItem);
+        %out.push_back(cppItem);
+        }
+    </template>
+
+    <template name="stdVectorToPyList">
+        %INTYPE::size_type vectorSize = %in.size();
+        PyObject* %out = PyList_New((int) vectorSize);
+        for (%INTYPE::size_type idx = 0; idx &lt; vectorSize; ++idx) {
+        %INTYPE_0 cppItem(%in[idx]);
+        PyList_SET_ITEM(%out, idx, %CONVERTTOPYTHON[%INTYPE_0](cppItem));
+        }
+        return %out;
+    </template>
+    <template name="pySeqToStdVector">
+        int vectorSize = PySequence_Size(%in);
+        %out.reserve(vectorSize);
+        for (int idx = 0; idx &lt; vectorSize; ++idx) {
+        Shiboken::AutoDecRef pyItem(PySequence_GetItem(%in, idx));
+        %OUTTYPE_0 cppItem = %CONVERTTOCPP[%OUTTYPE_0](pyItem);
+        %out.push_back(cppItem);
+        }
+    </template>
+    <template name="stdMapToPyDict">
+        PyObject* %out = PyDict_New();
+        %INTYPE::const_iterator it = %in.begin();
+        for (; it != %in.end(); ++it) {
+        %INTYPE_0 key = it->first;
+        %INTYPE_1 value = it->second;
+        PyObject* pyKey = %CONVERTTOPYTHON[%INTYPE_0](key);
+        PyObject* pyValue = %CONVERTTOPYTHON[%INTYPE_1](value);
+        PyDict_SetItem(%out, pyKey, pyValue);
+        Py_DECREF(pyKey);
+        Py_DECREF(pyValue);
+        }
+        return %out;
+    </template>
+    <template name="pyDictToStdMap">
+        PyObject* key;
+        PyObject* value;
+        Py_ssize_t pos = 0;
+        while (PyDict_Next(%in, &amp;pos, &amp;key, &amp;value)) {
+        %OUTTYPE_0 cppKey = %CONVERTTOCPP[%OUTTYPE_0](key);
+        %OUTTYPE_1 cppValue = %CONVERTTOCPP[%OUTTYPE_1](value);
+        %out.insert(std::make_pair(cppKey, cppValue));
+        }
+    </template>
+
+
+    <!--std::list from/to Python list-->
+    <container-type name="std::list" type="list">
+        <include file-name="list" location="global"/>
+        <conversion-rule>
+            <native-to-target>
+                <insert-template name="stdListToPyList"/>
+            </native-to-target>
+            <target-to-native>
+                <add-conversion type="PySequence">
+                    <insert-template name="pyListToStdList"/>
+                </add-conversion>
+            </target-to-native>
+        </conversion-rule>
+    </container-type>
+
+    <!--std::vector from/to Python list-->
+    <container-type name="std::vector" type="vector">
+        <include file-name="vector" location="global"/>
+        <conversion-rule>
+            <native-to-target>
+                <insert-template name="stdVectorToPyList"/>
+            </native-to-target>
+            <target-to-native>
+                <add-conversion type="PySequence">
+                    <insert-template name="pySeqToStdVector"/>
+                </add-conversion>
+            </target-to-native>
+        </conversion-rule>
+    </container-type>
+
+    <!--std::set from/to Python map-->
+    <container-type name="std::set" type="set">
+        <include file-name="set" location="global"/>
+        <conversion-rule>
+            <native-to-target>
+                <insert-template name="stdListToPyList"/>
+            </native-to-target>
+            <target-to-native>
+                <add-conversion type="PySequence">
+                    <insert-template name="pyListToStdList"/>
+                </add-conversion>
+            </target-to-native>
+        </conversion-rule>
+    </container-type>
+
+    <!--std::map from/to Python map-->
+    <container-type name="std::map" type="map">
+        <include file-name="map" location="global"/>
+        <conversion-rule>
+            <native-to-target>
+                <insert-template name="stdMapToPyDict"/>
+            </native-to-target>
+            <target-to-native>
+                <add-conversion type="PyDict">
+                    <insert-template name="pyDictToStdMap"/>
+                </add-conversion>
+            </target-to-native>
+        </conversion-rule>
+    </container-type>
+
+    <!--std::multimap from/to Python map-->
+    <container-type name="std::multimap" type="multi-map">
+        <include file-name="map" location="global"/>
+        <conversion-rule>
+            <native-to-target>
+                <insert-template name="stdMapToPyDict"/>
+            </native-to-target>
+            <target-to-native>
+                <add-conversion type="PyDict">
+                    <insert-template name="pyDictToStdMap"/>
+                </add-conversion>
+            </target-to-native>
+        </conversion-rule>
+    </container-type>
+
+    <!--Natron global enums-->
+	<namespace-type name="Natron" generate="yes">
+		<enum-type name="ActionRetCodeEnum"/>
+		<enum-type name="MergingFunctionEnum"/>
+		<enum-type name="StandardButtonEnum" flags="StandardButtons"/>
+		<enum-type name="KeyframeTypeEnum"/>
+		<enum-type name="PixmapEnum"/>
+		<enum-type name="AnimationLevelEnum"/>
+		<enum-type name="ImageBitDepthEnum"/>
+		<enum-type name="ImagePremultiplicationEnum"/>
+		<enum-type name="OrientationEnum"/>
+		<enum-type name="RotoStrokeType"/>
+		<enum-type name="PenType"/>
+		<enum-type name="ViewerContextLayoutTypeEnum"/>
+		<enum-type name="TableChangeReasonEnum"/>
+
+		<object-type name="RectI">
+			<modify-function signature="operator=(Natron::RectI)" remove="all"/>
+			<modify-function signature="upscalePowerOfTwo(unsigned int)const" remove="all"/>
+			<modify-function signature="downscalePowerOfTwo(unsigned int)const" remove="all"/>
+			<modify-function signature="roundPowerOfTwoLargestEnclosed(unsigned int)const" remove="all"/>
+			<modify-function signature="roundPowerOfTwoSmallestEnclosing(unsigned int)const" remove="all"/>
+			<modify-function signature="downscalePowerOfTwoLargestEnclosed(unsigned int)const" remove="all"/>
+			<modify-function signature="downscalePowerOfTwoSmallestEnclosing(unsigned int)const" remove="all"/>
+			<modify-function signature="toCanonical(unsigned int,double,Natron::RectD,Natron::RectD*)const" remove="all"/>
+			<modify-function signature="toCanonical_noClipping(unsigned int,double,Natron::RectD*)const" remove="all"/>
+			<modify-function signature="debug()const" remove="all"/>
+			<modify-function signature="splitIntoSmallerRects(int)const" remove="all"/>
+		</object-type>
+
+		<object-type name="RectD">
+			<modify-function signature="operator=(Natron::RectD)" remove="all"/>
+			<modify-function signature="debug()const" remove="all"/>
+			<modify-function signature="toPixelEnclosing(unsigned int,double,Natron::RectI*)const" remove="all"/>
+		</object-type>
+	</namespace-type>
+
+	<namespace-type name="Natron::Python" generate="no">
+		<modify-function signature="PyStringToStdString(PyObject*)" remove="all"/>
+		<modify-function signature="clearPythonStdErr()" remove="all"/>
+		<modify-function signature="clearPythonStdOut()" remove="all"/>
+		<modify-function signature="getAttrRecursive(std::string, PyObject*, bool*)" remove="all"/>
+		<modify-function signature="getFunctionArguments(std::string, std::string*, std::vector&lt;std::string&gt;*)" remove="all"/>
+		<modify-function signature="getGroupInfos(std::string,std::string*,std::string*,std::string*,std::string*,std::string*,std::string*,bool*,uint*)" remove="all"/>
+		<modify-function signature="getMainModule()" remove="all"/>
+		<modify-function signature="getPythonStdErr()" remove="all"/>
+		<modify-function signature="getPythonStdOut()" remove="all"/>
+		<modify-function signature="interpretPythonScript(std::string, std::string*, std::string*)" remove="all"/>
+		<modify-function signature="makeNameScriptFriendly(std::string)" remove="all"/>
+		<modify-function signature="makeNameScriptFriendlyWithDots(std::string)" remove="all"/>
+
+	<object-type name="ExprUtils">
+       <modify-function signature="noise(Natron::Python::Double2DTuple)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 4 &amp;&amp; tupleSize != 3  &amp;&amp; tupleSize != 2) {
+                PyErr_SetString(PyExc_TypeError, "the tuple must have 2, 3 or 4 items.");
+                return 0;
+               }
+
+               double ret = 0.;
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               if (tupleSize == 2) {
+                double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+                Natron::Python::Double2DTuple p = {x1, x2};
+                ret = %CPPSELF.%FUNCTION_NAME(p);
+               } else if (tupleSize == 3) {
+                double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+                double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+                Natron::Python::Double3DTuple p = {x1, x2, x3};
+                ret = %CPPSELF.%FUNCTION_NAME(p);
+               } else if (tupleSize == 4) {
+                double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+                double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+                double x4 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 3));
+                Natron::Python::ColorTuple p = {x1, x2, x3, x4};
+                ret = %CPPSELF.%FUNCTION_NAME(p);
+               }
+               %PYARG_0 = %CONVERTTOPYTHON[double](ret);
+
+               return %PYARG_0;
+           </inject-code>
+
+       </modify-function>
+       <modify-function signature="noise(Natron::Python::Double3DTuple)" remove="all"/>
+       <modify-function signature="noise(Natron::Python::ColorTuple)" remove="all"/>
+       <modify-function signature="snoise(Natron::Python::Double3DTuple)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 3) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 3 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               Natron::Python::Double3DTuple p = {x1, x2, x3};
+               double ret = %CPPSELF.%FUNCTION_NAME(p);
+               %PYARG_0 = %CONVERTTOPYTHON[double](ret);
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="vnoise(Natron::Python::Double3DTuple)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <modify-argument index="return">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 3) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 3 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               Natron::Python::Double3DTuple p = {x1, x2, x3};
+               Natron::Python::Double3DTuple ret = %CPPSELF.%FUNCTION_NAME(p);
+               %PYARG_0 = PyTuple_New(3);
+               PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[double](ret.x));
+               PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](ret.y));
+               PyTuple_SET_ITEM(%PYARG_0, 2, %CONVERTTOPYTHON[double](ret.z));
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="cnoise(Natron::Python::Double3DTuple)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <modify-argument index="return">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 3) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 3 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               Natron::Python::Double3DTuple p = {x1, x2, x3};
+               Natron::Python::Double3DTuple ret = %CPPSELF.%FUNCTION_NAME(p);
+               %PYARG_0 = PyTuple_New(3);
+               PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[double](ret.x));
+               PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](ret.y));
+               PyTuple_SET_ITEM(%PYARG_0, 2, %CONVERTTOPYTHON[double](ret.z));
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="snoise4(Natron::Python::ColorTuple)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 4) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 4 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               double x4 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 3));
+               Natron::Python::ColorTuple p = {x1, x2, x3, x4};
+               double ret = %CPPSELF.%FUNCTION_NAME(p);
+               %PYARG_0 = %CONVERTTOPYTHON[double](ret);
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="vnoise4(Natron::Python::ColorTuple)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <modify-argument index="return">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 4) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 4 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               double x4 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 3));
+               Natron::Python::ColorTuple p = {x1, x2, x3, x4};
+               Natron::Python::Double3DTuple ret = %CPPSELF.%FUNCTION_NAME(p);
+               %PYARG_0 = PyTuple_New(3);
+               PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[double](ret.x));
+               PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](ret.y));
+               PyTuple_SET_ITEM(%PYARG_0, 2, %CONVERTTOPYTHON[double](ret.z));
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="cnoise4(Natron::Python::ColorTuple)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <modify-argument index="return">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 4) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 4 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               double x4 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 3));
+               Natron::Python::ColorTuple p = {x1, x2, x3, x4};
+               Natron::Python::Double3DTuple ret = %CPPSELF.%FUNCTION_NAME(p);
+               %PYARG_0 = PyTuple_New(3);
+               PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[double](ret.x));
+               PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](ret.y));
+               PyTuple_SET_ITEM(%PYARG_0, 2, %CONVERTTOPYTHON[double](ret.z));
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="turbulence(Natron::Python::Double3DTuple,int,double,double)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 3) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 3 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               Natron::Python::Double3DTuple p = {x1, x2, x3};
+               double ret = %CPPSELF.%FUNCTION_NAME(p, %2, %3, %4);
+               %PYARG_0 = %CONVERTTOPYTHON[double](ret);
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="vturbulence(Natron::Python::Double3DTuple,int,double,double)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <modify-argument index="return">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 3) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 3 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               Natron::Python::Double3DTuple p = {x1, x2, x3};
+               Natron::Python::Double3DTuple ret = %CPPSELF.%FUNCTION_NAME(p, %2, %3, %4);
+               %PYARG_0 = PyTuple_New(3);
+               PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[double](ret.x));
+               PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](ret.y));
+               PyTuple_SET_ITEM(%PYARG_0, 2, %CONVERTTOPYTHON[double](ret.z));
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="cturbulence(Natron::Python::Double3DTuple,int,double,double)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <modify-argument index="return">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 3) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 3 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               Natron::Python::Double3DTuple p = {x1, x2, x3};
+               Natron::Python::Double3DTuple ret = %CPPSELF.%FUNCTION_NAME(p, %2, %3, %4);
+               %PYARG_0 = PyTuple_New(3);
+               PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[double](ret.x));
+               PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](ret.y));
+               PyTuple_SET_ITEM(%PYARG_0, 2, %CONVERTTOPYTHON[double](ret.z));
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="fbm(Natron::Python::Double3DTuple,int,double,double)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 3) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 3 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               Natron::Python::Double3DTuple p = {x1, x2, x3};
+               double ret = %CPPSELF.%FUNCTION_NAME(p, %2, %3, %4);
+               %PYARG_0 = %CONVERTTOPYTHON[double](ret);
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="vfbm(Natron::Python::Double3DTuple,int,double,double)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <modify-argument index="return">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 3) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 3 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               Natron::Python::Double3DTuple p = {x1, x2, x3};
+               Natron::Python::Double3DTuple ret = %CPPSELF.%FUNCTION_NAME(p, %2, %3, %4);
+               %PYARG_0 = PyTuple_New(3);
+               PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[double](ret.x));
+               PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](ret.y));
+               PyTuple_SET_ITEM(%PYARG_0, 2, %CONVERTTOPYTHON[double](ret.z));
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="fbm4(Natron::Python::ColorTuple,int,double,double)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 4) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 4 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               double x4 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 3));
+               Natron::Python::ColorTuple p = {x1, x2, x3, x4};
+               double ret = %CPPSELF.%FUNCTION_NAME(p, %2, %3, %4);
+               %PYARG_0 = %CONVERTTOPYTHON[double](ret);
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="vfbm4(Natron::Python::ColorTuple,int,double,double)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <modify-argument index="return">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 4) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 4 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               double x4 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 3));
+               Natron::Python::ColorTuple p = {x1, x2, x3, x4};
+               Natron::Python::Double3DTuple ret = %CPPSELF.%FUNCTION_NAME(p, %2, %3, %4);
+               %PYARG_0 = PyTuple_New(3);
+               PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[double](ret.x));
+               PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](ret.y));
+               PyTuple_SET_ITEM(%PYARG_0, 2, %CONVERTTOPYTHON[double](ret.z));
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="cfbm(Natron::Python::Double3DTuple,int,double,double)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <modify-argument index="return">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 3) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 3 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               Natron::Python::Double3DTuple p = {x1, x2, x3};
+               Natron::Python::Double3DTuple ret = %CPPSELF.%FUNCTION_NAME(p, %2, %3, %4);
+               %PYARG_0 = PyTuple_New(3);
+               PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[double](ret.x));
+               PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](ret.y));
+               PyTuple_SET_ITEM(%PYARG_0, 2, %CONVERTTOPYTHON[double](ret.z));
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="cfbm4(Natron::Python::ColorTuple,int,double,double)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <modify-argument index="return">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 4) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 4 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               double x4 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 3));
+               Natron::Python::ColorTuple p = {x1, x2, x3, x4};
+               Natron::Python::Double3DTuple ret = %CPPSELF.%FUNCTION_NAME(p, %2, %3, %4);
+               %PYARG_0 = PyTuple_New(3);
+               PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[double](ret.x));
+               PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](ret.y));
+               PyTuple_SET_ITEM(%PYARG_0, 2, %CONVERTTOPYTHON[double](ret.z));
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="cellnoise(Natron::Python::Double3DTuple)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 3) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 3 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               Natron::Python::Double3DTuple p = {x1, x2, x3};
+               double ret = %CPPSELF.%FUNCTION_NAME(p);
+               %PYARG_0 = %CONVERTTOPYTHON[double](ret);
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="ccellnoise(Natron::Python::Double3DTuple)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <modify-argument index="return">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 3) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 3 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               Natron::Python::Double3DTuple p = {x1, x2, x3};
+               Natron::Python::Double3DTuple ret = %CPPSELF.%FUNCTION_NAME(p);
+               %PYARG_0 = PyTuple_New(3);
+               PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[double](ret.x));
+               PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](ret.y));
+               PyTuple_SET_ITEM(%PYARG_0, 2, %CONVERTTOPYTHON[double](ret.z));
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+       <modify-function signature="pnoise(Natron::Python::Double3DTuple,Natron::Python::Double3DTuple)">
+           <modify-argument index="1">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <modify-argument index="2">
+               <replace-type modified-type="PyObject"/>
+           </modify-argument>
+           <inject-code class="target" position="beginning">
+               int tupleSize = PyTuple_GET_SIZE(%PYARG_1);
+               if (tupleSize != 3) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 3 items.");
+               return 0;
+               }
+               tupleSize = PyTuple_GET_SIZE(%PYARG_2);
+               if (tupleSize != 3) {
+               PyErr_SetString(PyExc_TypeError, "the tuple must have 3 items.");
+               return 0;
+               }
+               double x1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 0));
+               double x2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 1));
+               double x3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_1, 2));
+               double p1 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_2, 0));
+               double p2 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_2, 1));
+               double p3 = %CONVERTTOCPP[double](PyTuple_GET_ITEM(%PYARG_2, 2));
+               Natron::Python::Double3DTuple p = {x1, x2, x3};
+               Natron::Python::Double3DTuple period = {p1, p2, p3};
+               double ret = %CPPSELF.%FUNCTION_NAME(p, period);
+               %PYARG_0 = %CONVERTTOPYTHON[double](ret);
+               return %PYARG_0;
+           </inject-code>
+       </modify-function>
+
+   </object-type>
+
+    <value-type name="ImageLayer" copyable="true" hash-function="Natron::Python::ImageLayer::getHash">
+    </value-type>
+
+    <object-type name="Group" copyable="false">
+        <inject-documentation format="target">
+            This is an abstract class, it is derived by 2 different classes:
+            :doc:`App` which represents an instance of Natron, or more specifically an opened project.
+            :doc:`Effect` which represents a node in the nodegraph.
+        </inject-documentation>
+        <modify-function signature="getNode(QString)const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="getChildren()const">
+            <inject-code class="target" position="beginning">
+                std::list&lt;Natron::Python::Effect*&gt; effects = %CPPSELF.%FUNCTION_NAME(%ARGUMENT_NAMES);
+                PyObject* ret = PyList_New((int) effects.size());
+                int idx = 0;
+                for (std::list&lt;Natron::Python::Effect*&gt;::iterator it = effects.begin(); it!=effects.end(); ++it,++idx) {
+                PyObject* item = %CONVERTTOPYTHON[Natron::Python::Effect*](*it);
+                // Ownership transferences.
+                Shiboken::Object::getOwnership(item);
+                PyList_SET_ITEM(ret, idx, item);
+                }
+                return ret;
+            </inject-code>
+
+        </modify-function>
+    </object-type>
+
+    <object-type name="NodeCreationProperty"/>
+    <object-type name="IntNodeCreationProperty"/>
+    <object-type name="BoolNodeCreationProperty"/>
+    <object-type name="FloatNodeCreationProperty"/>
+    <object-type name="StringNodeCreationProperty"/>
+
+	<object-type name="App" copyable="false">
+        <modify-function signature="createNode(QString,int,Natron::Python::Group*, std::map&lt; QString, Natron::Python::NodeCreationProperty* &gt;)const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME(%1,%2,%3, %4);
+                %PYARG_0 = %CONVERTTOPYTHON[%RETURN_TYPE](%0);
+            </inject-code>
+        </modify-function>
+        <modify-function signature="createReader(QString,Natron::Python::Group*,std::map&lt; QString, Natron::Python::NodeCreationProperty* &gt;)const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME(%1,%2, %3);
+                %PYARG_0 = %CONVERTTOPYTHON[%RETURN_TYPE](%0);
+            </inject-code>
+        </modify-function>
+        <modify-function signature="createWriter(QString,Natron::Python::Group*, std::map&lt;QString, Natron::Python::NodeCreationProperty* &gt;)const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME(%1,%2, %3);
+                %PYARG_0 = %CONVERTTOPYTHON[%RETURN_TYPE](%0);
+            </inject-code>
+        </modify-function>
+        <modify-function signature="getProjectParam(QString)const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="renderInternal(bool,std::list&lt;Natron::Python::Effect*&gt;,std::list&lt;int&gt;,std::list&lt;int&gt;,std::list&lt;int&gt;)" remove="all"/>
+        <modify-function signature="renderInternal(bool,Natron::Python::Effect*,int,int,int)" remove="all"/>
+        <modify-function signature="render(std::list&lt;Natron::Python::Effect*&gt;,std::list&lt;int&gt;,std::list&lt;int&gt;,std::list&lt;int&gt;)">
+            <modify-argument index="1">
+                <replace-type modified-type="PyList"/>
+            </modify-argument>
+            <modify-argument index="2">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="3">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="4">
+                <remove-argument/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                if (!PyList_Check(%PYARG_1)) {
+                    PyErr_SetString(PyExc_TypeError, "tasks must be a list of tuple objects.");
+                    return 0;
+                }
+                std::list&lt;Natron::Python::Effect*&gt; effects;
+
+                std::list&lt;int&gt; firstFrames;
+
+                std::list&lt;int&gt; lastFrames;
+
+                std::list&lt;int&gt; frameSteps;
+
+                int size = (int)PyList_GET_SIZE(%PYARG_1);
+                for (int i = 0; i &lt; size; ++i) {
+                    PyObject* tuple = PyList_GET_ITEM(%PYARG_1,i);
+                    if (!tuple) {
+                        PyErr_SetString(PyExc_TypeError, "tasks must be a list of tuple objects.");
+                        return 0;
+                    }
+
+                    int tupleSize = PyTuple_GET_SIZE(tuple);
+                    if (tupleSize != 4 &amp;&amp; tupleSize != 3) {
+                        PyErr_SetString(PyExc_TypeError, "the tuple must have 3 or 4 items.");
+                        return 0;
+                    }
+                    Natron::Python::Effect* writeNode = %CONVERTTOCPP[Natron::Python::Effect*](PyTuple_GET_ITEM(tuple, 0));
+                    int firstFrame = %CONVERTTOCPP[int](PyTuple_GET_ITEM(tuple, 1));
+                    int lastFrame = %CONVERTTOCPP[int](PyTuple_GET_ITEM(tuple, 2));
+                    int frameStep;
+                    if (tupleSize == 4) {
+                        frameStep = %CONVERTTOCPP[int](PyTuple_GET_ITEM(tuple, 3));
+                    } else {
+                        frameStep = INT_MIN;
+                    }
+                    effects.push_back(writeNode);
+                    firstFrames.push_back(firstFrame);
+                    lastFrames.push_back(lastFrame);
+                    frameSteps.push_back(frameStep);
+                }
+
+                %CPPSELF.%FUNCTION_NAME(effects,firstFrames,lastFrames, frameSteps);
+            </inject-code>
+        </modify-function>
+        <modify-function signature="loadProject(QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME(%1);
+                %PYARG_0 = %CONVERTTOPYTHON[%RETURN_TYPE](%0);
+            </inject-code>
+        </modify-function>
+        <modify-function signature="newProject()">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME();
+                %PYARG_0 = %CONVERTTOPYTHON[%RETURN_TYPE](%0);
+            </inject-code>
+        </modify-function>
+    </object-type>
+
+    <object-type name="UserParamHolder" copyable="false">
+    	<modify-function signature="createIntParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createInt2DParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createInt3DParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createDoubleParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createDouble2DParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createDouble3DParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createBooleanParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createChoiceParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createColorParam(QString,QString,bool)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createStringParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createFileParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createOutputFileParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createPathParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createButtonParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createSeparatorParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createGroupParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createPageParam(QString,QString)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="createParametricParam(QString,QString,int)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+    </object-type>
+
+    <object-type name="Effect" copyable="false">
+        <inject-documentation format="target">
+            This object represents a single node in Natron, that is, an instance of a plug-in.
+            You cannot create Effects directly by calling their constructor, instead you must use the
+            function :doc:`App.createNode` to create them.
+        </inject-documentation>
+        <modify-function signature="getContainerGroup()const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="getInput(int)const">
+            <inject-documentation format="target">
+                Returns the node at the given input.
+            </inject-documentation>
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="getInput(QString)const">
+            <inject-documentation format="target">
+                Returns the node at the given input.
+            </inject-documentation>
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="getParam(QString)const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="getParams()const">
+            <inject-code class="target" position="beginning">
+                std::list&lt;Natron::Python::Param*&gt; params = %CPPSELF.%FUNCTION_NAME(%ARGUMENT_NAMES);
+                PyObject* ret = PyList_New((int) params.size());
+                int idx = 0;
+                for (std::list&lt;Natron::Python::Param*&gt;::iterator it = params.begin(); it!=params.end(); ++it,++idx) {
+                    PyObject* item = %CONVERTTOPYTHON[Natron::Python::Param*](*it);
+                    // Ownership transferences.
+                    Shiboken::Object::getOwnership(item);
+                    PyList_SET_ITEM(ret, idx, item);
+                }
+                return ret;
+            </inject-code>
+        </modify-function>
+        <modify-function signature="setScriptName(QString)">
+            <inject-code class="target" position="beginning">
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME(%1);
+                %PYARG_0 = %CONVERTTOPYTHON[%RETURN_TYPE](%0);
+            </inject-code>
+        </modify-function>
+        <modify-function signature="getPosition(double*,double*)const">
+            <modify-argument index="1">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="2">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="return">
+                <replace-type modified-type="PyObject"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                double x,y;
+                %CPPSELF.%FUNCTION_NAME(&amp;x,&amp;y);
+                %PYARG_0 = PyTuple_New(2);
+                PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[double](x));
+                PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](y));
+                return %PYARG_0;
+            </inject-code>
+
+        </modify-function>
+        <modify-function signature="getSize(double*,double*)const">
+            <modify-argument index="1">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="2">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="return">
+                <replace-type modified-type="PyObject"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                double x,y;
+                %CPPSELF.%FUNCTION_NAME(&amp;x,&amp;y);
+                %PYARG_0 = PyTuple_New(2);
+                PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[double](x));
+                PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](y));
+                return %PYARG_0;
+            </inject-code>
+
+        </modify-function>
+        <modify-function signature="getColor(double*,double*,double*)const">
+            <modify-argument index="1">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="2">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="3">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="return">
+                <replace-type modified-type="PyObject"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                double r,g,b;
+                %CPPSELF.%FUNCTION_NAME(&amp;r,&amp;g,&amp;b);
+                %PYARG_0 = PyTuple_New(3);
+                PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[double](r));
+                PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](g));
+                PyTuple_SET_ITEM(%PYARG_0, 2, %CONVERTTOPYTHON[double](b));
+                return %PYARG_0;
+            </inject-code>
+
+        </modify-function>
+        <!-- It doesn't seem that Shiboken allows to remove an overload:
+         signature 'getNode(QString)const' for function modification in 'Effect' not found. Possible candidates: getNode(QString)const in Group
+         -->
+        <!--<modify-function signature="getNode(QString)const" remove="all">
+        </modify-function>-->
+
+        <modify-function signature="getUserPageParam()const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+
+        <modify-function signature="connectInput(int,const Natron::Python::Effect*)">
+            <inject-code class="target" position="beginning">
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME(%1,%2);
+                %PYARG_0 = %CONVERTTOPYTHON[%RETURN_TYPE](%0);
+            </inject-code>
+        </modify-function>
+        <modify-function signature="disconnectInput(int)">
+            <inject-code class="target" position="beginning">
+                %CPPSELF.%FUNCTION_NAME(%1);
+            </inject-code>
+        </modify-function>
+        <modify-function signature="getItemsTable(QString)const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="getAllItemsTable()const">
+            <inject-code class="target" position="beginning">
+                std::list&lt;Natron::Python::ItemsTable*&gt; tables = %CPPSELF.%FUNCTION_NAME(%ARGUMENT_NAMES);
+                PyObject* ret = PyList_New((int) tables.size());
+                int idx = 0;
+                for (std::list&lt;Natron::Python::ItemsTable*&gt;::iterator it = tables.begin(); it!=tables.end(); ++it,++idx) {
+                PyObject* item = %CONVERTTOPYTHON[Natron::Python::ItemsTable*](*it);
+                // Ownership transferences.
+                Shiboken::Object::getOwnership(item);
+                PyList_SET_ITEM(ret, idx, item);
+                }
+                return ret;
+            </inject-code>
+        </modify-function>
+    </object-type>
+
+    <object-type name="AppSettings">
+        <modify-function signature="getParam(QString)const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="getParams()const">
+            <inject-code class="target" position="beginning">
+                std::list&lt;Natron::Python::Param*&gt; params = %CPPSELF.%FUNCTION_NAME(%ARGUMENT_NAMES);
+                PyObject* ret = PyList_New((int) params.size());
+                int idx = 0;
+                for (std::list&lt;Natron::Python::Param*&gt;::iterator it = params.begin(); it!=params.end(); ++it,++idx) {
+                PyObject* item = %CONVERTTOPYTHON[Natron::Python::Param*](*it);
+                // Ownership transferences.
+                Shiboken::Object::getOwnership(item);
+                PyList_SET_ITEM(ret, idx, item);
+                }
+                return ret;
+            </inject-code>
+        </modify-function>
+    </object-type>
+
+    <object-type name="Param">
+        <modify-function signature="getParent()const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="getParentEffect()const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="getParentItemBase()const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="getApp()const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+    </object-type>
+
+    <object-type name="AnimatedParam">
+        <modify-function signature="setExpression(QString,bool,int,QString)">
+            <inject-code class="target" position="beginning">
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME(%1,%2,%3);
+                %PYARG_0 = %CONVERTTOPYTHON[%RETURN_TYPE](%0);
+            </inject-code>
+        </modify-function>
+        <modify-function signature="getKeyTime(int,int,double*,QString)const">
+            <modify-argument index="3">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="return">
+                <replace-type modified-type="PyObject"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                double time;
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME(%1, %2,&amp;time);
+                %PYARG_0 = PyTuple_New(2);
+                PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[bool](%0));
+                PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](time));
+                return %PYARG_0;
+            </inject-code>
+        </modify-function>
+        <modify-function signature="getExpression(int,bool*,QString)const">
+            <modify-argument index="2">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="return">
+                <replace-type modified-type="PyObject"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                bool hasRetVar;
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME(%1,&amp;hasRetVar);
+                %PYARG_0 = PyTuple_New(2);
+                PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[%RETURN_TYPE](%0));
+                PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[bool](hasRetVar));
+                return %PYARG_0;
+            </inject-code>
+        </modify-function>
+    </object-type>
+
+    <object-type name="IntParam">
+    </object-type>
+
+    <object-type name="Int2DTuple">
+        <add-function signature="__getitem__(int)"  return-type="PyObject*">
+            <inject-code class="target" position="beginning">
+                if (_i &lt; 0 || _i &gt;= 2) {
+                PyErr_BadArgument();
+                return 0;
+                } else {
+                int ret;
+                switch (_i) {
+                case 0:
+                ret = %CPPSELF.x;
+                break;
+                case 1:
+                ret = %CPPSELF.y;
+                break;
+                }
+                return  %CONVERTTOPYTHON[int](ret);
+                }
+            </inject-code>
+        </add-function>
+    </object-type>
+
+    <object-type name="Int2DParam">
+    </object-type>
+
+    <object-type name="Int3DTuple">
+        <add-function signature="__getitem__(int)"  return-type="PyObject*">
+            <inject-code class="target" position="beginning">
+                if (_i &lt; 0 || _i &gt;= 3) {
+                PyErr_BadArgument();
+                return 0;
+                } else {
+                int ret;
+                switch (_i) {
+                case 0:
+                ret = %CPPSELF.x;
+                break;
+                case 1:
+                ret = %CPPSELF.y;
+                break;
+                case 2:
+                ret = %CPPSELF.z;
+                break;
+                }
+                return  %CONVERTTOPYTHON[int](ret);
+                }
+            </inject-code>
+        </add-function>
+    </object-type>
+
+    <object-type name="Int3DParam">
+    </object-type>
+
+    <object-type name="DoubleParam">
+    </object-type>
+
+    <object-type name="Double2DTuple">
+        <add-function signature="__getitem__(int)"  return-type="PyObject*">
+            <inject-code class="target" position="beginning">
+                if (_i &lt; 0 || _i &gt;= 2) {
+                PyErr_BadArgument();
+                return 0;
+                } else {
+                double ret;
+                switch (_i) {
+                case 0:
+                ret = %CPPSELF.x;
+                break;
+                case 1:
+                ret = %CPPSELF.y;
+                break;
+                }
+                return  %CONVERTTOPYTHON[double](ret);
+                }
+            </inject-code>
+        </add-function>
+    </object-type>
+
+    <object-type name="Double2DParam">
+    </object-type>
+
+    <object-type name="Double3DTuple">
+        <add-function signature="__getitem__(int)"  return-type="PyObject*">
+            <inject-code class="target" position="beginning">
+                if (_i &lt; 0 || _i &gt;= 3) {
+                PyErr_BadArgument();
+                return 0;
+                } else {
+                double ret;
+                switch (_i) {
+                case 0:
+                ret = %CPPSELF.x;
+                break;
+                case 1:
+                ret = %CPPSELF.y;
+                break;
+                case 2:
+                ret = %CPPSELF.z;
+                break;
+                }
+                return  %CONVERTTOPYTHON[double](ret);
+                }
+            </inject-code>
+        </add-function>
+    </object-type>
+
+    <object-type name="Double3DParam">
+    </object-type>
+
+    <object-type name="ColorTuple">
+        <add-function signature="__getitem__(int)"  return-type="PyObject*">
+            <inject-code class="target" position="beginning">
+                if (_i &lt; 0 || _i &gt;= 4) {
+                    PyErr_BadArgument();
+                    return 0;
+                } else {
+                    double ret;
+                    switch (_i) {
+                    case 0:
+                        ret = %CPPSELF.r;
+                        break;
+                    case 1:
+                        ret = %CPPSELF.g;
+                        break;
+                    case 2:
+                        ret = %CPPSELF.b;
+                        break;
+                    case 3:
+                        ret = %CPPSELF.a;
+                        break;
+
+                    }
+                    return  %CONVERTTOPYTHON[double](ret);
+                }
+            </inject-code>
+        </add-function>
+    </object-type>
+
+    <object-type name="ColorParam">
+    </object-type>
+
+    <object-type name="BooleanParam">
+    </object-type>
+
+    <object-type name="ChoiceParam">
+        <modify-function signature="setOptions(std::list&lt;QString&gt;,std::list&lt;QString&gt;,std::list&lt;QString&gt;)">
+            <modify-argument index="1">
+                <replace-type modified-type="PySequence"/>
+            </modify-argument>
+            <modify-argument index="2">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="3">
+                <remove-argument/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+
+                if (!PyList_Check(%1)) {
+                    PyErr_SetString(PyExc_ValueError, "Argument must be a list of tuples");
+                    return 0;
+                }
+
+                int listSize = PyList_Size(%1);
+                if (listSize == 0) {
+                    PyErr_SetString(PyExc_ValueError, "Argument must be a list of tuples");
+                    return 0;
+                }
+
+                std::list&lt;QString&gt; optionIDs, optionLabels, optionHelps;
+                for (int i = 0; i &lt; listSize; ++i) {
+                    PyObject* obj = PyList_GetItem(%1, i);
+                    if (!PyTuple_Check(obj)) {
+                        PyErr_SetString(PyExc_ValueError, "Argument must be a list of tuples");
+                        return 0;
+                    }
+                    int tupleSize = PyTuple_Size(obj);
+                    if (tupleSize != 3) {
+                        PyErr_SetString(PyExc_ValueError, "Each option must be a tuple of 3 strings");
+                        return 0;
+                    }
+                    PyObject* pyOptionId = PyTuple_GetItem(obj, 0);
+                    PyObject* pyOptionLabel = PyTuple_GetItem(obj, 1);
+                    PyObject* pyOptionHnt = PyTuple_GetItem(obj, 2);
+                    QString optionId = %CONVERTTOCPP[QString](pyOptionId);
+                    QString optionLabel = %CONVERTTOCPP[QString](pyOptionLabel);
+                    QString optionHint = %CONVERTTOCPP[QString](pyOptionHnt);
+                    optionIDs.push_back(optionId);
+                    optionLabels.push_back(optionLabel);
+                    optionHelps.push_back(optionHint);
+                }
+
+                %CPPSELF.%FUNCTION_NAME(optionIDs, optionLabels, optionHelps);
+
+            </inject-code>
+        </modify-function>
+        <modify-function signature="getOption(int,QString*,QString*,QString*)const">
+            <modify-argument index="2">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="3">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="4">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="return">
+                <replace-type modified-type="PyTuple"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                QString optionID, optionLabel, optionHint;
+                bool ok = %CPPSELF.%FUNCTION_NAME(%1, &amp;optionID,&amp;optionLabel, &amp;optionHint);
+                %PYARG_0 = PyTuple_New(4);
+                PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[bool](ok));
+                PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[QString](optionID));
+                PyTuple_SET_ITEM(%PYARG_0, 2, %CONVERTTOPYTHON[QString](optionLabel));
+                PyTuple_SET_ITEM(%PYARG_0, 3, %CONVERTTOPYTHON[QString](optionHint));
+                return %PYARG_0;
+            </inject-code>
+        </modify-function>
+        <modify-function signature="getActiveOption(QString*,QString*,QString*,QString)const">
+            <modify-argument index="1">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="2">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="3">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="return">
+                <replace-type modified-type="PyTuple"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                QString optionID, optionLabel, optionHint;
+                %CPPSELF.%FUNCTION_NAME(&amp;optionID,&amp;optionLabel, &amp;optionHint, %4);
+                %PYARG_0 = PyTuple_New(3);
+                PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[QString](optionID));
+                PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[QString](optionLabel));
+                PyTuple_SET_ITEM(%PYARG_0, 2, %CONVERTTOPYTHON[QString](optionHint));
+                return %PYARG_0;
+            </inject-code>
+        </modify-function>
+    </object-type>
+
+    <object-type name="ButtonParam"/>
+    <object-type name="SeparatorParam"/>
+    <object-type name="StringParamBase"/>
+
+    <object-type name="StringParam">
+        <enum-type name="TypeEnum"/>
+    </object-type>
+
+    <object-type name="FileParam"/>
+
+    <object-type name="PathParam">
+        <modify-function signature="getTable(std::list&lt;std::vector&lt;std::string&gt; &gt;*)const">
+            <modify-argument index="1">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="return">
+                <replace-type modified-type="PySequence"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                std::list&lt;std::vector&lt;std::string&gt; &gt; table;
+                %CPPSELF.%FUNCTION_NAME(&amp;table);
+
+                std::size_t outListSize = table.size();
+                PyObject* outList = PyList_New((int) outListSize);
+
+                std::size_t i = 0;
+                for (std::list&lt;std::vector&lt;std::string&gt; &gt;::iterator it = table.begin(); it != table.end(); ++it, ++i) {
+                    std::size_t subListSize = it->size();
+                    PyObject* subList = PyList_New((int) subListSize);
+                    for (std::size_t j = 0; j &lt; subListSize; ++j) {
+                        std::string cppItem = (*it)[j];
+                        PyList_SET_ITEM(subList, j, %CONVERTTOPYTHON[std::string](cppItem));
+                    }
+                    PyList_SET_ITEM(outList, i, subList);
+                }
+
+                return outList;
+            </inject-code>
+        </modify-function>
+        <modify-function signature="setTable(std::list&lt;std::vector&lt;std::string&gt; &gt;)">
+            <modify-argument index="1">
+                <replace-type modified-type="PySequence"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+
+                if (!PyList_Check(%PYARG_1)) {
+                    PyErr_SetString(PyExc_TypeError, "table must be a list of list objects.");
+                    return 0;
+                }
+
+                std::list&lt;std::vector&lt;std::string&gt; &gt; table;
+
+                int size = (int)PyList_GET_SIZE(%PYARG_1);
+                for (int i = 0; i &lt; size; ++i) {
+
+
+                    PyObject* subList = PyList_GET_ITEM(%PYARG_1,i);
+                    if (!subList || !PyList_Check(subList)) {
+                        PyErr_SetString(PyExc_TypeError, "table must be a list of list objects.");
+                        return 0;
+                    }
+                    int subSize = (int)PyList_GET_SIZE(subList);
+                    std::vector&lt;std::string&gt; rowVec(subSize);
+
+                    for (int j = 0; j &lt; subSize; ++j) {
+                        PyObject* pyString = PyList_GET_ITEM(subList,j);
+
+                        if ( PyString_Check(pyString) ) {
+                            char* buf = PyString_AsString(pyString);
+                            if (buf) {
+                                std::string ret;
+                                ret.append(buf);
+                                rowVec[j] = ret;
+                                }
+                        } else if (PyUnicode_Check(pyString) ) {
+                            PyObject* utf8pyobj = PyUnicode_AsUTF8String(pyString); // newRef
+                            if (utf8pyobj) {
+                                char* cstr = PyBytes_AS_STRING(utf8pyobj); // Borrowed pointer
+                                std::string ret;
+                                ret.append(cstr);
+                                Py_DECREF(utf8pyobj);
+                                rowVec[j] = ret;
+                            }
+                        }
+                    }
+                    table.push_back(rowVec);
+                }
+
+                %CPPSELF.%FUNCTION_NAME(table);
+
+            </inject-code>
+        </modify-function>
+    </object-type>
+
+    <object-type name="ParametricParam">
+        <modify-function signature="getNthControlPoint(int,int,double*,double*,double*,double*)const">
+            <modify-argument index="3">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="4">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="5">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="6">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="return">
+                <replace-type modified-type="PyObject"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                double key,value,left,right;
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME(%1, %2,&amp;key,&amp;value, &amp;left, &amp;right);
+                %PYARG_0 = PyTuple_New(5);
+                PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[bool](%0));
+                PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[double](key));
+                PyTuple_SET_ITEM(%PYARG_0, 2, %CONVERTTOPYTHON[double](value));
+                PyTuple_SET_ITEM(%PYARG_0, 3, %CONVERTTOPYTHON[double](left));
+                PyTuple_SET_ITEM(%PYARG_0, 4, %CONVERTTOPYTHON[double](right));
+                return %PYARG_0;
+            </inject-code>
+        </modify-function>
+
+    </object-type>
+
+    <object-type name="GroupParam">
+        <modify-function signature="setOpened(bool)">
+            <inject-code class="target" position="beginning">
+                %CPPSELF.%FUNCTION_NAME(%1);
+            </inject-code>
+        </modify-function>
+    </object-type>
+
+    <object-type name="PageParam"/>
+
+    <object-type name="ItemBase">
+        <modify-function signature="getParent()const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="getChildren()const">
+            <inject-code class="target" position="beginning">
+                std::list&lt;Natron::Python::ItemBase*&gt; items = %CPPSELF.%FUNCTION_NAME(%ARGUMENT_NAMES);
+                PyObject* ret = PyList_New((int) items.size());
+                int idx = 0;
+                for (std::list&lt;Natron::Python::ItemBase*&gt;::iterator it = items.begin(); it!=items.end(); ++it,++idx) {
+                PyObject* item = %CONVERTTOPYTHON[Natron::Python::ItemBase*](*it);
+                // Ownership transferences.
+                Shiboken::Object::getOwnership(item);
+                PyList_SET_ITEM(ret, idx, item);
+                }
+                return ret;
+            </inject-code>
+        </modify-function>
+        <modify-function signature="getParam(QString)const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="getParams()const">
+            <inject-code class="target" position="beginning">
+                std::list&lt;Natron::Python::Param*&gt; params = %CPPSELF.%FUNCTION_NAME(%ARGUMENT_NAMES);
+                PyObject* ret = PyList_New((int) params.size());
+                int idx = 0;
+                for (std::list&lt;Natron::Python::Param*&gt;::iterator it = params.begin(); it!=params.end(); ++it,++idx) {
+                PyObject* item = %CONVERTTOPYTHON[Natron::Python::Param*](*it);
+                // Ownership transferences.
+                Shiboken::Object::getOwnership(item);
+                PyList_SET_ITEM(ret, idx, item);
+                }
+                return ret;
+            </inject-code>
+        </modify-function>
+    </object-type>
+
+    <object-type name="ItemsTable">
+        <modify-function signature="getItemByFullyQualifiedScriptName(QString)const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="getSelectedItems()const">
+            <inject-code class="target" position="beginning">
+                std::list&lt;Natron::Python::ItemBase*&gt; items = %CPPSELF.%FUNCTION_NAME(%ARGUMENT_NAMES);
+                PyObject* ret = PyList_New((int) items.size());
+                int idx = 0;
+                for (std::list&lt;Natron::Python::ItemBase*&gt;::iterator it = items.begin(); it!=items.end(); ++it,++idx) {
+                PyObject* item = %CONVERTTOPYTHON[Natron::Python::ItemBase*](*it);
+                // Ownership transferences.
+                Shiboken::Object::getOwnership(item);
+                PyList_SET_ITEM(ret, idx, item);
+                }
+                return ret;
+            </inject-code>
+        </modify-function>
+
+        <modify-function signature="getTopLevelItems()const">
+            <inject-code class="target" position="beginning">
+                std::list&lt;Natron::Python::ItemBase*&gt; items = %CPPSELF.%FUNCTION_NAME(%ARGUMENT_NAMES);
+                PyObject* ret = PyList_New((int) items.size());
+                int idx = 0;
+                for (std::list&lt;Natron::Python::ItemBase*&gt;::iterator it = items.begin(); it!=items.end(); ++it,++idx) {
+                PyObject* item = %CONVERTTOPYTHON[Natron::Python::ItemBase*](*it);
+                // Ownership transferences.
+                Shiboken::Object::getOwnership(item);
+                PyList_SET_ITEM(ret, idx, item);
+                }
+                return ret;
+            </inject-code>
+        </modify-function>
+    </object-type>
+
+    <object-type name="BezierCurve">
+        <modify-function signature="getControlPointPosition(int,double,double*,double*,double*,double*,double*,double*,QString)const">
+            <modify-argument index="3">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="4">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="5">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="6">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="7">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="8">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="return">
+                <replace-type modified-type="PyTuple"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                double x,y,rx,ry,lx,ly;
+                %CPPSELF.%FUNCTION_NAME(%1, %2, &amp;x,&amp;y, &amp;lx,&amp;ly,&amp;rx,&amp;ry, %9);
+
+                PyObject* ret = PyTuple_New(6);
+                PyTuple_SET_ITEM(ret, 0, %CONVERTTOPYTHON[double](x));
+                PyTuple_SET_ITEM(ret, 1, %CONVERTTOPYTHON[double](y));
+                PyTuple_SET_ITEM(ret, 2, %CONVERTTOPYTHON[double](lx));
+                PyTuple_SET_ITEM(ret, 3, %CONVERTTOPYTHON[double](ly));
+                PyTuple_SET_ITEM(ret, 4, %CONVERTTOPYTHON[double](rx));
+                PyTuple_SET_ITEM(ret, 5, %CONVERTTOPYTHON[double](ry));
+                return ret;
+            </inject-code>
+        </modify-function>
+        <modify-function signature="getFeatherPointPosition(int,double,double*,double*,double*,double*,double*,double*,QString)const">
+            <modify-argument index="3">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="4">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="5">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="6">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="7">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="8">
+                <remove-argument/>
+            </modify-argument>
+            <modify-argument index="return">
+                <replace-type modified-type="PyTuple"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                double x,y,rx,ry,lx,ly;
+                %CPPSELF.%FUNCTION_NAME(%1, %2, &amp;x,&amp;y, &amp;lx,&amp;ly,&amp;rx,&amp;ry,%9);
+
+                PyObject* ret = PyTuple_New(6);
+                PyTuple_SET_ITEM(ret, 0, %CONVERTTOPYTHON[double](x));
+                PyTuple_SET_ITEM(ret, 1, %CONVERTTOPYTHON[double](y));
+                PyTuple_SET_ITEM(ret, 2, %CONVERTTOPYTHON[double](lx));
+                PyTuple_SET_ITEM(ret, 3, %CONVERTTOPYTHON[double](ly));
+                PyTuple_SET_ITEM(ret, 4, %CONVERTTOPYTHON[double](rx));
+                PyTuple_SET_ITEM(ret, 5, %CONVERTTOPYTHON[double](ry));
+                return ret;
+            </inject-code>
+        </modify-function>
+
+    </object-type>
+
+    <object-type name="Track"/>
+
+    <object-type name="StrokePoint"/>
+
+    <object-type name="Tracker">
+        <modify-function signature="createTrack()">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+    </object-type>
+
+    <object-type name="StrokeItem">
+        <modify-function signature="getPoints()const">
+            <inject-code class="target" position="beginning">
+                std::list&lt;std::list&lt;Natron::Python::StrokePoint&gt; &gt; points = %CPPSELF.%FUNCTION_NAME();
+                PyObject* ret = PyList_New((int) points.size());
+                int i = 0;
+                for (std::list&lt;std::list&lt;Natron::Python::StrokePoint&gt; &gt;::iterator it = points.begin(); it!=points.end(); ++it, ++i) {
+
+
+                    PyObject* subStrokeItemList = PyList_New((int) it->size());
+
+                    int idx = 0;
+                    for (std::list&lt;Natron::Python::StrokePoint&gt;::iterator it2 = it->begin(); it2!=it->end(); ++it2,++idx) {
+                        PyObject* item = %CONVERTTOPYTHON[Natron::Python::StrokePoint](*it);
+                        // Ownership transferences.
+                        PyList_SET_ITEM(subStrokeItemList, idx, item);
+                    }
+                    PyList_SET_ITEM(ret, i, subStrokeItemList);
+                }
+                return ret;
+            </inject-code>
+        </modify-function>
+    </object-type>
+
+    <object-type name="Roto">
+        <modify-function signature="createLayer()">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME();
+                %PYARG_0 = %CONVERTTOPYTHON[%RETURN_TYPE](%0);
+            </inject-code>
+        </modify-function>
+        <modify-function signature="createStroke(Natron::RotoStrokeType)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME(%1);
+                %PYARG_0 = %CONVERTTOPYTHON[%RETURN_TYPE](%0);
+            </inject-code>
+        </modify-function>
+        <modify-function signature="createBezier(double,double,double)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME(%1,%2,%3);
+                %PYARG_0 = %CONVERTTOPYTHON[%RETURN_TYPE](%0);
+            </inject-code>
+        </modify-function>
+        <modify-function signature="createEllipse(double,double,double,bool,double)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME(%1,%2,%3,%4,%5);
+                %PYARG_0 = %CONVERTTOPYTHON[%RETURN_TYPE](%0);
+            </inject-code>
+        </modify-function>
+        <modify-function signature="createRectangle(double,double,double,double)">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                %RETURN_TYPE %0 = %CPPSELF.%FUNCTION_NAME(%1,%2,%3,%4);
+                %PYARG_0 = %CONVERTTOPYTHON[%RETURN_TYPE](%0);
+            </inject-code>
+        </modify-function>
+    </object-type>
+
+    <rejection class="Natron::App" field-name="_instance"/>
+    <rejection class="Natron::Effect" field-name="_node"/>
+    <rejection class="Natron::*" field-name="_imp"/>
+
+    <object-type name="PyCoreApplication">
+        <modify-function signature="getActiveInstance()const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="getInstance(int)const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="getSettings()const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+    </object-type>
+
+    <object-type name="PyOverlayParamDesc"/>
+
+    <object-type name="PyOverlayInteract">
+        <modify-function signature="getSuggestedColor(Natron::Python::ColorTuple*)const">
+            <modify-argument index="return">
+                <replace-type modified-type="PyTuple"/>
+            </modify-argument>
+            <modify-argument index="1">
+                <remove-argument/>
+            </modify-argument>
+            <inject-code class="target" position="beginning">
+                Natron::Python::ColorTuple ret;
+                bool ok = %CPPSELF.%FUNCTION_NAME(&amp;ret);
+                PyObject* pyret = PyTuple_New(5);
+                PyTuple_SET_ITEM(pyret, 0, %CONVERTTOPYTHON[bool](ok));
+                PyTuple_SET_ITEM(pyret, 1, %CONVERTTOPYTHON[double](ret.r));
+                PyTuple_SET_ITEM(pyret, 2, %CONVERTTOPYTHON[double](ret.g));
+                PyTuple_SET_ITEM(pyret, 3, %CONVERTTOPYTHON[double](ret.b));
+                PyTuple_SET_ITEM(pyret, 4, %CONVERTTOPYTHON[double](ret.a));
+                return pyret;
+            </inject-code>
+        </modify-function>
+        <modify-function signature="getHoldingEffect()const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="fetchParameter(std::map&lt;QString, QString&gt;,QString,QString,int,bool)const">
+            <modify-argument index="return">
+                <define-ownership class="target" owner="target"/>
+            </modify-argument>
+        </modify-function>
+    </object-type>
+
+    <object-type name="PyPointOverlayInteract"/>
+    <object-type name="PyTransformOverlayInteract"/>
+    <object-type name="PyCornerPinOverlayInteract"/>
+
+</namespace-type>
+
+</typesystem>
+
+

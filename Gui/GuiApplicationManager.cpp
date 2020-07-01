@@ -934,10 +934,14 @@ GuiApplicationManager::initGui(const CLArgs& args)
 #endif
         QCoreApplication::processEvents();
     }
+
+    // the setWindowIcon() below crashes under Qt5
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QPixmap appIcPixmap;
     appPTR->getIcon(NATRON_PIXMAP_APP_ICON, &appIcPixmap);
     QIcon appIc(appIcPixmap);
     qApp->setWindowIcon(appIc);
+#endif
 
     QFontDatabase db;
     QStringList families = db.families(QFontDatabase::Latin); // We need a Latin font for the UI

@@ -41,6 +41,8 @@
 #include <QDebug>
 #include <QPainter>
 #include <QVariant>
+#include <QDrag>
+#include <QMimeData>
 
 #include "Gui/Gui.h"
 #include "Gui/GuiMacros.h"
@@ -799,8 +801,8 @@ TableModel::setRow(int row, const TableItemPtr& item)
             // Reset index in parent and model ptr in case someone else holds a ref to this item
             _imp->topLevelItems[row]->_imp->indexInParent = -1;
             _imp->topLevelItems[row]->_imp->model.reset();
-            first = createIndex(row, 0, 0);
-            last = createIndex(row, _imp->colCount - 1, 0);
+            first = createIndex(row, 0, nullptr);
+            last = createIndex(row, _imp->colCount - 1, nullptr);
             _imp->topLevelItems[row].reset();
         }
     } else {
@@ -1799,14 +1801,14 @@ QPixmap TableView::renderToPixmap(const std::list<TableItemPtr>& rows, QRect *r)
                 d.rect = itemRect;
                 d.index = idx;
                 d.tableItem = modelItem;
-                *r = r->unite(itemRect);
+                *r = r->united(itemRect);
                 paintItems.push_back(d);
             }
         }
 
 
     }
-    *r = r->intersect(viewportRect);
+    *r = r->intersected(viewportRect);
 
     if (paintItems.empty()) {
         return QPixmap();

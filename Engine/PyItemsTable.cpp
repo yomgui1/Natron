@@ -381,7 +381,7 @@ ItemsTable::createPyItemWrapper(const KnobTableItemPtr& item)
         }
         ItemBase* cppItem = 0;
         if (pyItem && Shiboken::Object::isValid(pyItem)) {
-            cppItem = (ItemBase*)Shiboken::Conversions::cppPointer(SbkNatronEngineTypes[SBK_ITEMBASE_IDX], (SbkObject*)pyItem);
+            cppItem = (ItemBase*)Shiboken::Conversions::cppPointer(SbkNatronEngineTypes[SBK_NATRON_PYTHON_ITEMBASE_IDX], (SbkObject*)pyItem);
         }
         NATRON_PYTHON_NAMESPACE::interpretPythonScript("del " kPythonTmpCheckerVariable, 0, 0);
         NATRON_PYTHON_NAMESPACE::clearPythonStdErr();

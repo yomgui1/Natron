@@ -66,11 +66,6 @@ NATRON_PYTHON_NAMESPACE_ENTER;
  **/
 #define kPyParamViewIdxMain "Main"
 
-/**
- * @brief Specify that an action (a setter) must be applied on all dimensions of a parameter
- **/
-#define kPyParamDimSpecAll -1
-
 #define PythonSetNullError() (PyErr_SetString(PyExc_RuntimeError, Param::tr("Value is Null").toStdString().c_str()))
 #define PythonSetInvalidDimensionError(index) (PyErr_SetString(PyExc_IndexError, Param::tr("%1: Dimension out of range").arg(QString::number(index)).toStdString().c_str()))
 #define PythonSetNonUserKnobError() (PyErr_SetString(PyExc_ValueError, Param::tr("Cannot do this on a non-user parameter").toStdString().c_str()))
@@ -85,6 +80,11 @@ protected:
     KnobIWPtr _knob;
 
 public:
+
+    /**
+     * @brief Specify that an action (a setter) must be applied on all dimensions of a parameter
+     **/
+    static const int kPyParamDimSpecAll;
 
     Param(const KnobIPtr& knob);
 

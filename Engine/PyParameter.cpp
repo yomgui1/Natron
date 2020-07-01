@@ -66,6 +66,8 @@ GCC_DIAG_ON(unused-parameter)
 NATRON_NAMESPACE_ENTER
 NATRON_PYTHON_NAMESPACE_ENTER
 
+const int Param::kPyParamDimSpecAll = -1;
+
 Param::Param(const KnobIPtr& knob)
     : _knob(knob)
 {
@@ -696,7 +698,7 @@ Param::getViewSetSpecFromViewName(const QString& viewName, ViewSetSpec* view) co
 }
 
 static DimSpec getDimSpecFromDimensionIndex(int dimension) {
-    if (dimension == kPyParamDimSpecAll) {
+    if (dimension == Param::kPyParamDimSpecAll) {
         return DimSpec::all();
     }
     return DimSpec(dimension);

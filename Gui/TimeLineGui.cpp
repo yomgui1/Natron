@@ -38,6 +38,9 @@ GCC_DIAG_UNUSED_PRIVATE_FIELD_ON
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
 #include <QFontMetrics>
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#include <QWindow>
+#endif
 #include "Global/GlobalDefines.h"
 
 #include "Engine/Cache.h"
@@ -1371,7 +1374,7 @@ double
 TimeLineGui::getScreenPixelRatio() const
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-    return windowHandle()->devicePixelRatio()
+    return windowHandle()->devicePixelRatio();
 #else
     return 1.;
 #endif

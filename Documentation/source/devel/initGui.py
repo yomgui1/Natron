@@ -4,8 +4,12 @@
 #Created by Alexandre GAUTHIER-FOICHAT on 01/27/2015.
 
 #PySide is already imported by Natron, but we remove the cumbersome PySide.QtGui and PySide.QtCore prefix
-from PySide.QtGui import *
-from PySide.QtCore import *
+try:
+    from PySide.QtGui import *
+    from PySide.QtCore import *
+except:
+    from PySide2.QtGui import *
+    from PySide2.QtCore import *
 
 #To import the variable "natron"
 from NatronGui import *

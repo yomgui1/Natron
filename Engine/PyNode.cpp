@@ -618,7 +618,7 @@ Effect::createParamWrapperForKnob(const KnobIPtr& knob)
             // The kPythonTmpCheckerVariable was set, check that it is valid and convert it to our C++ type
             Param* cppParam = 0;
             if (pyParam && Shiboken::Object::isValid(pyParam)) {
-                cppParam = (Param*)Shiboken::Conversions::cppPointer(SbkNatronEngineTypes[SBK_PARAM_IDX], (SbkObject*)pyParam);
+                cppParam = (Param*)Shiboken::Conversions::cppPointer(SbkNatronEngineTypes[SBK_NATRON_PYTHON_PARAM_IDX], (SbkObject*)pyParam);
             }
 
             // Ensure we remove the kPythonTmpCheckerVariable attribute
@@ -1453,7 +1453,7 @@ Effect::createItemsTableWrapper(const KnobItemsTablePtr& table)
         }
         ItemsTable* cppTable = 0;
         if (pyTable && Shiboken::Object::isValid(pyTable)) {
-            cppTable = (ItemsTable*)Shiboken::Conversions::cppPointer(SbkNatronEngineTypes[SBK_ITEMSTABLE_IDX], (SbkObject*)pyTable);
+            cppTable = (ItemsTable*)Shiboken::Conversions::cppPointer(SbkNatronEngineTypes[SBK_NATRON_PYTHON_ITEMSTABLE_IDX], (SbkObject*)pyTable);
         }
         NATRON_PYTHON_NAMESPACE::interpretPythonScript("del " kPythonTmpCheckerVariable, 0, 0);
         NATRON_PYTHON_NAMESPACE::clearPythonStdErr();

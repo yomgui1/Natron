@@ -65,8 +65,14 @@ CLANG_DIAG_ON(uninitialized)
 #include "Gui/KnobGuiFactory.h"
 #include "Gui/SplashScreen.h"
 
-// removed in qt5, just revert the commit (1b58d9acc493111390b31f0bffd6b2a76baca91b)
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 Q_INIT_RESOURCE_EXTERN(GuiResources);
+#endif
+
+inline void init_GuiResources()
+{
+    Q_INIT_RESOURCE(GuiResources);
+}
 
 /**
  * @macro Registers a keybind to the application.
@@ -273,10 +279,7 @@ GuiApplicationManager::initializeQApp(int &argc,
 
     app->setQuitOnLastWindowClosed(true);
 
-    //Q_INIT_RESOURCE(GuiResources);
-    // Q_INIT_RESOURCES expanded, and fixed for use from inside a namespace:
-    // (requires using Q_INIT_RESOURCES_EXTERN(GuiResources) before entering the namespace)
-    ::qInitResources_GuiResources();
+    init_GuiResources();
 
 #ifdef DEBUG
     QLocale loc;

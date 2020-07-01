@@ -45,6 +45,7 @@
 #include <QPixmapCache>
 #include <QWidget>
 #include <QTextLayout>
+#include <QDrag>
 
 #include "Engine/Utils.h"
 #include "Engine/Image.h"

@@ -194,7 +194,7 @@ App::createEffectFromNodeWrapper(const NodePtr& node)
         }
         Effect* cppEffect = 0;
         if (pyEffect && Shiboken::Object::isValid(pyEffect)) {
-            cppEffect = (Effect*)Shiboken::Conversions::cppPointer(SbkNatronEngineTypes[SBK_EFFECT_IDX], (SbkObject*)pyEffect);
+            cppEffect = (Effect*)Shiboken::Conversions::cppPointer(SbkNatronEngineTypes[SBK_NATRON_PYTHON_EFFECT_IDX], (SbkObject*)pyEffect);
         }
 
         NATRON_PYTHON_NAMESPACE::interpretPythonScript("del " kPythonTmpCheckerVariable, 0, 0);
@@ -233,7 +233,7 @@ App::createAppFromAppInstance(const AppInstancePtr& app)
         }
         App* cppApp = 0;
         if (pyApp && Shiboken::Object::isValid(pyApp)) {
-            cppApp = (App*)Shiboken::Conversions::cppPointer(SbkNatronEngineTypes[SBK_APP_IDX], (SbkObject*)pyApp);
+            cppApp = (App*)Shiboken::Conversions::cppPointer(SbkNatronEngineTypes[SBK_NATRON_PYTHON_APP_IDX], (SbkObject*)pyApp);
         }
         NATRON_PYTHON_NAMESPACE::interpretPythonScript("del " kPythonTmpCheckerVariable, 0, 0);
         NATRON_PYTHON_NAMESPACE::clearPythonStdErr();

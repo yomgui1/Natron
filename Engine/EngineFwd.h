@@ -32,6 +32,7 @@
 #include <vector>
 #include <map>
 
+#define YAML YAML_NATRON
 #include "Serialization/SerializationFwd.h"
 
 

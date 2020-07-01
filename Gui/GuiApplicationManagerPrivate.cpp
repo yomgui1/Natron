@@ -207,7 +207,10 @@ GuiApplicationManagerPrivate::createColorPickerCursor()
     QImage originalImage;
 
     originalImage.load( QString::fromUtf8(NATRON_IMAGES_PATH "color_picker.png") );
+    // the scaled() below crashes under Qt5
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     originalImage = originalImage.scaled(16, 16);
+#endif
     QImage dstImage(32, 32, QImage::Format_ARGB32);
     dstImage.fill( QColor(0, 0, 0, 0) );
 
